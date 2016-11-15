@@ -1,0 +1,124 @@
+{% extends "base-login-inscription.html" %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load widget_tweaks %}
+	{% load i18n %}
+
+	<body class="connexion etape-2">
+		<div class="row">
+			<div class="col-md-12 connexion-logo"> <img src="{% static 'images/refonte/home-pro-logo.png' %}" class="home-user-logo logo-pitch-2"> </div>
+		</div>
+
+		<div class="connexion-bloc inscription-form">
+			<h1> {% trans "Information de votre société" %} </h1>
+			<div class="connexion-container">
+
+				<form method="POST" action = "" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="connexion-form"> 
+						{% if form.errors %}
+					  		<div class="alert alert-danger alert-inscription"> 
+							    <ul>
+							    {% for field, error in form.errors.items %} 
+							        <li>{{ error }}</li>
+							    {% endfor %}
+							    </ul>
+							</div>
+						{% endif %} 
+						<div class="col-xs-8">
+							<div class="input-group">
+						      	<div class="input-group-addon"> <span class="glyphicon glyphicon-globe"></span> </div>
+						      	<input type="text" class="form-control" placeholder="{% trans 'Site web' %}" name="web_site" value="{{ form.web_site.value|default_if_none:"" }}">
+						    </div>
+						    <div class="input-group">
+						      	<div class="input-group-addon"> <span class="glyphicon glyphicon-download-alt"></span> </div>
+						      	{{ form.activity_area|add_class:"form-control" }}
+						    </div>
+						    <div class="input-group">
+						      	<div class="input-group-addon"> <span class="glyphicon glyphicon-map-marker"></span> </div>
+						      	<input type="text" class="form-control" placeholder="{% trans 'Siege social' %}" id="autocompletePlace" name="headquarters" value="{{ form.headquarters.value|default_if_none:"" }}">
+						    </div>
+						    <div class="input-group">
+						      	<div class="input-group-addon"> <span class="glyphicon glyphicon-custom"> <img src="{% static 'images/icons/glyphicons-44-group.png' %}"> </span>  </div>
+						      	{{ form.employes|add_class:"form-control" }}
+						    </div>
+						    <div class="input-group  {% if form.ca.errors %} has-error {% endif %} ">
+						      	<div class="input-group-addon"> <span class="glyphicon glyphicon-euro"></span> </div>
+						      	<input type="text" class="form-control" name="ca" value="{{ form.ca.value|default_if_none:"" }}" placeholder="{% trans "Chiffre d'affaires" %}">
+						    </div>
+						    <div class="input-group">
+						      	<div class="input-group-addon"> <span class="glyphicon glyphicon-facetime-video"></span> </div>
+						      	<input type="text"  class="form-control" name="video_url" value="{{ form.video_url.value|default_if_none:"" }}" placeholder="{% trans 'URL de la video' %}">
+						    </div>
+					    </div>
+					    <div class="col-xs-4 col-file-import">
+					    	<label for="upload" id="image-holder"> {% if object.image %} <img src="{{ object.image.url }}" >  {% else %} <img src="{% static 'images/myc2v-10.jpg' %}" > {% endif %} </label>
+					    	<input type="file" style="display:none" id="upload" name="image"> 
+					    </div>
+
+					    <div class="col-xs-12">
+					    	<label class="description"> {% trans "Description de votre entreprise" %} </label>
+					    	<textarea class="form-control" placeholder="500 caracteres maximum" name="description" > {{ form.description.value|default_if_none:"" }} </textarea>
+					    </div>
+					</div>
+
+					{{ form.latitude|add_class:"location-input" }}
+					{{ form.longitude|add_class:"location-input" }}
+					{{ form.street_number|add_class:"location-input" }}
+					{{ form.route|add_class:"location-input" }}
+					{{ form.locality|add_class:"location-input" }}
+					{{ form.administrative_area_level_2|add_class:"location-input" }}
+					{{ form.administrative_area_level_1|add_class:"location-input" }}
+					{{ form.country|add_class:"location-input" }}
+					{{ form.cp|add_class:"location-input" }}
+
+					<div class="row ">
+						<div class="col-xs-12">  <input type="submit" value="Terminer" class="btn-general-red submitInscription">  </div>
+					</div>
+				</form>
+			</div>
+			
+		</div>
+	</body>
+
+	<div class="default-upload" style="display:none">
+		<img src="{% static 'images/myc2v-10.jpg' %}" >
+	</div>
+
+	<script type="text/javascript">
+		$("#upload").on('change', function () {
+ 
+	        if (typeof (FileReader) != "undefined") {
+	        	var image_holder = $("#image-holder");
+	 			image_holder.empty();
+
+	 			if ( $(this)[0].files[0] ) {
+		            
+		            var reader = new FileReader();
+		            reader.onload = function (e) {
+		                $("<img />", {
+		                    "src": e.target.result,
+		                    "class": "thumb-image"
+		                }).appendTo(image_holder);
+		 
+		            }
+		            image_holder.show();
+		            
+		            reader.readAsDataURL($(this)[0].files[0]);
+	        	} else {
+	        		image_holder.html( $('.default-upload').html() );
+	        	}
+	        } else {
+	            alert("This browser does not support FileReader.");
+	        }
+	    });
+	</script>
+
+	<script type="text/javascript">
+		$( document ).ready(function() {
+		   	init_autocomplete("autocompletePlace", false, 'address');
+		});
+	</script> 
+
+{% endblock  %}

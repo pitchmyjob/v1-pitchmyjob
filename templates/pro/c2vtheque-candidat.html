@@ -1,0 +1,170 @@
+{% extends "pro-interne.html" %}
+
+{% block c2v-theque %} active {% endblock %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load tagspro %}
+	{% load i18n %}
+
+	<div class="container-fluid pro-c2v-theque">
+
+		<div class="col-xs-1 c2v-theque-nextprev">
+			<a href="{% url 'pro:c2v-theque-candidat' prev.id %}">  <span class="glyphicon glyphicon-chevron-left"> </span> </a>
+		</div>
+
+		<div class="col-xs-10">
+
+			<div class="pro-cv2-candidat container-fluid">
+				<div class="col-xs-3"> 
+					<img src="{{ object.image.logo100.url }}">  
+				</div>
+				<div class="col-xs-4"> 
+					<div class="c2vtheque-name"> {{ object.last_name|title }} {{ object.first_name|title }} </div>
+					<div class="c2vtheque-infos"> {{ object.study|default_if_none:"" }} </div>
+					<div class="c2vtheque-infos"> {{ object.experience|default_if_none:"" }}  </div>
+				</div>
+
+				<div class="col-xs-4"> 
+						<div class="c2vtheque-poste" style="min-height:25px;"> {{ object.activity_area.all|join:", " }}  </div>
+						<div class="c2vtheque-infos"> {% if object.availability %} {% trans "En poste" %} {% else %}  Disponible {% endif %}  </div>
+						<div class="c2vtheque-infos">   {{ object.job_wanted|default_if_none:"" }} </div> 
+					
+				</div>
+				<div class="col-xs-12 c2vtheque-contact"> 
+					<div class="row">
+						<div class="col-xs-3"></div>
+						<div class="col-xs-6 c2vtheque-link-contact">
+							<a href="#" class="btn-general-blue-2 btn-no-border" onclick="Contact({{object.id}}, '{{ object.first_name|title }}')">{% trans "Contacter" %}</a> 
+						</div>
+						<div class="col-xs-3"></div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col-xs-1 c2v-theque-nextprev">
+			<a href="{% url 'pro:c2v-theque-candidat' next.id %}">  <span class="glyphicon glyphicon-chevron-right"> </span>  </a>
+		</div>
+
+		
+		<div class="col-sm-12">	
+			<div class=" entretien-content entretien-2-c2v entretien-2-c2vtheque ">
+
+				{% if object.cv_pdf %}
+					<iframe src="{{ object.cv_pdf.url }}" style="width:100%; height:800px"></iframe>
+				{% else %}
+					<div id="load-theme"></div>
+				{% endif %}
+
+			</div>
+		</div>
+
+	</div> 
+
+	<script type="text/javascript">
+		$('.entretien-question').click(function() {
+			$('.entretien-question').removeClass('entretien-active');
+			$(this).addClass('entretien-active');
+			var qt = $(this).attr('data-qt');
+			$('.entretien-rep').hide();
+			$('.entretien-rep-'+qt).show();
+		});
+		function getCookie(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie != '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = jQuery.trim(cookies[i]);
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getCookie('csrftoken');
+		function csrfSafeMethod(method) {
+		    // these HTTP methods do not require CSRF protection
+		    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+		}
+		$.ajaxSetup({
+		    beforeSend: function(xhr, settings) {
+		        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+		            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+		        }
+		    }
+		});
+
+		$( "#load-theme" ).load( "{% url 'c2v:myc2v-theme' %}", {'id_member': {{ object.id }} }, function( response, status, xhr ) { });
+
+		var user;
+		var sendheader = function(xhr){
+				xhr.setRequestHeader('Authorization', 'Token {{ apitoken }}');
+		};
+
+		function Contact(id, name)
+		{
+			$('.title-contact').html( $('.title-contact').html().replace('[name]', name) );
+			$('.send-contact').modal('show');
+			user = id;
+		}
+
+		function sendMessage()
+		{
+			var message = $('.text-contact').val();
+			$.ajax({
+		         url: "/api/messages",
+		         type: "POST",
+		         data : {receiver:user, message:message},
+		         beforeSend: sendheader,
+		         success: function(response) { 
+		         	$('.send-contact').modal('hide'); 
+		         	notification("Message envoyé !"); 
+		         	$('.text-contact').val("");
+		         }
+	 	 	});
+		}
+
+	</script>
+
+	<link rel="stylesheet" href="//assets-cdn.ziggeo.com/css/ziggeo-v1.css" />
+	<script src="//assets-cdn.ziggeo.com/js/ziggeo-v1.js"></script>
+	<script>ZiggeoApi.token = "e50140772b22dbd8cbda85384066b8e5";</script>
+
+
+{% endblock  %}
+
+{% block modal %}
+
+<div class="modal fade send-contact" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog ">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title title-contact" > Contacter [name]</h4>
+			</div>
+			<div class="modal-body">
+		
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="exampleInputName2"> Message </label>
+							<textarea class="form-control text-contact" rows=11 object = "message"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default " data-dismiss="modal">Annuler</button>
+				<button type="button" class="btn btn-primary btn-sendCvEmail" onclick="sendMessage()">Envoyer</button>
+				<img src="{% static 'images/bx_loader.gif' %}" class="loadFbConnect" style="display:none">
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock  %}

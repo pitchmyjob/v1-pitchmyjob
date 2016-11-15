@@ -1,0 +1,24 @@
+{% extends 'emails/layout.html' %}
+
+
+{% block content %}
+{% load i18n %}
+
+<div style="padding:10px 30px 20px 30px;">
+
+	<div style="padding:0px 0;">
+		Bonjour {{ name }}, <br><br>
+
+		Vous avez postuler à l'offre : {{ offre }}, malheureusement votre candidature n'a pas été retenue pour ce poste.
+		<br><br>
+
+		Nous vous invitons à rechercher de nouvelles offre sur <a href="https://www.pitchmyjob.com">Pitch my job</a>
+		<br><br>
+
+		Bonne recherche et bonne journée, <br><br>
+
+		L'équipe Pitch my job
+	</div>
+
+</div>
+{% endblock %}

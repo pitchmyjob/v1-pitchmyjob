@@ -1,0 +1,17 @@
+User-agent : *
+Noindex: /*/login*
+Allow: /static/images/refonte/home-member-01.jpg
+Allow: /static/images/refonte/home-pro-logo.png
+Allow: /static/images/refonte/home-member-01.png
+Allow: /static/images/refonte/home-member-02.png
+Allow: /static/images/refonte/home-pro-*
+Allow: /fr/login$
+Disallow: /en/*
+Disallow: /*/refonte/*
+Disallow: /*/login*
+Disallow: /*/sn*
+Disallow: /sn*
+Disallow: /*/entreprise*
+
+
+Sitemap: https://www.pitchmyjob.com/fr/sitemap.xml

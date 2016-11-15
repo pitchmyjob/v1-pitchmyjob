@@ -1,0 +1,138 @@
+{% extends "pro-interne.html" %}
+
+{% block mes-offres %} active {% endblock %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load widget_tweaks %}
+	{% load i18n %}
+		
+	<div class="create-offre-1">
+		<div class="col-md-12">
+			<img src="{% static 'images/myc2v-32.png' %}">
+		</div>
+	</div> 
+
+	<div class="create-offre-bloc-1 box-4">
+		<div class="container-fluid">
+			<div class="col-md-12 title"> {% trans "Ajoutez vos questions d'entretien" %} </div>
+			<p> {% trans "Ajoutez les questions auxquelles les candidats répondront lorsqu'ils postuleront." %}</p>
+
+			{% if form.errors %}
+		  		<div class="alert alert-danger alert-job-step-4"> 
+				    <ul>
+				    {% for field, error in form.errors.items %} 
+				        <li>{{ error }}</li>
+				    {% endfor %}
+				    </ul>
+				</div>
+			{% endif %} 
+
+			<form action="" method="POST" id="job-step-4">
+				{% csrf_token %}
+
+				<div class="bloc-dynamic-form">
+					{% for question in list_questions %}
+						<label> {% trans "Question" %} N°{{ question.nb }} </label>
+						<input type="text" name="qt" class="form-control questions" value="{{ question.question }}">
+					{% empty %}
+						<label> Question N°1 </label>
+						<input type="text" name="qt" class="form-control questions" value="">
+					{% endfor %}
+				</div>
+				
+				<div class="add-form">
+					<span class="glyphicon glyphicon-plus-sign"> </span> {% trans "Ajouter une question" %} 
+				</div>
+
+				{{ form.list_questions }}
+
+				<div class="col-xs-12 bloc-choix-reponse" style="display:none">
+					<div class="title"> 
+						{% trans "Choisissez les modes de réponse" %}
+					</div>
+					<p>
+						{% trans "Vous pouvez choisir parmi les trois modes de réponses ci-dessous. Les candidats seront dans l’obligation de choisir un seul mode de réponse pour la totalité de l’entretien." %}
+					</p>
+
+					<div class="col-sm-12 choix-reponse">
+						<img src="{% static 'images/myc2v-11-1.jpg' %}" nohover="{% static 'images/myc2v-11-1.jpg' %}" hover="{% static 'images/myc2v-11.jpg' %}" class="id_is_video">
+						<label> {% trans "Réponse video" %} </label>
+						<input class="radio-choix" id="id_is_video" name="is_video" type="checkbox" checked>
+					</div>
+					<div class="col-sm-6 choix-reponse" style="display:none">
+						<img src="{% static 'images/myc2v-12-1.jpg' %}" nohover="{% static 'images/myc2v-12-1.jpg' %}" hover="{% static 'images/myc2v-12.jpg' %}" class="id_is_audio">
+						<label> {% trans "Réponse audio" %} </label>
+						{{ form.is_audio|add_class:"radio-choix" }}
+					</div>
+
+					<div class="col-sm-4 choix-reponse" style="display:none">
+						<img src="{% static 'images/myc2v-13-1.jpg' %}" nohover="{% static 'images/myc2v-13-1.jpg' %}" hover="{% static 'images/myc2v-13.jpg' %}" class="id_is_text">
+						<label> {% trans "Réponse texte" %} </label>
+						{{ form.is_text|add_class:"radio-choix" }}
+					</div>
+
+					<div class="clear"> </div>
+				</div>
+
+				<div class="col-sx-12">
+					<div class="col-sx-6"> 
+						<a href="{% url 'pro:job-step-3' object.id %}" class="backSubmit1" > {% trans "Retour" %} </a>
+					</div>
+
+					<div class="col-sx-6"> 
+						<input type="submit" value="Suivant" class="createSubmit1">	
+					</div>
+					<div class="clear"> </div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+
+	<div class="dynamic-form" style="display:none">
+		<label> {% trans "Question" %} N°{nb} </label>
+		<input type="text" name="qt" class="form-control questions">
+	</div>
+
+	<script type="text/javascript">
+		var nb = 2;
+		//var content = $('.dynamic-form').html().replace('{nb}', 1);
+		//$('.bloc-dynamic-form').prepend( content );
+
+		$('.add-form').click(function() {
+			content = $('.dynamic-form').html().replace('{nb}', nb++);
+			$('.bloc-dynamic-form').append( content );
+		});
+
+		var list_type = [];
+
+		$('.choix-reponse img').on("click", function() { 
+			if( $(this).attr('nohover') == $(this).attr('src') ) {
+				$('#'+$(this).attr('class')).prop( "checked", true );
+				$(this).attr('src', $(this).attr('hover') );
+			}else{
+				$(this).attr('src', $(this).attr('nohover') ); 
+				$('#'+$(this).attr('class')).prop( "checked", false );
+			}
+		});
+
+		$('.radio-choix').each(function() {
+			if (this.checked) {
+		        $("."+$(this).attr('id')).attr('src', $("."+$(this).attr('id')).attr('hover') );
+		    }
+		});
+
+		$('#job-step-4').submit(function() {
+
+			if( $("#id_is_video").prop('checked')==false &&  $("#id_is_audio").prop('checked')==false  && $("#id_is_text").prop('checked')==false )
+			{
+				alert("Veuillez saisir au moins un mode de réponse.");
+				return false;
+			}
+
+		});
+
+	</script>
+
+{% endblock  %}

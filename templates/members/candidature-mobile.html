@@ -1,0 +1,320 @@
+{% extends 'user-interne.html' %}
+
+{% block annonces %} active {% endblock %}
+{% block footer %} {% endblock %}
+{% block header %}{% endblock %}
+{% block js_autocomplete %} {% endblock %}
+
+{% block content %}
+
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+
+    <style>
+        .video-recorder{display:none}
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js" type="text/javascript"></script>
+
+    <script>
+        var nb = {{ questions|length }};
+
+        if (nb > 3){
+            var hq = $('.line2-trait img').height();
+            $('.line2-trait img').height( (hq / 5) * 2 );
+        }
+    </script>
+
+<script type="text/javascript">
+    var r_current = 1;
+
+    var pipe_ready=false;
+    var size = {width:400,height:300} ;
+    var flashvars = {qualityurl: "avq/480p.xml",accountHash:"e6369780594f9ff78bc9d2290ed9cd58",showMenu:"false", mrt:90,sis:0,asv:1};
+    (function() {var pipe = document.createElement('script'); pipe.type = 'text/javascript'; pipe.async = true;pipe.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 's1.addpipe.com/1.3/pipe.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pipe, s);})();
+
+    function onUploadDone(streamName, streamDuration, userId, recorderId, audioCodec, videoCodec, fileType){
+        var args = Array.prototype.slice.call(arguments);
+        console.log(args[0]);
+        console.log(streamName);
+
+        var post = {'token' : streamName, 'embed_url' : streamName, 'candidature' : {{ candidature.id }}, 'question' : r_current  };
+
+        $.ajax({
+             url: "/api/video/question",
+             data: post,
+             type: "POST",
+             beforeSend: function(xhr){xhr.setRequestHeader('Authorization', ' Token {{ apitoken }}');},
+             success: function() { console.log('Success!'); }
+        });
+    }
+
+    function onVideoRecorded(filename,filetype){
+        var args = Array.prototype.slice.call(arguments);
+        console.log('-------- onVideoRecorded');
+        console.log(filename );
+        console.log(filetype );
+
+        $('.upload-video').removeClass('no-visible');
+
+
+    }
+
+    function onClickUpload(){
+        console.log('-------- onClickUpload');
+        $('#hdfvr-submit-btn').removeClass('no-visible');
+
+        $('.upload-video').addClass('no-visible');
+    }
+
+    function onVideoUploadSuccess(filename,filetype){
+        console.log('-------- onVideoUploadSuccess');
+        console.log(filename );
+        console.log(filetype );
+
+
+        var post = {'token' : filename, 'embed_url' : filename, 'candidature' : {{ candidature.id }}, 'question' : r_current  };
+
+        $.ajax({
+             url: "/api/video/question",
+             data: post,
+             type: "POST",
+             beforeSend: function(xhr){xhr.setRequestHeader('Authorization', ' Token {{ apitoken }}');},
+             success: function() { console.log('Success!'); }
+        });
+
+        $('#hdfvr-submit-btn').addClass('no-visible');
+        $('.upload-video').addClass('no-visible');
+        $('.next-question').removeClass('no-visible');
+        $('#output').html("");
+    }
+
+
+    var app=angular.module('App', []);
+
+    app.factory('recorder',  function($http, $q){
+        var recorder = {
+            record : [],
+            sendVideo : function(datas) {
+				var deferred2=$q.defer();
+
+				$http.post('/api/video/question', datas, {headers: {'Authorization': ' Token {{ apitoken }}'} })
+                        .success(function (data, status) {
+							deferred2.resolve(data);
+						}).error(function (data, status) {
+							deferred2.reject('Erreur');
+				});
+
+                return deferred2.promise;
+			},
+            endEntretien : function() {
+                var deferred3=$q.defer();
+
+				$http.post('/api/entretien/close', {'candidature' : {{ candidature.id }} }, {headers: {'Authorization': ' Token {{ apitoken }}'} })
+                        .success(function (data, status) {
+							deferred3.resolve(data);
+						}).error(function (data, status) {
+							deferred3.reject('Erreur');
+				});
+
+                return deferred3.promise;
+            }
+        }
+        return recorder;
+    });
+
+    app.factory('etape', function() {
+        var factory = {
+            etape1 : true,
+            etape2 : false,
+            etape3 : false,
+            tips:true,
+        }
+        return factory;
+    });
+
+     app.controller('startWebcam', function($scope, etape){
+        $scope.etape = etape;
+        $scope.goEtape2 = function(){
+            etape.etape1 = false;
+            etape.etape2 = true;
+
+            $('#hdfvr-file-input').hide();
+            $('#hdfvr-submit-btn').addClass('no-visible');
+
+
+            $('.upload-video').addClass('no-visible');
+            $('.next-question').addClass('no-visible');
+
+            //$("#bloc-player").removeClass("visible");
+
+        }
+    });
+
+    app.controller('entretienQuestions', function($scope, etape, recorder){
+
+        $scope.upload = 1;
+        $scope.current = 1;
+        $scope.etape = etape;
+        $scope.qt = [];
+        $scope.qt[1] = 1;
+        $scope.start = 0;
+
+        {% for qt in questions %}
+            {% if not forloop.first %}
+                $scope.qt[{{qt.nb}}] = 0;
+            {% endif %}
+        {% endfor %}
+
+        $scope.entretienNext = function(){
+            $scope.next();
+        };
+
+        $scope.entretienRestart = function(){
+            $scope.start = 0;
+        };
+
+        $scope.startRecord = function(){
+            $('#hdfvr-file-input').click();
+            $scope.start = 1;
+        };
+
+        $scope.stopRecord = function(){
+            $scope.start = 2;
+        };
+
+        $scope.playRecord = function(){
+        };
+
+        $scope.uploadVideo = function(){
+            $('#hdfvr-submit-btn').click();
+        };
+
+        $scope.next = function(){
+
+            if( $scope.current == ($scope.qt.length-1)){
+                etape.etape2 = false;
+                etape.etape3 = true;
+                $("#bloc-player").addClass("visible");
+
+                recorder.endEntretien().then(function(){
+                    console.log('Entretien FINI');
+                }, function(msg){
+                });
+
+            }else{
+                $scope.qt[$scope.current] = 2;
+                $scope.current = $scope.current + 1 ;
+                $scope.qt[$scope.current] = 1;
+                $scope.start = 0;
+            }
+
+            r_current = $scope.current;
+
+            $('.next-question').addClass('no-visible');
+        }
+    });
+
+    app.controller('entretienFelicitation', function($scope, etape){
+        $scope.etape = etape;
+    });
+
+
+</script>
+
+
+
+    <div class="entretien entretien-mobile" ng-app="App">
+
+
+        <div class="entretien-start-webcam" ng-show="etape.etape1" ng-controller="startWebcam">
+            <div class="entretien-start-webcam-img" ng-click="goEtape2()">
+                <img src="{% static 'images/refonte/candidature-01.png' %}" alt="">
+            </div>
+
+            <div class="entretien-start-webcam-text"> Cliquez ici quand vous êtes prêt </div>
+        </div>
+
+        <div class="entretien-candidature-questions" style="margin-top:-60px;" ng-show="etape.etape2" ng-controller="entretienQuestions">
+
+            <table class="absolute-question">
+                {% for qt in questions %}
+                    <tr style="display: inline-block;padding-top: 20px;">
+                        <td class="line2-question qt-{{qt.nb}}"> Question {{qt.nb}}</td>
+                        <td>
+                            <img src="{% static 'images/refonte/candidature-08.png' %}" alt="" ng-if="qt[{{ qt.nb}}] == 2">
+                            <img src="{% static 'images/refonte/candidature-09.png' %}" alt="" ng-if="qt[{{ qt.nb}}] == 1">
+                            <img src="{% static 'images/refonte/candidature-10.png' %}" alt="" ng-if="qt[{{ qt.nb}}] == 0">
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <table style="width:100%; " class="table-question">
+
+                <tr class="line2">
+                    <td>
+
+                    </td>
+                    <td class="text" valign="center">
+                        {% for qt in questions %}
+                            <span ng-if="qt[{{qt.nb}}] == 1"> {{ qt.question }} </span>
+                        {% endfor %}
+                    </td>
+                </tr>
+            </table>
+
+            <div id="bloc-player" >
+                 <div id="hdfvr-content" ></div>
+            </div>
+
+
+            <div class="entretien-button">
+
+                 <div class="col-sm-12" ng-click="startRecord()" ng-if="start == 0" >
+                    <img src="{% static 'images/refonte/candidature-13.png' %}" alt=""   style="width:55px;">
+                    <div>Demarrer l'enregistrement</div>
+                </div>
+
+                <div class="col-sm-4 next-qt upload-video" >
+                    <img src="{% static 'images/refonte/candidature-07.png' %}" alt="" ng-click="uploadVideo()">
+                    <div> Valider </div>
+                </div>
+
+                <div class="col-sm-4 next-qt next-question">
+                    <img src="{% static 'images/refonte/candidature-07.png' %}" alt="" ng-click="entretienNext()">
+                    <div> Question suivante </div>
+                </div>
+
+            </div></div>
+
+        <div class="entretien-felicitation" ng-show = "etape.etape3" ng-controller="entretienFelicitation">
+            <div class="title"> Félicitation </div>
+            <div class="img-felicitation">
+                <img src="{% static 'images/refonte/candidature-14.png' %}" alt="">
+                <div class="text"> Votre candidature pour le poste de {{ candidature.job.job_title }} <br> chez {{ candidature.job.company}} a bien été envoyé. </div>
+            </div>
+
+             <div class="entretien-button">
+                <div class="col-sm-6">
+                    <a href="{% url 'members:list-job' %}">
+                        <img src="{% static 'images/refonte/candidature-15.png' %}" alt="" >
+                        <div> Retour aux annonces </div>
+                    </a>
+                </div>
+                <div class="col-sm-6">
+                    <a href="{% url 'members:detail-candidature' candidature.job.id %}">
+                        <img src="{% static 'images/refonte/candidature-16.png' %}" alt="" >
+                        <div> Voir mes réponses </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'emails/basic.html' %}
+
+
+{% block content %}
+
+{% load i18n %}
+
+	<h3> {% trans "Bonjour" %} {{ member }}</h3>
+	<p>{% trans "Un nouveau candidat est intéressé par votre offre" %} {{ job }} </p>
+    <p>
+        {% trans "Cependant il n’a pas encore passé l’entretien, nous vous invitions donc à découvrir son cv et à l’inviter à répondre à votre pré-entretien si son profil vous intéresse." %}
+    </p>
+	<!-- Callout Panel -->
+	<a href="https://www.pitchmyjob.com{% url 'pro:job-candidatures' id %}#interet" class="calloutpitch">
+		{% trans "Voir le candidat" %}
+	</a><!-- /Callout Panel -->
+
+{% endblock %}

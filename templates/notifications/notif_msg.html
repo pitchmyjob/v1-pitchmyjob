@@ -1,0 +1,70 @@
+{% load staticfiles %}
+{% load in_group %}
+{% load i18n %}
+
+<a href="#" class="dropdown-toggle my-account-notif-link notify-load-msg" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-envelope"></span> </a>
+
+<div class="dropdown-handle"> <div class="dropdown-nb dropdown-nb-{{ nb_msg }}"> {{ nb_msg }} </div> </div>
+
+<div class="dropdown-menu dropdown-notif">
+	<div class="col-sm-12 dropdown-notif-title"> {% trans "Mes messages" %}</div>
+	<div class="col-sm-12 dropdown-notif-content">
+		<div class="api_load"> <img src="{% static 'images/notif_loader.gif' %}"> </div>
+		<div class="api_load no_message" style="display:none"> {% trans "Aucun message" %} </div>
+	</div>
+	<div class="col-sm-12 dropdown-notif-more"> <a href="{% if user|in_group:'pro' %}/pro{% endif %}/messages"> {% trans "Afficher tous mes messages" %} </a> </div>
+</div>
+
+{% verbatim %}
+<script id="entry-template" type="text/x-handlebars-template">
+  	{{#each this}}
+		<div class="col-sm-12 dropdown-msg dropdown-msg-active-{{ view }}"> 
+			<a href="/notif-message/{{user.id}}">
+				<div class="col-sm-3 dropdown-msg-img" > <img src="{{ user.image }}" > </div>
+				<div class="col-sm-9 dropdown-msg-text">  
+					<div class="dropdown-msg-text-name"> {{ user.name }} </div>
+					<div class="dropdown-msg-text-msg">  {{ message }} </div>
+					<div class="dropdown-msg-text-date">  {{ date_posted }} </div>
+				</div>
+			</a>
+		</div>
+	{{/each}}
+</script>
+{% endverbatim %}
+
+{% verbatim %}
+<script id="count-msg-template" type="text/x-handlebars-template">
+	<div class="dropdown-nb dropdown-nb-{{ nb_msg }}"> {{ nb_msg }} </div>
+</script>
+{% endverbatim %}
+
+<script type="text/javascript">
+$(document).ready(function () {
+	var source = $("#entry-template").html();
+	var template = Handlebars.compile(source);
+
+	var sendheader = function(xhr){
+		xhr.setRequestHeader('Authorization', 'Token {{ apitoken }}');
+	};
+	$('.notify-load-msg').click(function() {
+		$.ajax({
+	         url: "/api/messages?update=1",
+	         beforeSend: sendheader,
+	         success: function(response) { 
+	         	if(response.length>0)
+	         	{
+	         		var html = template(response);
+	         		$('.dropdown-notif-content').html(html);
+	         	}else{
+	         		$('.api_load').hide();
+	         		$('.no_message').show();
+	         	}
+	         	$('.dropdown-handle').html( "" );
+	         }
+	 	 });
+
+	});
+
+});
+
+</script>

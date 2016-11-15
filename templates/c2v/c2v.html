@@ -1,0 +1,31 @@
+{% extends 'user-interne.html' %}
+
+{% block myc2v%} active {% endblock %}
+{% block js_autocomplete %}  {% endblock %}
+
+{% block rs_facebook %} 
+	{% load web_url %}
+	<meta property="og:url" content="{% with cv.member.first_name|add:"-"|add:cv.member.last_name as slug %} http://pitchmyjob.com{% url 'c2v:c2v_view' cv.member.id slug|slugify %} {% endwith %}" />
+	<meta property="og:title" content="{{ cv.member.first_name|title }} {{ cv.member.last_name|title }} - {{ cv.member.job_wanted }} | Pitch my job" />
+	<meta property="og:description" content="Découvrez mon c2v, le premier modèle de cv intégrant un pitch video  !" /> 
+	<meta property="fb:app_id" content="1521513254812652"/>
+	<meta property="og:image" content="{{ cv.member.image.url|web_url }}"/>
+{% endblock %}
+
+{% block content %}
+
+{% load staticfiles %}
+
+
+	<div class="container-fluid theme-c2v" style="margin-bottom:50px;margin-top:30px;">	
+
+		{% include 'c2v/themes/theme-1.html' %}
+
+	</div>
+
+
+	<link rel="stylesheet" href="//assets-cdn.ziggeo.com/css/ziggeo-v1.css" />
+	<script src="//assets-cdn.ziggeo.com/js/ziggeo-v1.js"></script>
+	<script>ZiggeoApi.token = "e50140772b22dbd8cbda85384066b8e5";</script>
+
+{% endblock %}

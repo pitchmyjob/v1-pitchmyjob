@@ -1,0 +1,571 @@
+{% load staticfiles %}
+{% load in_group %}
+{% load i18n %}
+
+<!DOCTYPE html>
+
+<!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
+<!--[if IE 8]><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="css/ie7.css" /><![endif]-->
+
+<html lang="fr">
+	<head>
+		<meta name="google-site-verification" content="aUAOx7YIZ3TTkqdRaEGofU5mojoCZ5R_ceFjl7Nfa2E" />
+		
+		<meta property="og:title" content="Rejoins Pitch my job" />
+		<meta property="og:description" content="Passe un entretien et decroche ton prochain job !" /> 
+		<meta property="fb:app_id" content="1521513254812652"/>
+	    <meta property="og:image" content="http://www.pitchmyjob.com/static/images/share2.png"/>
+
+		<meta charset="utf-8">
+		<link rel="canonical" href="http://www.pitchmyjob.com"/>
+		    
+		<title>Pitch my job | Offres d'emploi, stage et pré-entretien video</title>
+	    
+	    <!-- behavioral meta data -->
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="format-detection" content="telephone=no">
+	    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0">  
+	    
+	    <!-- core meta data -->
+		<meta name="description" content="Etudiant ou jeunes diplômé ? Postule en répondant aux questions des recruteurs en vidéo, audio ou texte et décroche ton prochain job !">
+		<meta name="author" content="">
+		<!-- styles -->
+		<link rel="stylesheet" href="{% static 'css/jquery.bxslider.css' %}">
+		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/global.css' %}">
+		<link rel="stylesheet" href="{% static 'css/devices.css' %}">
+
+		<!-- styles -->
+		<script src="{% static 'js/plugin/jquery-1.11.3.min.js' %}"></script> 
+		<script src="{% static 'js/plugin/jquery.bxslider.min.js' %}"></script>  
+		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script> 
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+
+		<meta name="google-site-verification" content="eyP3ivFNeQlyNV4mfYpZT9z-057tYfRGi0uvJEElC8Q" />
+		<meta name="google-site-verification" content="aUAOx7YIZ3TTkqdRaEGofU5mojoCZ5R_ceFjl7Nfa2E" />
+	    <!-- favicons -->
+		<link rel="icon" href="{% static 'images/favicon.png' %}" type="images/icons/x-icon" />
+		<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="images/icons/x-icon" />
+	    
+	    <meta name="robots" content="index/follow">
+		<meta name="googlebot" content="index/follow">
+		
+		<!--[if IE]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+<script type="application/ld+json">
+{  "@context": "http://schema.org/",
+    "@type" : "Organization",
+    "address": 
+    {"@type" : "PostalAddress",
+    "addressLocality" : "75015 Paris, France",
+    "StreetAddress" : "29 rue viala" 
+    }, 
+    "name":"Pitch my job",
+    "legalName" : "Pitch my job",
+    "brand" : "PitchMyJob",
+    "email" : "contact@pitchmyjob.com",
+    "url" : "https://www.pitchmyjob.com" ,
+    "sameAs" : [
+    "https://www.facebook.com/pitchmyjob/",
+    "https://twitter.com/pitchmyjob",
+    "https://plus.google.com/102188392481516799950/about"
+  ],
+
+    "logo" : "http://www.pitchmyjob.com/static/images/PITCH-Helvetica-P-bleu.png",
+    "description" : " Pitch my job est le premier site d'emploi qui donne la parole aux candidats et aux entreprises. 
+    Sur Pitch my job, nous remplaçons les lettres de motivations par des pré-entretiens et permettons à nos utilisateurs
+     d'ajouter un Pitch vidéo à leur CV.",
+     "founder":[
+     [{"@type" : "Person",
+     "givenName" : "Martial",
+     "familyName" : "Dahan"
+   }],
+
+   [{"@type" : "Person",
+     "givenName" : "Boudic",
+     "familyName" : "Antoine"
+   }],
+
+   [{"@type" : "Person",
+     "givenName" : "Tannier",
+     "familyName" : "Yannis"
+   }]
+
+   ]
+
+  	}
+  
+</script>
+
+	</head>
+
+	<body class="home">
+		
+		{% if user.is_authenticated and user|in_group:"member" %}
+		<header class="home-user">
+			<div class="home-user-filter-noir">
+			<div class="container-connected "> 
+				<nav class="navbar navbar-default navbar-home">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"  aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							</button>
+							<a href="#"> <img alt="Logo Pitch My Job" src="{% static 'images/PITCH-Helvetica-P-bleu.png' %}" class="home-user-logo logo-pitch"> </a>
+							<div class="user-notif-responsive">
+								<a href="/messages"> <span class="glyphicon glyphicon-envelope"></span>  </a>
+								<a href="#"> <span class="glyphicon glyphicon-bell"></span> </a>
+							</div>
+						</div>
+						<div id="navbar" class="navbar-collapse collapse">
+
+							<ul class="nav navbar-nav navbar-nav-menu">
+						        <li><a href="{% url 'c2v:myc2v' %}">{% trans "Mon CV" %}</a></li>
+						        <li><a href="{% url 'members:list-job' %}"> {% trans "Annonces" %}</a></li>
+						        <li><a href="{% url 'members:list-pro' %}"> {% trans "Entreprises" %} </a></li>
+						        {% if user.is_authenticated and user|in_group:"member" %}
+						        <li class="menu-responsive"><a href="{% url 'members:my-account' %}"> {% trans "Mon compte" %}</a></li>
+						        <li class="menu-responsive"><a href="{% url 'members:mes-candidatures-offre' %}"> {% trans "Mes candidatures" %}</a></li>
+						        <li class="menu-responsive"><a href="{% url 'members:logout' %}?next={{request.path}}"> {% trans "Déconnexion" %} </a></li>
+						        {% else %}
+						        <li class="menu-responsive"><a id="ga-btn-inscript" href="{% url 'members:inscription' %}"> {% trans "Inscription" %} </a></li>
+						        <li class="menu-responsive"><a href="{% url 'members:login' %}"> {% trans "Connexion" %}</a></li>
+						        <li class="menu-responsive"><a href="{% url 'pro:home' %}" >{% trans "Accés recruteur" %}</a></li>
+						         {% endif %}
+						        <!--<li><a href="#">SIMULATION</a></li>-->
+						      </ul>
+
+
+							<ul class="nav navbar-nav navbar-right  my-account menu-no-responsive"> 
+								<li class="my-account-notif dropdown">		
+									{% include 'notifications/notif_msg.html' %}
+								</li>
+
+						        <li class="my-account-notif dropdown">
+									{% include 'notifications/notif.html' %}
+						        </li>
+						        
+						        <li class="dropdown">
+						          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+						          	<img src="{{ user.member.image.profil50.url }}" class="circular-img"> <span class="caret"></span></a>
+						          <ul class="dropdown-menu">
+						            <li><a href="{% url 'members:my-account' %}"> <span class="glyphicon glyphicon-user"></span> {% trans "Mon compte" %} </a></li>
+						            <li><a href="{% url 'members:mes-candidatures-offre' %}"> <span class="glyphicon glyphicon-list-alt"></span> {% trans "Candidatures" %}</a></li>
+						            <!--<li><a href="#"> <span class="glyphicon glyphicon-cog"></span> Confidentialité </a></li>-->
+						            <li role="separator" class="divider"></li>
+						            <li><a href="{% url 'members:logout' %}?next={{request.path}}">  <span class="glyphicon glyphicon-off"></span> {% trans "Déconnexion" %} </a></li>
+						          </ul>
+						        </li>
+						     </ul> 
+						</div><!--/.nav-collapse -->
+					</div><!--/.container-fluid -->
+				</nav>
+			</div>
+		{% else %}
+		<header class="home-user home-no-connected">
+			<div class="home-user-filter-noir">
+				<div class="container"> 
+					<nav class="navbar navbar-default navbar-home">
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"  aria-controls="navbar">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								</button>
+								<a href="#"> <img src="{% static 'images/PITCH-Helvetica-P-bleu.png' %}" class="home-user-logo logo-pitch"> </a>
+							</div>
+							<div id="navbar" class="navbar-collapse collapse">
+								<ul class="nav navbar-nav navbar-right">
+									<li> <a id="ga-btn-inscrption" href="{% url 'members:inscription' %}" class="navbar-link"> {% trans "Inscription" %} </a> </li>
+									<li> <a id="ga-btn-cnxion" href="{% url 'members:login' %}"> {% trans "Connexion" %} </a> </li>
+									<li> <a id="ga-btn-accrecr" href="{% url 'pro:home' %}" class="btn-general-red"> {% trans "Accès recruteur" %} </a> </li>
+								</ul>
+							</div><!--/.nav-collapse -->
+						</div><!--/.container-fluid -->
+					</nav>
+					</div>
+				{% endif %}
+						<h1 class="h1-home"> {% trans "LE SITE D'EMPLOI QUI DONNE LA PAROLE AUX CANDIDATS" %} </h1>
+				
+
+					<div class="container"> 
+						<div class="home-user-content-search">
+							<h1> {% trans "Recherchez une offre d'emploi et répondez aux questions des recruteurs" %} </h1>
+							<div class="row">
+								<form action="/annonces" method="GET">
+									<div class="col-md-6"> <input type="text" class="form-control" placeholder="{% trans 'Métier, mot clé ou entreprise' %}" name="search"> </div>
+							  		<div class="col-md-6"> <input type="text" class="form-control" id="autocompletePlace" placeholder="{% trans 'Lieu' %}" name="place" > </div>
+							  		<div class="col-md-12"> <button class="btn-general-red"> {% trans "Rechercher" %} </button> </div>
+							  		<input class="location-input" id="id_locality" name="locality" type="text">
+							  		<input class="location-input" id="id_administrative_area_level_2" name="administrative_area_level_2" type="text">
+							  		<input class="location-input" id="id_administrative_area_level_1" name="administrative_area_level_1" type="text">
+							  		<input class="location-input" id="id_country" name="country" type="text"> 
+							  	</form>
+							</div>
+						</div>
+					</div>
+
+
+					<!--<div class="container"> 
+						<div class="home-user-content-search" style="margin-top:7%">
+							<h1> Béta privée : demande ton invitation </h1>
+							{% if messages %}
+							    {% for message in messages %}
+							    	<div class="col-sm-12" style="margin-bottom:-15px;">
+								  		<div class="alert alert-success col-sm-12" role="alert"> 
+										    {{ message }}
+										</div>
+									</div>
+							    {% endfor %}
+							{% endif %}
+							<div class="row">
+								<form action="" method="POST">
+									{% csrf_token %}
+							  		<div class="col-md-6"> <input type="text" class="form-control" placeholder="Nom" name="last_name" > </div>
+							  		<div class="col-md-6"> <input type="text" class="form-control" placeholder="Prénom" name="first_name" > </div> 
+							  		<div class="col-md-12"> <input type="text" class="form-control" placeholder="Ajout d'un mail" name="email" > </div>
+							  		<div class="col-md-12"> <button class="btn-general-red"> Envoyer </button> </div> 
+							  	</form>
+							</div>
+						</div>
+					</div> -->
+			</div>
+		</header>
+	
+		<div class="last-offre">
+			<div class="container"> 
+				<h2>{% trans "LES OFFRES RÉCENTES" %}</h2>
+
+				<div class="last-offre-slider" style="width:100%">
+
+					{% for job in jobs %}
+						 <div class="slide-offre">   
+						 	<a href="{% url 'members:detail-job' job.id %}">
+						  		<div class="row">
+							  		<div class="col-md-3 slide-image"> <img alt="Logo de l'offre d'emploi" src="{{ job.image.logo100.url }}"> </div>
+							  		<div class="col-md-9 slide-description"> 
+							  			<div class="slide-title"> {{ job.job_title }} </div> 
+							  			<div> {{ job.company }} </div> 
+							  			<div> {{ job.contracts.all|join:" - " }} </div> 
+							  		</div>
+								</div>
+							</a>
+						 </div>
+					 {%endfor%}
+
+				</div>
+				<div class="row all-offre">
+					<a id="ga-btn-02" href="{% url 'members:list-job' %}" class="btn-general-red"> {% trans "Voir toutes les offres" %} </a>
+				</div>
+
+			</div>
+		</div>
+
+		<div  class="entretien-differe">
+			<div class="container"> 
+				<h2> {% trans "LE PRÉ-ENTRETIEN" %} </h2>
+
+				<div class="row">
+					<div class="col-md-4"> <img src="{% static 'images/myc2v-02.png' %}">  <h3> {% trans "Recherche" %} </h3>  <p> {% trans "Selectionne les offres d'emploi et de stage qui correspondent à ta recherche." %}" </p> </div>
+					<div class="col-md-4"> <img src="{% static 'images/myc2v-03.png' %}">  <h3> {% trans "Reponse" %}  </h3>   <p> {% trans "Postule en répondant aux questions d’entretien des recruteurs en vidéo, audio ou texte" %} </p> </div>
+					<div class="col-md-4"> <img src="{% static 'images/myc2v-04.png' %}">  <h3> {% trans "Reception" %} </h3>  <p> {% trans "Ton CV et ton pré-entretien sont envoyés directement aux recruteurs." %} </p> </div>
+				</div>
+
+				<div class="row all-inscription">
+					<a id="ga-btn-03" href="{% url 'members:inscription' %}" class="btn-general-red"> {% trans "S'inscrire" %} </a>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="lecv2"> 
+			<div class="container"> 
+				<h2>{% trans "LE CV" %}</h2>
+
+				<div class="row">
+					<p> {% trans "Démarque-toi des autres candidats en donnant vie à ton cv." %}  <br>
+						{% trans "Crée ton cv et remplace ta photo par un pitch video." %}   </p>
+					<div>  <a id="ga-btn-04" href="{% url 'c2v:myc2v' %}" class="btn-general-red">{% trans "Créer mon CV" %}</a>  </div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="simulation"> 
+			<div class="container"> 
+				<h2>{% trans "SIMULATION" %}</h2>
+				<div class="row">
+					<p> {% trans "Entraine-toi et deviens un expert des entretiens d’embauche grâce à notre outil de simulation." %} </p>
+					<div>  <a id="ga-btn-05" class="btn-general-red" data-toggle="tooltip" data-placement="bottom" title="Bientot disponible">{% trans "S'entraîner" %}</a>  </div>
+					<div > <img alt="Entrainement vidéo aux entretiens d'embauche" src="{% static 'images/myc2v-05.png' %}"> </div>
+				</div>
+			</div> 
+		</div>  
+
+		<script type="text/javascript">
+			$(function () {
+			  $('[data-toggle="tooltip"]').tooltip()
+			})
+		</script>
+
+		<!--<div class="confiance"> 
+			<div class="container"> 
+				<h2>ILS NOUS FONT CONFIANCE</h2>
+
+				<div class="row list-confiance">
+					<img src="{% static 'images/myc2v-06.png' %}">
+					<img src="{% static 'images/myc2v-09.png' %}">
+					<img src="{% static 'images/myc2v-07.png' %}">
+					<img src="{% static 'images/myc2v-08.png' %}">				
+				</div>
+
+			</div>
+		</div>
+
+		<div class="temoignages"> 
+			<div class="container"> 
+				<h2>TEMOIGNAGES</h2>
+				<div class="temoignage-slider" style="width:100%">
+					<div class="slide-temoignage">   
+						<div class="row">
+							<div class="col-md-3"> <img src="{% static 'images/myc2v-11.png' %}"> </div>
+							<div class="col-md-9"> <div class="name"> Pierre Durand </div>  <div class="job"> Chef de produit e-commerce </div>  </div>
+							<div class="col-md-12"> <div class="text"> “Grâce à l’entretien différé, j’ai réussi à montrer toutes ma motivation aux entreprises et décroché plusieurs entretiens.” </div> </div>
+						</div>
+					</div>
+					<div class="slide-temoignage">   
+						<div class="row">
+							<div class="col-md-3"> <img src="{% static 'images/myc2v-11.png' %}"> </div>
+							<div class="col-md-9"> <div class="name"> Pierre Durand </div>  <div class="job"> Chef de produit e-commerce </div>  </div>
+							<div class="col-md-12"> <div class="text"> “Grâce à l’entretien différé, j’ai réussi à montrer toutes ma motivation aux entreprises et décroché plusieurs entretiens.” </div> </div>
+						</div>
+					</div>
+					<div class="slide-temoignage">   
+						<div class="row">
+							<div class="col-md-3"> <img src="{% static 'images/myc2v-11.png' %}"> </div>
+							<div class="col-md-9"> <div class="name"> Pierre Durand </div>  <div class="job"> Chef de produit e-commerce </div>  </div>
+							<div class="col-md-12"> <div class="text"> “Grâce à l’entretien différé, j’ai réussi à montrer toutes ma motivation aux entreprises et décroché plusieurs entretiens.” </div> </div>
+						</div>
+					</div>
+					<div class="slide-temoignage">   
+						<div class="row">
+							<div class="col-md-3"> <img src="{% static 'images/myc2v-11.png' %}"> </div>
+							<div class="col-md-9"> <div class="name"> Pierre Durand </div>  <div class="job"> Chef de produit e-commerce </div>  </div>
+							<div class="col-md-12"> <div class="text"> “Grâce à l’entretien différé, j’ai réussi à montrer toutes ma motivation aux entreprises et décroché plusieurs entretiens.” </div> </div>
+						</div>
+					</div>
+					<div class="slide-temoignage">   
+						<div class="row">
+							<div class="col-md-3"> <img src="{% static 'images/myc2v-11.png' %}"> </div>
+							<div class="col-md-9"> <div class="name"> Pierre Durand </div>  <div class="job"> Chef de produit e-commerce </div>  </div>
+							<div class="col-md-12"> <div class="text"> “Grâce à l’entretien différé, j’ai réussi à montrer toutes ma motivation aux entreprises et décroché plusieurs entretiens.” </div> </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+
+		<div class="presse"> 
+			<div class="container"> 
+				<h2>LA PRESSE PARLE DE NOUS</h2>
+				<div class="row">
+					<div class="col-xs-4">
+						<div class="col-md-3"> <img src="{% static 'images/myc2v-13.png' %}"> </div> 
+						<div class="col-md-9"> <div class="title"> 20minutes </div>  <div class="date"> le 20 aount 2015 </div>  <p> " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod. " </p>   </div> 
+					</div>
+
+					<div class="col-xs-4">
+						<div class="col-md-4"> <img src="{% static 'images/myc2v-14.png' %}"> </div> 
+						<div class="col-md-8"> <div class="title"> BFTM TV </div>  <div class="date"> le 20 aount 2015 </div>  <p> " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod. " </p>   </div> 
+					</div>
+
+					<div class="col-xs-4">
+						<div class="col-md-4"> <img src="{% static 'images/myc2v-15.png' %}"> </div> 
+						<div class="col-md-8"> <div class="title"> Le Monde </div>  <div class="date"> le 20 aount 2015 </div>  <p> " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod. " </p>   </div> 
+					</div>
+
+				</div>
+			</div>
+		</div> -->
+
+		<div class="application">
+			<div class="container"> 
+				<div class="row">
+					<div class="col-sm-5">
+						<h2> {% trans "PITCH MY JOB BIENTOT SUR MOBILE" %} </h2>
+						<p> {% trans "Avec l'application Pitch my job postule et passe tes entretiens à tout moment, où que tu sois." %} </p>
+						<p style="padding-top:20px;" class="appli-picto"> <img src="{% static 'images/android.png' %}"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="{% static 'images/app_store.png' %}"> </p>
+					</div>
+					<div class="col-sm-1"></div>
+					<div class="col-sm-5">
+						<img src="{% static 'images/pitchmyjob-24.png' %}" style="margin-bottom: -90px;">
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="recrute">
+			<div class="container">	
+				<h2> {% trans "ILS RECRUTENT" %} </h2>
+				<p> {% trans "Découvre toutes les offres proches de chez toi." %}  </p>
+			</div>
+
+
+			{% for job in alljobs %}
+
+				{% if job.latitude and job.longitude %}
+				<script type="text/javascript">
+					$( document ).ready(function() {
+					
+						function initialize() {
+						var marker{{job.id}} = new google.maps.Marker({
+							position: {lat: {{ job.latitude|stringformat:"f" }}, lng: {{ job.longitude|stringformat:"f" }} },
+							map: map,
+							icon: { url : "/static/images/c2v-v2-9-2.png" }
+						});
+
+						var loc = new google.maps.LatLng({{ job.latitude|stringformat:"f" }}, {{ job.longitude|stringformat:"f" }});
+
+						var infobox = new InfoBox({
+					         content: document.getElementById("infobox{{job.id}}"),
+					         disableAutoPan: false,
+					         maxWidth: 200,
+					         pixelOffset: new google.maps.Size(-75, 0),
+					         zIndex: null,
+					         infoBoxClearance: new google.maps.Size(1, 1)
+					    });
+					    
+					    google.maps.event.addListener(marker{{job.id}}, 'click', function() {
+					        infobox.open(map, this);
+					         map.panTo(loc);
+					    });
+					
+						//google.maps.event.addDomListener(window, 'load', initialize);
+						}
+						google.maps.event.addDomListener(window, 'load', initialize);
+					});
+				</script>
+				{% endif %}
+
+				<div style="display:none">
+					<div id="infobox{{job.id}}" class="infobox">
+						<img src="{{ job.image.logo100.url }}" style="width:30px; vertical-align: top; float:left;margin-right:5px;">
+						<div style="font-size:15px;margin-bottom:5px;"> {{ job.job_title }} </div> 
+						<span> <a href="{% url 'members:detail-job' job.id %}"> {% trans "Afficher l'annonce" %} </a> </span>
+				    </div>
+			    </div>
+			{% endfor %}
+
+			<div class="map-recrute" id="map-recrute"> 
+				<img src="{% static 'images/notif_loader.gif' %}">  
+			</div>
+
+
+
+		</div>
+
+
+
+		{% include 'footer.html' %}
+
+		<!-- Google Tag Manager -->
+		<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NC3XK5"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-NC3XK5');</script>
+		<!-- End Google Tag Manager -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '835536179914009');
+fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=835536179914009&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+	</body>
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/typeahead.css' %}">
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjwGyNL0CFzOMQt4viTCfgCAjlnaFXvNM&libraries=places"></script>
+	<script type="text/javascript" src="https://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/src/infobox.js"></script>
+	<script src="{% static 'js/plugin/bloodhound.min.js' %}"></script>
+	<script src="{% static 'js/plugin/typeahead.jquery.min.js' %}"></script>
+	<script src="{% static 'js/plugin/typeahead-addresspicker.min.js' %}"></script>
+	<script src="{% static 'js/custom/init-autocomplete.js' %}"></script>
+	<script src="{% static 'js/plugin/handlebars-v4.0.5.js' %}"></script>
+	<script src="{% static 'js/custom/share.js' %}"></script>
+
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+		  $('.last-offre-slider').bxSlider({
+		    slideWidth: 450,
+		    minSlides: 2,
+		    maxSlides: 3,
+		    slideMargin: 10,
+		    auto : false
+		  });
+		  $('.temoignage-slider').bxSlider({
+		    slideWidth: 400,
+		    minSlides: 2,
+		    maxSlides: 3,
+		    slideMargin: 10,
+		    auto : false
+		  });
+
+		 	init_autocomplete();
+		});
+
+		map = new google.maps.Map(document.getElementById('map-recrute'), {
+	    	center: {lat: 48.857713, lng: 2.349873},
+	    	zoom: 12,
+		    scrollwheel: false,
+	 	});
+
+	</script>
+
+
+	{% if user.is_authenticated and user|in_group:"member" and 1 == 2 %}
+		<script src="https://cdn.socket.io/socket.io-1.4.3.js"></script>
+		<script type="text/javascript">
+			var socket = io.connect('https://www.pitchmyjob.com:8080');
+			socket.emit('token', '{{apitoken}}' ); 
+		</script>
+
+		{% block msg_nodejs %}
+			<script type="text/javascript">
+				var count_source = $("#count-msg-template").html();
+				var count_template = Handlebars.compile(count_source);
+				var count_msg = {{ nb_msg }};
+
+				socket.on('receive_msg', function (receiver) {
+					console.log(receiver);
+					count_msg++;
+					$('.dropdown-handle').html( count_template({'nb_msg' : count_msg }));
+				});
+
+				$('.notify-load-msg').click(function() {
+					count_msg=0;
+				});
+			</script>
+		{% endblock %}
+	{% endif %}
+
+</html>

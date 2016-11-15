@@ -1,0 +1,236 @@
+{% load staticfiles %}
+{% load in_group %}
+{% load i18n %}
+
+<table class="col-sm-12 messagerie">
+
+	<tr>
+
+		<td class="col-xs-4 messagerie-left" valign=top> 
+			<div class="row">
+				<div class="msg-left-header"> 
+					<!--<img src="{% static 'images/chat_icon.svg' %}">--> <span> {% trans "Discussions" %}</span>
+				</div>
+				<div class="col-sm-12 msg-left-menu">
+					<div class="row"  style="height:100%">
+						<div class="msg-left-new-msg">
+							<!--<a href="" class="button-new-msg"> <span class="glyphicon glyphicon-envelope"></span> Nouveau message </a> -->
+							<!--<a href="" class="button-new-msg-2"> <span class="glyphicon glyphicon-envelope"></span> Nouveau message </a> -->
+							<div style="display:inline-block;width:10px;height:10px;border-radius:50%;background:green;margin-left:10%"></div> {% trans "En ligne" %}
+						</div>
+
+						<div class="msg-left-list col-sm-12"  style="height:100%">
+							<div class="row msg-left-content-group">
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="msg-left-footer col-sm-12">
+					<div class="row">
+							<!-- <div class="col-xs-3">
+									<img src="/media/c2v/37/37.jpg.50x50_q85_crop-smart.jpg">
+							</div>
+							<div class="col-xs-9 "> 
+								<div class="row">
+									<div class="msg-bloc-connect"> <span class="connected"></span>  Boudic antoine </div>
+								</div>
+							</div> -->
+					</div>
+				</div>
+
+			</div>
+		</td>
+
+		<td class="col-xs-8 messagerie-right" valign=top> 
+			<div class="row">
+				<div class="msg-right-header"> 
+					 <div class="col-xs-10">{{ receiver }} </div>
+					 <div class="col-xs-2 msg-right-header-config dropdown" style="display:none"> 
+					 	<span class="glyphicon glyphicon-cog btn-config" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span> 
+					 	<ul class="dropdown-menu" aria-labelledby="dLabel">
+						    <li> <a>{% trans "Desactiver les notifications" %}</a> </li>
+						    <li> <a>{% trans "Supprimer la conversation" %}</a> </li>
+						    <li role="separator" class="divider"></li>
+						    <li> <a>{% trans "Bloquer" %} </a> </li> 
+						</ul>
+					 </div>
+				</div>
+			
+
+				<div class="message-right-content col-sm-12">
+					
+					<div class="api_load_msg"> <img src="{% static 'images/notif_loader.gif' %}"> </div>
+
+				</div>
+
+				<div class="message-right-footer col-sm-12">
+					<div class="col-sm-10">
+						<textarea class="form-control input-message" row=1> </textarea>
+					</div>
+					<div class="col-sm-2">
+						<button class="message-right-send">{% trans "Envoyer" %}</button>
+					</div>
+				</div>
+
+			</div>
+		</td>
+
+	</tr>
+
+</table>
+
+<script src="https://cdn.socket.io/socket.io-1.4.3.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+	Handlebars.registerHelper('breaklines', function(text) {
+	    text = Handlebars.Utils.escapeExpression(text);
+	    text = text.replace(/(\r\n|\n|\r)/gm, '<br>');
+	    return new Handlebars.SafeString(text);
+	});
+
+	var sendheader = function(xhr){
+		xhr.setRequestHeader('Authorization', 'Token {{ apitoken }}');
+	};
+	var source  = $("#msg-template").html();
+	var source_group = $("#group-template").html();
+
+	load_message();
+
+	function load_message(){
+		$.ajax({
+	         url: "/api/message/{{receiver.id}}",
+	         beforeSend: sendheader,
+	         success: function(response) { 
+	         	if(response.length>0)
+	         	{
+	         		var template = Handlebars.compile(source);
+	         		var html = template(response);
+		         	$('.message-right-content').html(html);
+		         	
+	         	}else{
+	         		$('.api_load').hide();
+	         		$('.no_message').show();
+	         	}
+	         	setTimeout(function(){
+	         		scroll();
+	         	}, 10); 
+				
+	         }
+	 	});
+
+	 	$.ajax({
+	         url: "/api/messages",
+	         beforeSend: sendheader,
+	         success: function(response) { 
+	         	if(response.length>0)
+	         	{
+	         		var template = Handlebars.compile(source_group);
+	         		var html = template(response);
+		         	$('.msg-left-content-group').html(html);
+		         	$('.bloc-group-{{ receiver.id }}').addClass('group_active');
+	         	}else{
+
+	         	}
+	         }
+	 	 });
+	}
+
+	
+	$('.message-right-send').click(function(){
+
+		var template = Handlebars.compile(source);
+
+		{% if user|in_group:"member" %}
+			var user =  {'current':1,'name': '{{ user.member.first_name }} {{ user.member.last_name }}', 'image' : '{{ user.member.image.profil50.url }}'};
+		{% else %}
+			var user = {'current':1,'name': '{{ user.pro.company }}', 'image' : '{{ user.pro.image.logo50.url}}'};
+		{% endif %}
+		var objet = [{'user': user, 'message' : $('.input-message').val(), 'date_posted' : 'envoie ..' }];
+ 		var html = template(objet);
+     	$('.message-right-content').append(html);
+
+     	scroll();
+
+		$.ajax({
+	         url: "/api/messages",
+	         type: "POST",
+	         data : {receiver:{{ receiver.id }}, message:$('.input-message').val()},
+	         beforeSend: sendheader,
+	         success: function(response) { 
+	         	console.log('envoyé');
+	         	load_message();
+	         }
+		 });
+
+		message:$('.input-message').val("");
+	});
+
+	socket.on('receive_msg', function (sender) {
+		console.log(sender);
+		load_message();
+	});
+
+});
+
+function scroll()
+{
+	var $cont = $('.message-right-content');
+	$cont[0].scrollTop = $cont[0].scrollHeight+500;
+}
+
+</script>
+
+
+
+
+{% verbatim %}
+<script id="msg-template" type="text/x-handlebars-template">
+  	
+  	{{#each this}}
+		<div class="row message-right-bloc current-{{user.current}}">
+			<div class=" col-sm-12"> 
+				<div class="row">
+
+					<div class="col-xs-1 msg-right-bloc-name">
+						<img src="{{ user.image }}">
+					</div>
+					
+					<div class="col-xs-11 ">
+						<div class="msg-right-bloc-text">
+							{{breaklines message }}
+						</div>
+						<div class="msg-right-bloc-date">{{ user.name }} - {{ date_posted }} </div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	{{/each}}
+</script>
+{% endverbatim %}
+
+
+{% verbatim %}
+<script id="group-template" type="text/x-handlebars-template">
+  	{{#each this}}
+		<div class="msg-left-list-bloc col-sm-12 bloc-group-{{ user.id }}">
+			<a href="/notif-message/{{ user.id }}">
+				<div class="col-xs-3 responsive-img">
+						<img src="{{ user.image }}"> 
+				</div>
+				<div class="col-xs-9 responsive-text"> 
+					<div class="row msg-bloc-infos">
+						<div class="msg-bloc-name"> {{ user.name }} </div>
+						<div class="msg-bloc-text"> {{ message }} </div>
+					</div>
+				</div>
+			</a>
+		</div>
+	{{/each}}
+</script>
+{% endverbatim %}

@@ -1,0 +1,14 @@
+{% extends 'emails/basic.html' %}
+
+
+{% block content %}
+	<h3>Salut {{ first_name|title }}</h3>
+	<p class="lead">Nous espérons que ta découverte du site se passe bien.</p>
+	<p> On a remarqué que tu n’avais toujours pas rempli ton CV et nous t’avons compris et nous avons réagi. 
+		Aujourd’hui sur Pitch my job, tu peux créer ton CV en 1 clic via ton profil LinkedIn.
+	</p>
+	<!-- Callout Panel -->
+	<a href="http://www.pitchmyjob.com/mycv/#linkedin" class="calloutpitch">
+		Créer mon CV 
+	</a><!-- /Callout Panel -->		
+{% endblock %}

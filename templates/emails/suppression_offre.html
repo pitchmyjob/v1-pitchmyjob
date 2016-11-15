@@ -1,0 +1,15 @@
+{% extends 'emails/basic.html' %}
+
+
+{% block content %}
+{% load i18n %}
+
+<h3> {% trans "Bonjour" %} {{ first_name|title }}</h3>
+<p class="lead">{% trans "Votre offre" %} "{{ job }}" {% trans "a bien été supprimée." %}</p>
+<p>{% trans "Vous pouvez publier une nouvelle offre en cliquant sur le lien ci-dessous" %} :</p>
+<!-- Callout Panel -->
+<a href="http://www.pitchmyjob.com/pro/job-create/step-1" class="calloutpitch">
+	{% trans "Publier une offre" %}
+</a><!-- /Callout Panel -->		
+
+{% endblock %}

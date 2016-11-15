@@ -1,0 +1,234 @@
+{% extends "pro-interne.html" %}
+
+{% block mes-offres %} active {% endblock %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load tagspro %}
+	{% load i18n %}
+
+	<div class="container-offre">
+
+		<div class="col-sm-12 trie-offre" >
+			Tier par : 
+			<select class="form-control select-offre">
+				<option value="0">{% trans "Toutes les offres" %}</option>
+				<option value="1">{% trans "Offre en cours" %}</option>
+				<option value="2">{% trans "Offre expirée" %}</option>
+				<option value="3">{% trans "Offre en attente de publication" %}</option>
+			</select>
+		</div>
+
+		{% if messages %}
+		    {% for message in messages %}
+		    	<div class="col-sm-12" style="margin-top:20px; margin-bottom: -15px;">
+			  		<div class="alert alert-{% if message.tags == 'error' %}danger{% else %}success{% endif%} col-sm-12" role="alert"> 
+					   	{{ message }}
+					</div>
+				</div>
+		    {% endfor %}
+		{% endif %}
+
+		{% if delete %}
+			<div class="col-sm-12">
+				<div class="pro-delete-confirme">
+					<form action="" method="POST">
+						{% csrf_token %}
+						<p> {% trans "Etes vous sur de vouloir supprimer l'offre" %} <b> {{ object.job_title }} </b> ? </p>
+						<a href="{% url 'pro:offres' %}" class="btn-accept-delete">{% trans "Annuler" %}</a>    <input type="submit" value="{% trans 'Supprimer' %}" name="accept" class="btn-delete">
+						<input type="hidden" name="active">
+					</form>
+				</div>
+			</div>
+		{% endif %}
+
+		{% for job in object_list %}
+
+			<div class="col-sm-12 col-xs-12 col-lg-6 blc-offre {% if job.paid %} {% if job.is_valid %} offre-valid {% else %} offre-expire {% endif %} {% else %} offre-no-pay {% endif%} ">
+				<div class="pro-one-offre">
+					<table>
+						<tr>
+							<td style="width:75%" class="ofre-background "> 
+								{% if user.pro.cover %} <img src="{{ user.pro.cover.cover840.url }}" style="max-width:487px;max-height:102px;">  {% else %} <img src="{% static 'images/myc2v-25.jpg' %}"> {% endif %}
+							</td>
+
+							{% if job.paid %}
+								<td class="offre-nb-reponse offre-reponses {% if nb > 0 %} offre-reponses {% endif %}" href="{% url 'pro:job-candidatures' job.id %}" >
+								{% with  job.candidature_set|nbcandidature as nb %}
+									<a href="{% url 'pro:job-candidatures' job.id %}"> {% if nb > 0 %} {{ nb }} {% trans "Pré-entretien" %}{{ nb|pluralize }} {% else %} 0 Pré-entretien {% endif %} </a>
+								{% endwith %} <br>
+								{% with  job.interest_set.count as nb %}
+									<a href="{% url 'pro:job-candidatures' job.id %}"> {% if nb > 0 %} {{ nb }} {% trans "CV" %} {% else %} 0 CV {% endif %} </a>
+								{% endwith %}
+								</td>
+							{% else %}
+								<td class="offre-publish"> <a href="{% url 'pro:job-step-5' job.id %}">{% trans "Publier" %}</a> </td>
+							{% endif%}
+
+						</tr>
+						<tr class="pro-offre-info ">
+							<td class="offre-border">  
+								<div class="col-sm-12 pro-offre-title">
+									<a href="{% url 'members:detail-job' job.id %}" target="blank"> {{ job.job_title }}  </a> 
+								</div>	
+								<div class="col-sm-12 pro-offre-descript">
+									{{ job.contracts.all|join:", " }} - {{ job.studies.all|join:", " }}
+								</div>	
+								<div class="col-sm-12 pro-offre-descript">
+									{{ job.job_location }}
+								</div>	
+								{% if job.paid %}
+									{% if job.is_valid %}
+										<div class="col-sm-12 pro-offre-date">
+											<a href="#" style="float:left;display:none" onclick='getEmail("{{ job.job_title }}", {{ job.id }})' >{% trans "Inviter une personne par email" %}</a>
+											Postée le {{ job.date_posted }}
+										</div>	
+									{% else %}
+										<div class="col-sm-12 pro-offre-date">
+											Offre expirée depuis le {{ job.date_expire|date:"d M Y" }}. {% trans "Pour republier" %} <a href="{% url 'pro:job-step-5' job.id %}">{% trans "cliquez ici" %}</a> 
+										</div>	
+									{% endif %}
+								{% else %}
+									<div class="col-sm-12 pro-offre-date">
+										<b>{% trans "En attente de publication" %}</b>
+									</div>	
+								{% endif%}
+							</td>
+							<td>
+								<table class="pro-link-action">
+									<tr>
+										<td> <a href="{% url 'pro:job-step-1' job.id %}"> {% trans "Modifier" %} </a> </td>
+									</tr>
+									<tr>
+										<td> <a href="{% url 'pro:delete-offre' job.id %}"> {% trans "Supprimer" %} </a> </td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td style="width:100%; background:#6CB1E1; padding:5px 0; text-align:center;" colspan=2>
+								<a href="#" style="color:#fff;font-size:16px;" onclick='getEmail("{{ job.job_title }}", {{ job.id }})' >{% trans "Inviter des candidats par email" %}</a>
+							</td>
+						</tr>
+					</table>
+				</div>	
+			</div>
+			{% if forloop.counter|divisibleby:"2" %} <div style="clear:both"></div> {% endif %}
+		{% empty %}
+
+			<div class="col-xs-12">
+				<div class="container-fluid container-no-offre">
+					<div class="message"> {% trans "AUCUNE OFFRE PUBLIÉE" %} </div>
+					<p>  {% trans "Trouvez le candidat qu’il vous faut, grâce à l’entretien différé." %} </p>
+					<div class="link"> <a href="{% url 'pro:job-create' %}"> {% trans "PUBLIER UNE OFFRE" %} </a> </div>
+				</div> 
+			</div>
+
+
+		{% endfor %}
+
+	
+	</div> 
+
+	<script type="text/javascript">
+		$('.select-offre').change(function(){
+			var val = $(this).val();
+			$('.blc-offre').hide();
+
+			if(val=="0")
+				$('.blc-offre').show();
+			if(val=="1")
+				$('.offre-valid').show();
+			if(val=="2")
+				$('.offre-expire').show();
+			if(val=="3")
+				$('.offre-no-pay').show();
+
+
+		});
+
+		$('.offre-nb-reponse ').click(function(){
+			window.location.href = $(this).attr('href');
+		});
+
+		var offre;
+		var id;
+
+		var sendheader = function(xhr){
+			xhr.setRequestHeader('Authorization', 'Token {{ apitoken }}');
+		};
+
+		function postEmail(){
+			var text = $('.model').val().replace('[job]', offre).replace('[job]', offre).replace('[id]', id);
+			var email = $('.email').val();
+
+			$.ajax({
+		         url: "/api/send-invitation",
+		         type: "POST",
+		         data : {'message':text, 'job': offre, 'email':email},
+		         beforeSend: sendheader ,
+		         success: function(response) { 
+		         	notification("Invitation candidature envoyée ! "); 
+		         	$('.email').val("");
+		         }
+	     	 });
+
+			 $('.send-email').modal('hide');
+		}
+
+		function getEmail(job, pk){
+			offre = job;
+			id = pk;
+			$('.send-email').modal('show');
+
+		}
+	</script>
+{% endblock  %}
+
+{% block modal %}
+
+<div class="modal fade send-email" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog ">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" > {% trans "Envoyez l'annonce par email" %} </h4>
+			</div>
+			<div class="modal-body">
+				
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="exampleInputName2"> {% trans "Ajoutez les adresses emails des candidats que vous souhaitez inviter à repondre à votre pré-entretien video." %}  </label>
+							<input type="text" class="form-control email" object = "email" >
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default " data-dismiss="modal">{% trans "Annuler" %}</button>
+				<button type="button" class="btn btn-primary btn-sendCvEmail" onclick="postEmail()">{% trans "Envoyer" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<textarea class="model" style="display:none">
+
+Bonjour et merci pour l'intérêt que vous nous portez,
+
+Votre candidature pour le poste de "[job]" nous intéresse.
+
+Je vous propose de répondre à quelques questions de pré-entretien pour valider votre candidature en cliquant sur le lien suivant <a href="http://www.pitchmyjob.com/annonce/[id]"> [job] </a>. 
+
+Vous pouvez répondre aux questions en vidéo, audio ou texte. 
+
+L'objectif est de vous donner la parole afin que vous puissiez nous faire part de vos envies, de vos connaissances et de votre motivation. N'hésitez pas à votre tour à nous faire savoir si vous aviez la moindre question pendant l'entretien.
+
+Nous sommes impatient de recevoir votre candidature.
+
+</textarea>
+
+{% endblock  %}

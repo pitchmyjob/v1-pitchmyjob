@@ -1,0 +1,96 @@
+{% load staticfiles %}
+{% load i18n %}
+
+<div class="footer">
+	<div class="footer-1">
+			{% trans "Partage PitchMyJob et aide nous à nous développer" %} <a href="javascript:fbShare('http://www.pitchmyjob.com', 590, 380)"><img src="{% static 'images/myc2v-42.png'%}"></a>  <a href="javascript:TwitterShare('Rejoins Pitch my job ! Le site d\'emploi qui donne la parole aux candidats', 'http://www.pitchmyjob.com', 530, 450)"><img src="{% static 'images/myc2v-43.png'%}"></a>
+	</div> 
+	<div class="footer-2">
+		<ul>
+			<li> <a href="{% url 'pages:cgu' %}">{% trans "CGU" %}</a>  </li>
+			<li> <a href="{% url 'pages:a-propos' %}">{% trans "A propos" %}</a>  </li>
+			<li style="display:none"> <a href="{% url 'pages:faq-general' %}">{% trans "Faq" %}</a>  </li>
+			<li> <a href="{% url 'pages:presse' %}">{% trans "Presse" %}</a>  </li>
+			<li> <a href="{% url 'pages:partenaires' %}">{% trans "Partenaires" %}</a>  </li>
+			<li> <a href="{% url 'pages:contact' %}">{% trans "Nous contacter" %}</a>  </li>
+
+			<li> 
+				<form action="{% url 'set_language' %}" method="post" class="changelangform langen">{% csrf_token %}
+					<input type="hidden" name="language" value="en">
+					<a href="#" class="goen"> <img src="{% static 'images/pitchmyjob-01.png' %}"> </a>  
+				</form>
+			</li>
+
+			<li> 
+
+				<form action="{% url 'set_language' %}" method="post" class="changelangform langfr">{% csrf_token %}
+					<input type="hidden" name="language" value="fr">
+					<a href="#" class="gofr"> <img src="{% static 'images/pitchmyjob-02.png' %}"> </a>  
+				</form>
+
+			</li>
+
+		</ul>
+	</div> 
+
+	<script type="text/javascript">
+		$('.goen').click(function(){
+			$('.langen').submit();
+		});
+		$('.gofr').click(function(){
+			$('.langfr').submit();
+		});
+	</script>
+
+	<!--
+	<div class="footer-3">
+		<div class="container-fluid footer-3-content">
+			<div class="col-xs-3"> 
+				<ul>
+					<li> <a href="">Créer un C2V</a> </li>
+					<li> <a href="">Rechercher une offre</a> </li>
+					<li> <a href="">Nos entreprises</a> </li>
+					<li> <a href="">Entrainement à entretien</a> </li>
+				</ul>
+			</div>
+			<div class="col-xs-9"> 
+				<div class="titre-secteur">Offre par secteur : </div>
+				<div class="row list-secteur">
+					<div class="col-xs-4"> <a href="">Accueil / Restaurant</a> </div>
+					<div class="col-xs-4"> <a href="">Achat</a> </div>
+					<div class="col-xs-4"> <a href="">Informatique</a> </div>
+					<div class="col-xs-4"> <a href="">Areodinamique</a> </div>
+					<div class="col-xs-4"> <a href="">Banque</a> </div>
+					<div class="col-xs-4"> <a href="">Chimie</a> </div>
+					<div class="col-xs-4"> <a href="">Immobilier</a> </div>
+					<div class="col-xs-4"> <a href="">Import/export</a> </div>
+					<div class="col-xs-4"> <a href="">Accueil / Restaurant</a> </div>
+					<div class="col-xs-4"> <a href="">Achat</a> </div>
+					<div class="col-xs-4"> <a href="">Informatique</a> </div>
+					<div class="col-xs-4"> <a href="">Areodinamique</a> </div>
+					<div class="col-xs-4"> <a href="">Banque</a> </div>
+					<div class="col-xs-4"> <a href="">Chimie</a> </div>
+					<div class="col-xs-4"> <a href="">Immobilier</a> </div>
+					<div class="col-xs-4"> <a href="">Import/export</a> </div>
+					<div class="col-xs-4"> <a href="">Accueil / Restaurant</a> </div>
+					<div class="col-xs-4"> <a href="">Achat</a> </div>
+					<div class="col-xs-4"> <a href="">Informatique</a> </div>
+					<div class="col-xs-4"> <a href="">Areodinamique</a> </div>
+					<div class="col-xs-4"> <a href="">Banque</a> </div>
+					<div class="col-xs-4"> <a href="">Chimie</a> </div>
+					<div class="col-xs-4"> <a href="">Immobilier</a> </div>
+					<div class="col-xs-4"> <a href="">Import/export</a> </div>
+					<div class="col-xs-4"> <a href="">Accueil / Restaurant</a> </div>
+					<div class="col-xs-4"> <a href="">Achat</a> </div>
+					<div class="col-xs-4"> <a href="">Informatique</a> </div>
+					<div class="col-xs-4"> <a href="">Areodinamique</a> </div>
+					<div class="col-xs-4"> <a href="">Banque</a> </div>
+					<div class="col-xs-4"> <a href="">Chimie</a> </div>
+					<div class="col-xs-4"> <a href="">Immobilier</a> </div>
+					<div class="col-xs-4"> <a href="">Import/export</a> </div>
+				</div>
+			</div>
+
+		</div>
+	</div> -->
+</div>

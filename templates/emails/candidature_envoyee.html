@@ -1,0 +1,16 @@
+{% extends 'emails/basic.html' %}
+
+
+{% block content %}
+{% load i18n %}
+
+	<h3>{% trans "Bonjour" %} {{ first_name|title }}</h3>
+	<p class="lead">{% trans "Votre candidature pour l'offre" %} "{{ job.title }}" {% trans "à bien été envoyée à" %} "{{ company }}".</p>
+	<p>{% trans "Vous pouvez" %} <span style="font-weight:bold; color:#2C3E50; font-style:underline"> {% trans "revoir votre entretien" %}</span>.
+		{% trans "En attendant la réponse de" %} {{ company }} {% trans "pourquoi ne pas continuer votre recherche ?" %}</p>
+	<p>{% trans "Voici une sélection d'offres qui pourraient vous correspondre" %} :</p>
+	<!-- Callout Panel -->
+	<a href="http://www.pitchmyjob.com/annonces" class="calloutpitch">
+		{% trans "Accéder aux annonces" %}
+	</a><!-- /Callout Panel -->		
+{% endblock %}

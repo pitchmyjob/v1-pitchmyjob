@@ -1,0 +1,188 @@
+{% extends 'user-interne.html' %}
+
+{% block annonces %} active {% endblock %}
+{% block footer %} {% endblock %}
+{% block js_autocomplete %} {% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load tagspro %}
+{% load i18n %}
+
+<div class="container-fluid header-entretien">
+	<h1> {% trans "Résumé de ma candidature" %} </h1>
+</div>
+
+
+<div class="container-fluid entretien-6">
+
+	<div class="col-sm-12 back-list-offre"> <a href="{% url 'members:detail-job' object.job.id %}"> <span class="glyphicon glyphicon-arrow-left"></span> {% trans "Retour aux offres" %} </a>  </div>
+
+	<div class="container-fluid">
+		<div class="row">
+
+			{% if object.mode == 3 %}
+				<div class="col-sm-12 entretien-questions">
+					{% for reponse in object.candidaturereponse_set.all %}
+					<div class="row">
+						<div data-qt = "{{ reponse.nb }}" class="col-sm-12 entretien-audio-1 entretien-question {% if reponse.nb == 1 %} entretien-active {% endif %}">  {{ object|get_question:reponse.nb }} </div>
+						<div class="col-sm-12  entretien-reponse-text entretien-text-{{ reponse.nb}}">
+							{{ reponse.text}}
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+				<script type="text/javascript">
+					$('.entretien-text-1').show();
+					$('.entretien-question').click(function() {
+						$('.entretien-reponse-text').slideUp();
+						$('.entretien-question').removeClass('entretien-active');
+
+						var qt = $(this).attr('data-qt');
+						$(this).addClass('entretien-active');
+						$('.entretien-text-'+qt).slideDown();
+					});
+				</script>
+			{% endif %}
+
+			{% if object.mode == 1 %}
+				<div class="col-sm-6">
+
+					{% if object.new %}
+						{% for reponse in object.candidaturereponse_set.all %}
+								<video width="420" height="250" controls id="video-player" class="entretien-rep-{{ reponse.nb }} entretien-rep">
+									<source src="{{ reponse.video.path_aws_v2 }}" type="video/mp4">
+								</video>
+							{% endfor %}
+
+							<script type="text/javascript">
+								$(document).ready(function(){
+									var vid = $('.entretien-rep');
+									$('.entretien-text-1').show();
+									$('.entretien-question').click(function() {
+
+										$(".entretien-rep").each(function() {
+											this.pause();
+										});
+
+										$('.entretien-rep').hide();
+										$('.entretien-question').removeClass('entretien-active');
+
+										var qt = $(this).attr('data-qt');
+										$(this).addClass('entretien-active');
+										$('.entretien-rep-'+qt).show();
+									});
+								});
+							</script>
+
+
+					{% else %}
+						{% for reponse in object.candidaturereponse_set.all %}
+							 <div class="get_time-{{ reponse.nb }}" time={{ reponse.time|default_if_none:0 }}> </div>
+						{% endfor %}
+
+						<video width="420" height="250" controls id="video-player">
+							<source src="{{ object.video.path_video }}" type="video/mp4">
+						 </video>
+
+
+						<script type="text/javascript">
+							$(document).ready(function(){
+								var video = document.getElementById("video-player");
+								var path = "{{ object.video.path_video }}";
+
+								$('.entretien-question').click(function(e) {
+									$('.entretien-question').removeClass('entretien-active');
+									$(this).addClass('entretien-active');
+									//var qt = $(this).attr('data-qt');
+									//$('.entretien-rep').hide();
+									//$('.entretien-rep-'+qt).show();
+
+									var time = parseInt($('.get_time-'+$(this).attr('data-qt') ).attr("time"));
+									//skip(time);
+
+									video.src = path+"#t="+parseInt(time);
+								});
+
+								function skip(value) {
+									video.currentTime = value;
+									video.play();
+								}
+							});
+						</script>
+					{% endif %}
+
+				</div>
+
+				<div class="col-sm-6 entretien-questions"> 
+					{% for question in object.job.questions.all %}
+						<div class="row"> <div data-qt = "{{ question.nb }}" class="col-sm-12 entretien-question {% if forloop.first %} entretien-active {% endif %} " > {{ question.question }} </div>   </div>  
+					{% endfor %}
+				</div>
+
+			{% endif %}
+
+			{% if object.mode == 2 %}
+
+				<div class="col-sm-4 entretien-questions entretien-audio"> 
+					{% for reponse in object.candidaturereponse_set.all %}
+						<div class="get_time-{{ reponse.nb }}" time={{ reponse.time|default_if_none:0 }}> </div>
+					{% endfor %}
+
+					<div style="padding:20px 0;">
+						 <audio controls="" src="{{ object.audio.file_on_server.url }}" id="audio-player"></audio> 
+					</div>
+
+				</div>
+
+					<div class="col-sm-7 entretien-questions"> 
+						{% for question in object.job.questions.all %}
+							<div class="row"> 
+								<div data-qt = "{{ question.nb }}" class="col-sm-12 entretien-audio-{{ question.nb }} entretien-question {% if forloop.first %} entretien-active {% endif %}">  {{ question.question }} </div>   
+							</div>  
+						{% endfor %}
+					</div>
+
+				<script type="text/javascript">
+					$(document).ready(function(){
+						var audio = document.getElementById("audio-player");
+						var path = "{{ object.audio.file_on_server.url }}";
+						$('.entretien-question').click(function() {
+							$('.entretien-question').removeClass('entretien-active');
+							$(this).addClass('entretien-active');
+							//var qt = $(this).attr('data-qt');
+							//$('.entretien-rep').hide();
+							//$('.entretien-rep-'+qt).show();
+							//skip( $('.get_time-'+$(this).attr('data-qt') ).attr("time") );
+
+							var time = parseInt($('.get_time-'+$(this).attr('data-qt') ).attr("time"));
+							//skip(time);
+							audio.src = path+"#t="+parseInt(time);
+
+						}); 
+
+						function skip(value) {
+					        var audio = document.getElementById("audio-player");
+					        audio.currentTime = parseInt(value); 
+					        audio.play();
+					    }   
+				    }); 
+				</script>
+			{% endif %}
+
+
+		</div>
+	</div>
+
+</div>
+
+
+
+
+<link rel="stylesheet" href="//assets-cdn.ziggeo.com/css/ziggeo-v1.css" />
+<script src="//assets-cdn.ziggeo.com/js/ziggeo-v1.js"></script>
+<script>ZiggeoApi.token = "e50140772b22dbd8cbda85384066b8e5";</script>
+
+
+{% endblock %}

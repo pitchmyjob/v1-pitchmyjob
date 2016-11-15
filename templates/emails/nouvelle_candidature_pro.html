@@ -1,0 +1,12 @@
+{% extends 'emails/basic.html' %}
+
+{% block content %}
+{% load i18n %}
+
+<h3>{% trans "Bonjour" %} {{ first_name }}</h3>
+<p class="lead">{% trans "Vous avez reçu une nouvelle candidature pour votre offre" %} "{{ job }}"</p>
+<a href="http://www.pitchmyjob.com/pro/offre/{{id}}/candidatures" class="calloutpitch">
+	{% trans "Voir la candidature" %}
+</a><!-- /Callout Panel -->		
+
+{% endblock %}

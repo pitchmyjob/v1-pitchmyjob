@@ -1,0 +1,21 @@
+{% extends "pro-interne.html" %}
+
+{% block credits %} active {% endblock %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load widget_tweaks %}
+	{% load i18n %}
+
+	<div class="container-fluid pro-profil">
+		
+		<div class="credits">
+			<div class="title"> {% trans "Vous ne disposez pas encore de crédits" %} </div>
+			<div class="text"> {% trans "Vous pouvez publier votre première offre d'emploi gratuitement sur Pitch my job." %} </div>
+			<div> <a href="{% url 'pro:job-create' %}" class="btn-general-blue-2"> {% trans "PUBLIER UNE OFFRE" %}</a> </div>
+		</div>
+			
+	</div>	
+		
+{% endblock  %}
+

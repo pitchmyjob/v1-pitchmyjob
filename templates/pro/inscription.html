@@ -1,0 +1,79 @@
+{% extends "base-login-inscription.html" %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load i18n %}
+	
+	<body class="connexion">
+		<div class="row">
+			<div class="col-md-12 connexion-logo"> <a href="{% url 'pro:home' %}"> <img src="{% static 'images/refonte/home-pro-logo.png' %}" class="home-user-logo logo-pitch-2"> </a>  </div>
+		</div>
+
+		<div class="connexion-bloc inscription-form">
+			<h1> {% trans "Inscription" %} {% if pro %} {{ object.company }} {% endif %} </h1>
+			<div class="connexion-container">
+
+				<form method="POST" action = "">
+					{% csrf_token %}
+					<div class="connexion-form"> 
+						{% if form.errors %}
+					  		<div class="alert alert-danger alert-inscription"> 
+							    <ul>
+							    {% for field, error in form.errors.items %} 
+							        <li>{{ error }}</li>
+							    {% endfor %}
+							    </ul>
+							</div>
+						{% endif %} 
+
+						{% if pro %}
+							<div class="col-sm-12 row" style="text-align:center;padding-bottom:10px;margin-top:-15px">
+								<img src="{{ object.image.logo100.url }}"> 
+							</div>
+						{% endif %} 
+
+						<div class="input-group {% if form.company.errors %} has-error {% endif %}">
+					      	<div class="input-group-addon"> <span class="glyphicon glyphicon-briefcase"></span> </div>
+					      	<input type="text" class="form-control" name="company" value="{{ form.company.value|default_if_none:"" }}" placeholder="{% trans 'Nom de la société' %}">
+					    </div>
+					    <div class="input-group {% if form.phone.errors %} has-error {% endif %}">
+					      	<div class="input-group-addon"> <span class="glyphicon glyphicon-phone-alt"></span> </div>
+					      	<input type="text" class="form-control" name="phone" value="{{ form.phone.value|default_if_none:"" }}"  placeholder="{% trans 'Téléphone' %}">
+					    </div>
+					    <div class="input-group {% if form.last_name.errors %} has-error {% endif %}">
+					      	<div class="input-group-addon"> <span class="glyphicon glyphicon-user"></span> </div>
+					      	<input type="text" class="form-control" name="last_name" value="{{ form.last_name.value|default_if_none:"" }}"  placeholder="{% trans 'Nom' %}">
+					    </div>
+					    <div class="input-group {% if form.first_name.errors %} has-error {% endif %}">
+					      	<div class="input-group-addon"> <span class="glyphicon glyphicon-user"></span> </div>
+					      	<input type="text" class="form-control" name="first_name" value="{{ form.first_name.value|default_if_none:"" }}"  placeholder="{% trans 'Prenom' %}">
+					    </div>
+					    <div class="input-group {% if form.email.errors %} has-error {% endif %}">
+					      	<div class="input-group-addon"> <span class="glyphicon glyphicon-envelope"></span> </div>
+					      	<input type="email" class="form-control" name="email" value="{{ form.email.value|default_if_none:"" }}"  placeholder="{% trans 'Email' %}">
+					    </div>
+					    <div class="input-group {% if form.password.errors %} has-error {% endif %}">
+					      	<div class="input-group-addon"> <span class="glyphicon glyphicon-lock"></span> </div>
+					      	<input type="password" class="form-control" name="password" placeholder="{% trans 'Mot de passe' %}">
+					    </div>
+					    <div class="input-group {% if form.confirm_password.errors %} has-error {% endif %}">
+					      	<div class="input-group-addon"> <span class="glyphicon glyphicon-lock"></span> </div>
+					      	<input type="password" class="form-control" name="confirm_password" placeholder="{% trans 'Confirmer mot de passe' %}">
+					    </div>
+					    <div class="checkbox {% if form.cgu.errors %} has-error {% endif %}">
+					    <label>
+					     	{{ form.cgu }} {% trans "Accepter les" %} <a href="{% url 'pages:cgu' %}" target="_blank">{% trans "conditions générales d'utilisation" %}</a> 
+					    </label>
+					  </div>
+					</div>
+
+					<div class="row ">
+						<div class="col-xs-12"> <input type="submit" value="S'inscrire" class="btn-general-red submitInscription">  </div>
+					</div>
+				</form>
+			</div>
+			
+		</div>
+	</body>
+
+{% endblock  %}

@@ -1,0 +1,39 @@
+{% extends 'pages/base-pro-mon-compte.html' %}
+
+	
+{% block presse %} profil-menu-active {% endblock %}
+
+{% block subcontent %}
+{% load staticfiles %}
+
+<div class="col-sm-12 pages-content-a-propos">
+	<div class="row">
+	
+		<div class="col-sm-3 pages-presse">
+			<a href="{% url 'pages:contact' %}"> <img src="{% static 'images/myc2v-59.png' %}"> </a>
+			<h3> </h3>
+			<p>  </p>
+		</div>
+
+		<div class="col-sm-3 pages-presse">
+			<a href="{% url 'pages:contact' %}"> <img src="{% static 'images/myc2v-59.png' %}"> </a>
+			<h3> </h3>
+			<p> </p>
+		</div>
+
+		<div class="col-sm-3 pages-presse">
+			<a href="{% url 'pages:contact' %}"> <img src="{% static 'images/myc2v-59.png' %}"> </a>
+			<h3>  </h3>
+			<p>  </p>
+		</div>
+
+		<div class="col-sm-3 pages-presse">
+			<a href="{% url 'pages:contact' %}"> <img src="{% static 'images/myc2v-59.png' %}"> </a>
+			<h3>  </h3>
+			<p>  </p>
+		</div>
+
+	</div>
+</div>
+	
+{% endblock %}

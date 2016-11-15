@@ -1,0 +1,594 @@
+{% extends 'user-interne.html' %}
+
+{% block entreprises %} active {% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+{% load tagspro %}
+{% load i18n %}
+{% load in_group %}
+
+<style>
+	.user-offre-interne{    padding-right: 0 !important;}
+</style>
+
+
+<div class="container-fluid bloc-profil-entreprise" style="height:1300px" ng-app="App">
+
+    <a href="#" data-toggle="modal" data-target="#apply"> popup postuler </a> <br><br>
+
+
+
+	{{ apitoken }}
+
+
+
+<div class="modal fade popup-apply" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"  id="importCv">
+	<div class="modal-dialog ">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<p>{% trans "Grâce à Pitch my job" %}</p>
+                <h2>{% trans "Créez votre CV en un clic" %}</h2>
+
+				<div class="popup-back"> <a href="#"> <img src="{% static 'images/refonte/home-member-25.png' %}" alt=""> retour</a> </div>
+			</div>
+
+
+			<div class="modal-body" style="padding: 15px 15px 25px 15px;">
+				<div class="container-fluid popup-apply-create-cv">
+
+					<p> Créez votre CV grace à votre compte <br> Linkedin ou DoYouBuzz ! </p>
+
+					<p> En un clic, il n'y a pas plus facile </p>
+
+					<div class="col-sm-12" style="padding:40px 0 20px 0;">
+						<div class="col-sm-6"><img src="{% static 'images/refonte/home-member-23.png' %}" alt=""> </div>
+						<div class="col-sm-6"><img src="{% static 'images/refonte/home-member-24.png' %}" alt=""> </div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+{% if user.is_authenticated and user|in_group:"member" %}
+	<div class="modal fade popup-apply" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="apply" data-easein="expandIn" ng-controller="Apply">
+	<div class="modal-dialog ">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<p>Postuler pour le poste</p>
+                <h2>Charger de SEO H/F - stage</h2>
+			</div>
+
+
+			<div class="modal-body" style="padding: 15px 15px 25px 15px;">
+				<div class="container-fluid popup-apply-cv-2">
+
+					<h3>Bonjour Jean-Marc</h3>
+
+					<p> Tu souhaites postulé à l'annonce de <b>XXX</b> pour le poste de <b>Chargé de SEO H/F</b> </p>
+					<p> <b>XXX</b> a rédigé un entretien différé sous forme de <b>3 questions</b> auquel vous pouvez répondre en <b>vidéo</b> </p>
+
+
+					<form action="" method="POST" id="formSubmit" ng-submit="applySubmit($event)" enctype="multipart/form-data">
+						{% csrf_token %}
+						<div class="col-sm-5 choose-apply">
+							<label for="logged_cv" style="cursor:pointer">
+								<img ng-src="[[ image_upload_cv ]]" alt="">
+								<div class="choose-apply-filename"> [[ cv.name ]] </div>
+							</label>
+							<div>
+								[[ message_1 ]]
+							</div>
+							<input type="file" id="logged_cv" name="cv" style="display:none"  onchange="angular.element(this).scope().setFile(this)">
+						</div>
+
+						<div class="col-sm-2 choose-apply-ou"> OU </div>
+
+						<div class="col-sm-5 choose-apply">
+							<label for="logged_radio" style="cursor:pointer">
+								<img ng-src="[[ image_apply_cv ]]"  alt="" style="max-height:49px;">
+							</label>
+							<div>
+								[[ message_2 ]]
+							</div>
+							<input type="radio" name="cv" id="logged_radio" value="1" ng-model="apply.radio" ng-change="setCV()" style="display:none" >
+						</div>
+
+						<div class="col-sm-12 choose-apply-btn">
+							<div class="popup-btn-entretien container-fluid" ng-hide="incomplete">
+								<input type="submit" value="Passer l'entretien vidéo">
+							</div>
+							<div class="cv_incompleted" ng-show="incomplete">
+								Votre CV n'est pas complet, Nous vous invitons à uploader un CV au format PDF ou vous rendre sur
+								<a href="{% url 'c2v:myc2v' %}">votre page de CV</a>  afin de le completer.
+							</div>
+						</div>
+
+					</form>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+{% else %}
+
+	<div ng-controller="Apply">
+
+		<div class="modal fade popup-apply" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="inscriptionApply"   >
+			<div class="modal-dialog ">
+				<div class="modal-content">
+
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<p>Postuler pour le poste</p>
+						<h2>Charger de SEO H/F - stage</h2>
+					</div>
+
+					<div class="modal-body" style="padding: 15px 15px 25px 15px;">
+						<div class="container-fluid popup-apply-cv-2">
+
+							<h3>Bonjour [[ new.first_name ]]</h3>
+
+							<p> Tu souhaites postulé à l'annonce de <b>XXX</b> pour le poste de <b>Chargé de SEO H/F</b> </p>
+							<p> <b>XXX</b> a rédigé un entretien différé sous forme de <b>3 questions</b> auquel vous pouvez répondre en <b>vidéo</b> </p>
+
+							<div class="popup-btn-entretien">
+								<a href="#" ng-click="goEntretien()">Passer l'entretien vidéo</a>
+							</div>
+
+							<div class="popup-tips">
+								<h4>
+									<img src="{% static 'images/refonte/home-pro-12.png' %}" alt="" ng-hide="slide">
+									<img src="{% static 'images/refonte/home-pro-13.png' %}" alt="" ng-show="slide">
+									Tips
+									<img src="{% static 'images/refonte/home-member-21.png' %}" alt="" class="showhideTips" ng-hide="slide" ng-click="slide=!slide" >
+									<img src="{% static 'images/refonte/home-member-22.png' %}" alt="" class="showhideTips" ng-show="slide" ng-click="slide=!slide" >
+								</h4>
+
+								<div class="popup-tips-content container-fluid"  ng-show="slide" >
+
+									<div class="col-sm-6">
+										<table>
+											<tr>
+												<td> <img src="{% static 'images/refonte/home-member-15.png' %}" alt=""> </td>
+												<td> Lorem ipsum dolor exem patrnum blabla </td>
+											</tr>
+										</table>
+									</div>
+
+									<div class="col-sm-6">
+										<table>
+											<tr>
+												<td> <img src="{% static 'images/refonte/home-member-18.png' %}" alt=""> </td>
+												<td> Lorem ipsum dolor exem patrnum blabla </td>
+											</tr>
+										</table>
+									</div>
+
+									<div class="col-sm-6">
+										<table>
+											<tr>
+												<td> <img src="{% static 'images/refonte/home-member-16.png' %}" alt=""> </td>
+												<td> Lorem ipsum dolor exem patrnum blabla </td>
+											</tr>
+										</table>
+									</div>
+
+									<div class="col-sm-6">
+										<table>
+											<tr>
+												<td> <img src="{% static 'images/refonte/home-member-19.png' %}" alt=""> </td>
+												<td> Lorem ipsum dolor exem patrnum blabla </td>
+											</tr>
+										</table>
+									</div>
+
+									<div class="col-sm-6">
+										<table>
+											<tr>
+												<td> <img src="{% static 'images/refonte/home-member-17.png' %}" alt=""> </td>
+												<td> Lorem ipsum dolor exem patrnum blabla </td>
+											</tr>
+										</table>
+									</div>
+
+									<div class="col-sm-6">
+										<table>
+											<tr>
+												<td> <img src="{% static 'images/refonte/home-member-20.png' %}" alt=""> </td>
+												<td> Lorem ipsum dolor exem patrnum blabla </td>
+											</tr>
+										</table>
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade popup-apply" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"  data-easein="expandIn" id="apply"  >
+			<div class="modal-dialog ">
+				<div class="modal-content">
+
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<p>Postuler pour le poste</p>
+						<h2>Charger de SEO H/F - stage</h2>
+					</div>
+
+
+					<div class="modal-body">
+						<div class="container-fluid popup-apply-cv">
+
+							<form action="" ng-submit="inscriptionSubmit($event)" enctype="multipart/form-data" method="POST" id="submitApply">
+								<div class="col-sm-5 apply-cv-block">
+									<label for="logged_cv" style="cursor:pointer">
+										<img ng-src="[[ image_upload_cv ]]" alt="">
+										<div class="choose-apply-filename"> [[ cv.name ]] </div>
+									</label>
+									<div>
+										[[ message_1 ]]
+									</div>
+									<input type="file" id="logged_cv" name="cv" style="display:none"  onchange="angular.element(this).scope().setFile(this)">
+								</div>
+
+								<div class="col-sm-2 choose-apply-ou"> OU </div>
+
+								<div class="col-sm-5 apply-cv-block">
+									<a href="#" class="cvOneClick"> <img src="{% static 'images/refonte/home-member-11.png' %}" alt=""> </a>
+									<div>
+										Créez votre CV en un clic
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<div class="apply-trait"></div>
+								</div>
+
+								<div class="col-sm-5">
+									<label for="photo">
+										<img src="{% static 'images/refonte/home-member-12.png' %}" alt="" id="image-holder">
+									</label>
+
+									<input type="file" name="photo" id="photo" style="display:none;" onchange="angular.element(this).scope().setPhoto(this)">
+
+									<div class="apply-photo">
+										<label for="photo">Chosir ma photo</label>
+									</div>
+
+								</div>
+
+								<div class="col-sm-7 apply-cv-form">
+
+									<div class="input-group">
+										<div class="input-group-addon"> <span class="glyphicon glyphicon-user"></span> </div>
+										<input type="text" class="form-control" name="last_name" placeholder="{% trans 'Nom *' %}" ng-model="new.last_name" required >
+									</div>
+
+									<div class="input-group ">
+										<div class="input-group-addon"> <span class="glyphicon glyphicon-user"></span> </div>
+										<input type="text" class="form-control" name="first_name" value="" placeholder="{% trans 'Prénom *' %}" ng-model="new.first_name" required >
+									</div>
+
+									<div class="input-group ">
+										<div class="input-group-addon"> <span class="glyphicon glyphicon-envelope"></span> </div>
+										<input ng-blur="verification_email()" type="text" class="form-control" name="email" value="" placeholder="{% trans 'Email *' %}" ng-model="new.email" required>
+									</div>
+									<div ng-show="msg" class="msg_[[ msg.type ]] msg_email" > [[ msg.message ]] </div>
+
+									<div class="input-group ">
+										<div class="input-group-addon"> <span class="glyphicon glyphicon-envelope"></span> </div>
+										<input type="password" class="form-control" name="mdp" value="" placeholder="{% trans 'Mot de passe *' %}" ng-model="new.mdp" required>
+									</div>
+
+									<div class="input-group">
+										<input type="submit" value="Valider" class="apply-cv-valider" >
+										<a href="#" class="apply-cv-valider" style="display:none"> Valider </a>
+									</div>
+
+								</div>
+
+								<div class="col-xs-5 apply-cv-link">
+									<div>{% trans "Vous êtes déjà inscrits ?" %}</div>
+									<div> <a href="">{% trans "Connectez-vous" %}</a> </div>
+								</div>
+
+								<div class="col-xs-7 apply-cv-link row">
+									<label>
+										<input id="id_cgu" name="cgu" type="checkbox"  ng-model="new.cgu" required> Accepter les <a href="/cgu/" target="_blank">conditions générales d'utilisation</a>
+									</label>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+ 	</div>
+{% endif %}
+
+
+
+
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.2/velocity.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.2/velocity.ui.min.js"></script>
+<script src="https://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js" type="text/javascript"></script>
+<script src="https://code.angularjs.org/1.5.6/angular-route.min.js" type="text/javascript"></script>
+
+
+<script>
+
+   // add the animation to the modal
+$( ".modal" ).each(function(index) {
+   $(this).on('show.bs.modal', function (e) {
+		 var open = $(this).attr('data-easein');
+			 if(open == 'shake') {
+				 $('.modal-dialog').velocity('callout.' + open);
+			} else if(open == 'pulse') {
+				 $('.modal-dialog').velocity('callout.' + open);
+			} else if(open == 'tada') {
+				 $('.modal-dialog').velocity('callout.' + open);
+			} else if(open == 'flash') {
+				 $('.modal-dialog').velocity('callout.' + open);
+			}  else if(open == 'bounce') {
+				 $('.modal-dialog').velocity('callout.' + open);
+			} else if(open == 'swing') {
+				 $('.modal-dialog').velocity('callout.' + open);
+			}else {
+			  $('.modal-dialog').velocity('transition.' + open);
+			}
+	});
+});
+
+jQuery.fn.shake = function(intShakes, intDistance, intDuration) {
+    this.each(function() {
+        $(this).css("position","relative");
+        for (var x=1; x<=intShakes; x++) {
+        $(this).animate({left:(intDistance*-1)}, (((intDuration/intShakes)/4)))
+    .animate({left:intDistance}, ((intDuration/intShakes)/2))
+    .animate({left:0}, (((intDuration/intShakes)/4)));
+    }
+  });
+return this;
+};
+
+
+</script>
+
+
+<script>
+	var app=angular.module('App', ['ngRoute']);
+
+	app.config(function($routeProvider, $interpolateProvider){
+		$interpolateProvider.startSymbol('[[');
+        $interpolateProvider.endSymbol(']]');
+    });
+
+	app.factory('ApplyFactory', function($http, $q){
+        var factory = {
+            verification : false,
+            email : false,
+            getVerificationCv : function(){
+                var deferred=$q.defer();
+                if(factory.verification){
+                    deferred.resolve(factory.verification);
+                }else {
+                    $http.get('https://www.pitchmyjob.com/api/verification-cv', {headers: {'Authorization': ' Token {{ apitoken }}'} })
+                            .success(function (data, status) {
+                                factory.verification = data;
+                                deferred.resolve(factory.verification);
+                            }).error(function (data, status) {
+                                deferred.reject('Cette boutique existe pas.');
+                    });
+                }
+                return deferred.promise;
+            },
+			getVerificationEmail : function(email) {
+				var deferred2=$q.defer();
+
+				$http.post('https://www.pitchmyjob.com/api/verification-email', email)
+						.success(function (data, status) {
+							factory.email = data;
+							deferred2.resolve(factory.email);
+						}).error(function (data, status) {
+							deferred2.reject('Erreur');
+				});
+
+                return deferred2.promise;
+			}
+
+        };
+        return factory;
+    });
+
+
+	app.controller('Apply', function($scope, ApplyFactory){
+
+		$scope.message_1 = "Uploadez votre CV au format pdf";
+		$scope.message_2 = "Postuler avec mon CV";
+		$scope.incomplete = false;
+		$scope.valid = false;
+		$scope.photo = false;
+		$scope.email = false;
+		$scope.check_email = false;
+		$scope.noSubmit = true;
+		$scope.image_upload_cv = "{% static 'images/refonte/home-member-14.png' %}";
+		$scope.image_apply_cv = "{% static 'images/refonte/home-member-11.png' %}";
+
+		$scope.goEntretien = function(){
+			console.log('okk');
+			$scope.inscriptionSubmit(false);
+		}
+
+		$scope.applySubmit = function($event){
+			if($scope.valid == false)
+				$event.preventDefault();
+		};
+
+		$scope.inscriptionSubmit = function($event){
+
+			if($scope.check_email==false){
+				$scope.verification_email();
+			}
+
+			if( $scope.new.hasOwnProperty("last_name") && $scope.new.hasOwnProperty("first_name") && $scope.new.hasOwnProperty("email")
+				&& $scope.new.hasOwnProperty("mdp") && $scope.new.hasOwnProperty("cgu")  && $scope.photo && $scope.valid && $scope.email )
+			{
+				$('#inscriptionApply').modal('show');
+				setTimeout(function(){  $('#apply').modal('hide'); }, 150);
+			} else {
+
+				$event.preventDefault();
+
+			}
+
+			if($scope.noSubmit)
+			{
+				//$scope.noSubmit=false;
+				//$event.preventDefault();
+			}
+
+		};
+
+		$scope.setCV = function(){
+
+			$scope.cv=undefined;
+			$scope.image_upload_cv = "{% static 'images/refonte/home-member-14.png' %}";
+
+			ApplyFactory.getVerificationCv().then(function(verification){
+
+				if(verification.cv == true)
+				{
+					$scope.image_apply_cv = "{% static 'images/refonte/home-member-26.png' %}";
+					$scope.valid = true;
+				}else{
+					$scope.image_apply_cv = "{% static 'images/refonte/home-member-28.png' %}";
+					$scope.incomplete = true;
+				}
+
+            }, function(msg){
+                alert(msg);
+            });
+		}
+
+		$scope.setFile = function(element) {
+			$scope.$apply(function($scope) {
+				$scope.cv = element.files[0];
+				console.log($scope.cv);
+				if ($scope.cv.type == "application/pdf")
+				{
+					$scope.image_upload_cv = "{% static 'images/refonte/home-member-13.png' %}";
+					$scope.message_1 = "Uploadez votre CV au format pdf";
+					$scope.valid = true;
+				}else{
+					$scope.image_upload_cv = "{% static 'images/refonte/home-member-27.png' %}";
+					$scope.message_1="Le CV doit être au format PDF"
+					$scope.valid = false;
+				}
+
+				if($scope.apply)
+				{
+					$scope.apply.radio=false;
+					$scope.image_apply_cv = "{% static 'images/refonte/home-member-11.png' %}";
+				}
+
+				$scope.incomplete = false;
+
+			});
+		};
+
+		$scope.setPhoto = function(element){
+			if (typeof (FileReader) != "undefined") {
+
+				var image_holder = $("#image-holder");
+				image_holder.empty();
+
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					image_holder.attr('src', e.target.result)
+
+				}
+				image_holder.show();
+				reader.readAsDataURL($(element)[0].files[0]);
+
+				$scope.photo = true;
+
+			} else {
+				alert("This browser does not support FileReader.");
+			}
+		}
+
+		$scope.verification_email = function(){
+
+			if($scope.new)  {
+
+				ApplyFactory.getVerificationEmail($scope.new).then(function(verif){
+					console.log(verif);
+
+					if(verif.email == false){
+						$scope.msg = { 'type' : 'success', 'message' : "Cette adresse email est libre !"};
+						$scope.email = true;
+					}else{
+						$scope.msg = { 'type' : 'error', 'message' : "Cette adresse email est déjà utilisé, veuillez en choisir un autre."};
+						$scope.email = false;
+					}
+					$scope.check_email=true;
+				}, function(msg){
+					alert(msg);
+				});
+
+			}
+		};
+
+
+    });
+
+
+
+	$('.popup2').click(function(){
+		$('#inscriptionApply').modal('show');
+		setTimeout(function(){  $('#apply').modal('hide'); }, 150);
+	});
+
+	$('.cvOneClick').click(function(){
+		$('#importCv').modal('show');
+		setTimeout(function(){  $('#apply').modal('hide'); }, 150);
+	});
+
+	$('.popup-back').click(function(){
+		$('#inscriptionApply').modal('show');
+		setTimeout(function(){  $('#importCv').modal('hide'); }, 150);
+	});
+
+
+
+
+
+</script>
+
+
+
+{% endblock %}

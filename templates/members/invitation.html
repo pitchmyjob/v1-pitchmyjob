@@ -1,0 +1,48 @@
+{% extends "base-login-inscription.html" %}
+
+{% block content %}	
+	{% load staticfiles %}
+	
+	<body class="connexion">
+		<div class="row">
+			<div class="col-md-12 connexion-logo"> <a href="{% url 'members:home' %}">  <img src="{% static 'images/PITCH-Helvetica-P-bleu.png' %}" class="home-user-logo logo-pitch-2">  </a>  </div>
+		</div>
+
+
+		<div class="connexion-bloc">
+			<h1> Beta Test </h1>
+			<div class="connexion-container">
+
+				<form method="POST" action="">
+					{% csrf_token %}
+					<div class="connexion-form"> 
+						{% if form.errors %}
+					  		<div class="alert alert-danger alert-inscription lt-connexion"> 
+							    <ul>
+							    {% for field, error in form.errors.items %} 
+							        <li>{{ error }}</li>
+							    {% endfor %}
+							    </ul>
+							</div>
+						{% endif %} 
+						<div class="text-reset-pwd-1">
+							Le site est actuellement en beta test. Veuillez saisir le code afin d'utiliser Pitch My Job
+						</div>
+
+						<div class="input-group {% if form.username.errors %} has-error {% endif %}">
+					      	<div class="input-group-addon"> <span class="glyphicon glyphicon-lock"></span> </div>
+					      	<input type="text" class="form-control" name="code" value="" placeholder="Code">
+					    </div>
+					</div> 
+
+					<div class="row">
+						<div class="col-xs-12 btn-reset-pwd"> <input type="submit" name="submit" value="Envoyer" class="btn-general-red submitConnexion">  </div>
+					</div>
+				</form>
+				<div class="connexion-inscription"> <a href="{% url 'members:home' %}">  </a> </div>
+			</div>
+			
+		</div> 
+	</body>
+
+{% endblock  %}

@@ -1,0 +1,51 @@
+{% load i18n %}
+
+<div class="footer-3 {{ class }}">
+   <ul>
+       <li class="only-responsive"><a href="{% url 'pages:contact' %}">Contact</a> </li>
+       <li class="responsive-lang">
+           <form action="{% url 'set_language' %}" method="post" id="changelangform" style="display:inline">{% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}" />
+                <select name="language" id="changelang">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                            {{ language.code|title }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <!--<input type="submit" value="Go" class="bt-event"/>-->
+            </form>
+       </li>
+       <li><a href="{% url 'pages:cgu' %}">CGU</a> </li>
+       <li><a href="{% url 'pages:a-propos' %}">A propos</a> </li>
+       <li style="display:none"><a href="{% url 'pages:faq-general' %}">FAQ</a> </li>
+       <li><a href="{% url 'pages:presse' %}">Presse</a> </li>
+       <li><a href="{% url 'pages:partenaires' %}">Partenaires</a> </li>
+       <li class="responsive-lang"> <a href="{% url 'pages:contact' %}">Contact</a> </li>
+       <li class="only-responsive">
+           <form action="{% url 'set_language' %}" method="post" id="changelangform" style="display:inline">{% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}" />
+                <select name="language" id="changelang">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                            {{ language.code|title }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <!--<input type="submit" value="Go" class="bt-event"/>-->
+            </form>
+       </li>
+   </ul>
+</div>
+
+<script>
+    $('#changelang').change(function(){
+        $('#changelangform').submit();
+    });
+</script>

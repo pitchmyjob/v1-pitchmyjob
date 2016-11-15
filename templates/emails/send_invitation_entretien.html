@@ -1,0 +1,15 @@
+
+
+{% load i18n %}
+
+	<h3> {% trans "Bonjour" %} {{ member }}</h3>
+	<p>{% trans "Tu t’es récemment montré intéressé par l’offre" %} {{ job }} {% trans "de" %} {{ pro }} </p>
+    <p>
+        {% trans "Ta candidature a retenu leur attention et ils t’invitent à répondre à leur pré-entretien." %}
+    </p>
+	<!-- Callout Panel -->
+	<a href="https://www.pitchmyjob.com{% url 'members:candidature-1' id %}" class="calloutpitch">
+		{% trans "Passer l’entretien" %}
+	</a><!-- /Callout Panel -->
+
+

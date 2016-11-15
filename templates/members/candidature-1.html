@@ -1,0 +1,54 @@
+{% extends 'user-interne.html' %}
+
+{% block annonces %} active {% endblock %}
+{% block footer %} {% endblock %}
+{% block js_autocomplete %} {% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+	<div class="container-fluid header-entretien">
+		<h1> {{ object.job_title }} </h1>
+		<div> {{ object.company }} </div>
+	</div>
+
+
+	<div class="col-sm-12" >		
+		<div class="container-fluid entretien-content entretien-1">
+			<h2> {% trans "Bonjour" %} {{ user.member.first_name|title }} </h2>
+			<p> {% trans "Vous avez choisi de postuler à l’annonce de" %} <b>{{ object.company }}</b> {% trans "pour le poste de" %} <b>{{ object.job_title }}</b>. </p>
+			<p class="second-line"> {{ object.company }} {% trans "a rédigé un entretien différé sous forme de" %} {{ object.questions.all|length }} {% trans "questions auquel vous pouvez répondre en vidéo, audio ou texte." %} </p>
+			
+			<div class="row table-entretien">
+				<div class="col-sm-6">
+					<p>
+						{% trans "Pas encore prêt ?" %} <br> {% trans "Entrainez-vous !" %}
+					</p>
+					<a href="#" class="btn-general-blue-2" data-toggle="tooltip" data-placement="bottom" title="Bientot disponible"> {% trans "S'entrainer" %} </a> 
+				</div>
+				<div class="col-sm-6">
+					{% if candidate %}
+						<p>
+							{% trans "Vous avez déjà postulé à cette offre" %} <br> {% trans "Voir ma candidature" %}
+						</p>
+						<a href="{% url 'members:detail-candidature' object.id %}" class="btn-general-red"> {% trans "Ma candidature" %} </a>	
+					{% else %}
+						<p>
+							{% trans "Cliquez sur démarrer l'entretien" %} <br> {% trans "pour accéder aux questions" %}
+						</p>
+						<a id="ga-btn-demarerentre" href="{% url 'members:candidature-2' object.id %}" class="btn-general-red"> {% trans "Démarrer l'entretien" %} </a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		$(function () {
+		  $('[data-toggle="tooltip"]').tooltip()
+		});
+	</script>
+
+{% endblock %}

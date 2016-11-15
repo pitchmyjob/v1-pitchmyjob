@@ -1,0 +1,16 @@
+{% extends 'emails/basic.html' %}
+
+
+{% block content %}
+{% load i18n %}
+
+	<h3> {% trans "Bonjour" %} {{ first_name }}</h3>
+	<p class="lead">{% trans "Votre offre" %} "{{ job }}" {% trans "a été publiée avec succès." %}</p>
+	<p>{% trans "Vous allez bientôt recevoir vos premières candidatures." %}<br><br>
+	{% trans "Vous pouvez aussi consulter des profils dans notre C2V thèque." %}</p>
+	<!-- Callout Panel -->
+	<a href="http://www.pitchmyjob.com/pro/cv-theque" class="calloutpitch" style="background-color:#07A4DE;">
+		{% trans "Accéder à la CV-Theque" %}
+	</a><!-- /Callout Panel -->		
+
+{% endblock %}

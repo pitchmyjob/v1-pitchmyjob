@@ -1,0 +1,20 @@
+{% extends 'emails/basic.html' %}
+
+
+{% block content %}
+{% load i18n %}
+
+<h3>{% trans "Votre candidature chez" %} "{{company}}"</h3>
+
+{{ text|linebreaksbr }}
+
+<p>{% trans "On dit souvent que quand on tombe de cheval, la meilleure chose à faire est de remonter aussitôt en selle."%}<br>
+	{% trans "Voici une liste d'annonces qui pourraient vous correspondre" %} : </p>
+
+<!-- Callout Panel -->
+<a href="http://www.pitchmyjob.com/annonces" class="calloutpitch">
+	{% trans "Voir toutes les annonces" %}
+</a><!-- /Callout Panel -->		
+
+
+{% endblock %}

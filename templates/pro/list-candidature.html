@@ -1,0 +1,296 @@
+{% extends "pro-interne.html" %}
+
+{% block mes-offres %} active {% endblock %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load tagspro %}
+	{% load i18n %}
+
+	<div class="create-offre-1">
+		<div class="list-candidat-titre"> {{ object.job_title }} </div>
+	</div> 
+
+	<div class="container-fluid list-condidat-listing">
+		<div class="col-sm-12 back-list-offre"> <a href="{% url 'pro:offres' %}"> <span class="glyphicon glyphicon-arrow-left"></span> {% trans "Retour à la liste" %}</a>  </div>
+	</div> 
+
+	<div class="container-fluid list-condidat-listing">
+		<div class="col-sm-8">
+
+			<h2 class="title-candidature"> Ils ont postulé </h2>
+
+			{% for cand in object.candidature_set|candidature_active %}
+
+				<div class="container-fluid list-one-candidat cand-n-{{ cand.member.id }}">
+					<table>
+						<tr>
+							<td class="col-xs-10 list-one-candidat-bloc"> 
+								<a href="{% url 'pro:job-reponse-candidature' object.id cand.id %}">
+									<table>
+										<tr > 
+											<td class="col-sm-2"> 
+													<img src="{{ cand.member.image.logo100.url }}" style="max-width:85px">
+													
+											 </td> 
+											<td class="col-sm-5"> 
+												<div class="liste-one-name">  {{ cand.member.last_name|title }} {{ cand.member.first_name|title }} </div>
+												<div class="liste-one-exp"> {{ cand.member.study|default_if_none:""  }} </div>
+												<div class="liste-one-exp"> {{ cand.member.experience|default_if_none:""  }} </div>
+
+											</td> 
+											<td class="col-sm-5"> 
+												<div class="liste-one-name-post"  style="min-height:25px;"> {{ cand.member.activity_area.all|join:", " }}  </div> 
+												<div class="liste-one-post"> {% if cand.member.availability %} En poste {% else %}  Disponible {% endif %} </div>
+												<div class="liste-one-post">  {{ cand.member.job_wanted|default_if_none:"" }}  </div>
+											</td> 
+										</tr>
+										<tr>
+											<td colspan="3" class="col-sm-2"> <div class="liste-one-post" style="text-align:right;"> {{ cand.date_posted }}</div> </td>
+										</tr>
+									</table>
+								</a>
+							</td>
+							<td class="col-xs-2"> 
+								<div class="row">
+									<table class="liste-one-link">
+										<tr> <td>  <a onclick="Contact({{cand.member.id}}, '{{ cand.member.first_name|title }}')">{% trans "Contacter" %}</a> </td> </tr>
+										<tr> <td>  <a onclick="decline({{ cand.member.id }}, '{{ cand.member.email }}', '{{ cand.member.first_name|title }}')" >{% trans "Decliner" %}</a> </td> </tr>
+									</table>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+			{% endfor %}
+
+
+			{% if object.interest_set.count > 0 %}
+				<div class="trait_candidature">  </div>
+
+
+				<h2 class="title-candidature" id="interet"> Ils sont interessés par cette offre </h2>
+
+
+				{% for cand in object.interest_list %}
+
+					<div class="container-fluid list-one-candidat cand-n-{{ cand.member.id }}">
+						<table>
+							<tr>
+								<td class="col-xs-10 list-one-candidat-bloc">
+									<a href="{% url 'pro:c2v-theque-candidat' cand.member.id %}">
+										<table>
+											<tr >
+												<td class="col-sm-2">
+														<img src="{{ cand.member.image.logo100.url }}" style="max-width:85px">
+
+												 </td>
+												<td class="col-sm-5">
+													<div class="liste-one-name">  {{ cand.member.last_name|title }} {{ cand.member.first_name|title }} </div>
+													<div class="liste-one-exp"> {{ cand.member.study|default_if_none:""  }} </div>
+													<div class="liste-one-exp"> {{ cand.member.experience|default_if_none:""  }} </div>
+
+												</td>
+												<td class="col-sm-5">
+													<div class="liste-one-name-post"  style="min-height:25px;"> {{ cand.member.cv.poste|default_if_none:"" }}  </div>
+													<div class="liste-one-post"> {% if cand.member.availability %} En poste {% else %}  Disponible {% endif %} </div>
+													<div class="liste-one-post">  {{ cand.member.job_wanted|default_if_none:"" }}  </div>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="col-sm-2"> <div class="liste-one-post" style="text-align:right;"> {{ cand.date }}</div> </td>
+											</tr>
+										</table>
+									</a>
+								</td>
+								<td class="col-xs-2">
+									<div class="row">
+										<table class="liste-one-link">
+											<tr>
+												<td>
+													<a onclick="Contact({{cand.member.id}}, '{{ cand.member.first_name|title }}')">{% trans "Contacter" %}</a>
+													<a style="padding-top: 1px;padding-bottom: 8px;" onclick="decline({{ cand.member.id }}, '{{ cand.member.email }}', '{{ cand.member.first_name|title }}')" >{% trans "Décliner" %}</a>
+												</td>
+											</tr>
+											<tr> <td>  <a onclick="Entretien({{cand.member.id}}, {{cand.job.id}})" >{% trans "Inviter à passer le pré-entretien" %}</a> </td> </tr>
+										</table>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+				{% endfor %}
+			{% endif %}
+
+		</div>
+
+		<div class="col-sm-4"> 
+
+			<div class="list-candidat-bloc-right list-candidat-infos">
+				<h2> {{ object.job_title }} </h2>
+				<div class="date"> {% trans "Mise en ligne le" %} {{ object.date_created }} </div>
+				<div class="description"> {{ object.description|linebreaksbr }}</div>
+			</div>
+
+			<div class="list-candidat-bloc-right" style="font-size: 16px;">
+				<div class="container-fluid  detail-entreprise-stat">
+					<div class="detail-statistique-job"> <span> {% trans "Statistiques" %} </span> </div>
+					<img src="{% static 'images/myc2v-45.png' %}"> {{ object.view }} {% trans "vues" %} <br>
+					<img src="{% static 'images/myc2v-46.png' %}">
+					{% with object.candidature_set.all|nbcandidature as nb %} {{ nb }} pre-entretien{{ nb|pluralize }}  {% endwith %}
+					<br>
+					<img src="{% static 'images/myc2v-46.png' %}">
+					{% with object.interest_set.count as nb %} {{ nb }} cv {% endwith %}
+				</div>
+			</div>
+
+		</div>
+	</div> 
+
+	<script type="text/javascript">
+		var user;
+		var sendheader = function(xhr){
+				xhr.setRequestHeader('Authorization', 'Token {{ key }}');
+		};
+
+		function Entretien(user, job){
+			$.ajax({
+		         url: "/api/send-demande-entretien",
+		         type: "POST",
+		         data : {user:user, job:job},
+		         beforeSend: sendheader ,
+		         success: function(response) {
+		         	notification("Invitation à passer l'entretien envoyée.");
+				 }
+	     	 });
+		}
+
+		function Contact(id, name)
+		{
+			$('.title-contact').html( $('.title-contact').html().replace('[name]', name) );
+			$('.send-contact').modal('show');
+			user = id;
+		}
+
+		function decline(id, email, name)
+		{
+			$('.decline-email').val(email);
+			$('.text-email').val( $('.model').val().replace('[name]', name) );
+			$('.send-decline-email').modal('show');
+			user = id;
+		}
+
+		function postDecline()
+		{
+			
+			var message = $('.text-email').val();
+			$.ajax({
+		         url: "/api/decline-candidature",
+		         type: "POST",
+		         data : {member:user, job:{{object.id}}, message:message},
+		         beforeSend: sendheader ,
+		         success: function(response) { 
+		         	$('.send-decline-email').modal('hide'); 
+		         	notification("Candidature declinée : Un email a été envoyé au candidat pour le prévenir."); 
+		         	$('.cand-n-'+user).fadeOut(500, function(){ $(this).remove();});  }
+	     	 });
+		}
+
+		function sendMessage()
+		{
+			var message = $('.text-contact').val();
+			$.ajax({
+		         url: "/api/messages",
+		         type: "POST",
+		         data : {receiver:user, message:message},
+		         beforeSend: sendheader,
+		         success: function(response) { 
+		         	$('.send-contact').modal('hide'); 
+		         	notification("Message envoyé !"); 
+		         	$('.text-contact').val("");
+		         }
+	 	 	});
+		}
+		
+	</script>
+
+
+
+{% endblock  %}
+
+
+{% block modal %}
+
+<div class="modal fade send-decline-email" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog ">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" > Décliner la candidature </h4>
+			</div>
+			<div class="modal-body">
+				
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="exampleInputName2"> Email  </label>
+							<input type="text" class="form-control decline-email" object = "email" disabled>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="exampleInputName2"> Text de l'email </label>
+							<textarea class="form-control text-email" rows=11 object = "message"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default " data-dismiss="modal">Annuler</button>
+				<button type="button" class="btn btn-primary btn-sendCvEmail" onclick="postDecline()">Envoyer</button>
+				<img src="{% static 'images/bx_loader.gif' %}" class="loadFbConnect" style="display:none">
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade send-contact" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog ">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title title-contact" > Contacter [name]</h4>
+			</div>
+			<div class="modal-body">
+		
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="exampleInputName2"> Message </label>
+							<textarea class="form-control text-contact" rows=11 object = "message"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default " data-dismiss="modal">Annuler</button>
+				<button type="button" class="btn btn-primary btn-sendCvEmail" onclick="sendMessage()">Envoyer</button>
+				<img src="{% static 'images/bx_loader.gif' %}" class="loadFbConnect" style="display:none">
+			</div>
+		</div>
+	</div>
+</div>
+
+<textarea class="model" style="display:none">Bonjour [name], 
+
+Merci d’avoir postulé à l’offre d’emploi : « {{ object.job_title}} ». Nous sommes dans le regret de vous annoncer que votre candidature n’a pas été retenue pour le poste.
+
+</textarea>
+
+{% endblock  %}

@@ -1,0 +1,1158 @@
+{% extends 'user-interne.html' %}
+
+{% block myc2v%} active {% endblock %}
+{% block js_autocomplete %}  {% endblock %}
+{% block msg_nodejs %}  {% endblock %}
+
+{% block rs_facebook %} 
+	{% load web_url %}
+	<meta property="og:url" content="{% with user.member.first_name|add:"-"|add:user.member.last_name as slug %} http://pitchmyjob.com{% url 'c2v:c2v_view' user.member.id slug|slugify %} {% endwith %}" />
+	<meta property="og:title" content="{{ user.member.first_name|title }} {{ user.member.last_name|title }} - {{ user.member.job_wanted }} | Pitch my job" />
+	<meta property="og:description" content="Découvrez mon c2v, le premier modèle de cv intégrant un pitch video  !" /> 
+	<meta property="fb:app_id" content="1521513254812652"/>
+	<meta property="og:image" content="{{ user.member.image.url|web_url }}"/>
+{% endblock %}
+
+
+{% block content %}
+
+{% load staticfiles %}
+{% load i18n %}
+
+
+<link rel="stylesheet" href="{% static 'css/jquery.awesome-cropper.css'%}">
+<link rel="stylesheet" href="{% static 'css/imgareaselect-default.css'%}" media="screen">
+
+<script src="{% static 'js/plugin/jquery.imgareaselect.js'%}"></script> 
+<script src="{% static 'js/plugin/jquery.awesome-cropper.js'%}"></script> 
+
+<style type="text/css">
+.modal-title{ text-align: center; }
+
+</style>
+
+
+<div class="container-fluid c2v-head-content">		
+		<div class="container-fluid c2v-content-2"> 
+
+			<div class="col-sm-3 cv2-sous-content" style="display:none">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="input-group" style="width: 100%;display:none">
+				      		<div class="input-group-addon" style="width:32px"> <img src="{% static 'images/logoin.png' %}" style="width:15px;">  </div>
+				      		<!-- <button class="btn-general-blue btn-no-border btn-no-radius btn-submit" data-toggle="modal" data-target=".modal-importer-via" > Importer via </button> -->
+				      		<!--<button class="btn-general-blue btn-no-border btn-no-radius btn-submit" data-toggle="modal" data-target=".modal-importer-via" > Importer via </button>-->
+				      		<button class="btn-general-blue btn-no-border btn-no-radius btn-submit linkedin-import" onclick="liAuth()"> {% trans "Importer" %}  </button>
+				      		<!--<img src="/static/images/myc2v-25.png" style="cursor:pointer;height:33px;" class="test" onclick="impotLinkedin()" >-->
+				    	</div>  
+					</div>
+					<div class="col-xs-6" style="display:none">
+						<div class="input-group">
+				      		<div class="input-group-addon"> <span class="glyphicon glyphicon-pencil"></span> </div>
+				      		<button class="btn-general-blue btn-no-border btn-no-radius btn-submit"  data-toggle="tooltip" data-placement="bottom" title="Bientot disponible"> {% trans "Themes" %} </button>
+				    	</div> 
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12">
+				<div class="row">
+					<div class="col-xs-5">
+						<div class="input-group">
+				      		<div class="input-group-addon"> <span class="glyphicon glyphicon-download-alt"></span> </div>
+				      		<a href="{% url 'c2v:download' %}"> <button class="btn-general-blue btn-no-border btn-no-radius btn-submit"> {% trans "Télécharger" %} </button> </a>
+				      		<!-- <a href="#" class="download_pdf"> <button class="btn-general-blue btn-no-border btn-no-radius btn-submit"> Télécharger js </button> </a> -->
+				    	</div> 
+					</div>
+					<div class="col-xs-5">
+						<div class="input-group">
+				      		<div class="input-group-addon"> <span class="glyphicon glyphicon-send"></span> </div>
+				      		<button class="btn-general-blue btn-no-border btn-no-radius btn-submit" data-toggle="modal" data-target=".send-cv-email"> {% trans "Envoyer" %} </button>
+				    	</div> 
+					</div>
+					<div class="col-xs-2">
+				      	<div class="c2v-share" data-toggle="modal" data-target=".modal-partage-rs" > <span class="glyphicon glyphicon-share"></span> </div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	
+
+	<div class="container-fluid theme-c2v" style="margin-bottom:50px;">	
+
+		<div class="progress progress-linkedin" style="margin-bottom:0px; margin-top:10px;display:none">
+	  		<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%"> 
+	  			{% trans "Importation du cv Linkedin ..." %}
+	  		</div>
+	    </div>
+	    <div class="error-linkedin" style="text-align:center;color:red;display:none">
+	    	{% trans "Erreur lors de l'importation du CV, veuillez ressayer." %}
+	    </div>
+
+		<div class="upload-photo-profil" style="display:none"> </div>
+
+		<div id="load-theme"></div>
+
+	</div>
+
+
+
+<script type="text/javascript">
+
+	$('.upload-photo-profil').awesomeCropper( 
+	        { width: 200, height: 200, debug: true }
+	);
+
+	var object = {};
+	var file;
+	var sendheader = function(xhr){
+		xhr.setRequestHeader('Authorization', 'Token {{ key }}');
+	};
+	var method = "POST";
+	var type_video_import = 1;
+
+
+	
+	var savePutId = (function () {
+        var id; // Private Variable
+        var pub = {};// public object - returned at end of module
+        pub.setId = function (newstate) {
+            id = newstate;
+        };
+        pub.getId = function() {
+            return id ? "/"+id : "";
+        }
+        return pub; // expose externally
+    }());
+
+	$(document.body).on('hidden.bs.modal', function () {
+		method = "POST";
+		$('input').val( "" );
+		$('.form-res').val( "{% with user.member.first_name|add:"-"|add:user.member.last_name as slug %} http://www.pitchmyjob.com{% url 'c2v:c2v_view' user.member.id slug|slugify %} {% endwith %}" );
+		$('.logo-experience, .logo-formation').attr('src',  "" );
+	    removeError();
+	});
+
+	function removeError()
+	{
+		$('input').removeClass( "custom-error" );
+	    $('.alert-danger').remove();
+	}
+
+	function assignDatas(type)
+	{
+		$.each( object, function( key, value ) {
+			if(key == "image")
+		  	{	
+		  		$(".bloc-edit .logo-"+type).attr( 'src', value );
+		  		return true;
+		  	}
+		  	$(".bloc-edit .cv-"+type+'[object='+key+']').val( value );
+
+		});
+	}
+
+	function showError(type, errors)
+	{
+		removeError();
+		$('.content-'+type+' .modal-body').prepend($('<div class="alert alert-danger error-api"> Veuillez remplir les champs obligatoire </div>').fadeIn("slow"));
+
+		$.each( JSON.parse(errors), function( key, value ) {
+			$(".bloc-edit .cv-"+type+'[object='+key+']').addClass( "custom-error" );
+			console.log(value);
+			if(value=="invalid")
+			{
+				if(type=="formation")
+					$('.error-api').append('<br>Veuillez remplir un format de date correct (aaaa)');
+				if(type=="experience")
+					$('.error-api').append('<br>Veuillez remplir un format de date correct (mm/aaaa)');
+				if(type=="cv")
+					$('.error-api').append('<br>Veuillez remplir un format de date correct (mm/aaaa)');
+			}
+		});
+		 
+	}
+
+	function getDatas(type)
+	{
+		 $(".bloc-edit .cv-"+type).each(function(){
+		 	object[ $(this).attr('object') ] = $(this).val();
+		 	console.log(  $(this).attr('object') + " : " + $(this).val());
+		 });
+
+		 console.log(object);
+	}
+
+	function getDatasEmail(type)
+	{
+		 $(".cv-"+type).each(function(){
+		 	object[ $(this).attr('object') ] = $(this).val();
+		 });
+	}
+
+	function reload()
+	{
+		$( "#load-theme" ).load( "{% url 'c2v:myc2v-theme' %}", function( response, status, xhr ) {});
+	}
+
+
+	function getCv()
+	{
+		$.ajax({
+	         url: "/api/mycv",
+	         type: "GET",
+	         beforeSend: sendheader ,
+	         success: function(response) { object = response; openBloc('cv'); assignDatas('cv'); console.log(response); /** $('.edit-cv').modal('show'); **/ }
+     	 });
+	}
+
+	function putCv()
+	{
+		getDatas('cv');
+		//console.log(object);
+		//$('.edit-cv').modal('hide'); 
+		$.ajax({
+	         url: "/api/mycv",
+	         type: "PUT",
+	         data : object,
+	         beforeSend: sendheader,
+	         success: function(response) { console.log(response); $('.content-cv').slideToggle(); 
+		         setTimeout(function(){
+					  reload(); 
+					}, 400);  
+		     },
+		     error: function(xhr, status, error) { showError('cv', xhr.responseText )  }
+     	 });
+	}
+
+	function postPutObject(type)
+	{
+		getDatas(type);
+
+		console.log(object);
+		$.ajax({
+	         url: "/api/mycv/"+type+savePutId.getId() ,
+	         type: method,
+	         data : object,
+	         beforeSend: sendheader,
+	         success: function(response) {  method = "POST";  $('.edit-'+type).modal('hide'); $('.content-'+type).slideToggle(); 
+		         setTimeout(function(){
+					  reload(); 
+					}, 400); 
+		         savePutId.setId(""); },
+	         error: function(xhr, status, error) { showError(type, xhr.responseText )  }
+     	 });
+	}
+
+	function getObject(type, id)
+	{
+		$.ajax({
+	         url: "/api/mycv/"+type+"/"+id,
+	         type: "GET",
+	         beforeSend: sendheader,
+	         success: function(response) { object = response; 
+	           //$('.edit-'+type).modal('show'); 
+	           openBloc(type);
+	           assignDatas(type);
+	           method = "PUT"; 
+	           savePutId.setId(object.id); }
+     	 });
+	}
+
+	function deleteObject(type, id)
+	{
+		$.ajax({
+	         url: "/api/mycv/"+type+"/"+id,
+	         type: "DELETE",
+	         beforeSend: sendheader,
+	         success: function(response) { $('.del-'+type+'-'+id).fadeOut(500, function(){ $(this).remove();}); }
+     	 });
+	}
+
+	function putMedia( base64 )
+	{
+		//console.log(base64);
+		$.ajax({
+	         url: "/api/media",
+	         type: "PUT",
+	         data : { 'image' : base64 },
+	         beforeSend: sendheader,
+	         success: function(response) { console.log('okk'); }
+     	 });
+	}
+
+
+	function PostLinkVideo()
+	{
+		
+		$.ajax({
+	         url: "/api/video/url",
+	         type: "POST",
+	         data : { 'link_url' : $('.url-video-upload').val() },
+	         beforeSend: sendheader,
+	         success: function(response) { reload(); $('.add-video').modal('hide');  },
+	         error: function(xhr, status, error) { 
+	         	removeError();
+	          	var url_error ;
+	          	$.each( JSON.parse( xhr.responseText ), function( key, value ) {
+					url_error = value;
+				});
+	          	$('#c2v-save-url').prepend($('<div class="alert alert-danger"> ' + url_error + ' </div>').fadeIn("slow"));
+	        }
+     	 });
+	}
+
+	function PostRecordVideo()
+	{
+		$.ajax({
+	         url: "/api/video/record",
+	         type: "POST",
+	         data : object,
+	         beforeSend: sendheader,
+	         success: function(response) { reload();  },
+	         error: function(xhr, status, error) { 
+	         	console.log( xhr.responseText )
+	        }
+     	 });
+	}
+
+	function importVideo()
+	{
+		if( type_video_import == 2 )
+			$('#form-video-upload').submit();
+		if( type_video_import == 3 )
+			PostLinkVideo()
+		if( type_video_import == 1 )
+			$('.add-video').modal('hide'); 
+	}
+	//console.log( base64_photo );
+ 
+	function sendCvEmail()
+	{
+		
+		//$('.btn-sendCvEmail').hide();
+		//$('.loadFbConnect').show();
+		getDatasEmail("c2vemail");
+		///console.log(object);
+		$.ajax({
+	         url: "/api/send-c2v-email",
+	         type: "POST",
+	         data : object,
+	         beforeSend: sendheader,
+	         success: function(response) {
+				$('.send-cv-email').modal('hide'); 
+				var notif = $.notify({
+					icon: 'glyphicon glyphicon-warning-sign',
+					message: "L'email a bien été envoyé.",
+					//url: 'https://github.com/mouse0270/bootstrap-notify',
+					//target: '_blank'
+				},{
+					type: 'success',
+					allow_dismiss: true,
+					newest_on_top: false,
+					placement: {
+						from: "top",
+						align: "right"
+					},
+					offset: {
+						x: 20,
+						y: 20
+					},
+					spacing: 10,
+					z_index: 1030,
+					delay: 5000,
+					mouse_over: null,
+					animate: {
+						enter: 'animated fadeInDown',
+						exit: 'animated fadeOutUp'
+					},
+				});
+				//$('.btn-sendCvEmail').show();
+				//$('.loadFbConnect').hide();
+	      	},
+	         error: function(xhr, status, error) { 
+	         	showError("c2vemail", xhr.responseText )
+	        }
+     	 });
+	}
+
+	var save_type="";
+	function openBloc(type)
+	{
+		//console.log(type);
+		if (save_type != type)
+			$('.bloc-edit').slideUp();
+		save_type = type;
+
+		var html = $('.edit-'+type).html();
+		$('.content-'+type).html( html );
+		$('.content-'+type).slideDown();
+		scrollToAnchor('anchor-'+type);
+		$('.date-'+type).show();
+		$('.date-'+type+'-today').hide();
+		
+	}
+
+	function closeBloc(type)
+	{
+		$('.content-'+type).slideUp();
+	}
+
+	function scrollToAnchor(aid){
+	    var aTag = $("#"+aid);
+	    $('html,body').animate({scrollTop: aTag.offset().top},'slide');
+	}
+
+	function dateToday(type)
+	{
+		if( $('#date-'+type).is(':checked') )
+		{
+			$('.date-'+type).hide();
+			$('.date-'+type).val("");
+			$('.date-'+type+'-today').show();
+		}else{
+			$('.date-'+type).show();
+			$('.date-'+type+'-today').hide();
+		}
+			//console.log('ok');
+	}
+
+
+	function importLinkedin()
+	{
+		var url = $('.url-linkedin').val();
+		if(url != "")
+		{
+			$('.modal-importer-via').modal('hide'); 
+			$('.error-linkedin').hide(); 
+			$('.progress-linkedin').show();
+			$.ajax({
+	         	url: "/api/import/linkedin",
+	         	type: "POST",
+	         	data : { 'url' : url },
+	         	beforeSend: sendheader,
+	         	success: function(response) { $('.progress-linkedin').hide(); reload(); },
+	         	error: function(response) { importLinkedin(); },
+     		 }); 
+		}
+	}
+
+
+
+	
+
+</script>
+
+<script type="text/javascript" src="//platform.linkedin.com/in.js">
+    api_key:   77heghkyjgqwby
+    authorize: true
+    scope: r_basicprofile r_emailaddress
+    onLoad: autoImport
+</script>
+
+<script type="text/javascript">
+	var urlPublic="";
+	var test = 0;
+	var importjs = true;
+	
+	function liAuth(){
+		var fields = ['public-profile-url', 'emailAddress', 'first_name', 'last_name', 'date-of-birth'];
+	    IN.User.authorize(function(){
+	       $('.modal-importer-via').modal('hide'); 
+		   $('.error-linkedin').hide(); 
+		   $('.progress-linkedin').show();
+	       IN.API.Profile("me").fields(fields).result(onSuccess).error(onError);
+	    });
+	}
+
+	function onSuccess(data) {
+        var datas = data.values[0];
+        urlPublic = datas['publicProfileUrl'];
+        var url = datas['publicProfileUrl'];
+        $.ajax({
+         	url: "/api/import/linkedin",
+         	type: "POST",
+         	data : { 'url' : url },
+         	beforeSend: sendheader,
+         	success: function(response) { $('.progress-linkedin').hide(); reload(); },
+         	error: function(response) { retry(); },
+ 		 }); 
+    }
+
+    function retry()
+    {
+    	if(test < 6)
+    	{
+
+
+	    	$.ajax({
+	         	url: "/api/import/linkedin",
+	         	type: "POST",
+	         	data : { 'url' : urlPublic },
+	         	beforeSend: sendheader,
+	         	success: function(response) { $('.progress-linkedin').hide(); reload(); },
+	         	error: function(response) { retry(); },
+	 		 }); 
+    		test++;
+
+    	} else {
+    		$('.error-linkedin').show(); $('.progress-linkedin').hide();
+    	}
+    }
+
+    // Handle an error response from the API call
+    function onError(error) {
+        console.log(error);
+        $('.error-linkedin').show(); $('.progress-linkedin').hide();
+        console.log('okk');
+    }
+
+    function autoImport()
+    {
+
+    	var hash = window.location.hash;  	
+        if(hash == "#linkedin")
+        {
+        	var fields = ['public-profile-url', 'emailAddress', 'first_name', 'last_name', 'date-of-birth'];
+		    IN.User.authorize(function(){
+		    	importjs = false;
+		       $('.modal-importer-via').modal('hide'); 
+			   $('.error-linkedin').hide(); 
+			   $('.progress-linkedin').show();   
+		       IN.API.Profile("me").fields(fields).result(onSuccess).error(function(){ console.log('noo'); });
+		       window.location.hash = "";
+		    }); 
+		    
+        }
+
+    }
+
+    $(document).ready(function() {
+    	var hash = window.location.hash;  	
+        if(hash == "#linkedin")
+        {
+
+    		setTimeout(function(){ 
+
+    			if(importjs)
+    			{
+    				$('.modal-auto-importer-via').modal('show');
+    				window.location.hash = "";
+    			}
+
+    		 }, 1000);
+    		
+        }
+	});
+</script>
+
+<div class="test" style="display:none">
+	<div style="width:100%; height:150px; background:red;" class="content">
+		sfdf
+	</div>
+</div>
+
+<div class="modal fade send-cv-email edit-c2vemail" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog ">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" > {% trans "Envoyer mon CV par email" %} </h4>
+			</div>
+			<div class="modal-body">
+				
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="exampleInputName2"> {% trans "Email du destinataire" %} </label>
+							<input type="text" class="form-control cv-c2vemail" object = "email" placeholder="">
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<span class="glyphicon glyphicon-paperclip"></span> {% with user.member.first_name|add:"-"|add:user.member.last_name as slug %} cv-{{slug|slugify}}.pdf {% endwith %}
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="exampleInputName2"> {% trans "Text de l'email" %} </label>
+<textarea class="form-control cv-c2vemail" rows=11 object = "message">Bonjour, 
+
+Veuillez trouver ci-joint mon CV au format PDF.
+Vous pouvez accéder à mon CV en ligne à partir du lien : {% with user.member.first_name|add:"-"|add:user.member.last_name as slug %} http://www.pitchmyjob.com{% url 'c2v:c2v_view' user.member.id slug|slugify %} {% endwith %}
+
+Cordialement,
+{{ user.member.first_name|title }} {{ user.member.last_name|title }}
+
+</textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default " data-dismiss="modal">{% trans "Annuler" %}</button>
+				<button type="button" class="btn btn-primary btn-sendCvEmail" onclick="sendCvEmail()">{% trans "Envoyer" %}</button>
+				<img src="{% static 'images/bx_loader.gif' %}" class="loadFbConnect" style="display:none">
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog ">
+		<div class="modal-content edit-all-cv edit-skill">
+			<div class="modal-body">		
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="exampleInputName2"> {% trans "Competence" %} </label>
+							<input type="text" class="cv-skill form-control" object = "name" >
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="exampleInputName2"> {% trans "Niveau" %} </label>
+							<select class="cv-skill form-control" object = "level" >
+								<option> {% trans "Selectionner votre niveau" %} </option>
+								<option value="1"> {% trans "Notions" %} </option>
+								<option value="2"> {% trans "Débutant" %} </option>
+								<option value="3"> {% trans "Intermediaire" %}  </option>
+								<option value="4"> {% trans "Confirmé" %} </option>
+								<option value="5"> {% trans "Expert" %} </option>
+							</select>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default " onclick="closeBloc('skill')" data-dismiss="modal">{% trans "Annuler" %}</button>
+				<button type="button" class="btn btn-primary " onclick="postPutObject('skill')">{% trans "Enregistrer" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog ">
+		<div class="modal-content edit-all-cv edit-interest">
+			<div class="modal-body">				
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="exampleInputName2"> {% trans "Centre d'interet" %} </label>
+							<input type="text" class="cv-interest form-control" object = "name" >
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default " onclick="closeBloc('interest')" data-dismiss="modal">{% trans "Annuler" %}</button>
+				<button type="button" class="btn btn-primary " onclick="postPutObject('interest')">{% trans "Enregistrer" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade " tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog ">
+		<div class="modal-content edit-all-cv edit-language">
+			<!--div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" > Ajouter une langue </h4>
+			</div>-->
+			<div class="modal-body">
+				
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="exampleInputName2"> {% trans "Langue" %} </label>
+							<input type="text" class="cv-language form-control" object = "name" >
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="exampleInputName2"> {% trans "Niveau" %} </label>
+							<select class="cv-language form-control" object = "level" >
+								<option> {% trans "Selectionner votre niveau" %} </option>
+								<option value="1"> {% trans "Débutant" %} </option>
+								<option value="2"> {% trans "Niveau scolaire" %}  </option>
+								<option value="3"> {% trans "Bon niveau" %} </option>
+								<option value="4"> {% trans "Courant" %} </option>
+								<option value="5"> {% trans "Bilingue" %} </option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div> 
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default " onclick="closeBloc('language')"  data-dismiss="modal">{% trans "Annuler" %}</button>
+				<button type="button" class="btn btn-primary " onclick="postPutObject('language')">{% trans "Ajouter" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog ">
+		<div class="modal-content edit-all-cv edit-formation">
+			<div class="modal-body">	
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="exampleInputName2"> {% trans "École" %}* </label>
+							<input type="text" class="cv-formation form-control" object = "school" >
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="exampleInputName2">{% trans "Diplôme" %}* </label>
+							<input type="text" class="cv-formation form-control" object = "degree" >
+						</div>
+					</div>
+
+					<div class="col-sm-9">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="form-group">
+									<label for="exampleInputName2">{% trans "Discipline" %} </label>
+									<input type="text" class="cv-formation form-control" object = "discipline" >
+								</div>
+							</div>
+
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label for="exampleInputName2">{% trans "Année de debut" %}* </label>
+									<input type="text" class="cv-formation form-control" object = "date_start" >
+								</div>
+							</div>
+
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label for="exampleInputName2">{% trans "Année de fin" %}</label>
+									<input type="text" class="cv-formation form-control date-formation" object = "date_end" >
+									<div class="date-formation-today">- {% trans "Aujourd'hui" %} </div>
+									<input type="checkbox" onclick="dateToday('formation')" id="date-formation"> <label class="label-date" for="date-formation">{% trans "Ceci est ma formation actuelle" %}</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label >{% trans "Logo de l'entreprise" %}</label>
+							<div class="col-sm-8">
+								<div class="row">
+									<label for="logo-formation" style="cursor:pointer;padding:5px; background::blue" onclick="loadImage('formation')"> 
+										<img src="{% static 'images/myc2v-31.jpg' %}">
+									</label> 
+									<input type="file" class="cv-formation form-control logo-formation" style="display:none;">
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<img src="" class="cv-formation logo-formation" style="max-width:30px">
+							</div>
+							<input type="hidden" class="cv-formation form-control cv-formation-image" object = "image" >
+						</div>
+					</div>
+
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="exampleInputName2">{% trans "Description" %}</label>
+							<textarea placeholder="Décrivez ce qui vous a poussé à faire cette formation, n'hésitez pas à parler de vos activités associatives." class="cv-formation form-control" object = "description" ></textarea>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default " onclick="closeBloc('formation')" data-dismiss="modal">{% trans "Annuler" %}</button>
+				<button type="button" class="btn btn-primary " onclick="postPutObject('formation')">{% trans "Enregistrer" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!--     Ajout experience     -->
+<div class="modal fade " tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content edit-all-cv edit-experience">
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="exampleInputName2">{% trans "Nom de la société" %} *</label>
+							<input type="text" class="cv-experience form-control" object = "company" >
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="exampleInputName2">{% trans "Titre du poste" %} *</label>
+							<input type="text" class="cv-experience form-control" object = "title" >
+						</div>
+					</div>
+
+					
+					<div class="col-sm-9">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="form-group">
+									<label for="exampleInputName2">{% trans "Localisation" %}</label>
+									<input type="text" class="cv-experience form-control" object = "location" >
+								</div>
+							</div>
+
+						
+
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label for="exampleInputName2">{% trans "Date debut" %} *</label>
+									<input type="text" class="cv-experience form-control" object = "date_start" placeholder="mm/AAAA">
+								</div>
+							</div>
+
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label for="exampleInputName2">{% trans "Date fin" %} </label>
+									<input type="text" class="cv-experience form-control date-experience" object = "date_end" placeholder="mm/AAAA">
+									<div class="date-experience-today">- {% trans "Aujourd'hui" %}</div>
+									<input type="checkbox" onclick="dateToday('experience')" id="date-experience"> <label class="label-date" for="date-experience">{% trans "Ceci est mon poste actuel" %}</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label >{% trans "Logo de l'entreprise" %}</label>
+							<div class="col-sm-8">
+								<div class="row">
+									<label for="logo-experience" style="cursor:pointer;padding:5px; background::blue" onclick="loadImage('experience')"> 
+										<img src="{% static 'images/myc2v-31.jpg' %}">
+									</label> 
+									<input type="file" class="cv-experience form-control logo-experience" style="display:none;">
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<img src="" class="cv-experience logo-experience" style="max-width:50px">
+							</div>
+							<input type="hidden" class="cv-experience form-control cv-experience-image" object = "image" >
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="exampleInputName2">{% trans "Description" %}</label>
+							<textarea class="cv-experience form-control" object = "description" placeholder="Décrivez votre environnement de travail et les differentes tâches et missions que vous avez accompli." ></textarea>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default " onclick="closeBloc('experience')" data-dismiss="modal">{% trans "Annuler" %}</button>
+				<button type="button" class="btn btn-primary " onclick="postPutObject('experience')">{% trans "Enregistrer" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog ">
+		<div class="modal-content edit-all-cv edit-cv">
+			<!--<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" >Information général </h4>
+			</div>-->
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="exampleInputName2">{% trans "Prénom" %}</label>
+							<input type="text" class="cv-cv form-control" object = "first_name" >
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="exampleInputName2">{% trans "Nom" %} </label>
+							<input type="text" class="cv-cv form-control" object = "last_name" >
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="exampleInputName2">{% trans "Email" %}</label>
+							<input type="text" class="cv-cv form-control" object = "email" >
+						</div>
+					</div>
+
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="exampleInputName2">{% trans "Poste" %}</label>
+							<input type="text" class="cv-cv form-control" object = "poste" >
+						</div>
+					</div>
+
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="exampleInputName2">{% trans "Site" %} </label>
+							<input type="text" class="cv-cv form-control" object = "site" >
+						</div>
+					</div>
+
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="exampleInputName2">{% trans "Location" %}</label>
+							<input type="text" class="cv-cv form-control" object = "city" >
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label for="exampleInputName2">{% trans "Date de naissance" %}</label>
+							<input type="text" class="cv-cv form-control" object = "birthday" placeholder="dd/mm/aaaa">
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label for="exampleInputName2">{% trans "Téléphone" %}</label>
+							<input type="text" class="cv-cv form-control" object = "phone" >
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="exampleInputName2">{% trans "Description" %}</label>
+							<input type="text" class="cv-cv form-control" object = "description" maxlength="140" placeholder="Precisez le poste que vous rercherchez, vos disponibilités et vos préférences géographiques.">
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default " onclick="closeBloc('cv')" >{% trans "Annuler" %}</button>
+				<button type="button" class="btn btn-primary " onclick="putCv()">{% trans "Enregistrer" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade modal-importer-via" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog ">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" > {% trans "Importer votre CV via Linkedin en 1 click" %} </h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid c2v-rs-importer">
+					<div class="col-sm-12"> <button class="btn-no-effect" onclick="importLinkedin()"> <img src="{% static 'images/myc2v-52.png' %}"> </button> </div>
+					<input type="text" class="form-control url-linkedin" name="url">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade modal-auto-importer-via" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog ">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" >{% trans "Importer votre CV via Linkedin en 1 click" %}</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid c2v-rs-importer">
+					<div class="col-sm-12"> <button class="btn-no-effect" onclick="liAuth()"> <img src="{% static 'images/myc2v-52.png' %}"> </button> </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade add-video" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog ">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title"> {% trans "Ajoutez votre Pitch video" %} </h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid c2v-rs-importer">
+					<div class="col-sm-4"> 
+						<img src="{% static 'images/myc2v-54.png' %}" nohover = "{% static 'images/myc2v-54-1.png' %}" hover = "{% static 'images/myc2v-54.png' %}" class="c2v-add-video" href="#c2v-record-video" data-type = "1"  role="tab" data-toggle="tab">
+						{% trans "S'enregistrer" %}
+					</div>
+					<div class="col-sm-4"> 
+						<img src="{% static 'images/myc2v-55-1.png' %}" nohover = "{% static 'images/myc2v-55-1.png' %}" hover = "{% static 'images/myc2v-55.png' %}" class="c2v-add-video" href="#c2v-import-video" data-type = "2" role="tab" data-toggle="tab">
+						{% trans "Importer" %}
+					</div>
+					<div class="col-sm-4"> 
+						<img src="{% static 'images/myc2v-56-1.png' %}" nohover = "{% static 'images/myc2v-56-1.png' %}" hover = "{% static 'images/myc2v-56.png' %}" class="c2v-add-video"  href="#c2v-save-url" data-type = "3" role="tab" data-toggle="tab">
+						{% trans "Copier URL" %}
+					</div>
+				</div>
+
+				<div class="container-fluid c2v-rs-importer">
+				 	<div class="tab-content">
+				   	 	<div role="tabpanel" class="tab-pane active" id="c2v-record-video">
+
+				   	 		<div style="width:320px; margin:0 auto;">
+					   	 		<ziggeo ziggeo-width=320
+							          ziggeo-height=240 >
+							    </ziggeo> 
+						    </div>
+
+				  			<div class="description-video"> {% trans "Décrivez vous, ce que vous faites et ce que vous recherchez." %} </div>
+				   	 	</div>
+				   		<div role="tabpanel" class="tab-pane" id="c2v-import-video">
+				   			<form method="POST" action="" enctype="multipart/form-data" id="form-video-upload">
+				   				{% csrf_token %}
+				   				<input id="id_file_on_server" name="file_on_server" type="file">				
+				   			</form>
+				   		</div>
+				    	<div role="tabpanel" class="tab-pane" id="c2v-save-url">
+				    		<label> {% trans "Seul les videos Youtube, Dailymotion et Vimeo sont acceptés" %} </label>
+				    		<input type="text" class="form-control url-video-upload" placeholder = "Copiez le lien de votre vidéo">
+				    	</div> 
+				 	</div>
+				 </div>
+			</div>
+			 <div class="modal-footer">
+				<button type="button" class="btn btn-default " data-dismiss="modal">{% trans "Annuler" %}</button>
+				<button type="button" class="btn btn-primary " onclick="importVideo()">{% trans "Enregistrer" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade modal-partage-rs" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog ">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" > {% trans "Partage" %} </h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid c2v-rs-importer row">
+					<div class="col-sm-4"> 
+						<a target="blank" href="javascript:fbShare('{% with user.member.first_name|add:"-"|add:user.member.last_name as slug %}http://www.pitchmyjob.com{% url 'c2v:c2v_view' user.member.id slug|slugify %}{% endwith %}', 590, 380)"> <img src="{% static 'images/pitchmyjob-29.png' %}"> </a> 
+					</div>
+					<div class="col-sm-4"> 
+						<a href="javascript:TwitterShare('Découvrez mon c2v, le premier modèle de cv intégrant un pitch video !', '{% with user.member.first_name|add:"-"|add:user.member.last_name as slug %}http://www.pitchmyjob.com{% url 'c2v:c2v_view' user.member.id slug|slugify %}{% endwith %}', 530, 450)"> <img src="{% static 'images/pitchmyjob-30.png' %}"> </a> </div>
+					<div class="col-sm-4"> 
+						<a class="btn-no-effect" href="javascript:LinkedinShare('{% with user.member.first_name|add:"-"|add:user.member.last_name as slug %}http://www.pitchmyjob.com{% url 'c2v:c2v_view' user.member.id slug|slugify %}{% endwith %}', 530, 450)"> <img src="{% static 'images/pitchmyjob-31.png' %}"> </a> 
+					</div>
+					<div class="col-sm-12" style="padding-top:15px;"> 
+						<label> {% trans "Lien de partage de ton c2v" %} : </label>
+						<input type="text" class="form-control form-res" value="{% with user.member.first_name|add:"-"|add:user.member.last_name as slug %} http://www.pitchmyjob.com{% url 'c2v:c2v_view' user.member.id slug|slugify %} {% endwith %}" disabled>  
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<script type="text/javascript">
+	
+	$('.c2v-add-video').on("click", function() { 
+		if( $(this).attr('nohover') == $(this).attr('src') ) {
+			$('.c2v-add-video').each(function() { 
+				 $(this).attr('src', $(this).attr('nohover') ); 
+			});
+			$(this).attr('src', $(this).attr('hover') );
+		}else{
+			$(this).attr('src', $(this).attr('nohover') ); 
+		}
+	});
+
+	$('.c2v-add-video').tab();
+
+	$('.c2v-add-video').click(function() {
+		type_video_import = parseInt($(this).attr('data-type'));
+	});
+
+
+
+	//$(document).ready(function () {
+       // $('.upload-photo-profil').awesomeCropper( 
+       // { width: 150, height: 150, debug: true }
+       // );
+    //});
+
+	
+	$( "#load-theme" ).load( "{% url 'c2v:myc2v-theme' %}", function( response, status, xhr ) { });
+
+
+	function loadImage(type){
+		$('.bloc-edit .logo-'+type).trigger('click');
+		$(".bloc-edit .logo-"+type).change(readImageExperience);
+		$(".bloc-edit .logo-"+type).change(readImageFormation);
+	}
+	
+	
+	function readImageExperience() {
+	    if ( this.files && this.files[0] ) {
+	        var FR = new FileReader();
+	        FR.onload = function(e) {
+	             $('.bloc-edit .logo-experience').attr( "src", e.target.result );
+	             $('.bloc-edit .cv-experience-image').val( e.target.result );
+	             //console.log( e.target.result )
+	        };       
+	        FR.readAsDataURL( this.files[0] );
+	    }
+	}
+
+	function readImageFormation() {
+	    if ( this.files && this.files[0] ) {
+	        var FR = new FileReader();
+	        FR.onload = function(e) {
+	             $('.bloc-edit .logo-formation').attr( "src", e.target.result );
+	             $('.bloc-edit .cv-formation-image').val( e.target.result );
+	             //console.log( e.target.result )
+	        };       
+	        FR.readAsDataURL( this.files[0] ); 
+	    }
+	}
+
+	$(function () {
+	  $('[data-toggle="tooltip"]').tooltip()
+	});
+	
+
+</script>
+
+<link rel="stylesheet" href="//assets-cdn.ziggeo.com/css/ziggeo-v1.css" />
+<script src="//assets-cdn.ziggeo.com/js/ziggeo-v1.js"></script>
+<script>ZiggeoApi.token = "e50140772b22dbd8cbda85384066b8e5";</script>
+
+<script type="text/javascript">
+ ZiggeoApi.Events.on("submitted", function (data) {
+ 	object = { 'token' : data.video.token, 'embed_url' : data.video.embed_video_url, 'extension' : data.video.streams[0].video_type };
+	PostRecordVideo();
+    //alert("The video with token " + data.video.token + " has been submitted!");
+    //console.log(data.video);
+});
+</script>
+ 
+
+</body>
+
+<span data-toggle="modal" data-target=".modal-importer-via" style="display:none" > Importer via </span>
+
+
+{% endblock %}

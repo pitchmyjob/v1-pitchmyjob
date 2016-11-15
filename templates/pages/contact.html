@@ -1,0 +1,89 @@
+{% extends 'user-interne.html' %}
+
+{% block content %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+<div class="container-fluid pages-contact">
+	
+	<div class="col-sm-12 pages-title-contact">
+		<div class="pages-content-contact-content">
+			<h1> {% trans "Contact" %} </h1>
+		</div>
+	</div>
+
+	{% if form.errors %}
+		<div class="col-sm-12">
+	  		<div class="alert alert-danger "> 
+			    {% trans "Veuillez remplir tous les champs." %}
+			</div>
+		</div>
+	{% endif %} 
+
+	{% if messages %}
+	    {% for message in messages %}
+	    	<div class="col-sm-12">
+		  		<div class="alert alert-success" role="alert"> 
+				    {{ message }}
+				</div>
+			</div>
+	    {% endfor %}
+	{% endif %}
+
+	<div class="col-sm-12">
+		<div class="row">
+
+			<div class="col-sm-8">
+				<div class="col-sm-12 pages-content-contact">
+					<form action="" method="POST">
+						{% csrf_token %}
+						<div class="col-sm-6">
+							<label>{% trans "Nom" %}</label>
+							{{ form.first_name|add_class:"form-control"|add_error_class:"custom-error"}}
+						</div>
+
+						<div class="col-sm-6">
+							<label>{% trans "Prénom" %}</label>
+							{{ form.last_name|add_class:"form-control"|add_error_class:"custom-error" }}
+						</div>
+
+						<div class="col-sm-12">
+							<label>{% trans "Email" %}</label>
+							{{ form.email|add_class:"form-control"|add_error_class:"custom-error" }}
+						</div>
+
+						<div class="col-sm-12">
+							<label>{% trans "Objet de votre demande" %}</label>
+							{{ form.objets|add_class:"form-control"|add_error_class:"custom-error" }}
+						</div>
+
+						<div class="col-sm-12">
+							<label>{% trans "Message" %}</label>
+							{{ form.message|add_class:"form-control"|add_error_class:"custom-error" }}
+						</div>
+
+						<div class="col-sm-12 contact-submit">
+							<input type="submit" value="Envoyer" class="btn-general-blue">
+						</div>
+					</form>	
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="pages-content-contact contact-infos col-sm-12">
+					<h3> {% trans "Contactez-nous directement" %} </h3>
+					<div> Pitch My Job </div>
+					<div> 29 rue Viala </div>
+					<div> 75015 Paris </div>
+					<div class="tel"> <span class="glyphicon glyphicon-earphone"></span> 06 50 02 47 03 </div>
+					<div> <span class="glyphicon glyphicon-envelope" ></span> contact@pitchmyjob.com </div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}

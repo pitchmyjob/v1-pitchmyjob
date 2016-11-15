@@ -1,0 +1,419 @@
+{% extends 'user-interne.html' %}
+
+{% block annonces%} active {% endblock %}
+
+{% block seo %}
+	{% load i18n %}
+	{% get_current_language as LANGUAGE_CODE %}
+
+	<meta name="description" content="Tu recherches un emploi ? Trouves ton prochain job parmi nos {{ count }} offres d'emploi et postule en passant un pre-entretien">
+
+	{% if cano %}
+		<link rel="canonical" href="https://www.pitchmyjob.com{{ request.get_full_path }}">
+	{% else %}
+		{% if page_obj.has_previous %}
+			{% if page_obj.number == 1 %}
+				<link rel="prev" href="https://www.pitchmyjob.com/{{LANGUAGE_CODE}}/annonces" />
+			{% else %}
+	       		<link rel="prev" href="https://www.pitchmyjob.com/{{LANGUAGE_CODE}}/annonces?page={{ page_obj.previous_page_number }}" />
+			{% endif %}
+	    {% endif %}
+
+		{% if page_obj.number == 1 %}
+			<title>Postule en vidéo à plus de {{ count }}offres d'emploi sur Pitch my job</title>
+			<link rel="canonical" href="https://www.pitchmyjob.com/{{LANGUAGE_CODE}}/annonces">
+		{% else %}
+			<title>Postule en vidéo à plus de {{ count }} offres d'emploi sur Pitch my job - Page {{ page_obj.number }} </title>
+	    	<link rel="canonical" href="https://www.pitchmyjob.com/{{LANGUAGE_CODE}}/annonces?page={{ page_obj.number }}">
+	    {% endif %}
+
+	    {% if page_obj.has_next %}
+	       	<link rel="next" href="https://www.pitchmyjob.com/{{LANGUAGE_CODE}}/annonces?page={{ page_obj.next_page_number  }}" />
+	    {% endif %}
+    {% endif %}
+
+
+{% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% load separate_job %}
+{% load group_map %}
+
+<div class="container-fluid bloc-filtre">
+	<form action="{% url 'members:list-job' %}" method="GET">
+	<div class="container-fluid bloc-filtre-content">
+		<div class=" col-sm-5"> 
+			{% if LANGUAGE_CODE == "fr" %}
+				{{ form.search|add_class:"form-control"|attr:"placeholder:Métier, mot clé ou entreprise" }}   
+			{% else %}
+				{{ form.search|add_class:"form-control"|attr:"placeholder:Job title, keyword, company" }} 
+			{% endif %}
+		
+		</div>
+		<div class=" col-sm-5"> 
+			{% if LANGUAGE_CODE == "fr" %}
+				{{ form.place|add_class:"form-control"|attr:"placeholder:Ville, département ou région" }}  
+			{% else %}
+				{{ form.place|add_class:"form-control"|attr:"placeholder:City, state or region" }}  
+			{% endif %}
+		</div>
+		<div class=" col-sm-2"> 
+			<input type="submit" value="{% trans 'RECHERCHER' %}" class="form-control btn-general-red" > 
+		</div>
+		{{ form.locality|add_class:"location-input" }}
+			{{ form.administrative_area_level_2|add_class:"location-input" }}
+			{{ form.administrative_area_level_1|add_class:"location-input" }}
+			{{ form.country|add_class:"location-input" }}
+		<div class="bloc-more-filtre col-xs-12">
+			<div class=" col-sm-5"> 
+				{{ form.activity_area|add_class:"form-control" }}
+			</div>
+			<div class=" col-sm-5"> 
+				{{ form.study|add_class:"form-control" }}
+			</div>
+			<div class=" col-xs-12 bloc-filtre-radio"> 
+				<div class="col-xs-3 col-filtre-responsive">
+					<div class="checkbox">		  
+					    {% trans "Types de contrat" %}
+					</div>
+					{{ form.contracts }}
+				</div>
+				<div class=" col-xs-6"> 
+					<div class=" col-sm-6"> 
+						<div class="checkbox">
+						    {% trans "Expérience professionnelle" %}
+						</div>
+						{{ form.experiences }}
+					</div>
+					<div class=" col-sm-6">
+						<div class="checkbox">
+						    {% trans "Temps de travail" %}
+						</div>
+						{{ form.contract_time }}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class=" col-xs-12"> 
+			<div class="more-filtre"> <span class="glyphicon glyphicon-plus-sign" data-span="glyphicon glyphicon-minus-sign"></span> {% trans "Filtres" %} </div>
+		</div>
+	</div>
+	</form>
+</div>
+
+
+<script type="text/javascript">
+	var image = { url : "/static/images/c2v-v2-9-2.png" };
+	var infoWindows = [];
+
+	$(document).ready(function(){ 
+		map = new google.maps.Map(document.getElementById('map-recrute'), {
+	    	center: {lat: 48.857713, lng: 2.349873},
+	    	zoom: 11,
+		});
+ 	});
+
+ 	function closeAllInfoWindows() {
+	  for (var i=0;i<infoWindows.length;i++) {
+	     infoWindows[i].close();
+	  }
+	}
+
+</script>
+
+
+
+<div class="container-fluid bloc-liste-offre">
+	<div class="container-fluid">
+		<div class="col-sm-8"> 
+
+			
+
+<div class="list-offre-content">
+				<h1 style="font-familly:inherit;font-size:14px;margin-bottom:1%;color:#333366;"><strong>Nos offres d'emploi</strong></h1>
+
+	
+
+				{% with scraper=object_list|separate_job %}
+
+					{% for job in object_list %}
+						
+						<div  itemscope itemtype="https://schema.org/JobPosting" class="container-fluid bloc-one-offre">
+							<a href="{% url 'members:detail-job' job.id %}"> <div class="col-xs-3 bloc-logo-offre"> <img src="{{ job.image.logo100.url }}" alt="Logo pour l'offre d'emploi de {{ job.company }} "> </div> </a>
+							<div class="col-xs-9"> 
+								<a itemprop="url" class="url-annonce" content="{% url 'members:detail-job' job.id %}" href="{% url 'members:detail-job' job.id %}">
+								<div class="offre-one-description">
+									<h3 itemprop="title"> {{ job.job_title }} </h3>
+									<p> <span itemprop="hiringOrganization" > {{ job.company }} </span> - <span itemprop="jobLocation" > {{  job.job_location }}</span> </p>
+									<p> {{ job.contracts.all|join:" - " }} </p>
+								</div>
+								</a>
+								<div class="row">
+									<div class="col-md-6 offre-one-date" itemprop="datePosted">
+										{% if job.scraper  %}
+											{{ job.date_posted|date:"d F Y" }}
+										{% else %}
+											{% now "d F Y" %}
+										{% endif %}
+									</div>
+									<div class="col-md-6 offre-link-detail"> <a id="ga-btn-{{job.id}}" class="url-annonce" href="{% url 'members:detail-job' job.id %}">{% trans "Voir l'annonce" %}</a> </div>
+								</div>
+							</div>  
+						</div>
+
+						{% if forloop.counter == scraper %}
+							{% if search %}
+								<div style="width:80%;margin:15px auto;height:1px;background:#AFAFAF">  </div>
+							{% endif %}
+						{% endif %}
+
+
+					{% empty %}
+						<div class="bloc-no-offre"> 
+							<h2> {% trans "Oops !" %}</h2>
+							<p> Aucune annonce trouvée</p>
+						</div>
+
+						
+
+
+					{% endfor %}
+
+
+				{% endwith %}
+
+			</div>
+
+
+			
+			{% for job in object_list|group_map %}
+				
+				<script type="text/javascript">
+					$( document ).ready(function() {
+					
+						function initialize() {
+						var marker{{job.id}} = new google.maps.Marker({
+							position: {lat: {{ job.lat|stringformat:"f" }}, lng: {{ job.lng|stringformat:"f" }} },
+							map: map,
+							icon: image
+						});
+
+						var loc = new google.maps.LatLng({{ job.lat|stringformat:"f" }}, {{ job.lng|stringformat:"f" }});
+
+						var infobox = new InfoBox({
+					         content: document.getElementById("infobox{{job.id}}"),
+					         disableAutoPan: false,
+					         maxWidth: 200,
+					         pixelOffset: new google.maps.Size(-75, 0),
+					         zIndex: null,
+					         infoBoxClearance: new google.maps.Size(1, 1)
+					    });
+
+					    infoWindows.push(infobox);
+					    
+					    google.maps.event.addListener(marker{{job.id}}, 'click', function() {
+					    	closeAllInfoWindows();
+					        infobox.open(map, this);
+					        map.panTo(loc);
+					    });
+					
+						//google.maps.event.addDomListener(window, 'load', initialize);
+						}
+						google.maps.event.addDomListener(window, 'load', initialize);
+					});
+				</script>
+
+	
+				{% if job.nb == 1 %}
+					<div style="display:none">
+						<div id="infobox{{job.id}}" class="infobox">
+							<img src="{{ job.job.0.img }}" style="width:30px; vertical-align: top; float:left;margin-right:5px;line-height: 16px;">
+							<div style="font-size:15px;margin-bottom:5px;"> {{ job.job.0.title }} </div> 
+							<span> <a href="{{ job.job.0.link }}"> {% trans "Afficher l'annonce" %} </a> </span>
+					    </div>
+				    </div>
+			    {% else %}
+				    <div style="display:none">
+						<div id="infobox{{job.id}}" class="infobox">
+							{% for j in job.job %}
+								<a href="{{ j.link }}"> <div style="font-size:15px;margin-bottom:5px;line-height: 16px;"> {{ j.title }} </div> </a> 
+							{% endfor %}
+					    </div>
+				    </div>
+			    {% endif %}
+
+			{% endfor %}
+
+
+			
+
+			<div class="bloc-pagination">
+				<ul class="pagination">
+				    {% if page_obj.has_previous %}
+						{% if page_obj.number == 1 %}
+							<li>
+							  <link rel="prev" href="/annonces" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							  </link>
+							</li>
+						{% else %}
+							<li>
+							  <link rel="prev" href="?{{ page_obj.previous_page_number.querystring }}" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							  </link>
+							</li>
+						{% endif %}
+				    {% endif %}
+
+				    {% for page in page_obj.pages %}
+				        {% if page %}
+				            {% ifequal page page_obj.number %}
+				                <li class="active"><a >{{ page }}<span class="sr-only">(current)</span></a></li>
+				            {% else %}
+				                <li>
+									{% if page == 1 %}
+										<a href="/annonces">
+											{{ page }}
+
+												<link rel="next" href="/annonces">
+										</a>
+									{% else %}
+										<a href="?{{ page.querystring }}">
+											{{ page }}
+
+												<link rel="next" href="?{{ page.querystring }}">
+										</a>
+									{% endif %}
+				            	</li>
+				            {% endifequal %}
+				        {% else %}
+				        <li>
+					       <a> ...</a>
+					    </li>
+				        {% endif %}
+				    {% endfor %}
+
+				    {% if page_obj.has_next %}
+				        <li>
+					       <link rel="next" href="?{{ page_obj.next_page_number.querystring }}" aria-label="Next">
+					         <span aria-hidden="true">&raquo;</span>
+					       </link>
+					    </li>
+				    {% endif %}
+				</ul>
+			</div>
+
+		</div>
+
+		<div class="col-sm-4 sidebar-list-offre" style="padding-top:20px;">
+			<div class="bloc-sidebar-list-offre sidebar-entretien"  style="display:none; ">
+				<h2> {% trans "L'entretien différé" %} </h2>
+				<p> {% trans "Répond aux questions des recruteurs de 3 manières :" %} </p>
+				<div class="container-fluid">
+					<div class="col-xs-4"> 
+						<img src="{% static 'images/myc2v-34.png' %}">
+						{% trans "Video" %}
+					</div>
+					<div class="col-xs-4"> 
+						<img src="{% static 'images/myc2v-35.png' %}">
+						{% trans "Audio" %}
+					</div>
+					<div class="col-xs-4"> 
+						<img src="{% static 'images/myc2v-36.png' %}">
+						{% trans "Texte" %}
+					</div>
+				</div>
+			</div>
+
+
+			<div class="bloc-sidebar-list-offre sidebar-map" style="">
+				<div class="sidebar-map-title">
+
+					<div class="nb-sidebar-map-title"> {{ count }} </div>
+					 {% with object_list|length as nb %} <div class="nb-sidebar-map-text nb-sidebar-map-text-{{nb}}"> 
+						{% if nb %}  Offre{{ nb|pluralize }} correspond{{ nb|pluralize:"ent" }} {% else %} Offre correspond {% endif %} à ta recherche  {% endwith %} 
+					 </div> 
+					<div style="clear:both"> </div>	
+				</div>
+				<div class="map-recrute-job" id="map-recrute"> </div>
+			</div>
+
+			<div class="bloc-sidebar-list-offre sidebar-recrute ">
+				<h2> {% trans "Ils recrutent sur Pitch My Job" %} </h2>
+				<div class="container-fluid">
+					{% for pro in list_pro %}
+						<div class="sidebar-recrute-entreprise">
+							<a href="{% url 'members:detail-pro' pro.id %}">
+								<div class="col-xs-4"> <img src="{{ pro.image.logo50.url }}"> </div>
+								<div class="col-xs-8"> 
+									<div class="title"> {{ pro.company }} </div>
+									<div> {{ pro.activity_area }} </div>
+								</div>
+								<div class="clear"> </div>
+							</a>
+						</div>
+					{% endfor %}
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$( document ).ready(function() {
+		 init_autocomplete("id_place");
+
+		 url = window.location.href.split('?');
+		 
+
+		 if ( url.length > 1)
+		 {
+		 	console.log(url);
+
+
+		 }
+	});
+
+	$('.more-filtre').click(function() {
+		 $(".bloc-more-filtre").toggle();
+		 var elem = $('.more-filtre').find('span');
+		 if( elem.hasClass('glyphicon-minus-sign') )
+		 	elem.removeClass('glyphicon-minus-sign');
+		 else
+		 	elem.addClass('glyphicon-minus-sign');
+	});
+
+	$(".all-contracts").click(function () {
+	    $("#id_contracts input").prop('checked', $(this).prop('checked'));
+	});
+	$("#id_contracts input").click(function () {
+	    $(".all-contracts").prop('checked', false);
+	});
+
+
+	$(".all-experience").click(function () {
+	    $("#id_experiences input").prop('checked', $(this).prop('checked'));
+	});
+	$("#id_experiences input").click(function () {
+	    $(".all-experience").prop('checked', false);
+	});
+
+	$(".all-time").click(function () {
+	    $("#id_contract_time input").prop('checked', $(this).prop('checked'));
+	});
+	$("#id_contract_time input").click(function () {
+	    $(".all-time").prop('checked', false);
+	});
+
+</script> 
+
+
+
+{% endblock %}

@@ -1,0 +1,193 @@
+{% load web_url %}
+{% load get_range %}
+{% load age %}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<style type="text/css">
+	@page {
+		size: ;
+		margin: 1cm;
+		@frame footer {
+		    -pdf-frame-content: footerblock;
+		    bottom: 1cm;
+		    margin-left: 1cm;
+		    margin-right: 1cm;
+            margin-top: 1cm;
+		    height: 1cm;
+		}
+	}
+    .theme-1-bloc{background:#fff;  margin-bottom:10px;}
+    .theme-1-infos {font-size:14px; color:#666;}
+    .theme-1-name{color:#333366; font-size:34px; }
+    .theme-1-name span{font-size:18px; }
+    .theme-1-picto-1{margin-right:10px;}
+    .theme-1-picto{margin-right:10px;} 
+    .theme-1-info{padding-top:3px;}
+    .theme-1-separation{border-bottom: 5px solid #F3F3F3; height:1px; margin:5px -100px;}
+    .theme-1-separation-2{border-bottom: 1px solid #ECECF3; height:1px; margin-top:-22px; margin-bottom:-10px;}
+
+    .theme-1-experience{margin-top:20px;}
+    .theme-1-title{color:#333366; font-size:20px; margin-bottom:-20px;}
+    .note  { display:inline-block;vertical-align: middle; margin-left:10px; }
+    .note li { width:15px; height:15px; display:inline-block; background:#34495E; border-radius:50%; margin-left:5px; }
+</style>
+</head>
+<body>
+
+<div class="theme-1-bloc theme-1-infos">
+
+    <table>
+        <tr>
+            <td style="width:50%;text-align:left" valign=top> 
+                <div class="theme-1-name"> {{ cv.first_name }} {{ cv.last_name }}</div>
+                <div style="padding-top:-10px;">
+                    <table style="width: auto" >
+                        <tr>
+                            <td valign=top> 
+                                <img src="https://v1-pitchmyjob.s3.amazonaws.com/static/images/c2v-v2-4.png" class="theme-1-picto" style="width:15px;"> &nbsp;&nbsp; {{  cv.city|default_if_none:"" }} {{  cv.country|default_if_none:"" }}
+                                
+                            </td>
+                           {% if cv.birthday %} <td valign=top> <img src="https://v1-pitchmyjob.s3.amazonaws.com/static/images/c2v-v2-1.png" class="theme-1-picto-1" style="width:15px;"> &nbsp;&nbsp; {{  cv.birthday|age }} ans   </td> {% endif %}
+                           {% if cv.phone %}<td valign=top> <img src="https://v1-pitchmyjob.s3.amazonaws.com/static/images/c2v-v2-3.png" class="theme-1-picto" style="width:8px"> &nbsp;&nbsp; {{  cv.phone|default_if_none:"" }}   </td> {% endif %}
+                        </tr>
+                    </table>
+                    <div class="theme-1-info">
+                        <img src="https://v1-pitchmyjob.s3.amazonaws.com/static/images/c2v-v2-5.png" class="theme-1-picto-1" style="width:15px;"> &nbsp;&nbsp; {{  cv.email }}
+                    </div>
+                    {% if cv.site %}
+                    <div style="padding-top:-4px;">
+                        <img src="https://v1-pitchmyjob.s3.amazonaws.com/static/images/c2v-v2-6.png" class="theme-1-picto-1" style="width:15px;vertical-align:bottom"> &nbsp;&nbsp; {{  cv.site|default_if_none:"" }}
+                    </div>
+                    {% endif %}
+                </div>
+            </td>
+            <td style="width:50%; text-align:right" valign=top> 
+                <div style="position:relative"  class="dropdown">
+                    <img src="{{ cv.member.image.url }}" class="changePhoto" style="width:150px;">
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    {% if cv.description %}
+    <table style="padding-top:5px;">
+        <tr>
+            <td style="width:5%" valign=top> <img src="https://v1-pitchmyjob.s3.amazonaws.com/static/images/c2v-v2-7.png" style="width:20px">  </td>
+            <td style="width:90%; text-align:center;font-size:12px;"> {{cv.description|default_if_none:"" }}  </td>
+            <td style="width:5%" valign=bottom> <img src="https://v1-pitchmyjob.s3.amazonaws.com4/static/images/c2v-v2-8.png" style="width:20px;">  </td>
+        </tr>
+    </table>
+    {% endif %}
+
+</div>
+
+<div class="theme-1-separation"> &nbsp; </div>
+
+<div class="theme-1-experience">
+    <div class="theme-1-title" style="padding-bottom:-15px;margin-bottom:-15px;"> Experience professionnelle  </div>
+
+    {% for exp in cv.cvexperience_set.all %}
+        <div class="theme-1-xp">
+            <table style="width:100%">
+                <tr>
+                    <td>
+                        <div class="theme-1-xp-title" style="font-weight:bold;font-size:14px;color:#333366;"> {{ exp.title }} - {{ exp.company }} </div>
+                        <div class="theme-1-xp-date" style="margin-top:-5px;padding-bottom:-10px;"> 
+                            De {{ exp.date_start|date:"M. Y" }}  à {{ exp.date_end|date:"M. Y"  }}  &nbsp;&nbsp; <img src="https://v1-pitchmyjob.s3.amazonaws.com/static/images/c2v-v2-9.png" style="width:7px;height:12px;margin-top:-5px;" > {{ exp.location }}
+                        </div>
+                        <div class="theme-1-xp-desc" >
+                            {{ exp.description }} 
+                        </div>
+                    </td>
+                    <td style="text-align:right;width:200px;">
+                         <img src="{{ exp.image.logo100.url }}" style="width:70px;">
+                    </td>
+                </tr>
+            </table>
+            {% if forloop.last == False %}
+                <div class="theme-1-separation-2"> &nbsp; </div>
+            {%endif %}
+        </div>
+    {% endfor %}
+</div>
+
+<div class="theme-1-separation"> &nbsp; </div>
+
+<div class="theme-1-experience">
+    <div class="theme-1-title" style="padding-bottom:-15px;margin-bottom:-15px;"> Formations  </div>
+
+    {% for exp in cv.cvformation_set.all %}
+        <div class="theme-1-xp">
+            <table style="width:100%">
+                <tr>
+                    <td>
+                        <div class="theme-1-xp-title" style="font-weight:bold;font-size:14px;color:#333366;"> {{ exp.degree }} {{ exp.discipline }} - {{ exp.school }}  </div>
+                        <div class="theme-1-xp-date" style="margin-top:-5px;padding-bottom:-10px;"> 
+                            De {{ exp.date_start|date:"M. Y" }}  à {{ exp.date_end|date:"M. Y"  }} 
+                        </div>
+                        <div class="theme-1-xp-desc" style="padding-top:-5px;">
+                            {{ exp.description }} 
+                        </div>
+                    </td>
+                    <td style="text-align:right;width:200px;">
+                         <img src="{{ exp.image.logo100.url}}" style="width:70px;">
+                    </td>
+                </tr>
+            </table>
+
+            {% if forloop.last == False %}
+                <div class="theme-1-separation-2"> &nbsp; </div>
+            {%endif %}
+        </div>
+    {% endfor %}
+</div>
+
+<div class="theme-1-separation"> &nbsp; </div>
+
+<div class="theme-1-experience">
+
+    <table style="width:100%">
+        <tr>
+            <td style="width:40%" valign=top>
+                <div class="theme-1-title" style=""> Compétences  </div>
+                {% for exp in cv.cvskill_set.all %}
+                    <div class="theme-1-skill col-sm-3 del-skill-{{exp.id}}" style="margin-top:2px;font-weight:bold;font-size:12px;color:#333366;margin-bottom:3px;">
+                        <div class="row">
+                            {{ exp.name }} &nbsp;&nbsp;  {% for y in exp.level|get_range %} <img src="https://v1-pitchmyjob.s3.amazonaws.com/static/images/etoile.png" style="width:11px; margin-left:6px;">  {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </td>
+            <td style="width:30%" valign=top>
+                <div class="theme-1-title" style=""> Langues  </div>
+                {% for exp in cv.cvlanguage_set.all %}
+                    <div class="theme-1-skill col-sm-3 del-skill-{{exp.id}}" style="margin-top:2px;font-weight:bold;font-size:12px;color:#333366;">
+                        <div class="row">
+                            {{ exp.name }}  &nbsp;&nbsp;  {% for y in exp.level|get_range %} <img src="https://v1-pitchmyjob.s3.amazonaws.com/static/images/etoile.png" style="width:11px; margin-left:6px;">  {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </td>
+            <td style="width:30%" valign=top>
+                <div class="theme-1-title" style=""> Loisirs  </div>
+                {% for exp in cv.cvinterest_set.all %}
+                    <div class="theme-1-skill col-sm-3 del-skill-{{exp.id}}" style="margin-top:2px;font-weight:bold;font-size:12px;color:#333366;">
+                        <div class="row">
+                            {{ exp.name }} 
+                        </div>
+                    </div>
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+<div id="footerblock">
+    <pdf:pagenumber>
+</div>
+</body>
+</html>

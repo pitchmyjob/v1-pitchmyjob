@@ -1,0 +1,34 @@
+{% load staticfiles %}
+{% load in_group %}
+{% load i18n %}
+
+<a href="#" class="my-account-notif-link notify-load" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-bell"></span> 
+
+<div class="dropdown-handle"> <div class="dropdown-nb dropdown-nb-{{ nb_notif }}" style="right: 6px;"> {{ nb_notif }} </div> </div> </a>
+
+
+<div class="dropdown-menu dropdown-notif">
+	<div class="col-sm-12 dropdown-notif-title-red"> {% trans "Mes notifications" %}</div>
+	<div class="col-sm-12 dropdown-notif-content-2">
+		<div class="api_load-2"> <img src="{% static 'images/notif_loader.gif' %}"> </div>
+		<div class="api_load-2 no_message-2" style="display:none"> {% trans "Aucune notifications" %} </div>
+	</div>
+</div>
+
+
+
+ 
+<script type="text/javascript">
+$(document).ready(function () {
+	
+	$('.notify-load').click(function() {
+		
+		$( ".dropdown-notif-content-2" ).load( "{% url 'notifications:get-notification' %}", function( response, status, xhr ) {
+		 	$('.api_load-2').hide();
+	        $('.no_message-2').show();
+		});
+	});
+
+});
+
+</script>

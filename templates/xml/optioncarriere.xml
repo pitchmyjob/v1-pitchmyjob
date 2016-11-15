@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jobs>
+
+{% for job in jobs %}
+	<job>
+		<title><![CDATA[{{job.job_title}}]]></title>
+		<url><![CDATA[http://www.pitchmyjob.com{% url 'members:detail-job' job.id %}]]></url>
+
+		{% if job.locality %}
+			<location><![CDATA[{{job.locality}}]]></location>
+		{% elif  job.administrative_area_level_1 %}
+			<location><![CDATA[{{job.administrative_area_level_1}}]]></location>
+		{% elif  job.country %}
+			<location><![CDATA[{{job.country}}]]></location>
+		{% endif %}
+
+		<company><![CDATA[{{ job.company }}]]></company>
+
+	    <description><![CDATA[{{ job.description|linebreaks }}]]></description>
+
+	    <mission><![CDATA[{{ job.mission|linebreaks }}]]></mission>
+
+	    <profile><![CDATA[{{ job.profile|linebreaks }}]]></profile>
+
+		<contracttype><![CDATA[{{job.contracts.all|join:", "}}]]></contracttype>
+
+		<salary><![CDATA[{{job.salary}} per month ]]></salary>
+
+
+		<contact>
+	        <name><![CDATA[{{ job.pro.first_name }} {{ job.pro.last_name }}]]></name>
+	        <email><![CDATA[{{ job.pro.email }}]]></email>
+	        <phone><![CDATA[{{ job.pro.phone }}]]></phone>
+    	</contact>
+
+
+		<education><![CDATA[{{job.studies.all|join:", "}}}}]]></education>
+
+		<jobtype><![CDATA[{{job.contract_time.all|join:", "}}]]></jobtype>
+
+		<contracttype><![CDATA[{{job.contracts.all|join:", "}}]]></contracttype>
+
+		<category><![CDATA[{{job.activity_area.name}}]]></category>
+
+		<experience><![CDATA[{{ job.experiences.all|join:", " }}]]></experience>
+
+		<tags><![CDATA[{{ job.tags.all|join:", " }}]]></tags>
+
+	</job>
+{% endfor %}
+
+
+</jobs>

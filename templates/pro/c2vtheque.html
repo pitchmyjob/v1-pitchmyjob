@@ -1,0 +1,156 @@
+{% extends "pro-interne.html" %}
+
+{% block c2v-theque %} active {% endblock %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load tagspro %}
+	{% load widget_tweaks %}
+	{% load i18n %}
+	
+	<div class="container-fluid pro-c2v-theque">
+		<form action="" method="GET">	
+		<div class="col-sm-4">
+			
+				<!--<div class="pro-c2vtheque-filtre">
+					<div class="pro-c2vtheques-tags"> Tags </div>
+					<input type="text" class="form-control inputtag" data-role="tagsinput" value="CDD, CDI, Bac +5">
+				</div>-->
+				{{ form.la|add_class:"location-input" }}
+				{{ form.a1|add_class:"location-input" }}
+				{{ form.a2|add_class:"location-input" }}
+				{{ form.ct|add_class:"location-input" }}
+
+				<div class="pro-c2vtheque-filtre">
+					<div class="pro-c2vtheques-titre"> {% trans "Filtres" %} </div>
+
+					<div class="pro-bloc-filtre">
+						<label> {% trans "Secteur d'activités" %} </label>
+						{{ form.sa|add_class:"form-control" }}
+					</div>
+
+					<div class="pro-bloc-filtre">
+						<label> {% trans "Type de contrat" %} </label>
+						{{ form.c|add_class:"form-control" }}
+					</div>
+
+					<div class="pro-bloc-filtre">
+						<label> {% trans "Niveau d'étude" %} </label>
+						{{ form.e|add_class:"form-control" }}
+					</div>
+
+					<div class="pro-bloc-filtre">
+						<label> {% trans "Expérience" %} </label>
+						{{ form.exp }}
+					</div>
+
+					<!--<div class="pro-bloc-filtre">
+						<label> Salaire </label>
+						<div class="all-checkbox">
+						  <div> De {{ form.sd|add_class:"form-control input-salaire" }} à {{ form.sf|add_class:"form-control input-salaire" }} € </div>
+						</div>
+					</div>-->
+
+					<div class="pro-bloc-filtre">
+						<label> {% trans "Disponibilité" %} </label>
+						{{ form.d }}
+					</div>
+
+					<div class="pro-bloc-filtre">
+						<label> {% trans "Derniére connexion" %} </label>
+						{{ form.cn }}
+					</div>
+
+					<div class="pro-bloc-filtre pro-bloc-filtre-submit"> <a href="{% url 'pro:c2v-theque' %}" class="btn-general-blue-2">{% trans "Reinitialsier" %}</a>  <input type="submit" value="{% trans 'Filter' %}" class="btn-general-blue">  </div>
+
+				</div>
+			
+		</div>
+
+
+
+		<div class="col-sm-8">
+
+			<div class="pro-cv2-search container-fluid">
+				<div class="col-sm-5"> {{ form.s|add_class:"form-control"|attr:"placeholder:Métier, compétence ou mot clé" }} </div>
+				<div class="col-sm-5"> {{ form.p|add_class:"form-control"|attr:"placeholder:Ville, département, région" }} </div>
+				<div class="col-sm-2"> <input type="submit" value="OK" class="btn-general-blue-2"> </div>
+			</div>
+
+			{% for user in object_list %}
+
+				{% if user.experiences_count > 0 or user.cv_pdf %}
+				<a href="{% url 'pro:c2v-theque-candidat' user.id %}"> 			
+					<div class="pro-cv2-result container-fluid">
+						<div class="col-xs-3"> 
+							 <img src="{{ user.image.logo100.url }}">
+						</div>
+
+
+						<div class="col-xs-3">
+							<div class="c2vtheque-poste">{{ user.last_name|title }} {{ user.first_name|title }} </div>
+							<div class="c2vtheque-infos"> {{ user.study|default_if_none:""  }} </div>
+							<div class="c2vtheque-infos"> {{ user.experience|default_if_none:""  }} </div>
+						</div>
+						<div class="col-xs-6">
+								<div class="c2vtheque-poste"> {{ user.cv.poste|default_if_none:"" }} </div>
+								<div class="c2vtheque-infos"> {{ user.activity_area.all|join:", " }} </div>
+								<div class="c2vtheque-infos"> {% if user.availability %} En poste {% else %}  Disponible {% endif %} </div>
+								<div class="c2vtheque-infos">  {{ user.job_wanted|default_if_none:"" }} </div>
+						</div>
+					</div>
+				 </a>
+				{% endif %}
+			{% endfor %}
+
+			<div class="bloc-pagination">
+				<ul class="pagination">
+				    {% if page_obj.has_previous %}
+				        <li>
+					      <link rel="prev" href="?{{ page_obj.previous_page_number.querystring }}" aria-label="Previous">
+					        <span aria-hidden="true">&laquo;</span>
+					      </link>
+					    </li>
+				    {% endif %}
+
+				    {% for page in page_obj.pages %}
+				        {% if page %}
+				            {% ifequal page page_obj.number %}
+				                <li class="active"><a >{{ page }}<span class="sr-only">(current)</span></a></li>
+				            {% else %}
+				                <li>
+				                 	<a href="?{{ page.querystring }}">
+				                 		{{ page }}
+				                 		<link rel="next" href="?{{ page.querystring }}">
+				                 	</a>
+				            	</li>
+				            {% endifequal %}
+				        {% else %}
+				        <li>
+					       <a> ...</a>
+					    </li>
+				        {% endif %}
+				    {% endfor %}
+
+				    {% if page_obj.has_next %}
+				        <li>
+					       <link rel="next" href="?{{ page_obj.next_page_number.querystring }}" aria-label="Next">
+					         <span aria-hidden="true">&raquo;</span>
+					       </link>
+					    </li>
+				    {% endif %}
+				</ul>
+			</div>
+
+		</div> 
+		</form>
+	</div>
+
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			 init_autocomplete("id_p", true);
+		});
+	</script>
+
+
+{% endblock  %}

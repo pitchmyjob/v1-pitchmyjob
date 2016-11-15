@@ -1,0 +1,134 @@
+{% load staticfiles %}
+
+
+<br><br>
+
+{% for p in jobs %}
+	- {{ p }} : {{ p.job }} -- {{ p.member }}
+		<br>
+	{{ p.tags.all }}
+	<br><br>
+{% endfor %}
+
+<div id="go">
+	<div id="hdfvr-content" ></div>
+</div>
+<!-- end video recorder code -->
+
+<br><br>
+
+<a href="#" onclick="start()">start</a> <br><br>
+
+
+
+<a href="#" onclick="play()">Play</a> <br><br>
+
+
+<a href="#" onclick="pause()">pause</a> <br><br>
+
+
+<a href="#" class="save">Save</a> <br><br>
+
+
+
+
+{{ jobs }}
+
+
+
+
+<br><br><br>
+
+{% for m in member %}
+	{{ m.first_name }} {{ m.last_name }} : {{ m.email }} | {{ m.study }} | {{ m.experience }}<br><br>
+{% endfor %}
+<br><br>
+------------------------------------------
+<br><br>
+
+{{ member.count }}
+
+
+{{ res.errorCode  }} <br>
+{{ res.message }} <br>
+
+{{ res.status  }} <br><br>
+
+{{ res }}
+
+{% for r in res %}
+	
+
+	{{ r }} 
+	<br><br>
+
+{% endfor %}
+
+<br><br><br><br>
+
+
+{% for pro in cv %}
+
+	{{ pro.user }} : {{ pro.company }} : {{ pro.credit_job }} <br>
+	{{ pro.email }}.
+	<br>
+	Offre : {{ pro.job_set.count }}
+	<br><br>
+	-------------------------
+
+	<br><br>
+
+{% endfor %}
+
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
+
+-----------------
+
+{% for educ in cv %}
+	-  {{educ.member.first_name }} {{educ.member.email }} :: {{educ.first_name }} {{educ.last_name }} <br>
+	experience : {{ educ.num_exp }}<br>
+	formation : {{ educ.num_for }}<br>
+	----- 
+{% endfor %}
+
+<br><br><br><br>
+
+test :
+
+{{data.user}}
+
+: <br>
+: <br>
+
+Experience : <br>
+{% for educ in data.experiences %}
+{{educ}} <br><br>
+{% endfor %}
+
+
+<br><br><br>
+Education : <br>
+{% for educ in data.education %}
+{{educ}} <br><br>
+{% endfor %}
+
+<br><br><br>
+Skill : <br>
+{% for educ in data.skills %}
+{{educ}} <br><br>
+{% endfor %}
+
+<br><br><br>
+Langue : <br>
+{% for educ in data.languages %}
+{{educ}} <br><br>
+{% endfor %}
+
+
+<br><br><br>
+Interet : <br>
+{% for educ in data.interests %}
+{{educ}} <br><br>
+{% endfor %}

@@ -1,0 +1,43 @@
+{% extends "pro-interne.html" %}
+
+{% block mes-offres %} active {% endblock %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load tagspro %}
+	{% load i18n %}
+
+	<div class="container-factures">
+		<div class="col-sm-12">
+			<div class="factures-titles"> {% trans "Vos factures" %} </div>
+
+			{% for object in object_list %}
+				<div class="col-sm-12 row bloc-facture">
+					<div class="col-sm-12 bloc-title-facture">
+						<span> {% trans "Facture N°" %} {{ object.id }} </span>
+					</div>
+					<div class="col-sm-12 row content-facture">
+						<div class="col-sm-6 col-xs-6"> 
+							{% if object.type_facture == 1 %} 
+								<div> {% trans "Publication offre d'emploi" %} </div>
+								<div> Offre n° {{ object.job.id }} : {{ object.job.job_title }} </div>
+							{% endif %} 
+							{% if object.type_facture == 2 %}
+								<div> {{ object.designation }} </div>
+							{% endif %}
+						</div>
+						<div class="col-sm-2 col-xs-6"> {{ object.prix_ttc }}€ TTC </div>
+						<div class="col-xs-12 col-sm-4 dl-facture"> <a href="{% url 'factures:generate_facture' object.id %}"> {% trans "Telecharger" %} </a> </div>
+					</div>
+					<div class="col-sm-12 date-facture">
+						{{ object.date_created }}
+					</div>
+				</div> 
+			{% empty %}
+				<div class="no-facture"> {% trans "Aucune facture" %} </div>
+			{% endfor %}
+
+		</div>
+	</div>	
+
+{% endblock  %}

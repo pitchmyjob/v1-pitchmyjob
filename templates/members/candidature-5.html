@@ -1,0 +1,42 @@
+{% extends 'user-interne.html' %}
+
+{% block annonces %} active {% endblock %}
+{% block footer %} {% endblock %}
+{% block js_autocomplete %} {% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+
+<div class="container-fluid header-entretien">
+	<h1> {% trans "Entretien terminé" %} </h1>
+</div>
+
+
+<div class="col-sm-12">		
+	<div class="container-fluid entretien-content entretien-1">
+		<div class="entretien-medaille"> <img src="{% static 'images/myc2v-48.png'%}"> </div>
+		<h2> {% trans "Félicitations !" %} </h1>
+		<p> {% trans "Votre candidature pour le poste de" %} {{ candidature.job.job_title }} {% trans "chez" %} {{ candidature.job.company }} {% trans "a bien été envoyé." %} </p>
+		
+		<div class="row table-entretien">
+			<div class="col-sm-6">
+				<p>
+					{% trans "Continuez" %} <br> {% trans "votre recherche" %}
+				</p>
+				<a href="{% url 'members:list-job' %}" class="btn-general-blue"> {% trans "Retour aux annonces" %}</a> 
+			</div>
+			<div class="col-sm-6"> 
+				<p>
+					{% trans "Revisionnez" %} <br> {% trans "vos réponses" %}
+				</p>
+				<a href="{% url 'members:detail-candidature' candidature.job.id %}" class="btn-general-red"> {% trans "Voir mes réponses" %} </a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

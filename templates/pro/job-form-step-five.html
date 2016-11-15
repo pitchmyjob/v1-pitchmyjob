@@ -1,0 +1,220 @@
+{% extends "pro-interne.html" %}
+
+{% block mes-offres %} active {% endblock %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load widget_tweaks %}
+	{% load i18n %}
+		
+	<div class="create-offre-1">
+		<div class="col-md-12">
+			<img src="{% static 'images/myc2v-33.png' %}">
+		</div>
+	</div> 
+
+	<!--<div class="container-fluid container-fluid-offre">
+		<div class="col-sm-6">
+			<div class="container-fluid bloc-offre offre-1">
+				<div class="title"> Offre découverte </div>
+				<div class="price"> 0 € </div>
+				<div class="text">
+					<div class="width-text">
+						<ul>
+							<li> <span> Recevez des candidatures spontanées gratuitement  </span> </li>
+							<li> <span> La publication de votre première annonce d’emploi est gratuite </span>  </li>
+							<li> <span> La publication de votre Pré-entretien est gratuite </span>  </li>
+						</ul>
+					</div>
+					<a href="" class="btn-offre btn-offre-1"> Visualiser offre </a>
+				</div>
+				<div class="total-price">
+					<div class="container-fluid">
+						<div class="col-xs-8">
+							<select class="form-control">
+							  <option>1 Offre</option>
+							  <option>2 Offres</option>
+							  <option>3 Offres</option>
+							</select>
+						</div>
+						<div class="col-xs-4 calcule-price">
+							0 euros
+						</div>	
+					</div>
+				</div>
+			</div>	 
+		</div>-->
+
+		<div class="col-sm-12" style="margin:0 auto">
+			<div class="container-fluid bloc-offre offre-2">
+				<div class="title"> {% trans "Annonce emploi" %}</div>
+				<div class="price">
+					{% if user.pro.credit_job > 0  %}
+						<strike> 99 € HT</strike>&nbsp; {% trans "Gratuit" %}
+					{% else %}
+						{% if stage %}
+							49 € HT
+						{% else %}
+							99 € HT 
+						{% endif %}
+					{% endif %}
+				</div>
+				<div class="text">
+					<div class="width-text">
+						{% trans "La publication d’une offre d’emploi intègre:" %}
+						<ul>
+							<li> <span> {% trans "Valable 30 jours" %}  </span> </li>
+							<li> <span> {% trans "Candidatures illimitées" %}  </span> </li>
+							<li> <span> {% trans "Proposition automatique de candidats" %} </span>  </li>
+							<li> <span> {% trans "Accompagnement" %} </span>  </li>
+						</ul>
+					</div>
+					<!--<a href="" class="btn-offre btn-offre-2"> Visualiser offre </a>-->
+				</div>
+				<div class="total-price">
+						 
+						{% if user.pro.credit_job > 0  %}
+					 
+							<div class="container-fluid">
+								<div class="col-xs-12 calcule-price">
+									1 {% trans "Offre" %}
+								</div>	
+							</div>
+							<div>
+							
+								<form action="" method="POST">
+									{% csrf_token %}
+										<div class="col-sm-6">
+											<a href="{% url 'pro:job-step-4' object.id %}" class="backSubmit1 backSubmit1Paiement" > {% trans "Retour" %} </a>
+										</div>
+										<div class="col-sm-6">
+											<input type="submit" class="btn-paiement btn-offre" value="Publier l'offre">
+										</div>
+								</form>
+							</div>
+						
+
+						{% else %}
+
+							{{ pay|safe }}
+
+						{% endif %} 
+				</div>
+			</div>	
+		</div>
+
+		<!--<div class="col-sm-6">
+			<div class="container-fluid bloc-offre offre-3">
+				<div class="title"> Annonce emploi</div>
+				<div class="price"> 199 € <div>Offre valable 1 mois</div> </div>
+				<div class="text">
+					<div class="width-text">
+						La publication d’une offre d’emploi intègre:
+						<ul>
+							<li> <span> Recevez des candidatures spontanées gratuitement  </span> </li>
+							<li> <span> La publication de votre première annonce d’emploi est gratuite </span>  </li>
+							<li> <span> La publication de votre Pré-entretien est gratuite </span>  </li>
+						</ul>
+					</div>
+					<a href="" class="btn-offre btn-offre-3"> Visualiser offre </a>
+				</div>
+				<div class="total-price">
+					<div class="container-fluid">
+						<div class="col-xs-8">
+							<select class="form-control">
+							  <option>1 Offre</option>
+							  <option>2 Offres</option>
+							  <option>3 Offres</option>
+							</select>
+						</div>
+						<div class="col-xs-4 calcule-price">
+							0 euros
+						</div>	
+					</div>
+				</div>
+			</div>	
+		</div>
+
+		<div class="col-sm-6">
+			<div class="container-fluid bloc-offre offre-4">
+				<div class="title"> Annonce emploi</div>
+				<div class="price"> 199 € <div>Offre valable 1 mois</div> </div>
+				<div class="text">
+					<div class="width-text">
+						La publication d’une offre d’emploi intègre:
+						<ul>
+							<li> <span> Recevez des candidatures spontanées gratuitement  </span> </li>
+							<li> <span> La publication de votre première annonce d’emploi est gratuite </span>  </li>
+							<li> <span> La publication de votre Pré-entretien est gratuite </span>  </li>
+						</ul>
+					</div>
+					<a href="" class="btn-offre btn-offre-4"> Visualiser offre </a>
+				</div>
+				<div class="total-price">
+					<div class="container-fluid">
+						<div class="col-xs-8">
+							<select class="form-control">
+							  <option>1 Offre</option>
+							  <option>2 Offres</option>
+							  <option>3 Offres</option>
+							</select>
+						</div>
+						<div class="col-xs-4 calcule-price">
+							0 euros
+						</div>	
+					</div>
+				</div>
+			</div>	
+		</div>-->
+
+
+		<!--<div class="col-sm-6">
+			<div class="container-fluid bloc-offre bloc-panier">
+				<div class="titre col-xs-12"> Panier </div>
+				<div class="container-fluid">
+					<div class="col-xs-9">
+						2 Offres découvertes
+					</div>	
+					<div class="col-xs-3">
+						99 €
+					</div>
+					<div class="col-xs-9">
+						2 Annonces emplois
+					</div>	
+					<div class="col-xs-3">
+						259 €
+					</div>
+					<div class="col-xs-9">
+						2 Offres C2V-théques
+					</div>	
+					<div class="col-xs-3">
+						485 €
+					</div>	
+					<div class="col-xs-9">
+						2 Offres Annonce emploi + C2V-théques
+					</div>	
+					<div class="col-xs-3">
+						185 €
+					</div>
+				</div>	
+				<div class="titre col-xs-8"> Total </div>
+				<div class="titre col-xs-4"> 1090€ </div>
+				
+			</div>
+			<form action="" method="POST">
+				{% csrf_token %}
+				<div class="lien-paiement container-fluid">
+					<div class="col-sm-6">
+						<a href="{% url 'pro:job-step-4' object.id %}" class="backSubmit1 backSubmit1Paiement" > Retour </a>
+					</div>
+					<div class="col-sm-6">
+						<input type="submit" class="btn-paiement btn-offre" value="Passer au paiement ">
+					</div>
+				</div>	
+			</form>
+		</div>-->
+
+
+	</div>
+
+{% endblock  %}

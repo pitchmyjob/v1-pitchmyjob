@@ -1,0 +1,163 @@
+{% extends 'user-interne.html' %}
+
+
+{% block content %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-multiselect.css' %}" >
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datepicker.min.css' %}">
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-select.min.css' %}">
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-tagsinput.css' %}">
+
+<script src="{% static 'bootstrap/js/bootstrap-multiselect.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap-datepicker.min.js' %}"></script> 
+<script src="{% static 'bootstrap/js/bootstrap-datepicker.fr.min.js' %}"></script> 
+<script src="{% static 'bootstrap/js/bootstrap-select.min.js' %}"></script> 
+<script src="{% static 'bootstrap/js/bootstrap-tagsinput.js' %}"></script>
+
+<div class="container-fluid container-profil">
+		
+		<div class="col-sm-12">
+			<h1> {% trans "Mon compte" %} </h1>
+		</div>
+
+		<div class="col-sm-12">	
+			<div class="col-md-4 my-account-grid">
+				<div class="row profil-menu">
+					<ul>
+						<li> <a href="{% url 'members:my-account' %}" > {% trans "Votre compte" %} </a> </li>
+						<li> <a href="{% url 'members:my-account-information' %}" class="profil-menu-active"> {% trans "Votre recherche" %} </a> </li>
+						<li> <a href="{% url 'members:my-account-password' %}" > {% trans "Mot de passe" %} </a> </li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="col-md-8 my-account-grid-2">
+				<div class="col-sm-12 profil-container">
+
+					<div class="col-sm-12">
+						<div class="row">
+							<h2> {% trans "Informations & Recherches" %} </h2>
+						</div>
+					</div>
+
+					{% if form.errors %}
+				  		<div class="alert alert-danger col-sm-12"> 
+						    <ul>
+						    {% for field, error in form.errors.items %} 
+						        <li>{{ error }}</li>
+						    {% endfor %}
+						    </ul>
+						</div>
+					{% endif %} 
+
+						<div class="col-sm-12">
+							<div class="row">
+								<form method="POST" action="" id="formyaccount">
+								{% csrf_token %}
+									<div class="col-sm-12 my-account-tags">
+									    <div class="col-sm-12">
+											<label> {% trans "Compétence, metier" %} </label>
+											<input  type="text" name="tags_field" placeholder="" class="form-control inputtag" data-role="tagsinput" value="{{ form.tags_field.value|default_if_none:"" }}"  >
+										</div>
+									</div>
+
+									<div class="col-sm-12 line-profil">
+										<div class="col-sm-6">
+											<label> {% trans "Niveau d'étude" %} </label>
+											{{ form.study|add_class:"form-control"}}
+										</div>
+
+										<div class="col-sm-6">
+											<label> {% trans "Années d'expérience" %} </label>
+											{{ form.experience|add_class:"form-control"}}
+										</div>
+									</div>
+
+									<div class="col-sm-12 line-profil">
+										
+										<div class="col-sm-6">
+											<label> {% trans "Types de contrats" %} </label>
+											<select id="list-type-contrat" name="type-contrat" multiple="multiple">
+									      		 {% for value, text in form.contracts.field.choices %}
+												     <option value="{{ value }}" {% if value|slugify in form.contracts.value or value in form.contracts.value %} selected {% endif %} > {{ text }} </option>
+												{% endfor %}
+											</select>
+										</div> 
+
+										<div class="col-sm-6">
+											<label> {% trans "Lieu de recherche" %}  </label>
+											{{ form.search_location|add_class:"form-control"}}
+										</div>
+
+
+									</div> 
+
+									<div class="col-sm-12 line-profil">
+										<div class="col-sm-6">
+											<label> {% trans "Secteur d'activité" %}  </label>
+											{{ form.activity_area|add_class:"selectpicker form-control"|attr:"data-live-search=true"|attr:"multiple"|attr:"data-selected-text-format=count"}}
+										</div>
+										<div class="col-sm-6">
+											<label> {% trans "Disponibilité (Laissez vide si immediate)" %} </label>
+											{{ form.availability|add_class:"form-control"|attr:"placeholder:jj/mm/aaaa"}}
+										</div>
+										
+									</div>
+
+									{{ form.locality|add_class:"location-input" }}
+									{{ form.administrative_area_level_2|add_class:"location-input" }}
+									{{ form.administrative_area_level_1|add_class:"location-input" }}
+									{{ form.country|add_class:"location-input" }}
+								</form>
+
+								<div class="col-sm-12 button-submit">
+									<input type="submit" name="Submit" value="{% trans 'Enregistrer' %}" class="btn-general-blue-2 submitmyaccount">
+								</div>
+
+							</div>
+						</div>
+
+				</div>	
+			</div>
+		</div>
+</div>
+
+<script type="text/javascript">
+$('#list-type-contrat').multiselect({
+	nonSelectedText: 'Type de contrat',
+	checkboxName : "contracts"
+});
+</script>
+
+<script type="text/javascript">
+	$( document ).ready(function() {
+	   	init_autocomplete("id_search_location");
+	});
+
+	$('#id_availability').datepicker({
+		format: 'dd/mm/yyyy',
+		language: "fr",
+		autoclose: true
+	}); 
+
+	$('.selectpicker').selectpicker({
+	  size: 8,
+	  noneSelectedText: "Secteur d'activité",
+	  countSelectedText:"{0} Secteurs selectionnés"
+	});
+
+	$('.inputtag').tagsinput({
+	  trimValue: true,
+	  tagClass : 'label label-custom'
+	});
+
+	$('.submitmyaccount').click(function(){
+		$('#formyaccount').submit();
+	});
+
+</script>
+	
+{% endblock %}

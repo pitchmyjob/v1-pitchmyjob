@@ -1,0 +1,55 @@
+{% extends "pro-interne.html" %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load widget_tweaks %}
+	{% load i18n %}
+
+	<div class="container-fluid pro-profil">
+
+
+		
+		{% if paid %}
+		<div class="container-fluid bloc-offre offre-2">
+			<div class="title"> Paiement accepté </div>
+			<div class="text">
+				<div class="width-text" style="min-height:auto;font-size:16px !important;">
+					Votre paiement a été accepté.
+				</div>
+				<div> <br>
+					<p style="font-size:16px;margin-bottom:10px;"> {{ object.designation }} </p> 
+					<p> {{ object.description|linebreaks }} </p>
+				</div>
+				<!--<a href="" class="btn-offre btn-offre-2"> Visualiser offre </a>-->
+			</div>
+
+		</div>
+		{% else %}
+		<div class="container-fluid bloc-offre offre-2">
+			<div class="title"> Paiement refusé </div>
+			<div class="text">
+				<div class="width-text" style="min-height:auto;font-size:16px !important;">
+					Paiment refusé ou erreur. 
+				</div>
+				<div> <br>
+					<p style="font-size:16px;margin-bottom:20px;"> {{ object.designation }} </p> 
+					<p> {{ object.description|linebreaks }} </p>
+				</div>
+				<!--<a href="" class="btn-offre btn-offre-2"> Visualiser offre </a>-->
+			</div>
+			<div class="total-price">
+				
+				<div style="text-align:center"> Pour retenter le paiement, veuillez cliquer ici : </div>	
+
+				<div class="col-sm-12" style="padding-bottom:20px;">
+					<a href="{% url 'factures:payment_link' object.link %}" class="btn-paiement btn-offre"> Paiement </a>
+				</div>
+					 
+			</div>
+		</div>
+		{% endif %}
+		
+	</div>	
+		
+{% endblock  %}
+

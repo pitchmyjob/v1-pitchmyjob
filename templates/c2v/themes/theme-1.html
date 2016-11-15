@@ -1,0 +1,320 @@
+{% load staticfiles %}
+{% load web_url %}
+{% load get_range %}
+{% load age %}
+{% load i18n %}
+
+<style type="text/css">
+
+        .theme-1-bloc{background:#fff; padding:15px; margin-bottom:10px;}
+		.theme-1-infos {font-size:14px; color:#666;}
+		.theme-1-bloc table{width:100%; height: auto; min-height:auto; }
+		.theme-1-infos table{width:100%; }
+		.theme-1-infos table td{ vertical-align:top;}
+
+		.theme-1-name{color:#333366; font-size:34px; padding-bottom:10px;}
+		.theme-1-name span{font-size:22px; }
+		.theme-1-title{color:#333366; font-size:30px; padding-bottom:1=0px; font-weight:bold; }
+		.theme-1-xp{ padding-bottom:10px; border-bottom: 1px solid rgba(51, 51, 102, 0.4); margin-bottom:0; padding-top:10px; cursor:pointer;}
+		.theme-1-xp:hover { background: rgba(52, 73, 94, 0.08); }
+		.theme-1-xp:last-child{ border:0;}
+		.theme-1-xp-title{color:#333366; font-size:20px; font-weight:bold;}
+		.theme-1-xp-date{ color:#333366; padding-top:0px; font-size:14px;}
+		.theme-1-xp-desc { color:#666; padding-top:3px; font-size:14px;}
+		.theme-1-picto-1{  vertical-align: middle; margin-right:10px; }
+		.theme-1-picto{  vertical-align: bottom; margin-right:10px; }
+
+		.theme-1-skill{ color:#333366; font-size:15px; padding-bottom:10px; font-weight: bold;}
+
+		a { cursor:pointer;}
+
+		.btn-edit-general{ display:none;}
+		.theme-1-xp:hover .btn-edit-general{ display:block;}
+		.theme-1-skill:hover .btn-edit-general{ display:inline-block;}
+</style>
+
+<div class="theme-1-bloc theme-1-infos">
+
+	<table style="margin-bottom:15px;">
+		<tr>
+			<td style="width:75%" valign=top> 
+				<div class="theme-1-name"> {{ cv.first_name }} {{ cv.last_name }} {% if cv.poste %} - <span> {{cv.poste|default_if_none:"" }} </span> {% endif %} </div>
+				<div>
+					<table style="width: 80%;">
+
+						<tr>
+							{% if cv.city %} <td valign=top> <img src="http://www.pitchmyjob.com/static/images/c2v-v2-4.png" class="theme-1-picto" > {{  cv.city|default_if_none:"" }} {{  cv.country|default_if_none:""  }}</td> {% endif %}
+							<td valign=top> {% if cv.birthday %} <img src="http://www.pitchmyjob.com/static/images/c2v-v2-1.png" class="theme-1-picto-1" style="width:20px;"> {{  cv.birthday|age }} ans {% endif %}  </td>
+							{% if cv.phone %} <td valign=top> <img src="http://www.pitchmyjob.com/static/images/c2v-v2-3.png" class="theme-1-picto" style="width:10px"> {{  cv.phone|default_if_none:""  }}  </td> {% endif %}
+						</tr>
+					</table>
+					<div style="padding-top:12px;">
+						<img src="http://www.pitchmyjob.com/static/images/c2v-v2-5.png" class="theme-1-picto-1" > {{  cv.email }} 
+					</div>
+					{% if cv.site %}
+					<div style="padding-top:12px;">
+						<img src="http://www.pitchmyjob.com/static/images/c2v-v2-6.png" class="theme-1-picto-1" > {{  cv.site|default_if_none:""  }} 
+					</div>
+					{% endif %}
+					{% if cv.description %}
+						<table style="margin-top:8px;">
+							<tr>
+								<td style="width:20px"> <img src="http://www.pitchmyjob.com/static/images/c2v-v2-7.png" style="width: 18px;"> </td>
+								<td style=" text-align:center;width:92%"> {{cv.description|default_if_none:"" }} </td>
+								<td style="width:20px; float:right;"> <img src="http://www.pitchmyjob.com/static/images/c2v-v2-8.png" style="width: 18px;"></td>
+							</tr>
+						</table>
+					{% endif %}
+				</div>
+			</td>
+			<td style="text-align:right" valign=top> 
+				<div style="position:relative"  class="dropdown">
+					{% if modif %} 
+						<div class="pro-profil-modify"> 
+							<a href="#"  style="display:none" data-toggle="modal" data-target=".add-video" class="btn-edit-cv-2"> <span class="glyphicon glyphicon-facetime-video"> </span>  </a>
+							<label for="changePhoto" class="btn-edit-cv-2">  <span class="glyphicon glyphicon-camera"> </span>  </label>
+
+							<!--
+							<label for="input-pro-couverture" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							 	<img src="{% static 'images/myc2v-49.png'%}" class=""> 
+							</label>
+							 
+							 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							    <li><a href="#"> <label for="changePhoto" style="font-weight:normal;cursor:pointer">Modifier ma photo </label>  </a>  </li>
+							    <li>
+							    	<a href="#">  
+							    		<label for="addVideo" style="font-weight:normal;cursor:pointer" data-toggle="modal" data-target=".add-video"> 
+							    			{% if cv.member.video %} Modifier ma video {% else %} Ajouter une video {% endif %}
+							    		</label>   
+							    	</a>
+							    </li>
+							  </ul>-->
+						</div>
+					{% endif %} 
+					<img src="{{ cv.member.image.url }}" class="changePhoto" style="width:200px;">
+					{% if cv.member.video %}
+					 <!--<div style="position:absolute;top:67px; right:67px;cursor:pointer" data-toggle="modal" data-target=".show-video"> <img src="http://62.210.131.54/static/images/c2v-v2-10.png"> </div> -->
+					 <div style="position:absolute;top:67px; right:67px;cursor:pointer" onclick="showVideo()"> <img src="http://62.210.131.54/static/images/c2v-v2-10.png" class="play-img"> </div> 
+					 <div style="width:250px;height:200px;position:absolute;top:0; right:0;display:none" class="playerVideoC2"> 
+					 		{% if cv.member.video.type_video == 1 %}
+							  <video width="250" height="200" controls>
+								<source src="{{ cv.member.video.path_video }}" type="video/mp4">
+							 </video>
+							{% else %}
+								<div class="embed-responsive embed-responsive-16by9" style="height:205px;">
+								  <iframe class="embed-responsive-item"  webkitallowfullscreen mozallowfullscreen allowfullscreen src="{{ cv.member.video.url }}" ></iframe> 
+								</div>
+							{% endif %}
+
+					 </div>
+					 <script type="text/javascript">
+					 	function showVideo()
+						{
+							$('.playerVideoC2').show();
+						}
+		
+
+						$( ".play-img" ).hover(
+						  function() {
+						    $(this).attr('src', 'http://62.210.131.54/static/images/c2v-v2-10-full.png');
+						  }, function() {
+						    $(this).attr('src', 'http://62.210.131.54/static/images/c2v-v2-10.png');
+						  }
+						);
+					 </script>
+					{% endif %}
+				</div>
+			</td>
+		</tr>
+	</table>
+
+	
+
+	<div class="anchor" id="anchor-cv"></div>
+	<div class="row  bloc-edit content-cv" > </div>
+
+	{% if modif %}  <a  onclick="getCv()"> <div class="row btn-add-c2v"> {% trans "Editer mes informations" %} </div>  </a>  {% endif %} 
+
+</div>
+
+<div class="theme-1-bloc"  >
+	<!--<div class="theme-1-title"> Experience professionnelle  {% if modif %}  <a  data-toggle="modal" data-target=".edit-experience"> <span class="glyphicon glyphicon-plus"> </span> </a>  {% endif %} </div>-->
+	<div class="theme-1-title"> {% trans "Experiences professionnelles" %}  </div>
+
+	<div>
+	{% for exp in cv.cvexperience_set.all %}
+		<div class="theme-1-xp del-experience-{{exp.id}}">
+			<table style="width:100%">
+				<tr>
+					<td style="padding-left:20px;">
+						<div class="theme-1-xp-title"> {{ exp.title|default_if_none:""  }} - {{ exp.company|default_if_none:""  }} 
+						</div>
+						<div class="theme-1-xp-date"> 
+							de {{ exp.date_start|date:"M. Y" }}  à {{ exp.date_end|date:"M. Y"|default:"Aujourd'hui"  }}   
+							{% if exp.location %}
+								<img src="http://62.210.131.54/static/images/c2v-v2-9.png" style="margin-left:15px; margin-top: -8px;"> {{ exp.location }} 
+							{% endif %}
+						</div>
+						<div class="theme-1-xp-desc">
+							{{ exp.description|default_if_none:""|linebreaksbr  }}  
+						</div>
+					</td>
+					<td style="text-align:right;padding-right:20px;" valign=top>
+						 <img src="{{ exp.image.logo100.url}}" style="max-width:60px;">
+						 {% if modif %} 
+							 <div class="btn-delete-edit btn-edit-general">
+						 		<a onclick="getObject('experience', {{exp.id}})"> <span class="glyphicon glyphicon-pencil"> </span> </a>  
+								<a  onclick="deleteObject('experience', {{exp.id}})">  <span class="glyphicon glyphicon-remove" > </span>  </a> 
+							</div>
+						{% endif %}
+					</td>
+				</tr>
+			</table>
+		</div>
+	{% endfor %}
+	</div>
+
+	<div class="anchor" id="anchor-experience"></div>
+	<div class="row  bloc-edit content-experience" > </div>
+
+	{% if modif %}  <a  onclick="openBloc('experience')"> <div class="row btn-add-c2v"> {% trans "Ajouter une experience" %} </div>  </a>  {% endif %} 
+
+</div>
+
+
+
+<div class="theme-1-bloc"> 
+	<div class="theme-1-title"> {% trans "Formations" %} </div>
+	<div>
+	{% for exp in cv.cvformation_set.all %}
+		<div class="theme-1-xp del-formation-{{exp.id}}">
+			<table style="width:100%">
+				<tr>
+					<td style="padding-left:20px;">
+						<div class="theme-1-xp-title"> {{ exp.degree|default_if_none:""  }} {{ exp.discipline|default_if_none:""  }} - {{ exp.school|default_if_none:""  }} 
+						</div>
+						<div class="theme-1-xp-date"> 
+							de {{ exp.date_start|date:"Y" }}  à {{ exp.date_end|date:"Y"|default:"Aujourd'hui"  }} 
+						</div>
+						<div class="theme-1-xp-desc">
+							{{ exp.description|default_if_none:""|linebreaksbr  }} 
+						</div>
+					</td>
+					<td style="text-align:right;padding-right:20px;" valign=top>
+						 <img src="{{ exp.image.logo100.url }}" style="max-width:60px;">
+						{% if modif %} 
+							 <div class="btn-delete-edit btn-edit-general">
+						 		<a onclick="getObject('formation', {{exp.id}})"> <span class="glyphicon glyphicon-pencil"> </span> </a>  
+								<a  onclick="deleteObject('formation', {{exp.id}})">  <span class="glyphicon glyphicon-remove" > </span>  </a> 
+							</div>
+						{% endif %}
+					</td>
+				</tr>
+			</table>
+		</div>
+	{% endfor %}
+	</div>
+
+	<div class="anchor" id="anchor-formation"></div>
+	<div class="row bloc-edit content-formation"> </div>
+
+	{% if modif %}  <a  onclick="openBloc('formation')"> <div class="row btn-add-c2v"> {% trans "Ajouter une formation" %} </div>  </a>  {% endif %} 
+
+</div>
+
+
+
+<div class="theme-1-bloc theme-1-skill-bloc col-sm-12" {% if not modif %} {% if not cv.cvskill_set.all %} style="display:none" {% endif %} {% endif %}>
+	<div class="theme-1-title"> {% trans "Compétences" %} </div>
+
+	{% for exp in cv.cvskill_set.all %}
+		<div class="theme-1-skill col-sm-4 del-skill-{{exp.id}}">
+			<div class="row">
+				{% if modif %}  <a  onclick="deleteObject('skill', {{exp.id}})" class="btn-edit-general"> <span class="glyphicon glyphicon-remove"> </span> </a> {% endif %}
+
+				{{ exp.name }}  <ul class="note"> {% for y in exp.level|get_range %} <li></li>  {% endfor %} </ul>
+			</div>
+		</div>
+	{% endfor %}
+
+	<div style="clear:both"></div>
+
+	<div class="row bloc-edit content-skill"> </div>
+
+	{% if modif %}  <a  onclick="openBloc('skill')"> <div class="row btn-add-c2v"> {% trans "Ajouter une compétence" %} </div>  </a>  {% endif %} 
+
+</div>
+
+<div class="theme-1-bloc theme-1-skill-bloc col-sm-12" {% if not modif %} {% if not cv.cvlanguage_set.all %} style="display:none" {% endif %} {% endif %}>
+	<div class="theme-1-title"> {% trans "Langues" %} </div>
+
+	{% for exp in cv.cvlanguage_set.all %}
+		<div class="theme-1-skill col-sm-4 del-language-{{exp.id}}">
+			<div class="row">
+				{% if modif %}  <a onclick="deleteObject('language', {{exp.id}})" class="btn-edit-general"> <span class="glyphicon glyphicon-remove"> </span> </a> {% endif %}
+
+				{{ exp.name }} <ul class="note"> {% for y in exp.level|get_range %} <li></li>  {% endfor %} </ul> 
+			</div>
+		</div>
+	{% endfor %}
+	<div style="clear:both"></div>
+
+	<div class="row bloc-edit content-language"> </div>
+
+	{% if modif %}  <a  onclick="openBloc('language')"> <div class="row btn-add-c2v"> {% trans "Ajouter une langue" %} </div>  </a>  {% endif %} 
+</div>
+
+<div class="theme-1-bloc theme-1-skill-bloc col-sm-12" {% if not modif %} {% if not cv.cvinterest_set.all %} style="display:none" {% endif %} {% endif %}>
+	<div class="theme-1-title"> {% trans "Centres d’intérêt" %} </div>
+
+	{% for exp in cv.cvinterest_set.all %}
+		<div class="theme-1-skill col-sm-3 del-interest-{{exp.id}}">
+			<div class="row">
+				{{ exp.name }}  {% if modif %}  <a onclick="deleteObject('interest', {{exp.id}})" class="btn-edit-general"> <span class="glyphicon glyphicon-remove"> </span> </a> {% endif %}
+			</div>
+		</div>
+	{% endfor %}
+
+	<div style="clear:both"></div>
+	<div class="row bloc-edit content-interest"> </div>
+
+	{% if modif %}  <a  onclick="openBloc('interest')"> <div class="row btn-add-c2v"> {% trans "Ajouter un centres d’intérêt" %} </div>  </a>  {% endif %} 
+
+</div>
+
+
+
+
+<div style="clear:both"> </div>
+
+
+
+</div>
+
+
+
+{% if 1 == 2 %}
+
+<div class="modal fade show-video" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-expanded="true">
+	<div class="modal-dialog ">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title"> {% trans "Ma video" %} </h4>
+			</div>
+			<div class="modal-body">
+				{% if cv.member.video.type_video == 1 %}
+				  <video width="568" controls>
+					<source src="{{ cv.member.video.path_video }}" type="video/mp4">
+				 </video>
+				{% else %}
+					<div class="embed-responsive embed-responsive-16by9">
+					  <iframe class="embed-responsive-item"  src="{{ cv.member.video.url }}" ></iframe> 
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endif %}

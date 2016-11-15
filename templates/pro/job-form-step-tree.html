@@ -1,0 +1,86 @@
+{% extends "pro-interne.html" %}
+
+{% block mes-offres %} active {% endblock %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load widget_tweaks %}
+	{% load i18n %}
+		
+	<div class="create-offre-1">
+		<div class="col-md-12">
+			<img src="{% static 'images/myc2v-31.png' %} ">
+		</div>
+	</div> 
+
+	<div class="create-offre-bloc-1 box-3">
+		
+		<div class="container-fluid">
+			<div class="col-md-12 title"> {% trans "Description du poste" %} </div>
+
+			<form action="" method="POST" id="form-step-tree">
+				{% csrf_token %}
+				<div class="col-md-12"> 
+					{% if form.errors %}
+				  		<div class="alert alert-danger"> 
+						    <ul>
+						    {% for field, error in form.errors.items %} 
+						        <li>{{ error }}</li>
+						    {% endfor %}
+						    </ul>
+						</div>
+					{% endif %} 
+
+					<div>
+						<label> {% trans "Tags : Compétences recherchées" %} * </label>
+						<div>
+							<input type="text" name="tags_field" class="form-control inputtag" data-role="tagsinput" value="{{ form.tags_field.value|default_if_none:"" }}">
+						</div>
+					</div>
+
+					<div>
+						<label> {% trans "Description du poste" %} * </label>
+						{{ form.description|add_class:"form-control"|attr:"rows:5"}}
+					</div>
+
+					<div>
+						<label> {% trans "Missions" %} </label>
+						{{ form.mission|add_class:"form-control"|attr:"rows:5"}}
+					</div>
+
+					<div>
+						<label> {% trans "Profil" %} </label>
+						{{ form.profile|add_class:"form-control"|attr:"rows:5"}}
+					</div>
+
+					<div>
+						<label> {% trans "Url de la video de presentation du poste" %} </label>
+						{{ form.video_url|add_class:"form-control" }}
+					</div>
+
+				</div>
+			</form>
+
+			<div class="col-xs-12">
+				<div class="col-sx-6"> 
+					<a href="{% url 'pro:job-step-2' object.id %}" class="backSubmit1" > {% trans "Retour" %} </a>
+				</div>
+
+				<div class="col-sx-6"> 
+					<input type="submit" value="Suivant" class="createSubmit1">	
+				</div>
+			</div>
+
+		</div>
+		
+	</div>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.createSubmit1').click(function() {
+				$('#form-step-tree').submit();
+			});
+		});
+	</script>
+
+{% endblock  %}

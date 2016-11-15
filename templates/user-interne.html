@@ -1,0 +1,212 @@
+{% load staticfiles %}
+{% load in_group %}
+{% load i18n %}
+<!DOCTYPE html>
+
+<!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
+<!--[if IE 8]><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="css/ie7.css" /><![endif]-->
+
+<html lang="fr">
+	<head>
+		{% block rs_facebook %} 
+		<meta property="og:title" content="Rejoins Pitch my job" />
+		<meta property="og:description" content="Passe un entretien et decroche ton prochain job !" /> 
+		<meta property="fb:app_id" content="1521513254812652"/>
+	    <meta property="og:image" content="http://www.pitchmyjob.com/static/images/share2.png"/>
+	    {% endblock %}
+
+		<meta charset="utf-8">
+	    
+	    {% block seo %}
+			<title>Pitch my job</title>
+			<meta name="description" content="">
+
+			<meta name="robots" content="noindex">
+			<meta name="googlebot" content="noindex">
+		{% endblock %}
+	    
+	    <!-- behavioral meta data -->
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="format-detection" content="telephone=no">
+	    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0">  
+	    
+	    <!-- core meta data -->
+		
+		<meta name="author" content="">
+
+		<!-- styles -->
+		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/global.css' %}">
+		<link rel="stylesheet" href="{% static 'css/devices.css' %}">
+		<link href="{% static 'css/animate.min.css' %}" rel="stylesheet">
+
+		<!-- styles -->
+		<script src="{% static 'js/plugin/jquery-1.11.3.min.js' %}"></script> 
+		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script> 
+		<script src="{% static 'bootstrap/js/bootstrap-notify.min.js' %}"></script> 
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+		
+	    <!-- favicons -->
+		<link rel="icon" href="{% static 'images/favicon.png' %}" type="images/icons/x-icon" />
+		<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="images/icons/x-icon" />
+		
+	    
+		<!--[if IE]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+		
+	</head>
+
+	<body class="interne user-offre-interne">
+
+		{% block header %}
+		<header>
+			<div class="container-connected "> 
+				<nav class="navbar navbar-default navbar-home">
+					<div class="container-fluid">
+						<div class="navbar-header">
+
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"  aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							</button>
+							{% if user.is_authenticated %}
+								<a href="{% url 'members:home' %}"> <img src="{% static 'images/refonte/home-pro-logo.png' %}" class="home-user-logo logo-pitch">  </a>
+							{% else %}
+								<a href="{% url 'members:home' %}"> <img src="{% static 'images/refonte/home-pro-logo.png' %}" class="home-user-logo logo-pitch">  </a>
+							{% endif %}
+
+							{% if user.is_authenticated and user|in_group:"member" %}
+								<div class="user-notif-responsive">
+									<a href="/messages"> <span class="glyphicon glyphicon-envelope"></span>  </a>
+									<a href=""> <span class="glyphicon glyphicon-bell"></span> </a>
+								</div>
+							{% endif %}
+						</div>
+						<div id="navbar" class="navbar-collapse collapse">
+
+							<ul class="nav navbar-nav navbar-nav-menu">
+						        <li class="{% block myc2v%}{% endblock %}"><a href="{% url 'c2v:myc2v' %}">{% trans "Mon CV" %}</a></li>
+						        <li class="{% block annonces%}{% endblock %}"><a href="{% url 'members:list-job' %}">{% trans "Annonces" %}</a></li>
+						        <li class="{% block entreprises%}{% endblock %}"><a href="{% url 'members:list-pro' %}">{% trans "Entreprises" %}</a></li>
+						        {% if user.is_authenticated and user|in_group:"member" %}
+						        <li class="menu-responsive"><a href="{% url 'members:my-account' %}">{% trans "Mon compte" %}</a></li>
+						        <li class="menu-responsive"><a href="{% url 'members:mes-candidatures-offre' %}">{% trans "Mes candidatures" %}</a></li>
+						        <li class="menu-responsive"><a href="{% url 'members:logout' %}?next={{request.path}}">{% trans "Déconnexion" %}</a></li>
+						        {% else %}
+						        <li class="menu-responsive"><a href="{% url 'members:inscription' %}">{% trans "Inscription" %}</a></li>
+						        <li class="menu-responsive"><a href="{% url 'members:login' %}">{% trans "Connexion" %}</a></li>
+						        <li class="menu-responsive"><a href="{% url 'pro:home' %}">{% trans "Accés recruteur" %}</a></li>
+						         {% endif %}
+						        <!-- <li class="{% block simulation%}{% endblock %}"><a href="#">SIMULATION</a></li> -->
+						      </ul>
+
+
+							<ul class="nav navbar-nav navbar-right  my-account menu-no-responsive"> 
+								{% if user.is_authenticated and user|in_group:"member" %}
+								<li class="my-account-notif">
+									{% include 'notifications/notif_msg.html' %}
+								</li>
+						        <li class="my-account-notif">
+						        	{% include 'notifications/notif.html' %}
+						        </li>	        
+						        <li class="dropdown">
+						          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <img src="{{ user.member.image.profil50.url }}" class="circular-img"> <span class="caret"></span></a>
+						          <ul class="dropdown-menu">
+						            <li><a href="{% url 'members:my-account' %}"> <span class="glyphicon glyphicon-user"></span> {% trans "Mon compte" %} </a></li>
+						            <li><a href="{% url 'members:mes-candidatures-offre' %}"> <span class="glyphicon glyphicon-list-alt"></span> {% trans "Candidatures" %}</a></li>
+						            <!-- <li><a href="#"> <span class="glyphicon glyphicon-cog"></span> Confidentialité </a></li> -->
+						            <li role="separator" class="divider"></li>
+						            <li><a href="{% url 'members:logout' %}?next={{request.path}}">  <span class="glyphicon glyphicon-off"></span> {% trans "Déconnexion" %}</a></li>
+						          </ul>
+						        </li>
+						        {% else %}
+						       	 <li class="my-account-login-inscription menu-no-responsive"><a href="{% url 'members:inscription' %}">  {% trans "Inscription" %} </a></li>
+						         <li class="my-account-login-inscription menu-no-responsive"><a href="{% url 'members:login' %}">  {% trans "Connexion" %} </a></li>
+						         <li class="my-account-login-inscription menu-no-responsive btn-acces-recruteur"> <a href="{% url 'pro:home' %}" class="btn-general-red btnpro"> {% trans "Accès recruteur" %} </a> </li>
+						        {% endif %}
+						     </ul> 
+						</div><!--/.nav-collapse -->
+					</div><!--/.container-fluid -->
+				</nav>
+			</div>
+		</header>
+		{% endblock %}
+
+		{% block content %}{% endblock %}
+
+		{% block footer %}
+			{% include 'footer.html' %}
+		{% endblock %}
+
+
+		{% block js_autocomplete %}
+			<link rel="stylesheet" type="text/css" href="{% static 'css/typeahead.css' %}">
+			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC41CAlGBqTAAZ8nlT4AwRSGzi_jvBUWac&libraries=places"></script>
+			<script src="{% static 'js/plugin/bloodhound.min.js' %}"></script>
+			<script src="{% static 'js/plugin/typeahead.jquery.min.js' %}"></script>
+			<script src="{% static 'js/plugin/typeahead-addresspicker.min.js' %}"></script>
+			<script src="{% static 'js/custom/init-autocomplete.js' %}"></script>
+			<script src="{% static 'js/custom/map.js' %}"></script>
+			<script type="text/javascript" src="https://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/src/infobox.js"></script>
+		{% endblock %}
+		
+		<script src="{% static 'js/plugin/handlebars-v4.0.5.js' %}"></script>
+		<script src="{% static 'js/custom/share.js' %}"></script>
+
+		{% if user.is_authenticated and user|in_group:"member" and 1 == 2 %}
+			<script src="https://cdn.socket.io/socket.io-1.4.3.js"></script>
+			<script type="text/javascript">
+				var socket = io.connect('https:/www.pitchmyjob.com:8080', {secure: true});
+				socket.emit('token', '{{apitoken}}' ); 
+			</script>
+
+			{% block msg_nodejs %}
+				<script type="text/javascript">
+					var count_source = $("#count-msg-template").html();
+					var count_template = Handlebars.compile(count_source);
+					var count_msg = {{ nb_msg }};
+
+					socket.on('receive_msg', function (receiver) {
+						console.log(receiver);
+						count_msg++;
+						$('.dropdown-handle').html( count_template({'nb_msg' : count_msg }));
+					});
+
+					$('.notify-load-msg').click(function() {
+						count_msg=0;
+					});
+				</script>
+			{% endblock %}
+		{% endif %}
+
+
+		<!-- Google Tag Manager -->
+		<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NC3XK5"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-NC3XK5');</script>
+		<!-- End Google Tag Manager -->	
+
+		<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '835536179914009');
+fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=835536179914009&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+	</body>
+
+</html>

@@ -1,0 +1,51 @@
+{% load staticfiles %}
+{% load i18n %}
+
+<div class="footer">
+	{% if user.is_authenticated == False %}
+		<div class="footer-1">
+				{% trans "Inscrivez vous sur Pitch My Job et publiez votre première offre gratuitement" %} &nbsp;&nbsp; <a href="{% url 'pro:inscription' %}" class="btn-general-red">{% trans "Inscription" %}</a>
+		</div> 
+	{% endif %}
+
+	<div class="footer-2">
+		<ul>
+			<li> <a href="{% url 'pages:a-propos-pro' %}">{% trans "A propos" %}</a>  </li>
+			<!--<li> <a href="{% url 'pages:faq-general' %}">L'équipe</a>  </li>-->
+			<li> <a href="{% url 'pages:presse-pro' %}">{% trans "Presse" %}</a>  </li>
+			<li> <a href="{% url 'pages:tarifs-pro' %}">{% trans "Tarifs" %}</a>  </li>
+			<li style="display:none"> <a href="{% url 'pages:mentions-legales' %}">{% trans "Mentions légales" %}</a>  </li>
+			
+			<li> 
+				<form action="{% url 'set_language' %}" method="post" class="changelangform langen">{% csrf_token %}
+					<input type="hidden" name="language" value="en">
+					<a href="#" class="goen"> <img src="{% static 'images/pitchmyjob-01.png' %}"> </a>  
+				</form>
+			</li>
+
+			<li> 
+
+				<form action="{% url 'set_language' %}" method="post" class="changelangform langfr">{% csrf_token %}
+					<input type="hidden" name="language" value="fr">
+					<a href="#" class="gofr"> <img src="{% static 'images/pitchmyjob-02.png' %}"> </a>  
+				</form>
+
+			</li>
+
+
+			<!--<li> <a href="javascript:fbShare('http://www.pitchmyjob.com', 590, 380)" > <img src="{% static 'images/pitchmyjob-03.png' %}"> </a>  </li>
+			<li> <a href="javascript:TwitterShare('Rejoins Pitch my job ! Le site d\'emploi qui donne la parole aux candidats', 'http://www.pitchmyjob.com', 530, 450)"> <img src="{% static 'images/pitchmyjob-04.png' %}"> </a>  </li>
+			<li> <a  href="javascript:LinkedinShare('http://www.pitchmyjob.com', 530, 450)"> <img src="{% static 'images/pitchmyjob-05.png' %}"> </a>  </li>-->
+		</ul>
+	</div> 
+
+	<script type="text/javascript">
+		$('.goen').click(function(){
+			$('.langen').submit();
+		});
+		$('.gofr').click(function(){
+			$('.langfr').submit();
+		});
+	</script>
+
+</div>

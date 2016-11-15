@@ -1,0 +1,32 @@
+{% extends "pro-interne.html" %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load widget_tweaks %}
+	{% load i18n %}
+
+	<div class="container-fluid pro-profil">
+
+
+		<div style="text-align:center; padding-top:20px; font-size:28px;color:#2C3E50"> Lien de paiement personnalisé </div>
+		
+		<div class="container-fluid bloc-offre offre-2">
+				<div class="title"> {{ object.designation }} </div>
+				<div class="price">  {{ object.prix_ht }} € HT  </div>
+				<div class="text">
+					<div class="width-text pro-paiement-link" style="min-height:auto;">
+						{{ object.description|linebreaks }}
+					</div>
+					<!--<a href="" class="btn-offre btn-offre-2"> Visualiser offre </a>-->
+				</div>
+				<div class="total-price">
+						
+					{{ code|safe }}
+						 
+				</div>
+			</div>
+			
+	</div>	
+		
+{% endblock  %}
+

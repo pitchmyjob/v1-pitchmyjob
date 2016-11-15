@@ -1,0 +1,56 @@
+{% extends 'pages/base-mon-compte.html' %}
+
+	
+{% block partenaires %} profil-menu-active {% endblock %}
+
+{% block subcontent %}
+{% load staticfiles %}
+
+<div class="col-sm-12 pages-content-a-propos">
+	<div class="row" style="text-align:center">
+
+		<div class="col-sm-12 row">
+
+
+			<div class="col-sm-3 pages-presse" style="max-height:100px; line-height:100px; text-align:center;">
+				<a href="http://flatchr.io/"> <img src="{% static 'images/partenaire/viadeo.png' %}"> </a>
+				<h3>  </h3>
+			</div>
+
+			<div class="col-sm-3 pages-presse" style="max-height:100px; line-height:100px; text-align:center;">
+				<a href="https://www.broadbean.com"> <img src="{% static 'images/partenaire/broadbean.png' %}"> </a>
+				<h3> </h3>
+			</div>
+
+			<div class="col-sm-3 pages-presse" style="max-height:100px; line-height:100px; text-align:center;">
+				<a href="https://www.doyoubuzz.com">  <img src="{% static 'images/partenaire/doyoubuzz.jpg' %}">  </a>
+				<h3> </h3>
+			</div>
+
+			<div class="col-sm-3 pages-presse" style="max-height:100px; line-height:100px; text-align:center;">
+				<a href="http://www.multiposting.fr">  <img src="{% static 'images/partenaire/eewee-saas-Multiposting-logo.png' %}"> </a>
+				<h3> </h3>
+			</div>
+
+
+		</div>
+
+		<div class="col-sm-3 pages-presse" style="max-height:100px; line-height:100px; text-align:center;">
+			<a href="http://fr.jobrapido.com">  <img src="{% static 'images/partenaire/jobrapido.png' %}"> </a>
+			<h3>  </h3>
+		</div>
+
+		<div class="col-sm-3 pages-presse" style="max-height:100px; line-height:100px; text-align:center;">
+			<a href="http://flatchr.io/"> <img src="{% static 'images/partenaire/Logo-Flatchr.jpg' %}"> </a>
+			<h3>  </h3>
+		</div>
+
+		<div class="col-sm-3 pages-presse" style="max-height:100px; line-height:100px; text-align:center;">
+				<a href="http://www.indeed.fr/"> <img src="{% static 'images/partenaire/Indeedlogo.png' %}"> </a>
+				<h3> </h3>
+			</div>
+
+	</div>
+</div>
+	
+{% endblock %}

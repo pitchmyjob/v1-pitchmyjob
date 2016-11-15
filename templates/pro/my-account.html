@@ -1,0 +1,91 @@
+{% extends "pro-interne.html" %}
+
+{% block mes-offres %} active {% endblock %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load widget_tweaks %}
+	{% load i18n %}
+
+	<div class="my-account-pro">
+
+		  <!-- Nav tabs -->
+		  <ul class="nav nav-tabs" role="tablist">
+		    <li role="presentation" class="active"><a href="{% url 'pro:my-account' %}" > {% trans "Mon compte" %}</a></li>
+		    <li role="presentation"><a href="{% url 'pro:my-account-password' %}" > {% trans "Modifier mon mot de passe" %}</a></li>
+		  </ul>
+
+		  <!-- Tab panes -->
+		  <div class="my-account-content">
+		  		<form action="" method="POST">
+		  			{% csrf_token %}
+
+		  			<div class="col-sm-12">
+			  			{% if form.errors %}
+					  		<div class="alert alert-danger col-sm-12"> 
+							    <ul>
+							    {% for field, error in form.errors.items %} 
+							        <li>{{ error }}</li>
+							    {% endfor %}
+							    </ul>
+							</div>
+						{% endif %} 
+					</div>
+
+			  		<div class="col-sm-3 profil-photo"> 
+						<img src="{{ user.pro.image.profil100.url}} ">
+						<div style="display:none;"><a href="#" class="delete-account" onclick='confirm_delete()'> {% trans "Supprimer mon compte" %} </a></div>
+					</div>
+
+			  		<div class="col-sm-9">
+			  			<div class="col-sm-6"> 
+			  				<label> {% trans "Nom" %} </label>
+							{{ form.last_name|add_class:"form-control"}} 
+						</div>
+						<div class="col-sm-6"> 
+			  				<label> {% trans "Prénom" %} </label>
+							{{ form.first_name|add_class:"form-control"}} 
+						</div>
+						<div class="col-sm-12"> 
+			  				<label> {% trans "Email" %} </label>
+							<input type="text" value="{{ user.pro.email }}" class="form-control" disabled>
+						</div>
+						<div class="col-sm-6"> 
+			  				<label> {% trans "Siege social" %} </label>
+							<input type="text" class="form-control" placeholder="Siege social" id="autocompletePlace" name="headquarters" value="{{ form.headquarters.value|default_if_none:"" }}">
+						</div>
+						<div class="col-sm-6"> 
+			  				<label> {% trans "Téléphone" %} </label>
+							{{ form.phone|add_class:"form-control"}} 
+						</div>
+
+						<div class="col-sm-12" style="text-align:right;">
+							<input type="submit" class="btn-general-red" value="Enregistrer">
+						</div>
+			  		</div>
+
+			  		{{ form.latitude|add_class:"location-input" }}
+					{{ form.longitude|add_class:"location-input" }}
+					{{ form.street_number|add_class:"location-input" }}
+					{{ form.route|add_class:"location-input" }}
+					{{ form.locality|add_class:"location-input" }}
+					{{ form.administrative_area_level_2|add_class:"location-input" }}
+					{{ form.administrative_area_level_1|add_class:"location-input" }}
+					{{ form.country|add_class:"location-input" }}
+
+				</form>
+
+		  		<div class="clear"></div>
+		  </div>
+
+	</div>
+
+	<script type="text/javascript">
+		$( document ).ready(function() {
+		   	init_autocomplete("autocompletePlace", false, 'address');
+		   	$('.tt-hint').css({'height':'34px'});
+		});
+	</script> 
+
+
+{% endblock  %}

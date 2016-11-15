@@ -1,0 +1,16 @@
+{% extends 'emails/basic.html' %}
+
+
+{% block content %}
+
+{% load i18n %}
+
+	<h3> Bonjour {{ member }}</h3>
+
+	<p> D2SI recherche un développeur web Python en CDI. <br> Si cette opportunité vous intéresse et que vous voulez en savoir plus, c’est par ici.</p>
+	<!-- Callout Panel -->
+	<a href="https://www.pitchmyjob.com/annonce/17212" class="calloutpitch">
+		Voir l'offre
+	</a><!-- /Callout Panel -->
+
+{% endblock %}

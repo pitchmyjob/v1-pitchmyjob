@@ -1,0 +1,114 @@
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+<!DOCTYPE html>
+
+<!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
+<!--[if IE 8]><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="css/ie7.css" /><![endif]-->
+
+<html lang="fr">
+	<head>
+		<meta property="og:title" content="Rejoins Pitch my job" />
+		<meta property="og:description" content="Passe un entretien et decroche ton prochain job !" /> 
+		<meta property="fb:app_id" content="1521513254812652"/>
+	    <meta property="og:image" content="http://www.pitchmyjob.com/static/images/share2.png"/>
+
+		<meta charset="utf-8">
+	    
+		<title>Pitch my job</title>
+	    
+	    <!-- behavioral meta data -->
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="format-detection" content="telephone=no">
+	    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0">  
+	    
+	    <!-- core meta data -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datepicker.min.css' %}">
+		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-multiselect.css' %}" >
+		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-select.min.css' %}" >
+		<link rel="stylesheet" href="{% static 'css/global.css' %}">
+		<link rel="stylesheet" href="{% static 'css/devices.css' %}">
+		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-tagsinput.css' %}">
+		
+
+		<script src="{% static 'js/plugin/jquery-1.11.3.min.js' %}"></script>  
+		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script> 
+		<script src="{% static 'bootstrap/js/bootstrap-datepicker.min.js' %}"></script> 
+		<script src="{% static 'bootstrap/js/bootstrap-datepicker.fr.min.js' %}"></script> 
+		<script src="{% static 'bootstrap/js/bootstrap-multiselect.js' %}"></script>
+		<script src="{% static 'bootstrap/js/bootstrap-select.min.js' %}"></script>
+		<script src="{% static 'bootstrap/js/bootstrap-tagsinput.js' %}"></script>
+		
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+		
+	    <!-- favicons -->
+		<link rel="icon" href="{% static 'images/favicon.png' %}" type="images/icons/x-icon" />
+		<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="images/icons/x-icon" />
+
+		<meta name="robots" content="noindex">
+		<meta name="googlebot" content="noindex">
+
+		<!--[if IE]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+		
+	</head>
+
+	{% block content %}{% endblock %}
+
+	<!-- Google Tag Manager -->
+	<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NC3XK5"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-NC3XK5');</script>
+	<!-- End Google Tag Manager -->
+
+	
+	<script type="text/javascript">
+
+		function ok() {
+			console.log('ooo');
+		}
+
+		$('#disponibilite').datepicker({
+			format: 'dd/mm/yyyy',
+			language: "fr",
+			autoclose: true
+		}); 
+
+        $('#list-type-contrat').multiselect({
+        	nonSelectedText: 'Type de contrat',
+        	checkboxName : "contracts"
+        });
+
+         $('#date-naissance').datepicker({
+			format: 'dd/mm/yyyy',
+			language: "fr",
+			autoclose: true
+		});
+
+        $('.inputtag').tagsinput({
+		  trimValue: true,
+		  tagClass : 'label label-custom'
+		});
+	</script>
+
+	{% block js_autocomplete %}
+		<link rel="stylesheet" type="text/css" href="{% static 'css/typeahead.css' %}">
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjwGyNL0CFzOMQt4viTCfgCAjlnaFXvNM&libraries=places"></script>
+		<script src="{% static 'js/plugin/bloodhound.min.js' %}"></script>
+		<script src="{% static 'js/plugin/typeahead.jquery.min.js' %}"></script>
+		<script src="{% static 'js/plugin/typeahead-addresspicker.min.js' %}"></script>
+		<script src="{% static 'js/custom/init-autocomplete.js' %}"></script>
+	{% endblock %}
+
+
+</html>

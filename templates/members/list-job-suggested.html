@@ -1,0 +1,17 @@
+
+{{ test }}
+{% for job in object_list %}					
+<div class="bloc-suggested col-sm-12 row">
+	<div class="col-sm-3 row">
+		<a href="{% url 'members:detail-job' job.id %}"> <img src="{{ job.image.logo50.url }}" style="max-width:40px;"> </a>
+	</div>
+
+	<div class="col-sm-9 row">
+		<div> <a href="{% url 'members:detail-job' job.id %}"> {{ job.job_title }} </a> </div>
+		<div> <span> {{ job.contracts.all|join:" - " }} | {{  job.job_location }}   </span> </div>
+	</div>
+	
+</div>
+{% endfor %}
+
+</div>

@@ -1,0 +1,225 @@
+{% load staticfiles %}
+{% load in_group %}
+{% load i18n %}
+
+<!DOCTYPE html>
+
+<!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
+<!--[if IE 8]><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="css/ie7.css" /><![endif]-->
+
+<html lang="fr">
+	<head>
+		<meta property="og:title" content="Rejoins Pitch my job" />
+		<meta property="og:description" content="Passe un entretien et decroche ton prochain job !" /> 
+		<meta property="fb:app_id" content="1521513254812652"/>
+	    <meta property="og:image" content="https://www.pitchmyjob.com/static/images/share2.png"/>
+	    
+		<meta charset="utf-8">
+	    
+		<title>Pitch my job</title>
+	    
+	    <!-- behavioral meta data -->
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="format-detection" content="telephone=no">
+	    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0">  
+	    
+	    <!-- core meta data -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<!-- styles -->
+		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-tagsinput.css' %}">
+		<link rel="stylesheet" href="{% static 'css/global.css' %}">
+		<link rel="stylesheet" href="{% static 'css/devices.css' %}">
+		<link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+
+		<!-- styles -->
+		<script src="{% static 'js/plugin/jquery-1.11.3.min.js' %}"></script> 
+		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script> 
+		<script src="{% static 'bootstrap/js/bootstrap-tagsinput.js' %}"></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+		
+	    <!-- favicons -->
+		<link rel="icon" href="{% static 'images/favicon.png' %}" type="images/icons/x-icon" />
+		<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="images/icons/x-icon" />
+
+		<meta name="robots" content="noindex">
+		<meta name="googlebot" content="noindex">
+
+	    
+		<!--[if IE]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+		
+	</head>
+
+	<body class="pro-layout">
+		<header class="pro-interne ">
+			<nav class="navbar navbar-default navbar-pro-interne pro-connected">
+				<div class="container-fluid ">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"  aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						</button>
+						<a href="{% url 'pro:offres' %}"> <img src="{% static 'images/refonte/home-pro-logo.png' %}" class="pro-logo">  </a>
+					</div>
+					<div id="navbar" class="navbar-collapse collapse ">
+
+						<ul class="nav navbar-nav navbar-nav-menu">
+					        <li ><a href="{% url 'pro:job-create' %}" class="btn-plublier-offre"> {% trans "+ Publier une offre" %} </a></li>
+					      </ul>
+
+
+						<ul class="nav navbar-nav navbar-right"> 
+							<li class="pro-interne-notif my-account-notif">
+								{% include 'notifications/notif_msg.html' %}
+							</li>
+					         <li class="pro-interne-notif my-account-notif">
+					         	{% include 'notifications/notif.html' %}
+					         </li>	
+					         <li class="dropdown">
+					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" > <div  class="pro-logo-entreprise" > <img src="{{ user.pro.image.logo50.url }}" > </div> </a>
+					        	<ul class="dropdown-menu">
+						            <li><a href="{% url 'pro:my-account' %}"> <span class="glyphicon glyphicon-user"></span> {% trans "Paramètre" %} </a></li>
+						            <!-- <li><a href="#"> <span class="glyphicon glyphicon-cog"></span> Confidentialité </a></li> -->
+						            <li role="separator" class="divider"></li>
+						            <li><a href="{% url 'members:logout' %}?next={{request.path}}">  <span class="glyphicon glyphicon-off"></span> {% trans "Déconnexion" %}</a></li>
+						          </ul>
+					        </li>
+					     </ul> 
+					</div><!--/.nav-collapse -->
+				</div><!--/.container-fluid -->
+			</nav>
+		</header>
+
+		<div class="full-container">
+
+			<table>
+				<tr>
+
+					<td class="pro-interne-sidebar">
+						<ul>
+							<li class="{% block mes-offres %} {% endblock %}"> 
+								<a href="{% url 'pro:offres' %}" > <span class="glyphicon glyphicon-briefcase"></span> <span class="libele-menu"> {% trans "Mes offres" %} </span> </a> 
+							</li>
+							<!--<li class="{% block candidatures %} {% endblock %}"> 
+							 	<a href=""> <span class="glyphicon glyphicon-list-alt"></span> <span class="libele-menu"> Candidatures </span></a>  
+							</li>-->
+							<li class="{% block c2v-theque %} {% endblock %}"> 
+								<a href="{% url 'pro:c2v-theque' %}"> <span class="glyphicon glyphicon-search"></span> <span class="libele-menu"> {% trans "CV-Thèque" %} </span></a>  
+							</li>
+							<li class="{% block profil %} {% endblock %}"> 
+								<a href="{% url 'pro:profil' %}"> <span class="glyphicon glyphicon-user"></span> <span class="libele-menu"> {% trans "Mon profil" %} </span></a>  
+							</li>
+							<li class="{% block credits %} {% endblock %}" style="display:none">
+								<a href="{% url 'pro:credits' %}"> <span class="glyphicon glyphicon-credit-card"></span> <span class="libele-menu"> {% trans "Crédits" %} </span></a>  
+							</li>
+							<!--<li class="{% block list-offre %} {% endblock %}"> 
+								<a href="{% url 'members:logout' %}?next=pro"> <span class="glyphicon glyphicon-off"></span> <span class="libele-menu"> Deconnexion </span></a>  
+							</li>-->
+							<li class="{% block contact %} {% endblock %}"> 
+								<a href="{% url 'pages:contact' %}"> <span class="glyphicon glyphicon-question-sign"></span> <span class="libele-menu"> {% trans "Contact" %} </span></a>  
+							</li>
+
+							<li class="{% block a-propos-pro %} {% endblock %}" style="display:none"> 
+								<a href="{% url 'pages:a-propos-pro' %}"> <span class="glyphicon glyphicon-question-sign"></span> <span class="libele-menu"> {% trans "A propos" %} </span></a>  
+							</li>
+
+						</ul>
+					</td>
+					<td align=top class="pro-interne-content">
+
+						{% block content %}{% endblock %}
+						
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		{% include 'footer-pro.html' %}
+
+		<!-- Google Tag Manager -->
+		<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NC3XK5"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-NC3XK5');</script>
+		<!-- End Google Tag Manager -->
+		<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '835536179914009');
+fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=835536179914009&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+	</body>
+
+	<script type="text/javascript">
+		$('.inputtag').tagsinput({
+		  trimValue: true,
+		  tagClass : 'label label-custom'
+		});
+		$(function () {
+		  $('[data-toggle="tooltip"]').tooltip()
+		});
+	
+	</script>
+
+	{% block js_autocomplete %}
+		<link rel="stylesheet" type="text/css" href="{% static 'css/typeahead.css' %}">
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjwGyNL0CFzOMQt4viTCfgCAjlnaFXvNM&libraries=places"></script>
+		<script src="{% static 'js/plugin/bloodhound.min.js' %}"></script>
+		<script src="{% static 'js/plugin/typeahead.jquery.min.js' %}"></script>
+		<script src="{% static 'js/plugin/typeahead-addresspicker.min.js' %}"></script>
+		<script src="{% static 'js/custom/init-autocomplete.js' %}"></script>
+	{% endblock %}
+
+	<script src="{% static 'bootstrap/js/bootstrap-notify.min.js' %}"></script> 
+	<script src="{% static 'js/custom/notification.js' %}"></script>
+	<script src="{% static 'js/plugin/handlebars-v4.0.5.js' %}"></script>
+	<script src="{% static 'js/custom/share.js' %}"></script>
+
+
+	{% block modal %}
+	{% endblock %}
+
+	{% if user.is_authenticated and user|in_group:"pro" and 1 == 2 %}
+		<script src="https://cdn.socket.io/socket.io-1.4.3.js"></script>
+
+		<script type="text/javascript">
+			var socket = io.connect('https://www.pitchmyjob.com:8080');
+			socket.emit('token', '{{apitoken}}' ); 
+		</script>
+
+		{% block msg_nodejs %}
+			<script type="text/javascript">
+				var count_source = $("#count-msg-template").html();
+				var count_template = Handlebars.compile(count_source);
+				var count_msg = {{ nb_msg }};
+
+				socket.on('receive_msg', function (receiver) {
+					console.log(receiver);
+					count_msg++;
+					$('.dropdown-handle').html( count_template({'nb_msg' : count_msg }));
+				});
+
+				$('.notify-load-msg').click(function() {
+					count_msg=0;
+				});
+			</script>
+		{% endblock %}
+	{% endif %}
+		
+</html>
