@@ -1,0 +1,3955 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-10 15:24+0100\n"
+"PO-Revision-Date: 2016-04-12 18:12+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+
+#: api/youtube_api.py:127
+#: myc2V/lib/python2.7/site-packages/django_youtube/api.py:127
+msgid "Incorrect username or password"
+msgstr ""
+
+#: api/youtube_api.py:188 api/youtube_api.py:237 api/youtube_api.py:268
+#: api/youtube_api.py:308
+#: myc2V/lib/python2.7/site-packages/django_youtube/api.py:188
+#: myc2V/lib/python2.7/site-packages/django_youtube/api.py:237
+#: myc2V/lib/python2.7/site-packages/django_youtube/api.py:268
+#: myc2V/lib/python2.7/site-packages/django_youtube/api.py:308
+msgid "Authentication is required"
+msgstr ""
+
+#: api/youtube_api.py:314
+#: myc2V/lib/python2.7/site-packages/django_youtube/api.py:314
+msgid "Cannot be deleted from Youtube"
+msgstr ""
+
+#: members/forms.py:13
+msgid "Le champs Email est obligatoire."
+msgstr "The field email is required"
+
+#: members/forms.py:13
+msgid "L'email n'est pas valide."
+msgstr "The email is not valid"
+
+#: members/forms.py:14
+msgid "Le mot de passe est obligatoire."
+msgstr "The password is required"
+
+#: members/forms.py:35
+msgid "Le champs Date de naissance est obligatoire."
+msgstr "The field date of birth is required"
+
+#: members/forms.py:35
+msgid "Veuillez saisir une date valide (sous forme dd/mm/YYYY)."
+msgstr "Please enter a valid date (DD/MM/YYYY)"
+
+#: members/forms.py:36
+msgid "Le numero de téléphone permet au recruteur de vous contacter."
+msgstr ""
+
+#: members/forms.py:53 members/forms.py:80
+msgid "Niveau d'étude actuel"
+msgstr "Current level of studies"
+
+#: members/forms.py:53 pro/forms.py:32
+msgid "Veuillez choisir un niveau d'étude."
+msgstr "Select an education level"
+
+#: members/forms.py:54 pro/forms.py:20
+msgid "Veuillez choisir un secteur d'activité."
+msgstr "Select an activity area"
+
+#: members/forms.py:55
+msgid "Année d'expérience professionnel"
+msgstr "Years of work experience"
+
+#: members/forms.py:55
+msgid "Veuillez choisir un niveau d'expérience professionnel."
+msgstr "Select a level of work experience"
+
+#: members/forms.py:56 pro/forms.py:29
+msgid "Veuillez choisir au minimum un type de contrat."
+msgstr "Select at least on contract type"
+
+#: members/forms.py:60
+#, fuzzy
+#| msgid "Veuillez repondre à la question."
+msgid "Veuillez remplir au moins un tag."
+msgstr "Please answer the question"
+
+#: members/forms.py:61
+#, fuzzy
+#| msgid "Veuillez repondre à la question."
+msgid "Veuillez mettre une photo."
+msgstr "Please answer the question"
+
+#: members/forms.py:79 pro/forms.py:20
+#: templates/members/my-account-information.html:100
+msgid "Secteur d'activité"
+msgstr "Activity area"
+
+#: members/forms.py:106 templates/members/candidature-4-audio.html.py:69
+#: templates/members/candidature-4-video.html:36
+#: templates/members/candidature-4.html:35
+msgid "Veuillez repondre à la question."
+msgstr "Please answer the question"
+
+#: members/forms.py:125
+#, fuzzy
+#| msgid "Ancien de mot de passe"
+msgid "Veuillez saisir l'ancien mot de passe."
+msgstr "Old password"
+
+#: members/forms.py:127 members/forms.py:149
+#, fuzzy
+#| msgid "Entrez votre nouveau mot de passe."
+msgid "Veuillez saisir votre nouveau mot de passe."
+msgstr "Enter your new password"
+
+#: members/forms.py:136
+msgid "L'ancien mot de passe n'est pas bon. Veuillez recommencer."
+msgstr "Retype your old password"
+
+#: members/forms.py:143 members/forms.py:155
+msgid "Les mots de passe ne sont pas identique."
+msgstr "The passwords don't match"
+
+#: members/socialnetwork/sn_views.py:123
+msgid ""
+"Aucun email ne semble être rattaché à votre compte Linkedin. Vous ne pouvez "
+"pas vous inscrire avec votre compte Linkedin sur Pitch my job."
+msgstr ""
+
+#: members/socialnetwork/sn_views.py:177
+msgid ""
+"Aucun email n'est rattaché à votre compte Facebook. De ce fait, vous ne "
+"pouvez pas vous inscrire avec votre compte Facebook sur Pitch my job."
+msgstr ""
+
+#: members/views.py:62 members/views.py:83 pro/views.py:55
+msgid "L'email et le mot de passe ne correspondent pas."
+msgstr "The email and password don't match"
+
+#: members/views.py:337
+#, fuzzy
+#| msgid "Connexion"
+msgid "Connexion requise."
+msgstr "Sign in"
+
+#: members/views.py:682 pro/views.py:146
+#, fuzzy
+#| msgid "Votre CV a bien été importé."
+msgid "Votre mot de passe a bien été modifié."
+msgstr "Your password was successfully edited"
+
+#: myc2V/lib/python2.7/site-packages/dal_select2/views.py:38
+#, python-format
+msgid "Create \"%(new_value)s\""
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/contrib/messages/apps.py:7
+#, fuzzy
+#| msgid "Message"
+msgid "Messages"
+msgstr "Message"
+
+#: myc2V/lib/python2.7/site-packages/django/contrib/sitemaps/apps.py:7
+#, fuzzy
+#| msgid "Site"
+msgid "Site Maps"
+msgstr "Website"
+
+#: myc2V/lib/python2.7/site-packages/django/contrib/staticfiles/apps.py:7
+#, fuzzy
+#| msgid "Statistiques"
+msgid "Static Files"
+msgstr "Statistics"
+
+#: myc2V/lib/python2.7/site-packages/django/contrib/syndication/apps.py:7
+#, fuzzy
+#| msgid "Location"
+msgid "Syndication"
+msgstr "Location"
+
+#: myc2V/lib/python2.7/site-packages/django/contrib/webdesign/apps.py:7
+msgid "Web Design"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:33
+msgid "Enter a valid value."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:98
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:677
+msgid "Enter a valid URL."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:141
+msgid "Enter a valid integer."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:152
+msgid "Enter a valid email address."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:225
+msgid ""
+"Enter a valid 'slug' consisting of letters, numbers, underscores or hyphens."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:232
+msgid ""
+"Enter a valid 'slug' consisting of Unicode letters, numbers, underscores, or "
+"hyphens."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:237
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:256
+msgid "Enter a valid IPv4 address."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:242
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:257
+msgid "Enter a valid IPv6 address."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:252
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:255
+msgid "Enter a valid IPv4 or IPv6 address."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:284
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1130
+msgid "Enter only digits separated by commas."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:292
+#, python-format
+msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:318
+#, python-format
+msgid "Ensure this value is less than or equal to %(limit_value)s."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:325
+#, python-format
+msgid "Ensure this value is greater than or equal to %(limit_value)s."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:334
+#, python-format
+msgid ""
+"Ensure this value has at least %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at least %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:345
+#, python-format
+msgid ""
+"Ensure this value has at most %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at most %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:359
+#, python-format
+msgid "Ensure that there are no more than %(max)s digit in total."
+msgid_plural "Ensure that there are no more than %(max)s digits in total."
+msgstr[0] ""
+msgstr[1] ""
+
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:364
+#, python-format
+msgid "Ensure that there are no more than %(max)s decimal place."
+msgid_plural "Ensure that there are no more than %(max)s decimal places."
+msgstr[0] ""
+msgstr[1] ""
+
+#: myc2V/lib/python2.7/site-packages/django/core/validators.py:369
+#, python-format
+msgid ""
+"Ensure that there are no more than %(max)s digit before the decimal point."
+msgid_plural ""
+"Ensure that there are no more than %(max)s digits before the decimal point."
+msgstr[0] ""
+msgstr[1] ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/base.py:1095
+#: myc2V/lib/python2.7/site-packages/django/forms/models.py:722
+msgid "and"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/base.py:1097
+#, python-format
+msgid "%(model_name)s with this %(field_labels)s already exists."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:110
+#, python-format
+msgid "Value %(value)r is not a valid choice."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:111
+msgid "This field cannot be null."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:112
+msgid "This field cannot be blank."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:113
+#, python-format
+msgid "%(model_name)s with this %(field_label)s already exists."
+msgstr ""
+
+#. Translators: The 'lookup_type' is one of 'date', 'year' or 'month'.
+#. Eg: "Title must be unique for pub_date year"
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:117
+#, python-format
+msgid ""
+"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:134
+#, python-format
+msgid "Field of type: %(field_type)s"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:913
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1817
+#, fuzzy
+#| msgid "Intermediaire"
+msgid "Integer"
+msgstr "Intermediate"
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:917
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1815
+#, python-format
+msgid "'%(value)s' value must be an integer."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:992
+#, python-format
+msgid "'%(value)s' value must be either True or False."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:994
+msgid "Boolean (Either True or False)"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1069
+#, python-format
+msgid "String (up to %(max_length)s)"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1125
+msgid "Comma-separated integers"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1174
+#, python-format
+msgid ""
+"'%(value)s' value has an invalid date format. It must be in YYYY-MM-DD "
+"format."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1176
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1319
+#, python-format
+msgid ""
+"'%(value)s' value has the correct format (YYYY-MM-DD) but it is an invalid "
+"date."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1179
+msgid "Date (without time)"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1317
+#, python-format
+msgid ""
+"'%(value)s' value has an invalid format. It must be in YYYY-MM-DD HH:MM[:ss[."
+"uuuuuu]][TZ] format."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1321
+#, python-format
+msgid ""
+"'%(value)s' value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
+"[TZ]) but it is an invalid date/time."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1325
+msgid "Date (with time)"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1477
+#, python-format
+msgid "'%(value)s' value must be a decimal number."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1479
+msgid "Decimal number"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1636
+#, python-format
+msgid ""
+"'%(value)s' value has an invalid format. It must be in [DD] [HH:[MM:]]ss[."
+"uuuuuu] format."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1639
+#, fuzzy
+#| msgid "Formations"
+msgid "Duration"
+msgstr "Education"
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1690
+msgid "Email address"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1714
+msgid "File path"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1781
+#, python-format
+msgid "'%(value)s' value must be a float."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1783
+msgid "Floating point number"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1884
+msgid "Big (8 byte) integer"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1899
+msgid "IPv4 address"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1930
+#, fuzzy
+#| msgid "Presse"
+msgid "IP address"
+msgstr "Press"
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:2014
+#, python-format
+msgid "'%(value)s' value must be either None, True or False."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:2016
+msgid "Boolean (Either True, False or None)"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:2076
+msgid "Positive integer"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:2088
+msgid "Positive small integer"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:2101
+#, python-format
+msgid "Slug (up to %(max_length)s)"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:2135
+msgid "Small integer"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:2142
+#, fuzzy
+#| msgid "Texte"
+msgid "Text"
+msgstr "Text"
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:2168
+#, python-format
+msgid ""
+"'%(value)s' value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
+"format."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:2170
+#, python-format
+msgid ""
+"'%(value)s' value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
+"invalid time."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:2173
+msgid "Time"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:2301
+msgid "URL"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:2324
+msgid "Raw binary data"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/__init__.py:2368
+#, python-format
+msgid "'%(value)s' is not a valid UUID."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/files.py:237
+msgid "File"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/files.py:392
+msgid "Image"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/related.py:736
+#, python-format
+msgid "%(model)s instance with %(field)s %(value)r does not exist."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/related.py:738
+msgid "Foreign Key (type determined by related field)"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/related.py:996
+msgid "One-to-one relationship"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/db/models/fields/related.py:1113
+msgid "Many-to-many relationship"
+msgstr ""
+
+#. Translators: If found as last label character, these punctuation
+#. characters will prevent the default label_suffix to be appended to the label
+#: myc2V/lib/python2.7/site-packages/django/forms/boundfield.py:167
+msgid ":?.!"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:65
+msgid "This field is required."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:254
+msgid "Enter a whole number."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:299
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:336
+msgid "Enter a number."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:414
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:1158
+msgid "Enter a valid date."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:438
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:1159
+msgid "Enter a valid time."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:460
+msgid "Enter a valid date/time."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:489
+msgid "Enter a valid duration."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:556
+msgid "No file was submitted. Check the encoding type on the form."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:557
+msgid "No file was submitted."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:558
+msgid "The submitted file is empty."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:560
+#, python-format
+msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid_plural ""
+"Ensure this filename has at most %(max)d characters (it has %(length)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:563
+msgid "Please either submit a file or check the clear checkbox, not both."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:625
+msgid ""
+"Upload a valid image. The file you uploaded was either not an image or a "
+"corrupted image."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:792
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:886
+#: myc2V/lib/python2.7/site-packages/django/forms/models.py:1227
+#, python-format
+msgid "Select a valid choice. %(value)s is not one of the available choices."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:887
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:1002
+#: myc2V/lib/python2.7/site-packages/django/forms/models.py:1226
+msgid "Enter a list of values."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:1003
+msgid "Enter a complete value."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/fields.py:1217
+msgid "Enter a valid UUID."
+msgstr ""
+
+#. Translators: This is the default suffix added to form field labels
+#: myc2V/lib/python2.7/site-packages/django/forms/forms.py:84
+msgid ":"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/forms.py:191
+#, python-format
+msgid "(Hidden field %(name)s) %(error)s"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/formsets.py:97
+msgid "ManagementForm data is missing or has been tampered with"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/formsets.py:345
+#, python-format
+msgid "Please submit %d or fewer forms."
+msgid_plural "Please submit %d or fewer forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/formsets.py:352
+#, python-format
+msgid "Please submit %d or more forms."
+msgid_plural "Please submit %d or more forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/formsets.py:380
+#: myc2V/lib/python2.7/site-packages/django/forms/formsets.py:382
+msgid "Order"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/formsets.py:384
+msgid "Delete"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/models.py:716
+#, python-format
+msgid "Please correct the duplicate data for %(field)s."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/models.py:720
+#, python-format
+msgid "Please correct the duplicate data for %(field)s, which must be unique."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/models.py:726
+#, python-format
+msgid ""
+"Please correct the duplicate data for %(field_name)s which must be unique "
+"for the %(lookup)s in %(date_field)s."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/models.py:734
+msgid "Please correct the duplicate values below."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/models.py:1058
+msgid "The inline foreign key did not match the parent instance primary key."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/models.py:1120
+msgid "Select a valid choice. That choice is not one of the available choices."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/models.py:1229
+#, python-format
+msgid "\"%(pk)s\" is not a valid value for a primary key."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/utils.py:172
+#, python-format
+msgid ""
+"%(datetime)s couldn't be interpreted in time zone %(current_timezone)s; it "
+"may be ambiguous or it may not exist."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/widgets.py:353
+msgid "Currently"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/widgets.py:354
+msgid "Change"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/widgets.py:355
+msgid "Clear"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/widgets.py:570
+msgid "Unknown"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/widgets.py:571
+msgid "Yes"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/forms/widgets.py:572
+#, fuzzy
+#| msgid "Nom"
+msgid "No"
+msgstr "Last name"
+
+#: myc2V/lib/python2.7/site-packages/django/template/defaultfilters.py:867
+msgid "yes,no,maybe"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/template/defaultfilters.py:896
+#: myc2V/lib/python2.7/site-packages/django/template/defaultfilters.py:908
+#, python-format
+msgid "%(size)d byte"
+msgid_plural "%(size)d bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: myc2V/lib/python2.7/site-packages/django/template/defaultfilters.py:910
+#, python-format
+msgid "%s KB"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/template/defaultfilters.py:912
+#, python-format
+msgid "%s MB"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/template/defaultfilters.py:914
+#, python-format
+msgid "%s GB"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/template/defaultfilters.py:916
+#, python-format
+msgid "%s TB"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/template/defaultfilters.py:918
+#, python-format
+msgid "%s PB"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dateformat.py:61
+msgid "p.m."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dateformat.py:62
+msgid "a.m."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dateformat.py:67
+msgid "PM"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dateformat.py:68
+msgid "AM"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dateformat.py:153
+msgid "midnight"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dateformat.py:155
+msgid "noon"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:6
+msgid "Monday"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:6
+msgid "Tuesday"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:6
+msgid "Wednesday"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:6
+msgid "Thursday"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:6
+msgid "Friday"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:7
+msgid "Saturday"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:7
+msgid "Sunday"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:10
+#, fuzzy
+#| msgid "Mon CV"
+msgid "Mon"
+msgstr "Resume"
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:10
+#, fuzzy
+#| msgid "vue"
+msgid "Tue"
+msgstr "views"
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:10
+msgid "Wed"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:10
+msgid "Thu"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:10
+msgid "Fri"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:11
+#, fuzzy
+#| msgid "Suivant"
+msgid "Sat"
+msgstr "Next"
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:11
+#, fuzzy
+#| msgid "Suivant"
+msgid "Sun"
+msgstr "Next"
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:18
+msgid "January"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:18
+msgid "February"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:18
+msgid "March"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:18
+msgid "April"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:18
+msgid "May"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:18
+msgid "June"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:19
+msgid "July"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:19
+msgid "August"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:19
+msgid "September"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:19
+msgid "October"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:19
+msgid "November"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:20
+msgid "December"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:23
+msgid "jan"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:23
+msgid "feb"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:23
+msgid "mar"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:23
+msgid "apr"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:23
+msgid "may"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:23
+msgid "jun"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:24
+msgid "jul"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:24
+msgid "aug"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:24
+msgid "sep"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:24
+#, fuzzy
+#| msgid "Contact"
+msgid "oct"
+msgstr "Contact"
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:24
+msgid "nov"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:24
+msgid "dec"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:31
+msgctxt "abbrev. month"
+msgid "Jan."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:32
+msgctxt "abbrev. month"
+msgid "Feb."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:33
+msgctxt "abbrev. month"
+msgid "March"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:34
+msgctxt "abbrev. month"
+msgid "April"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:35
+msgctxt "abbrev. month"
+msgid "May"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:36
+msgctxt "abbrev. month"
+msgid "June"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:37
+msgctxt "abbrev. month"
+msgid "July"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:38
+msgctxt "abbrev. month"
+msgid "Aug."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:39
+msgctxt "abbrev. month"
+msgid "Sept."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:40
+msgctxt "abbrev. month"
+msgid "Oct."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:41
+msgctxt "abbrev. month"
+msgid "Nov."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:42
+msgctxt "abbrev. month"
+msgid "Dec."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:45
+msgctxt "alt. month"
+msgid "January"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:46
+msgctxt "alt. month"
+msgid "February"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:47
+msgctxt "alt. month"
+msgid "March"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:48
+msgctxt "alt. month"
+msgid "April"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:49
+msgctxt "alt. month"
+msgid "May"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:50
+msgctxt "alt. month"
+msgid "June"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:51
+msgctxt "alt. month"
+msgid "July"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:52
+msgctxt "alt. month"
+msgid "August"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:53
+msgctxt "alt. month"
+msgid "September"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:54
+msgctxt "alt. month"
+msgid "October"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:55
+msgctxt "alt. month"
+msgid "November"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/dates.py:56
+msgctxt "alt. month"
+msgid "December"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/ipv6.py:10
+msgid "This is not a valid IPv6 address."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/text.py:77
+#, python-format
+msgctxt "String to return when truncating text"
+msgid "%(truncated_text)s..."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/text.py:246
+msgid "or"
+msgstr ""
+
+#. Translators: This string is used as a separator between list elements
+#: myc2V/lib/python2.7/site-packages/django/utils/text.py:265
+#: myc2V/lib/python2.7/site-packages/django/utils/timesince.py:63
+msgid ", "
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/timesince.py:11
+#, python-format
+msgid "%d year"
+msgid_plural "%d years"
+msgstr[0] ""
+msgstr[1] ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/timesince.py:12
+#, python-format
+msgid "%d month"
+msgid_plural "%d months"
+msgstr[0] ""
+msgstr[1] ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/timesince.py:13
+#, python-format
+msgid "%d week"
+msgid_plural "%d weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/timesince.py:14
+#, python-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/timesince.py:15
+#, python-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/timesince.py:16
+#, python-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: myc2V/lib/python2.7/site-packages/django/utils/timesince.py:52
+msgid "0 minutes"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/csrf.py:107
+msgid "Forbidden"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/csrf.py:108
+msgid "CSRF verification failed. Request aborted."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/csrf.py:112
+msgid ""
+"You are seeing this message because this HTTPS site requires a 'Referer "
+"header' to be sent by your Web browser, but none was sent. This header is "
+"required for security reasons, to ensure that your browser is not being "
+"hijacked by third parties."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/csrf.py:117
+msgid ""
+"If you have configured your browser to disable 'Referer' headers, please re-"
+"enable them, at least for this site, or for HTTPS connections, or for 'same-"
+"origin' requests."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/csrf.py:122
+msgid ""
+"You are seeing this message because this site requires a CSRF cookie when "
+"submitting forms. This cookie is required for security reasons, to ensure "
+"that your browser is not being hijacked by third parties."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/csrf.py:127
+msgid ""
+"If you have configured your browser to disable cookies, please re-enable "
+"them, at least for this site, or for 'same-origin' requests."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/csrf.py:132
+msgid "More information is available with DEBUG=True."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/debug.py:508
+msgid "Welcome to Django"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/debug.py:509
+msgid "It worked!"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/debug.py:510
+msgid "Congratulations on your first Django-powered page."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/debug.py:511
+msgid ""
+"Of course, you haven't actually done any work yet. Next, start your first "
+"app by running <code>python manage.py startapp [app_label]</code>."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/debug.py:513
+msgid ""
+"You're seeing this message because you have <code>DEBUG = True</code> in "
+"your Django settings file and you haven't configured any URLs. Get to work!"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/generic/dates.py:48
+msgid "No year specified"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/generic/dates.py:104
+msgid "No month specified"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/generic/dates.py:163
+msgid "No day specified"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/generic/dates.py:219
+msgid "No week specified"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/generic/dates.py:378
+#: myc2V/lib/python2.7/site-packages/django/views/generic/dates.py:406
+#, python-format
+msgid "No %(verbose_name_plural)s available"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/generic/dates.py:660
+#, python-format
+msgid ""
+"Future %(verbose_name_plural)s not available because %(class_name)s."
+"allow_future is False."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/generic/dates.py:694
+#, python-format
+msgid "Invalid date string '%(datestr)s' given format '%(format)s'"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/generic/detail.py:55
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/generic/list.py:76
+msgid "Page is not 'last', nor can it be converted to an int."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/generic/list.py:81
+#, python-format
+msgid "Invalid page (%(page_number)s): %(message)s"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/generic/list.py:172
+#, python-format
+msgid "Empty list and '%(class_name)s.allow_empty' is False."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/static.py:58
+msgid "Directory indexes are not allowed here."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/static.py:60
+#, python-format
+msgid "\"%(path)s\" does not exist"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django/views/static.py:100
+#, python-format
+msgid "Index of %(directory)s"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django_youtube/models.py:10
+msgid "The Youtube id of the video"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django_youtube/models.py:14
+msgid "Comma seperated keywords"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django_youtube/models.py:140
+msgid ""
+"Temporary file on server for                                               "
+"using in `direct upload` from                                               "
+"your server to youtube"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django_youtube/templates/django_youtube/direct-upload.html:7
+#: myc2V/lib/python2.7/site-packages/django_youtube/templates/django_youtube/upload.html:7
+msgid "Upload video file"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django_youtube/templates/django_youtube/videos.html:11
+msgid "No video found"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django_youtube/views.py:51
+#, fuzzy
+#| msgid "Ma video"
+msgid "Invalid video."
+msgstr "My video"
+
+#: myc2V/lib/python2.7/site-packages/django_youtube/views.py:58
+msgid "This video is currently being processed"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django_youtube/views.py:210
+msgid "An error occurred during the upload, Please try again."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django_youtube/views.py:265
+msgid "Upload failed, Please try again."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/django_youtube/views.py:289
+msgid "Video could not be deleted."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/djangular/forms/field_mixins.py:35
+#, python-format
+msgid "Ensure this value has at least %(limit_value)d character"
+msgid_plural "Ensure this value has at least %(limit_value)d characters"
+msgstr[0] ""
+msgstr[1] ""
+
+#: myc2V/lib/python2.7/site-packages/djangular/forms/field_mixins.py:41
+#, python-format
+msgid "Ensure this value has at most %(limit_value)d character"
+msgid_plural "Ensure this value has at most %(limit_value)d characters"
+msgstr[0] ""
+msgstr[1] ""
+
+#: myc2V/lib/python2.7/site-packages/djangular/forms/field_mixins.py:79
+msgid "This input self does not contain valid data."
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/paybox.py:145
+msgid "Paybox"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/paybox.py:149
+#: myc2V/lib/python2.7/site-packages/eopayment/sips2.py:96
+#: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:220
+msgid "Normal return URL"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/paybox.py:155
+#: myc2V/lib/python2.7/site-packages/eopayment/sips2.py:102
+#: myc2V/lib/python2.7/site-packages/eopayment/tipi.py:51
+msgid "Automatic return URL"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/paybox.py:160
+msgid "Plateforme cible"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/paybox.py:167
+msgid "Numéro de site"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/paybox.py:174
+msgid "Numéro de rang"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/paybox.py:181
+msgid "Identifiant"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/paybox.py:188
+msgid "Secret partagé"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/paybox.py:195
+msgid "Devise"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/paybox.py:203
+msgid "Callback URL"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/sips2.py:71
+msgid "Platform"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/sips2.py:78
+msgid "Merchant ID"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/sips2.py:84
+msgid "Secret Key"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/sips2.py:90
+msgid "Key Version"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/sips2.py:107
+msgid "Currency code"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:103
+msgid "Complément d'information 1"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:105
+msgid "Complément d'information 2"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:107
+msgid "Complément d'information 3"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:111
+msgid "Liste des cartes de paiement acceptées"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:112
+msgid ""
+"vide ou des valeurs sépareés par un point-virgule parmi AMEX, AURORE-MULTI, "
+"BUYSTER, CB, COFINOGA, E-CARTEBLEUE, MASTERCARD, JCB, MAESTRO, ONEY, "
+"ONEY_SANDBOX, PAYPAL, PAYPAL_SB, PAYSAFECARD, VISA"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:124
+msgid "Identifiant de la boutique"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:226
+msgid ""
+"Automatic return URL (ignored, must be set in Payzen/SystemPay backoffice)"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:231
+msgid "URL du service de paiment"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:232
+#: myc2V/lib/python2.7/site-packages/eopayment/tipi.py:40
+msgid "ne pas modifier si vous ne savez pas"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:236
+msgid "Secret pour la configuration de TEST"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:240
+msgid "Secret pour la configuration de PRODUCTION"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/tipi.py:31
+msgid "Numéro client"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/tipi.py:32
+msgid "un numéro à 6 chiffres communiqué par l’administrateur TIPI"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/tipi.py:39
+msgid "URL du service TIPI"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/eopayment/tipi.py:46
+msgid "Normal return URL (unused by TIPI)"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:313
+msgid "usage: "
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:821
+msgid ".__call__() not defined"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1105
+#, python-format
+msgid "unknown parser %r (choices: %s)"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1146
+#, python-format
+msgid "argument \"-\" with mode %r"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1349
+#, python-format
+msgid "cannot merge actions - two groups are named %r"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1387
+msgid "'required' is an invalid argument for positionals"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1407
+#, python-format
+msgid "invalid option string %r: must start with a character %r"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1428
+#, python-format
+msgid "dest= is required for options like %r"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1445
+#, python-format
+msgid "invalid conflict_resolution value: %r"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1463
+#, python-format
+msgid "conflicting option string(s): %s"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1526
+msgid "mutually exclusive arguments must be optional"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1596
+msgid "positional arguments"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1597
+msgid "optional arguments"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1615
+msgid "show this help message and exit"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1621
+msgid "show program's version number and exit"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1653
+msgid "cannot have multiple subparser arguments"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1705
+#, python-format
+msgid "unrecognized arguments: %s"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1802
+#, python-format
+msgid "not allowed with argument %s"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1848
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1862
+#, python-format
+msgid "ignored explicit argument %r"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1952
+msgid "too few arguments"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1959
+#, python-format
+msgid "argument %s is required"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:1973
+#, python-format
+msgid "one of the arguments %s is required"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:2019
+msgid "expected one argument"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:2020
+msgid "expected at most one argument"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:2021
+msgid "expected at least one argument"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:2023
+#, python-format
+msgid "expected %s argument(s)"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:2080
+#, python-format
+msgid "ambiguous option: %s could match %s"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:2142
+#, python-format
+msgid "unexpected option string: %s"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:2243
+#, python-format
+msgid "%r is not callable"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:2259
+#, python-format
+msgid "invalid %s value: %r"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:2269
+#, python-format
+msgid "invalid choice: %r (choose from %s)"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/gunicorn/argparse_compat.py:2362
+#, python-format
+msgid "%s: error: %s\n"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/kombu/transport/django/models.py:12
+msgid "name"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/kombu/transport/django/models.py:20
+msgid "queue"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/kombu/transport/django/models.py:21
+msgid "queues"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/kombu/transport/django/models.py:28
+msgid "payload"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/kombu/transport/django/models.py:37
+#, fuzzy
+#| msgid "Message"
+msgid "message"
+msgstr "Message"
+
+#: myc2V/lib/python2.7/site-packages/kombu/transport/django/models.py:38
+#, fuzzy
+#| msgid "Mes messages"
+msgid "messages"
+msgstr "My messages"
+
+#: myc2V/lib/python2.7/site-packages/kombu/transport/qpid.py:1265
+#, python-format
+msgid "Attempting to connect to qpid with SASL mechanism %s"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/kombu/transport/qpid.py:1270
+#, python-format
+msgid "Connected to qpid with SASL mechanism %s"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/kombu/transport/qpid.py:1288
+#, python-format
+msgid "Unable to connect to qpid with SASL mechanism %s"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/pure_pagination/templates/pure_pagination/pagination-bootstrap.html:8
+#: myc2V/lib/python2.7/site-packages/pure_pagination/templates/pure_pagination/pagination-bootstrap.html:10
+#: myc2V/lib/python2.7/site-packages/pure_pagination/templates/pure_pagination/pagination-bootstrap.html:17
+msgid "previous page"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/pure_pagination/templates/pure_pagination/pagination-bootstrap.html:26
+msgid "current page"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/pure_pagination/templates/pure_pagination/pagination-bootstrap.html:42
+#: myc2V/lib/python2.7/site-packages/pure_pagination/templates/pure_pagination/pagination-bootstrap.html:43
+#: myc2V/lib/python2.7/site-packages/pure_pagination/templates/pure_pagination/pagination-bootstrap.html:50
+msgid "next page"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/pure_pagination/templates/pure_pagination/pagination.html:4
+#: myc2V/lib/python2.7/site-packages/pure_pagination/templates/pure_pagination/pagination.html:6
+msgid "previous"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/pure_pagination/templates/pure_pagination/pagination.html:20
+#: myc2V/lib/python2.7/site-packages/pure_pagination/templates/pure_pagination/pagination.html:22
+msgid "next"
+msgstr ""
+
+#: myc2v/settings.py:217
+msgid "French"
+msgstr ""
+
+#: myc2v/settings.py:218
+msgid "English"
+msgstr ""
+
+#: pro/forms.py:12
+msgid "Le nom de société est obligatoire."
+msgstr "The company name is required"
+
+#: pro/forms.py:13
+msgid "Le téléphone est obligatoire."
+msgstr "The phone number is required"
+
+#: pro/forms.py:21
+#, fuzzy
+#| msgid "Offres d'emploi"
+msgid "Nombres d'employés"
+msgstr "Job offers"
+
+#: pro/forms.py:21
+#, fuzzy
+#| msgid "Secteur d'activité"
+msgid "Veuillez choisir un nombre d'employés."
+msgstr "Company size"
+
+#: pro/forms.py:30
+#, fuzzy
+#| msgid "Secteur d'activité"
+msgid "Veuillez choisir au minimum une durée de contrat."
+msgstr "Contract duration"
+
+#: pro/forms.py:31
+#, fuzzy
+#| msgid "Expérience professionnelle"
+msgid "Veuillez choisir au minimum un niveau d'expérience professionnel."
+msgstr "Professional experience"
+
+#: pro/forms.py:40 pro/forms.py:46
+#, fuzzy
+#| msgid "Ancien de mot de passe"
+msgid "Veuillez saisir au moins 3 tags."
+msgstr "Old password"
+
+#: pro/forms.py:41
+#, fuzzy
+#| msgid "Veuillez repondre à la question."
+msgid "Veuillez écrire une description."
+msgstr "Please answer the question"
+
+#: pro/forms.py:54
+#, fuzzy
+#| msgid "Veuillez repondre à la question."
+msgid "Veuillez ecrire au moins une question."
+msgstr "Please answer the question"
+
+#: pro/forms.py:58
+msgid "Veuillez choisir au moins un type de reponse."
+msgstr "Please select at least one answering mode"
+
+#: pro/forms.py:75
+msgid ""
+"L'url de la video doit etre un lien Youtube, Dailymotion ou Viemo uniquement."
+msgstr "The video URL has to be a Youtube, Dailymotion or Vimeo link"
+
+#: pro/forms.py:101
+#, fuzzy
+#| msgid "Intermediaire"
+msgid "Immediate"
+msgstr "Intermediate"
+
+#: pro/forms.py:101
+msgid "Avec préavis"
+msgstr "Prior notice"
+
+#: pro/forms.py:102
+msgid "Il y a 1 jour"
+msgstr "One day ago"
+
+#: pro/forms.py:102
+msgid "Moins de 5 jours"
+msgstr "Less than 5 days"
+
+#: pro/forms.py:102
+msgid "Moins de 1 mois"
+msgstr "Less than 1 month"
+
+#: pro/forms.py:102
+msgid "Moins de 6 mois"
+msgstr "Less than 6 months"
+
+#: pro/views.py:53
+msgid "Veuillez vous connecter avec un compte Pro."
+msgstr "Please connect with a Pro account"
+
+#: templates/404.html:18
+msgid "Oops ! La page que vous recherchez n'existe pas."
+msgstr "Oops ! That page you doesn't exist"
+
+#: templates/500.html:17
+msgid ""
+"Une erreur est survenue. Veuillez recommencer, si le probleme persiste "
+"veuillez contacter Pitch my job."
+msgstr ""
+"Something happened. Please retry, if the problem persits contact our support"
+
+#: templates/c2v/myc2v-login.html:15
+#, fuzzy
+#| msgid "Completer votre CV en 1 clic"
+msgid "Créer votre CV en 1 clic"
+msgstr "Create your resume in one click"
+
+#: templates/c2v/myc2v-login.html:38 templates/members/detail-job.html:473
+#: templates/pages/react.html.py:310
+msgid "Connectez-vous"
+msgstr "Sign in"
+
+#: templates/c2v/myc2v-login.html:64 templates/pages/reset-password-1.html:14
+#: templates/pages/reset-password-2.html:14
+#: templates/pages/reset-password-3.html:14
+msgid "Mot de passe oublié ?"
+msgstr "Forgot your password ?"
+
+#: templates/c2v/myc2v-login.html:72 templates/members/login.html.py:78
+msgid "Pas encore inscrit ?"
+msgstr "Not registered ?"
+
+#: templates/c2v/myc2v-login.html:72
+msgid "S'inscrire sur Pitch my job"
+msgstr "Register to Pitch my job"
+
+#: templates/c2v/myc2v.html:45 templates/c2v/myc2v.html.py:1000
+msgid "Importer"
+msgstr "Import"
+
+#: templates/c2v/myc2v.html:52
+msgid "Themes"
+msgstr "Themes"
+
+#: templates/c2v/myc2v.html:63
+msgid "Télécharger"
+msgstr "Download"
+
+#: templates/c2v/myc2v.html:70 templates/c2v/myc2v.html.py:603
+#: templates/notifications/messages.html:73 templates/pro/list-offre.html:215
+msgid "Envoyer"
+msgstr "Send"
+
+#: templates/c2v/myc2v.html:88
+msgid "Importation du cv Linkedin ..."
+msgstr "Import via Linkedin"
+
+#: templates/c2v/myc2v.html:92
+msgid "Erreur lors de l'importation du CV, veuillez ressayer."
+msgstr "Something happened… Please retry (if it persists, contact us)"
+
+#: templates/c2v/myc2v.html:563
+msgid "Envoyer mon CV par email"
+msgstr "Send your resume by email"
+
+#: templates/c2v/myc2v.html:570
+msgid "Email du destinataire"
+msgstr "Recipient's email"
+
+#: templates/c2v/myc2v.html:587
+msgid "Text de l'email"
+msgstr "Email content"
+
+#: templates/c2v/myc2v.html:602 templates/c2v/myc2v.html.py:639
+#: templates/c2v/myc2v.html:661 templates/c2v/myc2v.html.py:701
+#: templates/c2v/myc2v.html:781 templates/c2v/myc2v.html.py:865
+#: templates/c2v/myc2v.html:943 templates/c2v/myc2v.html.py:1034
+#: templates/pro/list-offre.html:38 templates/pro/list-offre.html.py:214
+msgid "Annuler"
+msgstr "Cancel"
+
+#: templates/c2v/myc2v.html:618
+msgid "Competence"
+msgstr "Competences"
+
+#: templates/c2v/myc2v.html:624 templates/c2v/myc2v.html.py:687
+msgid "Niveau"
+msgstr "Level"
+
+#: templates/c2v/myc2v.html:626 templates/c2v/myc2v.html.py:689
+msgid "Selectionner votre niveau"
+msgstr "Select a level"
+
+#: templates/c2v/myc2v.html:627
+msgid "Notions"
+msgstr "Notions"
+
+#: templates/c2v/myc2v.html:628 templates/c2v/myc2v.html.py:690
+msgid "Débutant"
+msgstr "Beginner"
+
+#: templates/c2v/myc2v.html:629
+msgid "Intermediaire"
+msgstr "Intermediate"
+
+#: templates/c2v/myc2v.html:630
+msgid "Confirmé"
+msgstr "Experienced"
+
+#: templates/c2v/myc2v.html:631
+msgid "Expert"
+msgstr "Expert"
+
+#: templates/c2v/myc2v.html:640 templates/c2v/myc2v.html.py:662
+#: templates/c2v/myc2v.html:782 templates/c2v/myc2v.html.py:866
+#: templates/c2v/myc2v.html:944 templates/c2v/myc2v.html.py:1035
+#: templates/members/my-account-information.html:117
+#: templates/members/my-account-password.html:86
+msgid "Enregistrer"
+msgstr "Save"
+
+#: templates/c2v/myc2v.html:654
+msgid "Centre d'interet"
+msgstr "Hobbies"
+
+#: templates/c2v/myc2v.html:681
+msgid "Langue"
+msgstr "Language"
+
+#: templates/c2v/myc2v.html:691
+msgid "Niveau scolaire"
+msgstr "Grade level"
+
+#: templates/c2v/myc2v.html:692
+msgid "Bon niveau"
+msgstr "Good level"
+
+#: templates/c2v/myc2v.html:693
+msgid "Courant"
+msgstr "Fluent"
+
+#: templates/c2v/myc2v.html:694
+msgid "Bilingue"
+msgstr "Bilingual"
+
+#: templates/c2v/myc2v.html:702 templates/members/list-job.html.py:189
+msgid "Ajouter"
+msgstr "Add"
+
+#: templates/c2v/myc2v.html:715
+msgid "École"
+msgstr "School"
+
+#: templates/c2v/myc2v.html:721
+msgid "Diplôme"
+msgstr "Degree"
+
+#: templates/c2v/myc2v.html:730
+msgid "Discipline"
+msgstr "Field of study"
+
+#: templates/c2v/myc2v.html:737
+msgid "Année de debut"
+msgstr "Start date"
+
+#: templates/c2v/myc2v.html:744
+msgid "Année de fin"
+msgstr "End date"
+
+#: templates/c2v/myc2v.html:746 templates/c2v/myc2v.html.py:831
+msgid "Aujourd'hui"
+msgstr "Today"
+
+#: templates/c2v/myc2v.html:747
+msgid "Ceci est ma formation actuelle"
+msgstr "This is my actual formation"
+
+#: templates/c2v/myc2v.html:755 templates/c2v/myc2v.html.py:840
+msgid "Logo de l'entreprise"
+msgstr "Company logo"
+
+#: templates/c2v/myc2v.html:773 templates/c2v/myc2v.html.py:857
+#: templates/c2v/myc2v.html:935
+msgid "Description"
+msgstr "Description"
+
+#: templates/c2v/myc2v.html:797 templates/pro/inscription.html.py:37
+msgid "Nom de la société"
+msgstr "Company name"
+
+#: templates/c2v/myc2v.html:803
+msgid "Titre du poste"
+msgstr "Title"
+
+#: templates/c2v/myc2v.html:813
+msgid "Localisation"
+msgstr "Location"
+
+#: templates/c2v/myc2v.html:822
+msgid "Date debut"
+msgstr "Start date"
+
+#: templates/c2v/myc2v.html:829
+msgid "Date fin"
+msgstr "End date"
+
+#: templates/c2v/myc2v.html:832
+msgid "Ceci est mon poste actuel"
+msgstr "I currently work here"
+
+#: templates/c2v/myc2v.html:884 templates/home-member-2.html.py:20
+#: templates/members/my-account.html:57 templates/pages/contact-pro.html:49
+#: templates/pages/contact.html.py:47 templates/pro/my-account.html:46
+msgid "Prénom"
+msgstr "First name"
+
+#: templates/c2v/myc2v.html:890 templates/home-member-2.html.py:26
+#: templates/members/inscription.html:62 templates/members/my-account.html:62
+#: templates/pages/contact-pro.html:44 templates/pages/contact.html.py:42
+#: templates/pro/inscription.html:45 templates/pro/my-account.html.py:42
+msgid "Nom"
+msgstr "Last name"
+
+#: templates/c2v/myc2v.html:896 templates/members/inscription.html.py:80
+#: templates/members/login.html:65 templates/pages/contact-pro.html.py:54
+#: templates/pages/contact.html:52 templates/pro/inscription.html.py:53
+#: templates/pro/my-account.html:50
+msgid "Email"
+msgstr "Email"
+
+#: templates/c2v/myc2v.html:903
+msgid "Poste"
+msgstr "Position"
+
+#: templates/c2v/myc2v.html:910
+msgid "Site"
+msgstr "Website"
+
+#: templates/c2v/myc2v.html:917 templates/members/detail-job.html.py:204
+msgid "Location"
+msgstr "Location"
+
+#: templates/c2v/myc2v.html:923 templates/members/my-account.html.py:72
+msgid "Date de naissance"
+msgstr "Date of birth"
+
+#: templates/c2v/myc2v.html:929 templates/members/inscription.html.py:75
+#: templates/pro/inscription.html:41 templates/pro/my-account.html.py:58
+msgid "Téléphone"
+msgstr "Phone"
+
+#: templates/c2v/myc2v.html:956 templates/c2v/myc2v.html.py:973
+msgid "Importer votre CV via Linkedin en 1 click"
+msgstr "Import your resume via Likedin in one click"
+
+#: templates/c2v/myc2v.html:990
+msgid "Ajoutez votre Pitch video"
+msgstr "Add your video pitch"
+
+#: templates/c2v/myc2v.html:996
+msgid "S'enregistrer"
+msgstr "Record"
+
+#: templates/c2v/myc2v.html:1004
+msgid "Copier URL"
+msgstr "Copy URL"
+
+#: templates/c2v/myc2v.html:1018
+msgid "Décrivez vous, ce que vous faites et ce que vous recherchez."
+msgstr "Describe yourself, what you do and what you are looking for"
+
+#: templates/c2v/myc2v.html:1027
+msgid "Seul les videos Youtube, Dailymotion et Vimeo sont acceptés"
+msgstr "Only Youtube, Dailymotion & Vimeo videos"
+
+#: templates/c2v/myc2v.html:1046
+msgid "Partage"
+msgstr "Share"
+
+#: templates/c2v/myc2v.html:1059
+msgid "Lien de partage de ton c2v"
+msgstr "Share your resume"
+
+#: templates/c2v/themes/theme-1.html:136
+msgid "Editer mes informations"
+msgstr "Edit my informations"
+
+#: templates/c2v/themes/theme-1.html:142
+msgid "Experiences professionnelles"
+msgstr "Experience"
+
+#: templates/c2v/themes/theme-1.html:180
+msgid "Ajouter une experience"
+msgstr "Add an experience"
+
+#: templates/c2v/themes/theme-1.html:187
+msgid "Formations"
+msgstr "Education"
+
+#: templates/c2v/themes/theme-1.html:221
+msgid "Ajouter une formation"
+msgstr "Add education"
+
+#: templates/c2v/themes/theme-1.html:228
+msgid "Compétences"
+msgstr "Skills"
+
+#: templates/c2v/themes/theme-1.html:244
+msgid "Ajouter une compétence"
+msgstr "Add skill"
+
+#: templates/c2v/themes/theme-1.html:249
+msgid "Langues"
+msgstr "Language"
+
+#: templates/c2v/themes/theme-1.html:264
+msgid "Ajouter une langue"
+msgstr "Add language"
+
+#: templates/c2v/themes/theme-1.html:268
+msgid "Centres d’intérêt"
+msgstr "Hobbies"
+
+#: templates/c2v/themes/theme-1.html:281
+msgid "Ajouter un centres d’intérêt"
+msgstr "Add hobby"
+
+#: templates/c2v/themes/theme-1.html:303
+msgid "Ma video"
+msgstr "My video"
+
+#: templates/emails/candidature_envoyee.html:7
+#: templates/emails/email_interet.html:8
+#: templates/emails/modification_offre.html:7
+#: templates/emails/mot_de_passe_oublie.html:6
+#: templates/emails/nouveau_message_pro.html:6
+#: templates/emails/nouveau_message_user.html:7
+#: templates/emails/nouvelle_candidature_pro.html:6
+#: templates/emails/offre_publiee.html:7
+#: templates/emails/send_invitation_entretien.html:5
+#: templates/emails/suppression_offre.html:7
+#: templates/members/candidature-1.html:20
+msgid "Bonjour"
+msgstr "Hi "
+
+#: templates/emails/candidature_envoyee.html:8
+msgid "Votre candidature pour l'offre"
+msgstr "Your application for the offer"
+
+#: templates/emails/candidature_envoyee.html:8
+msgid "à bien été envoyée à"
+msgstr "has been sent"
+
+#: templates/emails/candidature_envoyee.html:9
+msgid "Vous pouvez"
+msgstr "You can "
+
+#: templates/emails/candidature_envoyee.html:9
+msgid "revoir votre entretien"
+msgstr "watch it again"
+
+#: templates/emails/candidature_envoyee.html:10
+msgid "En attendant la réponse de"
+msgstr "Pending the answer of"
+
+#: templates/emails/candidature_envoyee.html:10
+msgid "pourquoi ne pas continuer votre recherche ?"
+msgstr "Why don't you keep on searching"
+
+#: templates/emails/candidature_envoyee.html:11
+msgid "Voici une sélection d'offres qui pourraient vous correspondre"
+msgstr "Here is a selection of job offers that might match"
+
+#: templates/emails/candidature_envoyee.html:14
+msgid "Accéder aux annonces"
+msgstr "Access to the job offers"
+
+#: templates/emails/candidature_refusee.html:7
+msgid "Votre candidature chez"
+msgstr "Your Application at"
+
+#: templates/emails/candidature_refusee.html:11
+msgid ""
+"On dit souvent que quand on tombe de cheval, la meilleure chose à faire est "
+"de remonter aussitôt en selle."
+msgstr ""
+
+#: templates/emails/candidature_refusee.html:12
+msgid "Voici une liste d'annonces qui pourraient vous correspondre"
+msgstr "List of jobs ad that may fit you"
+
+#: templates/emails/candidature_refusee.html:16
+msgid "Voir toutes les annonces"
+msgstr "See all the jobs"
+
+#: templates/emails/email_interet.html:9
+#, fuzzy
+#| msgid "Vous avez reçu une nouvelle candidature pour votre offre"
+msgid "Un nouveau candidat est intéressé par votre offre"
+msgstr "You received a new application for your offer"
+
+#: templates/emails/email_interet.html:11
+msgid ""
+"Cependant il n’a pas encore passé l’entretien, nous vous invitions donc à "
+"découvrir son cv et à l’inviter à répondre à votre pré-entretien si son "
+"profil vous intéresse."
+msgstr ""
+
+#: templates/emails/email_interet.html:15
+#, fuzzy
+#| msgid "Voir la candidature"
+msgid "Voir le candidat"
+msgstr "See the application"
+
+#: templates/emails/modification_offre.html:8
+msgid "Vous avez modifié votre offre"
+msgstr "You edited your offer"
+
+#: templates/emails/modification_offre.html:8
+msgid ""
+"avec succès, pour consulter votre offre vous pouvez cliquer sur le lien ci-"
+"dessous"
+msgstr "Successfully, to see your ad you can click on the link bellow"
+
+#: templates/emails/modification_offre.html:11
+msgid "Voir l'offre"
+msgstr "See the job offer"
+
+#: templates/emails/modification_offre.html:14
+msgid ""
+"Vous pouvez aussi rechercher des candidats correspondant à votre recherche "
+"dans la C2V thèque"
+msgstr "You can also find candidates in our resume library"
+
+#: templates/emails/modification_offre.html:17
+#: templates/emails/offre_publiee.html:13
+msgid "Accéder à la CV-Theque"
+msgstr "Access to the resume library"
+
+#: templates/emails/mot_de_passe_oublie.html:7
+msgid ""
+"Un changement de mot de passe a été demandé sur notre site pour l'identifiant"
+msgstr "You asked for a new password"
+
+#: templates/emails/mot_de_passe_oublie.html:8
+msgid ""
+"Si vous êtes à l'origine de cette demande, et si vous êtes toujours d'accord "
+"pour procéder à la réinitialisation de votre mot de passe il vous suffit de "
+"cliquer sur le lien ci-dessous"
+msgstr ""
+
+#: templates/emails/mot_de_passe_oublie.html:11
+msgid "Réinitialiser mon mot de passe"
+msgstr "Reset my passsword"
+
+#: templates/emails/nouveau_message_pro.html:7
+#: templates/emails/nouveau_message_user.html:8
+msgid "Vous avez reçu un nouveau message de"
+msgstr "You received a message from"
+
+#: templates/emails/nouveau_message_pro.html:11
+msgid "Pour visionner le message du candidat cliquez sur le lien ci-dessous"
+msgstr "To see the message of the applicant, click here"
+
+#: templates/emails/nouveau_message_pro.html:14
+#: templates/emails/nouveau_message_user.html:12
+msgid "Voir le message"
+msgstr "See the message"
+
+#: templates/emails/nouveau_message_user.html:9
+msgid "Pour consulter le message, cliquez sur le bouton ci-dessous"
+msgstr "To see the message, click here"
+
+#: templates/emails/nouvelle_candidature_pro.html:7
+msgid "Vous avez reçu une nouvelle candidature pour votre offre"
+msgstr "You received a new application for your offer"
+
+#: templates/emails/nouvelle_candidature_pro.html:9
+msgid "Voir la candidature"
+msgstr "See the application"
+
+#: templates/emails/offre_publiee.html:8
+#: templates/emails/suppression_offre.html:8
+msgid "Votre offre"
+msgstr "Your offer"
+
+#: templates/emails/offre_publiee.html:8
+msgid "a été publiée avec succès."
+msgstr "Was successfully published"
+
+#: templates/emails/offre_publiee.html:9
+msgid "Vous allez bientôt recevoir vos premières candidatures."
+msgstr "You will soon receive your first applications"
+
+#: templates/emails/offre_publiee.html:10
+msgid "Vous pouvez aussi consulter des profils dans notre C2V thèque."
+msgstr "You can also see candidates in our resume library"
+
+#: templates/emails/send_invitation_entretien.html:6
+msgid "Tu t’es récemment montré intéressé par l’offre"
+msgstr ""
+
+#: templates/emails/send_invitation_entretien.html:6
+msgid "de"
+msgstr ""
+
+#: templates/emails/send_invitation_entretien.html:8
+msgid ""
+"Ta candidature a retenu leur attention et ils t’invitent à répondre à leur "
+"pré-entretien."
+msgstr ""
+
+#: templates/emails/send_invitation_entretien.html:12
+#, fuzzy
+#| msgid "Passer l'entretien"
+msgid "Passer l’entretien"
+msgstr "Apply"
+
+#: templates/emails/suppression_offre.html:8
+msgid "a bien été supprimée."
+msgstr "Has been deleted"
+
+#: templates/emails/suppression_offre.html:9
+msgid ""
+"Vous pouvez publier une nouvelle offre en cliquant sur le lien ci-dessous"
+msgstr "To create a job offer, click here"
+
+#: templates/emails/suppression_offre.html:12
+msgid "Publier une offre"
+msgstr "Create a job offer"
+
+#: templates/footer-pro.html:7
+msgid ""
+"Inscrivez vous sur Pitch My Job et publiez votre première offre gratuitement"
+msgstr "Sign up and publish your first offer for free"
+
+#: templates/footer-pro.html:7 templates/home-member-2.html.py:47
+#: templates/home-member.html:136 templates/home-member.html.py:186
+#: templates/home-pro-2.html:78 templates/home-pro.html.py:75
+#: templates/members/inscription.html:13
+#: templates/members/login-refonte.html:5 templates/pro/inscription.html:13
+#: templates/user-interne.html.py:99 templates/user-interne.html:126
+msgid "Inscription"
+msgstr "Sign up"
+
+#: templates/footer-pro.html:13 templates/footer.html.py:11
+#: templates/pages/base-mon-compte.html:18
+#: templates/pages/base-pro-mon-compte.html:18 templates/pro-interne.html:128
+msgid "A propos"
+msgstr "About"
+
+#: templates/footer-pro.html:15 templates/footer.html.py:13
+#: templates/pages/base-mon-compte.html:19
+#: templates/pages/base-pro-mon-compte.html:19
+msgid "Presse"
+msgstr "Press"
+
+#: templates/footer-pro.html:16 templates/pages/tarifs-pro.html.py:12
+msgid "Tarifs"
+msgstr "Prices"
+
+#: templates/footer-pro.html:17 templates/pages/mentions-legales.html.py:12
+msgid "Mentions légales"
+msgstr "Legal"
+
+#: templates/footer.html:6
+msgid "Partage PitchMyJob et aide nous à nous développer"
+msgstr "Share Pitch my job "
+
+#: templates/footer.html:10
+msgid "CGU"
+msgstr "GCU"
+
+#: templates/footer.html:12
+msgid "Faq"
+msgstr "FAQ"
+
+#: templates/footer.html:14 templates/pages/base-mon-compte.html.py:20
+#: templates/pages/base-pro-mon-compte.html:20
+msgid "Partenaires"
+msgstr "Partnership"
+
+#: templates/footer.html:15
+msgid "Nous contacter"
+msgstr "Contact us"
+
+#: templates/home-member-2.html:4 templates/home-member.html.py:137
+#: templates/home-member.html:187 templates/home-pro-2.html.py:79
+#: templates/home-pro.html:76 templates/members/login-refonte.html.py:48
+#: templates/members/login.html:14 templates/members/login.html.py:75
+#: templates/pro/login.html:13 templates/user-interne.html.py:100
+#: templates/user-interne.html:127
+msgid "Connexion"
+msgstr "Sign in"
+
+#: templates/home-member-2.html:41 templates/members/inscription.html.py:84
+#: templates/members/login-refonte.html:39 templates/members/login.html:69
+#: templates/members/my-account-information.html:32
+#: templates/members/my-account-password.html:24
+#: templates/members/my-account-password.html:34
+#: templates/members/my-account.html:21 templates/pro/inscription.html:57
+msgid "Mot de passe"
+msgstr "Password"
+
+#: templates/home-member-2.html:51
+msgid "Déjà inscrit ?"
+msgstr ""
+
+#: templates/home-member.html:128 templates/user-interne.html.py:91
+msgid "Mon CV"
+msgstr "Resume"
+
+#: templates/home-member.html:129 templates/user-interne.html.py:92
+msgid "Annonces"
+msgstr "Jobs"
+
+#: templates/home-member.html:130 templates/user-interne.html.py:93
+msgid "Entreprises"
+msgstr "Companies"
+
+#: templates/home-member.html:132 templates/home-member.html.py:157
+#: templates/layout-home-member.html:126
+#: templates/members/my-account-information.html:23
+#: templates/members/my-account-password.html:15
+#: templates/members/my-account.html:12
+#: templates/pages/base-mon-compte.html:11
+#: templates/pages/base-pro-mon-compte.html:11
+#: templates/pro/my-account-password.html:14 templates/pro/my-account.html:14
+#: templates/user-interne.html.py:95 templates/user-interne.html:118
+msgid "Mon compte"
+msgstr "My account"
+
+#: templates/home-member.html:133
+#: templates/members/mes-candidatures-offre.html:12
+#: templates/user-interne.html:96
+msgid "Mes candidatures"
+msgstr "My applications"
+
+#: templates/home-member.html:134 templates/home-member.html.py:161
+#: templates/pro-interne.html:89 templates/user-interne.html.py:97
+#: templates/user-interne.html:122
+msgid "Déconnexion"
+msgstr "SIgn out"
+
+#: templates/home-member.html:138 templates/user-interne.html.py:101
+msgid "Accés recruteur"
+msgstr "Recruiters"
+
+#: templates/home-member.html:158 templates/user-interne.html.py:119
+msgid "Candidatures"
+msgstr "Appications"
+
+#: templates/home-member.html:188 templates/layout-home-member.html.py:130
+#: templates/user-interne.html:128
+msgid "Accès recruteur"
+msgstr "Recruiters"
+
+#: templates/home-member.html:195
+msgid "LE SITE D'EMPLOI QUI DONNE LA PAROLE AUX CANDIDATS"
+msgstr "THE JOB-BOARD THAT GIVES BACK A VOICE TO CANDIDATES"
+
+#: templates/home-member.html:200
+msgid "Recherchez une offre d'emploi et répondez aux questions des recruteurs"
+msgstr "Select a job offer and answer to pre-interview questions"
+
+#: templates/home-member.html:203
+msgid "Métier, mot clé ou entreprise"
+msgstr "job title, keyword, company..."
+
+#: templates/home-member.html:204
+msgid "Lieu"
+msgstr "Location"
+
+#: templates/home-member.html:205
+msgid "Rechercher"
+msgstr "Search"
+
+#: templates/home-member.html:244
+msgid "LES OFFRES RÉCENTES"
+msgstr "Recent job offer"
+
+#: templates/home-member.html:265
+msgid "Voir toutes les offres"
+msgstr "See all the jobs"
+
+#: templates/home-member.html:273
+msgid "LE PRÉ-ENTRETIEN"
+msgstr "THE PRE-INTERVIEW"
+
+#: templates/home-member.html:276
+msgid "Recherche"
+msgstr "Search"
+
+#: templates/home-member.html:276
+msgid ""
+"Selectionne les offres d'emploi et de stage qui correspondent à ta recherche."
+msgstr "Select the job or traineeship offer that best suits your skills"
+
+#: templates/home-member.html:277
+msgid "Reponse"
+msgstr "Answer"
+
+#: templates/home-member.html:277
+msgid ""
+"Postule en répondant aux questions d’entretien des recruteurs en vidéo, "
+"audio ou texte"
+msgstr "Apply by answering interview questions in video, audio or text"
+
+#: templates/home-member.html:278
+msgid "Reception"
+msgstr "Send"
+
+#: templates/home-member.html:278
+msgid "Ton CV et ton pré-entretien sont envoyés directement aux recruteurs."
+msgstr "Your resume and your pre-interview  are sent to the recruiters"
+
+#: templates/home-member.html:282 templates/members/inscription.html.py:98
+#: templates/members/login.html:78 templates/pro/login.html.py:43
+msgid "S'inscrire"
+msgstr "Sign up"
+
+#: templates/home-member.html:290 templates/home-pro.html.py:108
+msgid "LE CV"
+msgstr "THE RESUME"
+
+#: templates/home-member.html:293
+msgid "Démarque-toi des autres candidats en donnant vie à ton cv."
+msgstr "Stand out by giving life to your resume"
+
+#: templates/home-member.html:294
+msgid "Crée ton cv et remplace ta photo par un pitch video."
+msgstr "Create your resume and replace your photo by a video pitch"
+
+#: templates/home-member.html:295
+msgid "Créer mon CV"
+msgstr "Create my resume"
+
+#: templates/home-member.html:303
+msgid "SIMULATION"
+msgstr "Training"
+
+#: templates/home-member.html:305
+msgid ""
+"Entraine-toi et deviens un expert des entretiens d’embauche grâce à notre "
+"outil de simulation."
+msgstr ""
+"Practice and become an expert of job interviews with our simulation solution"
+
+#: templates/home-member.html:306
+msgid "S'entraîner"
+msgstr "Train"
+
+#: templates/home-member.html:402
+msgid "PITCH MY JOB BIENTOT SUR MOBILE"
+msgstr "Available soon on mobile"
+
+#: templates/home-member.html:403
+msgid ""
+"Avec l'application Pitch my job postule et passe tes entretiens à tout "
+"moment, où que tu sois."
+msgstr ""
+"With pitch my job's application you can attend a pre-interview where ever "
+"you are"
+
+#: templates/home-member.html:417
+msgid "ILS RECRUTENT"
+msgstr "They hire"
+
+#: templates/home-member.html:418
+msgid "Découvre toutes les offres proches de chez toi."
+msgstr "Discover all the companies near you"
+
+#: templates/home-member.html:462 templates/members/list-job.html.py:247
+msgid "Afficher l'annonce"
+msgstr "See the offer"
+
+#: templates/home-pro-2.html:76 templates/home-pro.html.py:73
+msgid "Accédez à mon espace Pro"
+msgstr "Get to recruiters' space"
+
+#: templates/home-pro-2.html:81 templates/home-pro.html.py:78
+msgid "Accès candidat"
+msgstr "Candidates"
+
+#: templates/home-pro-2.html:88
+msgid "Recrutez autrement"
+msgstr ""
+
+#: templates/home-pro-2.html:88
+#, fuzzy
+#| msgid "S'inscrire sur Pitch my job"
+msgid "grâce à Pitch my job !"
+msgstr "Register to Pitch my job"
+
+#: templates/home-pro-2.html:89
+#, fuzzy
+#| msgid "Publier une offre"
+msgid "Publiez une offre"
+msgstr "Create a job offer"
+
+#: templates/home-pro-2.html:211
+#, fuzzy
+#| msgid "Accédez à la CV-thèque"
+msgid "Accédez à la CV-Thèque"
+msgstr "Acces to the resume library"
+
+#: templates/home-pro-2.html:234
+#, fuzzy
+#| msgid "a visité votre profil"
+msgid "Créez votre profil"
+msgstr "Viewed your profile"
+
+#: templates/home-pro-2.html:329 templates/pro/job-form-step-five.html:53
+msgid "Gratuit"
+msgstr "Free"
+
+#: templates/home-pro.html:85
+msgid "recrutez autrement grâce au CV et au pré-entretien"
+msgstr "Change the way you recruit thanks to pre-interview"
+
+#: templates/home-pro.html:86 templates/home-pro.html.py:101
+msgid "Publier une offre gratuitement"
+msgstr "Publish a job offer"
+
+#: templates/home-pro.html:94
+msgid "ENTRETIEN DIFFÉRÉ"
+msgstr "PRE-INTERVIEW"
+
+#: templates/home-pro.html:97
+msgid "Etape 1"
+msgstr "Step 1"
+
+#: templates/home-pro.html:97
+msgid "Rédigez votre annonce d'emploi et ajouter des questions d'entretiens"
+msgstr "Edit your job offer and add interview questions"
+
+#: templates/home-pro.html:98
+msgid "Etape 2"
+msgstr "Step 2"
+
+#: templates/home-pro.html:98
+msgid ""
+"Les candidats postulent en répondant directement à vos questions en vidéo, "
+"audio ou texte"
+msgstr ""
+"The candidates apply by answering your questions in video, audio or text"
+
+#: templates/home-pro.html:99
+msgid "Etape 3"
+msgstr "Step 3"
+
+#: templates/home-pro.html:99
+msgid "Vous recevez le CV et l’entretien du candidat par mail."
+msgstr "You receive the resume and interview by mail"
+
+#: templates/home-pro.html:109
+msgid ""
+"Découvrez la personalité des candidats gràce au pitch vidéo contenu dans "
+"leur CV. Et gagnez du temps lors de la pré-selection de vos candidats"
+msgstr ""
+"Discover who stands behind a resume thanks to the pitch video and save time "
+"on candidate's pre-selection"
+
+#: templates/home-pro.html:115
+msgid "LA CV-THEQUE"
+msgstr "THE RESUME LIBRARY"
+
+#: templates/home-pro.html:117
+msgid ""
+"Vous cherchez à recruter un candidat ? Accédez à la première base de donnée "
+"de CV Vidéo"
+msgstr "You're a looking for a candidate ? Access to our resume database"
+
+#: templates/home-pro.html:119
+msgid ""
+"Sourcez de manière optimale les personnalités qui correspondent à votre "
+"entreprise"
+msgstr "Source the people that fits with your company"
+
+#: templates/home-pro.html:120
+msgid ""
+"Gagnez du temps en envoyant des demandes d'entretiens aux meilleurs profils."
+msgstr "Save time by sending pre-interview questions to the best candidates"
+
+#: templates/home-pro.html:122 templates/home-pro.html.py:134
+msgid "Accédez à la CV-thèque"
+msgstr "Acces to the resume library"
+
+#: templates/home-pro.html:129
+msgid "VOTRE PROFIL ENTREPRISE"
+msgstr "YOUR COMPANY PROFILE"
+
+#: templates/home-pro.html:132
+msgid ""
+"Gràce à votre profil, développez votre marque employeur, attirez de nouveaux "
+"talents et recevez gratuitement des candidatures spontanée."
+msgstr ""
+"hanks to your career page, develop your employment brand, attract new "
+"talents and receive free spontaneous applications"
+
+#: templates/layout-home-member.html:118 templates/layout-home-member.html:124
+#: templates/pages/base-faq.html:21
+msgid "Offres d'emploi"
+msgstr "Job offers"
+
+#: templates/layout-home-member.html:139
+msgid "Dechire ta lettre de motivation"
+msgstr ""
+
+#: templates/layout-home-member.html:141
+#, fuzzy
+#| msgid ""
+#| "Postule en répondant aux questions d’entretien des recruteurs en vidéo, "
+#| "audio ou texte"
+msgid ""
+"Postule en répondant aux questions des recruteurs en vidéo et décroche ton "
+"prochain job"
+msgstr "Apply by answering interview questions in video, audio or text"
+
+#: templates/members/candidature-1.html:21
+msgid "Vous avez choisi de postuler à l’annonce de"
+msgstr "You chose to apply to the offer"
+
+#: templates/members/candidature-1.html:21
+msgid "pour le poste de"
+msgstr "for the position of"
+
+#: templates/members/candidature-1.html:22
+msgid "a rédigé un entretien différé sous forme de"
+msgstr "has created a pre interview"
+
+#: templates/members/candidature-1.html:22
+msgid "questions auquel vous pouvez répondre en vidéo, audio ou texte."
+msgstr "you can answer to the interview in video, audio or text"
+
+#: templates/members/candidature-1.html:27
+msgid "Pas encore prêt ?"
+msgstr "Not ready yet ?"
+
+#: templates/members/candidature-1.html:27
+msgid "Entrainez-vous !"
+msgstr "Practice !"
+
+#: templates/members/candidature-1.html:29
+msgid "S'entrainer"
+msgstr "Practice"
+
+#: templates/members/candidature-1.html:34
+msgid "Vous avez déjà postulé à cette offre"
+msgstr "You already applied to that offer"
+
+#: templates/members/candidature-1.html:34
+#: templates/members/mes-candidatures-offre-interet.html:42
+#: templates/members/mes-candidatures-offre.html:42
+msgid "Voir ma candidature"
+msgstr "See my application"
+
+#: templates/members/candidature-1.html:36
+#: templates/members/detail-job.html:105 templates/members/detail-job.html:156
+msgid "Ma candidature"
+msgstr "My application"
+
+#: templates/members/candidature-1.html:39
+msgid "Cliquez sur démarrer l'entretien"
+msgstr "Click to start the interview"
+
+#: templates/members/candidature-1.html:39
+msgid "pour accéder aux questions"
+msgstr "Access to the questions"
+
+#: templates/members/candidature-1.html:41
+msgid "Démarrer l'entretien"
+msgstr "Start the interview"
+
+#: templates/members/candidature-2.html:13
+msgid "Valider votre CV"
+msgstr "Validate your resume"
+
+#: templates/members/candidature-2.html:21
+msgid ""
+"Veuillir remplir au minimum une expérience et une formation dans votre C2V en"
+msgstr "Complete at least one e"
+
+#: templates/members/candidature-2.html:21
+msgid "cliquant ici"
+msgstr "click here"
+
+#: templates/members/candidature-2.html:22
+msgid "ou bien importer un CV en format PDF."
+msgstr "or import your resume in PDF"
+
+#: templates/members/candidature-2.html:41
+msgid "Modifier mon CV"
+msgstr "Edit my resume"
+
+#: templates/members/candidature-2.html:42
+msgid "Votre CV a bien été importé."
+msgstr "Your resume was successfully imported"
+
+#: templates/members/candidature-2.html:46
+msgid "Postuler avec mon CV"
+msgstr "Apply with my resume"
+
+#: templates/members/candidature-3.html:14
+msgid "Choisissez un mode de réponse"
+msgstr "Answering mode "
+
+#: templates/members/candidature-3.html:25
+msgid "Réponse vidéo"
+msgstr "Video answer"
+
+#: templates/members/candidature-3.html:36
+#: templates/pro/job-form-step-four.html:65
+msgid "Réponse audio"
+msgstr "Audio answer"
+
+#: templates/members/candidature-3.html:47
+#: templates/pro/job-form-step-four.html:71
+msgid "Réponse texte"
+msgstr "Text answer"
+
+#: templates/members/candidature-4-audio.html:59
+msgid "Allumez votre micro"
+msgstr "Turn on your microphone"
+
+#: templates/members/candidature-4-video.html:27
+msgid "Prêts à passer l'entretien ?"
+msgstr "Ready to pass the interview"
+
+#: templates/members/candidature-4-video.html:44
+msgid "Question suivante"
+msgstr "Next question"
+
+#: templates/members/candidature-4-video.html:46
+msgid "Recommencer"
+msgstr "Restart"
+
+#: templates/members/candidature-4-video.html:47
+msgid "Finir l'entretien"
+msgstr "Finish the enterview"
+
+#: templates/members/candidature-4-video.html:49
+msgid "Démarrer"
+msgstr "Start"
+
+#: templates/members/candidature-4-video.html:50
+msgid "Envoyer la candidature"
+msgstr "Send your application"
+
+#: templates/members/candidature-4.html:43
+#: templates/pro/job-form-step-five.html:88
+#: templates/pro/job-form-step-four.html:80
+#: templates/pro/job-form-step-tree.html:66
+#: templates/pro/job-form-step-two.html:89
+msgid "Retour"
+msgstr "Back"
+
+#: templates/members/candidature-4.html:44
+msgid "Suivant"
+msgstr "Next"
+
+#: templates/members/candidature-5.html:14
+msgid "Entretien terminé"
+msgstr "Interview finished"
+
+#: templates/members/candidature-5.html:21
+msgid "Félicitations !"
+msgstr "Congratulations !"
+
+#: templates/members/candidature-5.html:22
+msgid "Votre candidature pour le poste de"
+msgstr "Your application for the position"
+
+#: templates/members/candidature-5.html:22
+msgid "chez"
+msgstr "at"
+
+#: templates/members/candidature-5.html:22
+msgid "a bien été envoyé."
+msgstr "was successfully sent"
+
+#: templates/members/candidature-5.html:27
+msgid "Continuez"
+msgstr "Continue"
+
+#: templates/members/candidature-5.html:27
+msgid "votre recherche"
+msgstr "your research"
+
+#: templates/members/candidature-5.html:29
+msgid "Retour aux annonces"
+msgstr "Back to jobs"
+
+#: templates/members/candidature-5.html:33
+msgid "Revisionnez"
+msgstr "Replay"
+
+#: templates/members/candidature-5.html:33
+msgid "vos réponses"
+msgstr "your answers"
+
+#: templates/members/candidature-5.html:35
+msgid "Voir mes réponses"
+msgstr "Consult my answers"
+
+#: templates/members/detail-job.html:58 templates/members/detail-pro.html:18
+#: templates/pro/list-candidature.html:15
+#: templates/pro/list-reponse-candidature.html:14
+msgid "Retour à la liste"
+msgstr "back to the list"
+
+#: templates/members/detail-job.html:80 templates/pro/c2vtheque.html.py:33
+msgid "Type de contrat"
+msgstr "Contract type"
+
+#: templates/members/detail-job.html:85
+msgid "Experience"
+msgstr "Experience"
+
+#: templates/members/detail-job.html:92
+#, fuzzy
+#| msgid "Diplôme"
+msgid "Diplome"
+msgstr "Degree"
+
+#: templates/members/detail-job.html:95
+msgid "Date"
+msgstr "Date"
+
+#: templates/members/detail-job.html:98
+msgid "Référence"
+msgstr "Reference"
+
+#: templates/members/detail-job.html:113 templates/members/detail-job.html:158
+#: templates/members/detail-job.html:159
+msgid "Passer l'entretien"
+msgstr "Apply"
+
+#: templates/members/detail-job.html:133
+#: templates/pro/job-form-step-tree.html:19
+#: templates/pro/job-form-step-tree.html:42
+msgid "Description du poste"
+msgstr "Job description"
+
+#: templates/members/detail-job.html:142
+#: templates/pro/job-form-step-tree.html:47
+msgid "Missions"
+msgstr "Missions"
+
+#: templates/members/detail-job.html:148
+#: templates/pro/job-form-step-tree.html:52
+msgid "Profil"
+msgstr "Profile"
+
+#: templates/members/detail-job.html:197 templates/members/detail-pro.html:109
+#: templates/pro/profil.html.py:90
+msgid "Site Web"
+msgstr "Website"
+
+#: templates/members/detail-job.html:198 templates/members/detail-pro.html:110
+#: templates/pro/profil.html.py:92
+msgid "Secteur"
+msgstr "Activity area"
+
+#: templates/members/detail-job.html:199 templates/members/detail-pro.html:111
+#: templates/pro/profil.html.py:94
+msgid "Employés"
+msgstr "Employees"
+
+#: templates/members/detail-job.html:200 templates/members/detail-pro.html:112
+#: templates/pro/profil.html.py:96
+msgid "Chiffre d'affaire"
+msgstr "Turnover"
+
+#: templates/members/detail-job.html:225 templates/members/detail-pro.html:121
+#: templates/pro/list-candidature.html:139
+msgid "Statistiques"
+msgstr "Statistics"
+
+#: templates/members/detail-job.html:226
+#: templates/pro/list-candidature.html:140
+msgid "vues"
+msgstr "Views"
+
+#: templates/members/detail-job.html:227 templates/members/detail-pro.html:123
+msgid "candidature"
+msgstr "application"
+
+#: templates/members/detail-job.html:245 templates/pages/react.html.py:32
+#, fuzzy
+#| msgid "S'inscrire sur Pitch my job"
+msgid "Grâce à Pitch my job"
+msgstr "Register to Pitch my job"
+
+#: templates/members/detail-job.html:246 templates/pages/react.html.py:33
+#, fuzzy
+#| msgid "Completer votre CV en 1 clic"
+msgid "Créez votre CV en un clic"
+msgstr "Create your resume in one click"
+
+#: templates/members/detail-job.html:439 templates/pages/react.html.py:282
+msgid "Nom *"
+msgstr ""
+
+#: templates/members/detail-job.html:444 templates/pages/react.html.py:287
+#, fuzzy
+#| msgid "Prénom"
+msgid "Prénom *"
+msgstr "First name"
+
+#: templates/members/detail-job.html:449 templates/pages/react.html.py:292
+#, fuzzy
+#| msgid "Email"
+msgid "Email *"
+msgstr "Email"
+
+#: templates/members/detail-job.html:455 templates/pages/react.html.py:298
+#, fuzzy
+#| msgid "Mot de passe"
+msgid "Mot de passe *"
+msgstr "Password"
+
+#: templates/members/detail-job.html:472 templates/pages/react.html.py:309
+msgid "Vous êtes déjà inscrits ?"
+msgstr ""
+
+#: templates/members/detail-pro.html:25
+msgid "Candidature spontannée"
+msgstr "spontaneous application"
+
+#: templates/members/detail-pro.html:43
+msgid "Description de l'entreprise"
+msgstr "Company's description"
+
+#: templates/members/detail-pro.html:60
+msgid "Listes des annonces"
+msgstr "Job list "
+
+#: templates/members/detail-pro.html:76 templates/members/list-job.html:164
+msgid "Voir l'annonce"
+msgstr "Open"
+
+#: templates/members/detail-pro.html:122
+msgid "vue"
+msgstr "views"
+
+#: templates/members/fbconnect-password.html:14
+msgid "Entrez votre mot de passe"
+msgstr "Enter a new password"
+
+#: templates/members/fbconnect-password.html:32
+#: templates/pages/reset-password-3.html:46
+msgid "Nouveau mot de passe"
+msgstr "New password"
+
+#: templates/members/fbconnect-password.html:36
+#: templates/members/inscription.html:88
+#: templates/members/my-account-password.html:80
+#: templates/pages/reset-password-3.html:50 templates/pro/inscription.html:61
+#: templates/pro/my-account-password.html:65
+msgid "Confirmer mot de passe"
+msgstr "confirm password"
+
+#: templates/members/fbconnect-password.html:41
+#: templates/pages/reset-password-3.html:55
+msgid "Valider"
+msgstr "Confirm"
+
+#: templates/members/fbconnect-password.html:44
+#: templates/pages/reset-password-1.html:43
+#: templates/pages/reset-password-2.html:32
+#: templates/pages/reset-password-3.html:58
+msgid "Besoin d'aide ? Consultez la"
+msgstr "Need help ? Access"
+
+#: templates/members/fbconnect-password.html:44
+#: templates/pages/base-faq.html:11 templates/pages/reset-password-1.html:43
+#: templates/pages/reset-password-2.html:25
+#: templates/pages/reset-password-2.html:32
+#: templates/pages/reset-password-3.html:58
+msgid "FAQ"
+msgstr "FAQ"
+
+#: templates/members/inscription-step-two.html:14
+msgid "Information & Recherche"
+msgstr "Information & Research"
+
+#: templates/members/inscription-step-two.html:43
+msgid ""
+"Ajouter ici un maximum de mot clés correspondant à votre recherche. Il peut "
+"s'agir de compétences, métiers ou fonctions"
+msgstr ""
+
+#: templates/members/inscription-step-two.html:75
+#: templates/members/my-account-information.html:91
+msgid "Lieu de recherche"
+msgstr "Location "
+
+#: templates/members/inscription-step-two.html:105
+msgid "Terminer"
+msgstr "Finish"
+
+#: templates/members/inscription.html:32
+#, fuzzy
+#| msgid "L'inscription via Linkedin crée votre compte et"
+msgid "L'inscription via Viadeo ou Linkedin crée votre compte et"
+msgstr "Register via LinkedIn and "
+
+#: templates/members/inscription.html:32
+#, fuzzy
+#| msgid "rempli votre cv en 1 click."
+msgid "rempli votre compte en 1 clic."
+msgstr "complete your resume in 1 click"
+
+#: templates/members/inscription.html:66 templates/pro/inscription.html:49
+msgid "Prenom"
+msgstr "First name"
+
+#: templates/members/inscription.html:70
+msgid "Date de naissance (jj/mm/AAAA)"
+msgstr "Date of birth (DD/MM/YYYY)"
+
+#: templates/members/inscription.html:92 templates/pro/inscription.html:65
+msgid "conditions générales d'utilisation"
+msgstr "general condition of use"
+
+#: templates/members/list-job.html:65 templates/members/list-pro.html.py:34
+msgid "RECHERCHER"
+msgstr "SEARCH"
+
+#: templates/members/list-job.html:81 templates/pro/job-form-step-two.html:34
+msgid "Types de contrat"
+msgstr "Contract type"
+
+#: templates/members/list-job.html:88
+msgid "Expérience professionnelle"
+msgstr "Professional experience"
+
+#: templates/members/list-job.html:94
+msgid "Temps de travail"
+msgstr "Working period"
+
+#: templates/members/list-job.html:103 templates/pro/c2vtheque.html.py:25
+msgid "Filtres"
+msgstr "Filters"
+
+#: templates/members/list-job.html:178 templates/members/list-pro.html:83
+msgid "Oops !"
+msgstr "Oops !"
+
+#: templates/members/list-job.html:183
+msgid "Quelles entreprises aimeriez vous retrouver sur Pitch my job ?"
+msgstr ""
+
+#: templates/members/list-job.html:186
+#, fuzzy
+#| msgid "Nom de l'entreprise"
+msgid "Noms des entreprises"
+msgstr "Company name"
+
+#: templates/members/list-job.html:325
+#, fuzzy
+#| msgid "Entretiens différés"
+msgid "L'entretien différé"
+msgstr "Pre-interviews"
+
+#: templates/members/list-job.html:326
+msgid "Répond aux questions des recruteurs de 3 manières :"
+msgstr "3 innovative ways of answering the recruiter's questions"
+
+#: templates/members/list-job.html:330
+#, fuzzy
+#| msgid "Ma video"
+msgid "Video"
+msgstr "My video"
+
+#: templates/members/list-job.html:334
+msgid "Audio"
+msgstr "Audio"
+
+#: templates/members/list-job.html:338
+msgid "Texte"
+msgstr "Text"
+
+#: templates/members/list-job.html:357
+#, fuzzy
+#| msgid "S'inscrire sur Pitch my job"
+msgid "Ils recrutent sur Pitch My Job"
+msgstr "They recruit on Pitch my Job"
+
+#: templates/members/list-pro.html:69 templates/members/list-pro.html.py:71
+msgid "OFFRE"
+msgstr "OFFER"
+
+#: templates/members/list-pro.html:76
+msgid "VOIR PROFIL"
+msgstr "PROFILE"
+
+#: templates/members/list-pro.html:84
+msgid "Aucune entreprise trouvée"
+msgstr "No company found"
+
+#: templates/members/login.html:74 templates/pro/login.html.py:39
+msgid "Mot de passé oublié ?"
+msgstr "Forgotten password ?"
+
+#: templates/members/ma-candidature.html:14
+msgid "Résumé de ma candidature"
+msgstr "Application's summary"
+
+#: templates/members/ma-candidature.html:20
+msgid "Retour aux offres"
+msgstr "Back to offers"
+
+#: templates/members/mes-candidatures-offre-interet.html:12
+#: templates/members/mes-candidatures-offre-interet.html:20
+#: templates/members/mes-candidatures-offre.html:20
+msgid "Les offres qui m'intéressent"
+msgstr ""
+
+#: templates/members/mes-candidatures-offre-interet.html:19
+#: templates/members/mes-candidatures-offre.html:19
+msgid "Offre d'emplois"
+msgstr "Job offers"
+
+#: templates/members/mes-candidatures-offre-interet.html:48
+#, fuzzy
+#| msgid "Aucune candidature"
+msgid "Aucune offre"
+msgstr "No application received"
+
+#: templates/members/mes-candidatures-offre.html:48
+msgid "Aucune candidature"
+msgstr "No application received"
+
+#: templates/members/my-account-information.html:30
+#: templates/members/my-account-password.html:22
+#: templates/members/my-account.html:19 templates/members/my-account.html:31
+msgid "Votre compte"
+msgstr "Your account"
+
+#: templates/members/my-account-information.html:31
+#: templates/members/my-account-password.html:23
+#: templates/members/my-account.html:20
+msgid "Votre recherche"
+msgstr "Your research"
+
+#: templates/members/my-account-information.html:42
+msgid "Informations & Recherches"
+msgstr "Informations & Research"
+
+#: templates/members/my-account-information.html:62
+#, fuzzy
+#| msgid "Compétences"
+msgid "Compétence, metier"
+msgstr "Skills"
+
+#: templates/members/my-account-information.html:69
+#: templates/pro/c2vtheque.html:38
+msgid "Niveau d'étude"
+msgstr "Level of studies"
+
+#: templates/members/my-account-information.html:74
+msgid "Années d'expérience"
+msgstr "Years of experience"
+
+#: templates/members/my-account-information.html:82
+msgid "Types de contrats"
+msgstr "Contract types"
+
+#: templates/members/my-account-information.html:104
+msgid "Disponibilité (Laissez vide si immediate)"
+msgstr "Availability (don't fill if immediate)"
+
+#: templates/members/my-account-password.html:66
+#: templates/pro/my-account-password.html:51
+msgid "Ancien de mot de passe"
+msgstr "Old password"
+
+#: templates/members/my-account-password.html:73
+#: templates/pro/my-account-password.html:58
+msgid "Nouveau de mot de passe"
+msgstr "New password"
+
+#: templates/members/my-account.html:50 templates/pro/my-account.html.py:37
+msgid "Supprimer mon compte"
+msgstr "Delete account"
+
+#: templates/members/my-account.html:67
+msgid "Adresse email"
+msgstr "Mail adress"
+
+#: templates/notifications/list_notification.html:10
+msgid "Nouvelle candidature de"
+msgstr "New apllication from"
+
+#: templates/notifications/list_notification.html:21
+msgid "Candidatre refusé de la part de"
+msgstr "Application refused from"
+
+#: templates/notifications/list_notification.html:32
+msgid "a visité votre profil"
+msgstr "Viewed your profile"
+
+#: templates/notifications/messages.html:12
+msgid "Discussions"
+msgstr "Discussions"
+
+#: templates/notifications/messages.html:19
+msgid "En ligne"
+msgstr "Online"
+
+#: templates/notifications/messages.html:53
+msgid "Desactiver les notifications"
+msgstr "Desable notifications "
+
+#: templates/notifications/messages.html:54
+msgid "Supprimer la conversation"
+msgstr "Delete conversation"
+
+#: templates/notifications/messages.html:56
+msgid "Bloquer"
+msgstr "Block"
+
+#: templates/notifications/notif.html:11
+msgid "Mes notifications"
+msgstr "My notifications"
+
+#: templates/notifications/notif.html:14
+msgid "Aucune notifications"
+msgstr "Notification empty"
+
+#: templates/notifications/notif_msg.html:10
+msgid "Mes messages"
+msgstr "My messages"
+
+#: templates/notifications/notif_msg.html:13
+msgid "Aucun message"
+msgstr "No message"
+
+#: templates/notifications/notif_msg.html:15
+msgid "Afficher tous mes messages"
+msgstr "Show all messages"
+
+#: templates/pages/a-propos-pro.html:12 templates/pages/a-propos.html.py:11
+msgid ""
+"Pitch my job est un site d'emploi Français permettant aux candidats et aux "
+"entreprises de se découvrir grâce à des innovations uniques, le CV et "
+"l'entretien différé."
+msgstr ""
+"Pitch my job is a french job board allowing candidates and companies to "
+"interact thanks to unique innovations : the pre-interview and the resume"
+
+#: templates/pages/a-propos-pro.html:14 templates/pages/a-propos.html.py:13
+msgid ""
+"L'aventure Pitch my job a démarré en Juin 2013 avec le soutien de "
+"l’incubateur AMBITION dans les locaux des MBA ESG à Paris à partir de "
+"janvier 2014."
+msgstr ""
+"The project Pitch my job started in June 2013 with the support of the "
+"incubator AMBITION in MBA ESG's offices in Paris since January 2014"
+
+#: templates/pages/a-propos-pro.html:16 templates/pages/a-propos.html.py:15
+msgid ""
+"Notre objectif est de permettre à tous les chercheurs d'emploi de mettre en "
+"avant leur personnalité et leur motivation et d’offrir aux entreprises des "
+"outils leur permettant de trouver le bon candidat."
+msgstr ""
+"Our goal is to allow every candidate to be able to put forward their "
+"motivation and personality and offer companies better tools to find the "
+"right candidate."
+
+#: templates/pages/base-faq.html:18 templates/pages/faq-general.html.py:11
+msgid "Général"
+msgstr "General"
+
+#: templates/pages/base-faq.html:19 templates/pages/faq-c2v.html.py:12
+msgid "C2V"
+msgstr "RESUME"
+
+#: templates/pages/base-faq.html:20
+#: templates/pages/faq-entretiens-differes.html:11
+msgid "Entretiens différés"
+msgstr "Pre-interviews"
+
+#: templates/pages/cgu.html:12
+msgid "Condition général d'utilisation"
+msgstr "general condition of use"
+
+#: templates/pages/cgu.html:21 templates/pages/mentions-legales.html.py:21
+msgid "Vie privée"
+msgstr "Privacy"
+
+#: templates/pages/cgu.html:25
+msgid ""
+"La collecte de données personnelles est indispensable pour le fonctionnement "
+"du site Pitchmyjob et le succès de la démarche de l'utilisateur. Ce dernier "
+"a cependant un intérêt légitime à être informé des modalités de "
+"conservation, de gestion et d'utilisation de ces données."
+msgstr ""
+"Collecting personal data is essential for Pitch my job and the success of "
+"the user's experience. The user has a legitimate interest to be informed of "
+"the conversation's modality, management and use of its data."
+
+#: templates/pages/cgu.html:27
+msgid ""
+"Pitchmyjob veille étroitement à la conservation et à la confidentialité de "
+"données personnelles enregistrées par chaque utilisateur sur le site et est "
+"tenu à cet égard d'une obligation de moyen."
+msgstr "Pitch my job "
+
+#: templates/pages/cgu.html:28
+msgid ""
+"Aucune donnée d'identification n'est recueillie par Pitchmyjob avant votre "
+"accès au site, cet accès se faisant après création de votre compte et "
+"acceptation des Conditions Générales d’Utilisation (CGU)."
+msgstr ""
+"No identification data is saved by Pitch my job before your access to the "
+"website, data are collected after you register and after your acceptance of "
+"the general condition of use"
+
+#: templates/pages/cgu.html:31
+msgid ""
+"L'utilisateur candidat autorise expressément et sans réserve Pitchmyjob à "
+"communiquer aux recruteurs toutes ses données personnelles d'identification "
+"(adresse mail) et l'intégralité de son profil, cette communication étant "
+"indispensable à la démarche du candidat. Pitchmyjob est expressément "
+"autorisé par l'utilisateur à utiliser les données autres que les données "
+"personnelles d'identification à des fins statistiques, d'étude ou à toute "
+"autre fin conforme à son objet social."
+msgstr ""
+"The user (candidate) expressly authorized and with no reserve Pitch my job "
+"to communicate to recruiters every personal data identification (mail "
+"adress) and the all the profile information, this communication is essential "
+"to the user's experience. Pitch my job is expressly authorized by the user "
+"to user all the other data for statistics use, study or any other end "
+"congruent to its social object."
+
+#: templates/pages/cgu.html:34
+msgid ""
+"Aucune donnée personnelle d'identification enregistrée sur le site par "
+"l'utilisateur ne sera utilisée par Pitchmyjob à d'autres fins que celles "
+"expressément autorisées ci-dessus par l'utilisateur. Ces mêmes données ne "
+"pourront en aucun cas être cédées par Pitchmyjob à qui que ce soit."
+msgstr ""
+"No personal identification data is saved on the website by the user will be "
+"used by Pitch my job for any other purposes than the ones expressly "
+"authorized  above by the user. These data cannot be sold by Pitch my job."
+
+#: templates/pages/cgu.html:37
+msgid ""
+"Le recruteur s'engage formellement et comme une condition essentielle de sa "
+"relation avec Pitchmyjob à veiller à la confidentialité des données "
+"personnelles des candidats qui lui seraient transmises, à en assurer la "
+"conservation ou, le cas échéant, la destruction avec le plus grand soin et "
+"dans le respect des textes en vigueur."
+msgstr ""
+"The recruiter formally commits and as an essential condition of its relation "
+"to Pitch my job to look after the confidentiality of the candidate's "
+"personal data transmitted by the candidates, to secrure their conservation, "
+"if any, the destruction with the greatest care and respect of the law."
+
+#: templates/pages/cgu.html:38
+msgid ""
+"Le recruteur s'interdit formellement toute transmission ou cession des "
+"données précitées quel qu’en soit le motif ou le bénéficiaire, et ce sous "
+"peine de fermeture immédiate de son compte et de poursuites judiciaires."
+msgstr ""
+"The recruiter agrees not to transmit or dispose any data abovementioned for "
+"any reason, ground or beneficiary upon a pain of immediate closure of the "
+"account and legal proceedings."
+
+#: templates/pages/cgu.html:41
+msgid ""
+"En application des dispositions de l'article 36 du chapitre V de la  Loi n° "
+"78-17 du 6 Janvier 1978, l'utilisateur, titulaire du droit d'accès aux "
+"informations le concernant (cf. article 34 de la même loi)  peut exiger "
+"qu'elles soient rectifiées, complétées, clarifiées, mises à jour ou effacées "
+"si elles sont inexactes, incomplètes, équivoques, périmées ou dont la "
+"collecte ou l'utilisation, la communication ou la conservation est interdite."
+msgstr ""
+"Under statutory provisions of the article 36 of the chapter V of the law n"
+"°78-28 of the 6 January 1978, the user owner of the right to access the "
+"information  about him (cf. article 34 of the same law) can require, "
+"rectification, completion, clairification, update or delete if they are "
+"inexact, incomplete, equivocal, ourdated or if the collect or use, "
+"communication or conservation if prohibided"
+
+#: templates/pages/cgu.html:44
+#, fuzzy
+#| msgid ""
+#| "A cette fin, contactez Pitchmyjob en envoyant un mail "
+#| "à contact@pitchmyjob.com ou un courrier à : Myc2v SAS, 56 Avenue du "
+#| "Général de Gaulle 78600 Maisons Laffitte."
+msgid ""
+"A cette fin, contactez Pitchmyjob en envoyant un mail à contact@pitchmyjob."
+"com ou un courrier à : Pitchmyjob SAS, 29 rue Viala 75015 Paris."
+msgstr ""
+"Please contact Pitch my job by sending an email at : contact@pitchmyjob.com "
+"or by mail at : Myc2v SAS, 56 Avenue du général de gaulle 78600 Maisons "
+"Laffitte"
+
+#: templates/pages/contact-pro.html:14 templates/pages/contact.html.py:12
+#: templates/pro-interne.html:124 templates/pro/job-form-step-one.html:40
+msgid "Contact"
+msgstr "Contact"
+
+#: templates/pages/contact-pro.html:21 templates/pages/contact.html.py:19
+msgid "Veuillez remplir tous les champs."
+msgstr "Please fill all the fields"
+
+#: templates/pages/contact-pro.html:59 templates/pages/contact.html.py:57
+msgid "Objet de votre demande"
+msgstr "Topic "
+
+#: templates/pages/contact-pro.html:64 templates/pages/contact.html.py:62
+msgid "Message"
+msgstr "Message"
+
+#: templates/pages/contact-pro.html:77 templates/pages/contact.html.py:75
+msgid "Contactez-nous directement"
+msgstr "Contact us "
+
+#: templates/pages/reset-password-1.html:30
+msgid ""
+"Vous devez saisir votre adresse email telle qu’elle a été saisie lors de "
+"votre inscription."
+msgstr "Please enter the same email adress you used when you registered"
+
+#: templates/pages/reset-password-2.html:24
+msgid "Votre demande à bien été envoyée par email"
+msgstr "Your request was successfully sent by email"
+
+#: templates/pages/reset-password-2.html:25
+msgid "Vous n'avez pas reçu d'email ? Consultez la"
+msgstr "You didn't receive an email ? Consult the"
+
+#: templates/pages/reset-password-3.html:41
+msgid "Entrez votre nouveau mot de passe."
+msgstr "Enter your new password"
+
+#: templates/pro-interne.html:72
+msgid "+ Publier une offre"
+msgstr "+ Publish an offer"
+
+#: templates/pro-interne.html:86
+msgid "Paramètre"
+msgstr "Settings"
+
+#: templates/pro-interne.html:106
+msgid "Mes offres"
+msgstr "My offers"
+
+#: templates/pro-interne.html:112
+msgid "CV-Thèque"
+msgstr "Resume library"
+
+#: templates/pro-interne.html:115
+msgid "Mon profil"
+msgstr "Profile"
+
+#: templates/pro-interne.html:118
+msgid "Crédits"
+msgstr "Credits"
+
+#: templates/pro/c2vtheque-candidat.html:30
+msgid "En poste"
+msgstr "Current position"
+
+#: templates/pro/c2vtheque-candidat.html:38
+#: templates/pro/list-candidature.html:57
+#: templates/pro/list-candidature.html:112
+#: templates/pro/list-reponse-candidature.html:182
+msgid "Contacter"
+msgstr "Contact"
+
+#: templates/pro/c2vtheque.html:28
+msgid "Secteur d'activités"
+msgstr "Activity area"
+
+#: templates/pro/c2vtheque.html:43 templates/pro/job-form-step-two.html:48
+msgid "Expérience"
+msgstr "Experience"
+
+#: templates/pro/c2vtheque.html:55
+msgid "Disponibilité"
+msgstr "Availability"
+
+#: templates/pro/c2vtheque.html:60
+msgid "Derniére connexion"
+msgstr "Last connexion"
+
+#: templates/pro/c2vtheque.html:64
+msgid "Reinitialsier"
+msgstr "Reset"
+
+#: templates/pro/c2vtheque.html:64
+msgid "Filter"
+msgstr "Filter"
+
+#: templates/pro/credits.html:13
+msgid "Vous ne disposez pas encore de crédits"
+msgstr "You don't have any crédits yet"
+
+#: templates/pro/credits.html:14
+#, fuzzy
+#| msgid "Publier une offre gratuitement"
+msgid ""
+"Vous pouvez publier votre première offre d'emploi gratuitement sur Pitch my "
+"job."
+msgstr "Publish a job offer"
+
+#: templates/pro/credits.html:15 templates/pro/list-offre.html.py:123
+msgid "PUBLIER UNE OFFRE"
+msgstr "PUBLISH A JOB OFFER"
+
+#: templates/pro/factures.html:12
+msgid "Vos factures"
+msgstr ""
+
+#: templates/pro/factures.html:17
+msgid "Facture N°"
+msgstr ""
+
+#: templates/pro/factures.html:22
+#, fuzzy
+#| msgid "La publication d’une offre d’emploi intègre:"
+msgid "Publication offre d'emploi"
+msgstr "Publishing a job offer includes"
+
+#: templates/pro/factures.html:30
+#, fuzzy
+#| msgid "Télécharger"
+msgid "Telecharger"
+msgstr "Download"
+
+#: templates/pro/factures.html:37
+#, fuzzy
+#| msgid "Aucune candidature"
+msgid "Aucune facture"
+msgstr "No application received"
+
+#: templates/pro/inscription-step-two.html:14
+msgid "Information de votre société"
+msgstr "Company's information"
+
+#: templates/pro/inscription-step-two.html:32
+msgid "Site web"
+msgstr "Website"
+
+#: templates/pro/inscription-step-two.html:40 templates/pro/my-account.html:54
+msgid "Siege social"
+msgstr "Headquarter"
+
+#: templates/pro/inscription-step-two.html:48
+msgid "Chiffre d'affaires"
+msgstr "Turnover"
+
+#: templates/pro/inscription-step-two.html:52
+msgid "URL de la video"
+msgstr "Video's URL"
+
+#: templates/pro/inscription-step-two.html:61 templates/pro/profil.html:50
+msgid "Description de votre entreprise"
+msgstr "Company's description"
+
+#: templates/pro/inscription.html:65
+msgid "Accepter les"
+msgstr "Accept the"
+
+#: templates/pro/job-form-step-five.html:50
+msgid "Annonce emploi"
+msgstr "Job offer"
+
+#: templates/pro/job-form-step-five.html:64
+msgid "La publication d’une offre d’emploi intègre:"
+msgstr "Publishing a job offer includes"
+
+#: templates/pro/job-form-step-five.html:66
+msgid "Valable 30 jours"
+msgstr "Available 30 days"
+
+#: templates/pro/job-form-step-five.html:67
+msgid "Candidatures illimitées"
+msgstr "Unlimited application"
+
+#: templates/pro/job-form-step-five.html:68
+msgid "Proposition automatique de candidats"
+msgstr "Auto candidate selection"
+
+#: templates/pro/job-form-step-five.html:69
+msgid "Accompagnement"
+msgstr "Support"
+
+#: templates/pro/job-form-step-five.html:80
+msgid "Offre"
+msgstr "Offer"
+
+#: templates/pro/job-form-step-four.html:18
+msgid "Ajoutez vos questions d'entretien"
+msgstr "Add your pre-interview questions"
+
+#: templates/pro/job-form-step-four.html:19
+msgid ""
+"Ajoutez les questions auxquelles les candidats répondront lorsqu'ils "
+"postuleront."
+msgstr "Candidates will answer to your questions to apply for the job"
+
+#: templates/pro/job-form-step-four.html:36
+#: templates/pro/job-form-step-four.html:94 templates/pro/profil.html:116
+msgid "Question"
+msgstr "Question"
+
+#: templates/pro/job-form-step-four.html:45
+msgid "Ajouter une question"
+msgstr "Add a question"
+
+#: templates/pro/job-form-step-four.html:52
+msgid "Choisissez les modes de réponse"
+msgstr "Select an answering method"
+
+#: templates/pro/job-form-step-four.html:55
+msgid ""
+"Vous pouvez choisir parmi les trois modes de réponses ci-dessous. Les "
+"candidats seront dans l’obligation de choisir un seul mode de réponse pour "
+"la totalité de l’entretien."
+msgstr ""
+"You have to select at least one answering mode. The candidates will be "
+"obliged to select one answering mode for the whole interview"
+
+#: templates/pro/job-form-step-four.html:60
+msgid "Réponse video"
+msgstr "Video"
+
+#: templates/pro/job-form-step-one.html:18
+msgid "Détail du poste"
+msgstr "Job description"
+
+#: templates/pro/job-form-step-one.html:23
+msgid "Votre logo"
+msgstr "Your logo"
+
+#: templates/pro/job-form-step-one.html:38
+msgid "Nom de l'entreprise"
+msgstr "Company name"
+
+#: templates/pro/job-form-step-one.html:42
+msgid "Lien vers le site"
+msgstr "website :"
+
+#: templates/pro/job-form-step-one.html:46
+msgid "Intitulé du poste"
+msgstr "Job title"
+
+#: templates/pro/job-form-step-one.html:48
+msgid "Lieux du poste"
+msgstr "Location "
+
+#: templates/pro/job-form-step-one.html:50
+msgid "Secteur du poste"
+msgstr "Activity area"
+
+#: templates/pro/job-form-step-tree.html:35
+#, fuzzy
+#| msgid "Compétences recherchées"
+msgid "Tags : Compétences recherchées"
+msgstr "Skills wanted"
+
+#: templates/pro/job-form-step-tree.html:57
+msgid "Url de la video de presentation du poste"
+msgstr "Video :"
+
+#: templates/pro/job-form-step-two.html:18
+msgid "Le contrat"
+msgstr "The contract"
+
+#: templates/pro/job-form-step-two.html:43
+msgid "Alternance"
+msgstr "Part-time"
+
+#: templates/pro/job-form-step-two.html:56
+msgid "Salaire net annuel"
+msgstr "Salary (annual)"
+
+#: templates/pro/job-form-step-two.html:59
+msgid "Laissez vide si selon profil"
+msgstr "Leave empty if depending on the profile"
+
+#: templates/pro/job-form-step-two.html:68
+msgid "Niveaux d'études"
+msgstr "Level of study"
+
+#: templates/pro/job-form-step-two.html:76
+msgid "Types de durée"
+msgstr "Duration "
+
+#: templates/pro/list-candidature.html:58
+msgid "Decliner"
+msgstr "Decline"
+
+#: templates/pro/list-candidature.html:113
+#, fuzzy
+#| msgid "Decliner"
+msgid "Décliner"
+msgstr "Decline"
+
+#: templates/pro/list-candidature.html:116
+#, fuzzy
+#| msgid "Prêts à passer l'entretien ?"
+msgid "Inviter à passer le pré-entretien"
+msgstr "Ready to pass the interview"
+
+#: templates/pro/list-candidature.html:133
+msgid "Mise en ligne le"
+msgstr "Online the "
+
+#: templates/pro/list-offre.html:15
+#, fuzzy
+#| msgid "Voir toutes les offres"
+msgid "Toutes les offres"
+msgstr "See all the jobs"
+
+#: templates/pro/list-offre.html:16
+#, fuzzy
+#| msgid "Offre d'emplois"
+msgid "Offre en cours"
+msgstr "Job offers"
+
+#: templates/pro/list-offre.html:17
+#, fuzzy
+#| msgid "Offre d'emplois"
+msgid "Offre expirée"
+msgstr "Job offers"
+
+#: templates/pro/list-offre.html:18
+msgid "Offre en attente de publication"
+msgstr ""
+
+#: templates/pro/list-offre.html:37
+msgid "Etes vous sur de vouloir supprimer l'offre"
+msgstr "Are you sure you want to delete this offer "
+
+#: templates/pro/list-offre.html:38 templates/pro/list-offre.html.py:103
+msgid "Supprimer"
+msgstr "Delete"
+
+#: templates/pro/list-offre.html:58
+#, fuzzy
+#| msgid "Passer l'entretien"
+msgid "Pré-entretien"
+msgstr "Apply"
+
+#: templates/pro/list-offre.html:61
+#, fuzzy
+#| msgid "CGU"
+msgid "CV"
+msgstr "GCU"
+
+#: templates/pro/list-offre.html:65
+msgid "Publier"
+msgstr ""
+
+#: templates/pro/list-offre.html:83
+msgid "Inviter une personne par email"
+msgstr "Invite someone by email"
+
+#: templates/pro/list-offre.html:88
+msgid "Pour republier"
+msgstr ""
+
+#: templates/pro/list-offre.html:88
+#, fuzzy
+#| msgid "cliquant ici"
+msgid "cliquez ici"
+msgstr "click here"
+
+#: templates/pro/list-offre.html:93
+msgid "En attente de publication"
+msgstr ""
+
+#: templates/pro/list-offre.html:100
+msgid "Modifier"
+msgstr "Edit"
+
+#: templates/pro/list-offre.html:110
+#, fuzzy
+#| msgid "Inviter une personne par email"
+msgid "Inviter des candidats par email"
+msgstr "Invite someone by email"
+
+#: templates/pro/list-offre.html:121
+msgid "AUCUNE OFFRE PUBLIÉE"
+msgstr "NO OFFER PUBLISHED"
+
+#: templates/pro/list-offre.html:122
+msgid "Trouvez le candidat qu’il vous faut, grâce à l’entretien différé."
+msgstr "Find the best candidates thanks to the pre-interview !"
+
+#: templates/pro/list-offre.html:195
+msgid "Envoyez l'annonce par email"
+msgstr "Send the offer by email"
+
+#: templates/pro/list-offre.html:202
+msgid ""
+"Ajoutez les adresses emails des candidats que vous souhaitez inviter à "
+"repondre à votre pré-entretien video."
+msgstr ""
+
+#: templates/pro/list-offre.html:206
+msgid ""
+"Separé par une virgule si plusieurs (ex : john@mail.com, lea@mail.com, ...)"
+msgstr ""
+
+#: templates/pro/my-account-password.html:15 templates/pro/my-account.html:15
+msgid "Modifier mon mot de passe"
+msgstr "Change my password"
+
+#: templates/pro/profil.html:25
+msgid "Veuillez remplir les champs obligatoire."
+msgstr "Please fill the fields marked *"
+
+#: templates/pro/profil.html:45
+msgid "Url de la vidéo de présentation"
+msgstr "Video "
+
+#~ msgid "Créer votre CV"
+#~ msgstr "Create your resume"
+
+#~ msgid "Demande d'entretien"
+#~ msgstr "Pre - Interview requests"
+
+#~ msgid ""
+#~ "Vous pouvez publier gratuitement des offres d'emploi sur Pitch my job "
+#~ "pendant toute la durée de la Béta fermée."
+#~ msgstr "You can publish your job offers for free during the béta version"
+
+#, fuzzy
+#~| msgid "Reponse"
+#~ msgid "Réponse"
+#~ msgstr "Answer"
+
+#~ msgid "Candidatures spontanées"
+#~ msgstr "Spontaneous applications"
+
+#~ msgid "Bientot disponible .."
+#~ msgstr "Available soon ..."
+
+#~ msgid "Retrouvez nous sur"
+#~ msgstr "Find us on "
+
+#~ msgid "Veuillez indiquer un métier recherché."
+#~ msgstr "Position searched"
+
+#~ msgid ""
+#~ "Veuillez saisir une date de disponibilité valide (sous forme dd/mm/YYYY)."
+#~ msgstr "Please enter a valid date (DD/MM/YYYY)"
+
+#~ msgid "Diplome minimum"
+#~ msgstr "Minimum degree"
+
+#~ msgid "Métier recherché"
+#~ msgstr "Position searched"
+
+#~ msgid "Disponibilité (laissez vide si immediate)"
+#~ msgstr "Availability (don't fill if immediate)"
+
+#~ msgid "Métier"
+#~ msgstr "Job"

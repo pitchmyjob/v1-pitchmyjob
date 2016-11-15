@@ -1,0 +1,96 @@
+{% load staticfiles %}
+  <style type="text/css">
+      @page {
+          size: a4 portrait;
+          margin: 0.5in 0.5in 0.5in 0.5in;
+          padding: 0;
+          font-size:20px; 
+
+          @frame footer {
+              -pdf-frame-content: bloclogo;
+              top:1cm;
+              left:13cm;
+          }
+
+      } 
+
+      .tb-facture td{ padding-top:5px;}
+      .tb-facture-2 td{ padding-top:15px;}
+  </style>
+<body>
+
+    <div style="font-size:14px;">
+
+        <div id="bloclogo">
+            <img src="http://www.pitchmyjob.com/static/images/logopitch.jpg">
+        </div>
+
+        <div style=""> 
+            Pitch my job <br>
+            29 rue Viala <br>
+            75015 Paris <br>
+            0650024703 <br>
+            N° SIRET : 81138145800025
+        </div>
+
+        <div style="margin-left:450px;margin-top:40px;">
+            Facturé a <br>
+            {% if facture.company %} {{ facture.company }} {% else %} {{ facture.first_name }} {{ facture.last_name }} {% endif %} <br>
+            {{ facture.adresse }} <br>
+            {{ facture.cp }} {{ facture.city }}
+        </div>
+
+        <div style="margin-top:40px;">
+            Date : {{ facture.date_created|date:"d/m/Y"}} <br>
+            Référence :
+                {% if facture.type_facture == 1 %} Publication offre #{{ facture.job.id }} {% endif %} 
+                {% if facture.type_facture == 2 %}  {{ facture.designation }} #{{ facture.reference}} {% endif %} 
+            <br>
+            Numero de facture : {{ facture.id }}
+        </div>
+
+        <div style="margin-top:50px;">
+            <table>
+                <tr style="border-bottom:1px solid black">
+                    <td>Désignation</td>
+                    <td>Quantité</td>
+                    <td>Prix unitaire HT</td>
+                    <td>Prix total  HT</td>
+                </tr>
+
+                <tr class="tb-facture">
+                    <td>{{ facture.designation}}</td>
+                    <td>{{ facture.quantite }}</td>
+                    <td>{{ facture.prix_ht }}€</td>
+                    <td>{{ facture.prix_ht }}€</td>
+                </tr>
+
+                <tr class="tb-facture-2">
+                    <td></td>
+                    <td colspan="2" style="text-align:right;padding-right:20px;">Total Hors taxe </td>
+                    <td>{{ facture.prix_ht }}€</td>
+                </tr>
+
+                <tr class="tb-facture">
+                    <td></td>
+                    <td colspan="2" style="text-align:right;padding-right:20px;">TVA à 20%</td>
+                    <td>{{ facture.tva }}€</td>
+                </tr>
+
+                <tr class="tb-facture">
+                    <td></td>
+                    <td colspan="2" style="text-align:right; font-weight:bold;padding-right:20px;">Total TTC en euros</td>
+                    <td>{{ facture.prix_ttc }}€</td>
+                </tr>
+
+            </table>
+        </div>
+
+        <div style="margin-top:50px;"> 
+            Conditions de paiement : à la réception
+        </div>
+
+    </div>
+
+</body>
+

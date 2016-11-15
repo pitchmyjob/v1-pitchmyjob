@@ -1,0 +1,180 @@
+{% extends "base-login-inscription.html" %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load widget_tweaks %}
+	{% load i18n %}
+
+	<body class="connexion etape-2">
+		<div class="row">
+			<div class="col-md-12 connexion-logo"> <img src="{% static 'images/PITCH-Helvetica-P-bleu.png' %}" class="home-user-logo logo-pitch">  </div>
+		</div>
+
+		<div class="connexion-bloc inscription-form">
+			<h1> {% trans "Information & Recherche" %} </h1>
+			<div class="connexion-container">
+
+				<form method="POST" action="" id="formInscriptionTwo" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="connexion-form"> 
+						{% if form.errors %}
+							<div class="col-sm-12">
+						  		<div class="alert alert-danger alert-inscription"> 
+								    <ul>
+								    {% for field, error in form.errors.items %} 
+								        <li>{{ error }}</li>
+								    {% endfor %}
+								    </ul>
+								</div>
+							</div>
+						{% endif %}
+
+						<div class="col-sm-12 photorequired" style="display:none">
+					  		<div class="alert alert-danger alert-inscription"> 
+							    <ul>
+								   <li>Veuillez ajouter une photo.</li>
+							    </ul>
+							</div>
+						</div>
+
+						<div class="col-sm-12 tag-input-style">
+							<div class="input-group {% if form.tags_field.errors %} has-error {% endif %}">
+						      	<div class="input-group-addon"> <span class="glyphicon glyphicon-briefcase"></span> </div>
+						      	<input  type="text" name="tags_field" placeholder="{% trans "Ajouter ici un maximum de mot clés correspondant à votre recherche. Il peut s'agir de compétences, métiers ou fonctions" %}" class="form-control inputtag" data-role="tagsinput" value="{{ form.tags_field.value|default_if_none:"" }}"  >
+						    </div>
+						    <div style="margin-top:-10px;margin-bottom:10px;">(Appuyez sur Entrée ou séparez par des virgules pour ajouter plusieurs mots clé.)</div> 
+						</div>
+
+						<div class="col-sm-6">
+							
+						    <div class="input-group {% if form.activity_area.errors %} has-error {% endif %} input-multi-select">
+						    	<div class="input-group-addon"> <span class="glyphicon glyphicon-download-alt"></span> </div>      	
+						      	{{ form.activity_area|add_class:"selectpicker form-control"|attr:"data-live-search=true"|attr:"multiple"|attr:"data-selected-text-format=count"}}
+					   	 	</div>
+
+						    <div class="input-group group-type-contrat {% if form.contracts.errors %} has-error {% endif %}">
+						      	<div class="input-group-addon"> <span class="glyphicon glyphicon-pencil"></span> </div>
+						      	<select id="list-type-contrat" name="type-contrat" multiple="multiple">
+						      		 {% for value, text in form.contracts.field.choices %}
+									     <option value="{{ value }}" {% if value|slugify in form.contracts.value or value in form.contracts.value %} selected {% endif %} > {{ text }} </option>
+									{% endfor %}
+								</select>
+						    </div>
+
+						    <div class="input-group {% if form.study.errors %} has-error {% endif %}">
+						      	<div class="input-group-addon"> <span class="glyphicon glyphicon-education"></span> </div>
+						      	{{ form.study|add_class:"form-control" }}
+						    </div>
+						    <div class="input-group {% if form.experience.errors %} has-error {% endif %}">
+						      	<div class="input-group-addon"> <span class="glyphicon glyphicon-tasks"></span> </div>
+						      	{{ form.experience|add_class:"form-control" }}
+						    </div>
+
+							<div class="input-group">
+						      	<div class="input-group-addon"> <span class="glyphicon glyphicon-map-marker"></span> </div>
+						      	<input type="text" class="form-control" placeholder="{% trans 'Lieu de recherche' %}" id="autocompletePlace" name="search_location" value="{{ form.search_location.value|default_if_none:"" }}">
+						    </div>
+
+
+					    </div>
+					    <div class="col-sm-6" style="text-align: center;">
+
+						    <label for="upload" id="image-holder" style="width: 65%;margin: auto;"> {% if object.image %} <img src="{{ object.image.url }}" >  {% else %} 
+						    	<img src="{% static 'images/myc2v-10.jpg' %}" > {% endif %} 
+						    </label>
+					    	<input type="file" style="display:none" id="upload" name="image"> 
+					    	(Cliquez sur l'image pour changer de photo)
+			
+						   <!-- <div class="input-group">
+						      	<div class="input-group-addon"> <span class="glyphicon glyphicon-euro"></span> </div>
+						      	{{ form.salary|add_class:"form-control"|attr:"placeholder:Salaire net mensuel" }}
+						    </div>-->
+
+						    
+
+					    </div>
+					</div>
+
+					{{ form.locality|add_class:"location-input" }}
+					{{ form.administrative_area_level_2|add_class:"location-input" }}
+					{{ form.administrative_area_level_1|add_class:"location-input" }}
+					{{ form.country|add_class:"location-input" }}
+ 				</form>
+
+				<div class="row ">
+					<div class="col-xs-12"> <input type="submit" value="{% trans 'Terminer' %}" class="btn-general-red submitInscription">  </div>
+				</div>
+				
+			</div>
+		
+		</div>
+
+		<script type="text/javascript">
+			{% if object.image.name == "c2v/mycv_default.png" %}
+				var change = false;
+			{% else %}
+				var change = true;
+			{% endif %}
+			
+			$( document ).ready(function() {
+			   	init_autocomplete();
+			   	init_metier();
+			   	$('.selectpicker').selectpicker({
+				  size: 8,
+				  noneSelectedText: "Secteur d'activité",
+				  countSelectedText:"{0} Secteurs selectionnés"
+				});
+
+				$('.submitInscription').click(function(){
+					$('.photorequired').hide();
+					if(change){
+						$('#formInscriptionTwo').submit();
+					}else{
+						$('.photorequired').show();
+					}
+				    
+				});
+
+			});
+		</script>
+
+		<script type="text/javascript">
+			
+			$("#upload").on('change', function () {
+	 
+		        if (typeof (FileReader) != "undefined") {
+		        	var image_holder = $("#image-holder");
+		 			image_holder.empty();
+
+		 			if ( $(this)[0].files[0] ) {
+
+		 				change=true;
+			            
+			            var reader = new FileReader();
+			            reader.onload = function (e) {
+			                $("<img />", {
+			                    "src": e.target.result,
+			                    "class": "thumb-image"
+			                }).appendTo(image_holder);
+			 
+			            }
+			            image_holder.show();
+			            
+			            reader.readAsDataURL($(this)[0].files[0]);
+		        	} else {
+		        		image_holder.html( $('.default-upload').html() );
+		        	}
+		        } else {
+		            alert("This browser does not support FileReader.");
+		        }
+		    });
+		</script>
+
+
+	</body>
+
+
+
+
+{% endblock  %}
+

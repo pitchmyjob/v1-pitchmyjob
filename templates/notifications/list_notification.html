@@ -1,0 +1,39 @@
+{% load i18n %}
+
+{% for object in notifications %}
+<div class="col-sm-12 dropdown-msg dropdown-msg-active-{{ object.view }}"> 
+
+		{% if object.type_notif == 5 %}
+		<a href="{% url 'pro:job-candidatures' object.job.id %}">
+			<div class="col-sm-3 dropdown-msg-img" > <img src="{{ object.sender.member.image.logo50.url }}" > </div>
+			<div class="col-sm-9 dropdown-msg-text">  
+				<div class="dropdown-msg-text-name"> {% trans "Nouvelle candidature de" %} {{ object.sender.member.first_name }}</div>
+				<div class="dropdown-msg-text-msg">  </div>
+				<div class="dropdown-msg-text-date">  {{ object.last_update }}</div>
+			</div>
+		</a>
+		{% endif %}
+
+		{% if object.type_notif == 6 %}
+		<a href="#">
+			<div class="col-sm-3 dropdown-msg-img" > <img src="{{ object.sender.pro.image.logo50.url }}" >  </div>
+			<div class="col-sm-9 dropdown-msg-text">  
+				<div class="dropdown-msg-text-name"> {% trans "Candidatre refusé de la part de" %} {{ object.sender.pro.company }}</div>
+				<div class="dropdown-msg-text-msg">  </div>
+				<div class="dropdown-msg-text-date">  {{ object.last_update }} </div>
+			</div>
+		</a>
+		{% endif %}
+
+		{% if object.type_notif == 7 %}
+		<a href="{% url 'members:detail-pro' object.sender.pro.id %}">
+			<div class="col-sm-3 dropdown-msg-img" > <img src="{{ object.sender.pro.image.logo50.url }}" > </div>
+			<div class="col-sm-9 dropdown-msg-text">  
+				<div class="dropdown-msg-text-name"> {{ object.sender.pro.company }} {% trans "a visité votre profil" %} </div>
+				<div class="dropdown-msg-text-msg">  </div>
+				<div class="dropdown-msg-text-date">  {{ object.last_update }} </div>
+			</div>
+		</a>
+		{% endif %}
+</div>
+{% endfor%}

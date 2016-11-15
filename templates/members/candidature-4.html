@@ -1,0 +1,201 @@
+{% extends 'user-interne.html' %}
+
+{% block annonces %} active {% endblock %}
+{% block footer %} {% endblock %}
+{% block js_autocomplete %} {% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+
+
+	<div class="container-fluid header-entretien">
+		<h1> {{ candidature.job.job_title }} - {{ candidature.job.company }} </h1>
+		<div class="beadcreamps">
+			{% for qt in questions %}
+				{% if qt.nb <= nb  %}
+					<div class="beadcreamps-red">{{ qt.nb }}</div>
+				{% else %}
+					<div class="beadcreamps-white">{{ qt.nb }}</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+
+	<div class="container-fluid entretien-content entretien-4">
+		{{ question.question}}
+	</div>
+
+	{% if candidature.mode == 1 %}
+
+		<div class="container-fluid entretien-4-text" style="max-width:600px;">
+			<div class="alert alert-danger row" style="display:none"> 
+			    {% trans "Veuillez repondre à la question." %}
+			</div>
+			<div style="width:320px; margin:0 auto;">
+	   	 		<ziggeo ziggeo-width=320
+			          ziggeo-height=240 >
+			    </ziggeo> 
+		    </div>
+		    <div class="row">
+				<div class="col-sm-6"> <a href="{{ back }}" class="backSubmit1">{% trans "Retour" %}</a> </div> 
+				<div class="col-sm-6"> <a href="{{ next }}" class="createSubmit1" style="display:none">{% trans "Suivant" %}</a>  </div> 
+			</div>
+
+	    </div> 
+
+
+		<link rel="stylesheet" href="//assets-cdn.ziggeo.com/css/ziggeo-v1.css" />
+		<script src="//assets-cdn.ziggeo.com/js/ziggeo-v1.js"></script>
+		<script>ZiggeoApi.token = "e50140772b22dbd8cbda85384066b8e5";</script>
+		<script>ZiggeoApi.Config.resumable = true;</script>
+ 
+		<script type="text/javascript">
+			var object;
+			var over = 0;
+
+			ZiggeoApi.Events.on("submitted", function (data) {
+				object = { 'token' : data.video.token, 'embed_url' : data.video.embed_video_url, 'extension' : data.video.streams[0].video_type, 'reponse' : {{reponse.id}} }; 
+				//alert("The video with token " + data.video.token + " has been submitted!");
+				console.log(data.video);
+				$.ajax({
+					url: "http://62.210.131.54/api/video/entretien",
+					type: "POST",
+					data : object,
+					beforeSend: function(xhr){ xhr.setRequestHeader('Authorization', 'Token {{ form }}'); },
+					success: function(response) { console.log('okkk'); },
+					error: function(xhr, status, error) { 
+					 	 console.log( xhr.responseText )
+				    }
+				});
+				$('.createSubmit1').show();
+			});
+		</script>
+
+	{% endif %}
+
+	{% if candidature.mode == 2 %}
+		 <style>
+
+	        /* Styles for recorder buttons */
+	        .recorder button, .recorder .upload, .level {
+	            border: 1px solid #686868;
+	            height: 30px;
+	            background-color: white;
+	            display: inline-block;
+	            vertical-align: bottom;
+	            margin: 2px;
+	            box-sizing: border-box;
+	            border-radius: 4px;
+	        }
+
+	        /* Styles for level indicator - required! */
+	        .level {
+	            width: 30px;
+	            height: 30px;
+	            position: relative;
+	        }
+	        .progress-audio {
+	            position: absolute;
+	            bottom: 0;
+	            left: 0;
+	            width: 100%;
+	            background-color: #b10000;
+	        }
+	        .upload {
+	            padding-top: 2px;
+	        }
+
+	    </style>
+	     <script type="text/javascript">
+        	$( document ).ready(function() {
+
+			    $('.testBase64').click(function() {
+			    	var stringBase64 = FWRecorder.getBase64('audio');
+			    	var object = {'reponse' : {{reponse.id}}, 'file_on_server' : stringBase64 }
+			    	$.ajax({
+						url: "http://62.210.131.54/api/audio/entretien",
+						type: "POST",
+						data : object,
+						beforeSend: function(xhr){ xhr.setRequestHeader('Authorization', 'Token {{ form }}'); },
+						success: function(response) { console.log('okkk'); },
+						error: function(xhr, status, error) { 
+						 	 console.log( xhr.responseText )
+					    }
+					});
+
+			    	$('.createSubmit1').show();
+			    });
+			});
+        </script>
+		<script type="text/javascript" src="{% static 'js/plugin/record/swfobject.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/plugin/record/recorder.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/plugin/record/basic.js' %}"></script>
+
+		<div class="container-fluid entretien-4-text container" style="max-width:600px;">
+			<section class="recorder-container">
+
+		        <!-- Recorder control buttons -->
+		        <div id="flashcontent">
+		                    <p>Your browser must have JavaScript enabled and the Adobe Flash Player installed.</p>
+		                </div>
+		        <div class="recorder" style="text-align: center;">
+		            <button class="start-recording" onclick="FWRecorder.record('audio', 'audio.wav');">
+		                <img src="{% static 'images/record.png' %}" alt="Record">
+		            </button>
+		            <div class="level">
+		                <div class="progress-audio"></div>
+		            </div>
+		            <button class="stop-recording" onclick="FWRecorder.stopRecording('audio');">
+		                <img src="{% static 'images/stop.png' %}" alt="Stop Recording"/>
+		            </button>
+		            <button class="start-playing" onclick="FWRecorder.playBack('audio');" title="Play">
+		                <img src="{% static 'images/play.png' %}" alt="Play"/>
+		            </button>
+		            <button class="testBase64"> Base64 </button>
+		            <div class="upload" style="display: inline-block">
+		                
+		            </div>
+		        </div>
+
+		    </section>
+		     <div class="row">
+				<div class="col-sm-6"> <a href="{{ back }}" class="backSubmit1">Retour</a> </div> 
+				<div class="col-sm-6"> <a href="{{ next }}" class="createSubmit1" style="display:none">Suivant</a>  </div> 
+			</div>
+		</div>
+	{% endif %}
+
+
+	{% if candidature.mode == 3 %}
+		<div class="container-fluid entretien-4-text">
+			{% if form.errors %}
+				<div class="alert alert-danger row"> 
+				    <ul>
+				    	{% for field, error in form.errors.items %} 
+				        	<li>{{ error }}</li>
+				   		{% endfor %}
+				    </ul>
+				</div>
+			{% endif %} 
+			<form action="" method="POST">
+				{% csrf_token %}
+				<div class="row">
+					{{ form.text|add_class:"form-control"|add_error_class:"custom-error" }}
+				</div>
+				<div class="row">
+					<div class="col-sm-6"> <a href="{{ back }}" class="backSubmit1">Retour</a> </div> 
+					<div class="col-sm-6"> <input type="submit" value="Suivant" class="createSubmit1 createSubmitEntretien"> </div> 
+				</div>
+			</form>
+		</div>
+		<script type="text/javascript">
+			$('textarea').focus();
+		</script>
+	{% endif %}
+
+
+
+{% endblock %}

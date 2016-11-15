@@ -1,0 +1,21 @@
+{% extends 'emails/layout.html' %}
+
+
+{% block content %}
+<div style="padding:15px 30px 10px 30px;">	
+			<div style="font-size:20px; font-weight:bold;text-transform:uppercase;color:#2C3E50"> Demande d'inscription sur Pitch my job  </div> 
+
+	<div style="padding:10px 0;">
+		Bonjour {{ nom }}, <br><br>
+		Nous avons le plaisir de vous annoncer que vous avez été sélectionné pour tester PitchMyJob en avant première. <br><br>
+		
+	 Code secret : <b>Pitchme</b><br><br>
+	</div>
+	<div style="padding-top:20px; text-align:center">
+		<a href="http://pitchmyjob.com/invitation" style="padding:10px 15px;color:#fff; background:#E73C3C; font-size:18px;"> ALLER SUR PITCH MY JOB </a>
+	</div>
+	<div style="padding-top:40px; font-style:italic;text-align:center">Si vous avez des questions n'hésitez pas à nous contacter au 0650024703 ou au 0669670272 ou par mail à l'adresse contact@pitchmyjob.com </div>
+		</div>
+	
+
+{% endblock %}

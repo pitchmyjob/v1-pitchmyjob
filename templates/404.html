@@ -1,0 +1,29 @@
+{% extends 'user-interne.html' %}
+
+{% block annonces %} {% endblock %}
+{% block js_autocomplete %} {% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+	<div class="page404">		
+		
+		<div class="page404-img">
+			<img src="{% static 'images/pitchmyjob-25.png' %}">
+		</div>
+
+		<div class="page404-text">
+			{% trans "Oops ! La page que vous recherchez n'existe pas." %}
+		</div>
+
+		<div class="page404-link">
+			<a href="{% url 'members:home' %}">
+				<img src="{% static 'images/pitchmyjob-26.png' %}">
+			</a>
+		</div>
+
+	</div>
+
+{% endblock %}

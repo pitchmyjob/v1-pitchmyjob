@@ -1,0 +1,28 @@
+{% extends 'user-interne.html' %}
+
+{% block annonces %} {% endblock %}
+{% block js_autocomplete %} {% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+	<div class="page404">		
+		
+		<div class="page404-img">
+		</div>
+
+		<div class="page404-text">
+			{% trans "Une erreur est survenue. Veuillez recommencer, si le probleme persiste veuillez contacter Pitch my job." %}
+		</div>
+
+		<div class="page404-link">
+			<a href="{% url 'members:home' %}">
+				<img src="{% static 'images/pitchmyjob-26.png' %}">
+			</a>
+		</div>
+
+	</div>
+
+{% endblock %}

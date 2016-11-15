@@ -1,0 +1,201 @@
+{% load staticfiles %}
+{% load in_group %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<!DOCTYPE html>
+
+<!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
+<!--[if IE 8]><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="css/ie7.css" /><![endif]-->
+
+<html lang="fr">
+	<head>
+		<meta property="og:title" content="Rejoins Pitch my job" />
+		<meta property="og:description" content="Passe un entretien et decroche ton prochain job !" />
+		<meta property="fb:app_id" content="1521513254812652"/>
+        <meta property="og:image" content="https://www.pitchmyjob.com/static/images/dechire2.png"/>
+	    <meta property="og:url" content="https://www.pitchmyjob.com/fr/"/>
+
+		<meta charset="utf-8">
+
+		<title>Pitch my job | Offres d'emploi, stage et pré-entretien video</title>
+
+        <link rel="canonical" href="https://www.pitchmyjob.com/{{LANGUAGE_CODE}}/">
+
+	    <!-- behavioral meta data -->
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="format-detection" content="telephone=no">
+	    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0">
+
+	    <!-- core meta data -->
+		<meta name="description" content="Tu recherches un emploi ? Postules en répondant aux questions des recruteurs en vidéo ou en audio et décroche ton prochain job !">
+		<meta name="author" content="">
+
+		<!-- styles -->
+		<link rel="stylesheet" href="{% static 'css/jquery.bxslider.css' %}">
+		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/global.css' %}">
+		<link rel="stylesheet" href="{% static 'css/devices.css' %}">
+
+		<!-- styles -->
+		<script src="{% static 'js/plugin/jquery-1.11.3.min.js' %}"></script>
+		<script src="{% static 'js/plugin/jquery.bxslider.min.js' %}"></script>
+		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+
+	    <!-- favicons -->
+		<link rel="icon" href="{% static 'images/favicon.png' %}" type="images/icons/x-icon" />
+		<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="images/icons/x-icon" />
+
+        <meta name="google-site-verification" content="SUXuuc0BTTivUE0I6C9gUc9wMTiE2aW8tRb-tfcj0cU" />
+
+
+        {% block nofollow %}{% endblock %}
+
+
+
+		<!--[if IE]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <script type="application/ld+json">
+            {  "@context": "http://schema.org/",
+                "@type" : "Organization",
+                "address":
+                {"@type" : "PostalAddress",
+                "addressLocality" : "75015 Paris, France",
+                "StreetAddress" : "29 rue viala"
+                },
+                "name":"Pitch my job",
+                "legalName" : "Pitch my job",
+                "brand" : "PitchMyJob",
+                "email" : "contact@pitchmyjob.com",
+                "url" : "https://www.pitchmyjob.com" ,
+                "sameAs" : [
+                "https://www.facebook.com/pitchmyjob/",
+                "https://twitter.com/pitchmyjob",
+                "https://plus.google.com/102188392481516799950/about"
+              ],
+
+                "logo" : "http://www.pitchmyjob.com/static/images/PITCH-Helvetica-P-bleu.png",
+                "description" : " Pitch my job est le premier site d'emploi qui donne la parole aux candidats et aux entreprises.Sur Pitch my job, nous remplaçons les lettres de motivations par des pré-entretiens et permettons à nos utilisateurs d'ajouter un Pitch vidéo à leur CV.",
+                 "founder":[
+                 [{"@type" : "Person",
+                 "givenName" : "Martial",
+                 "familyName" : "Dahan"
+               }],
+
+               [{"@type" : "Person",
+                 "givenName" : "Boudic",
+                 "familyName" : "Antoine"
+               }],
+
+               [{"@type" : "Person",
+                 "givenName" : "Tannier",
+                 "familyName" : "Yannis"
+               }]
+
+               ]
+
+                }
+
+         </script>
+
+	</head>
+
+	<body class="home-member-2">
+
+            <nav class="navbar navbar-default navbar-home-member-2">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"  aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        </button>
+                        <ul class="nav navbar-nav navbar-right nav-header-desktop" style="display:none">
+                            <li style="padding-left:60px;"> <a id="ga-btn-02" href="{% url 'members:list-job' %}">{% trans "Offres d'emploi" %}</a> </li>
+                        </ul>
+                        <a href="#"> <img src="{% static 'images/refonte/home-pro-logo.png' %}" class="home-user-logo logo-pitch"> </a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                                <li class="nav-header-responsive"> <a href="{% url 'members:list-job' %}" class="navbar-link"> {% trans "Offres d'emploi" %} </a> </li>
+                            {% if user.is_authenticated and user|in_group:"member" %}
+                                <li> <a id="ga-btnpro-aepace" href="{% url 'members:my-account' %}" class="navbar-link"> {% trans "Mon compte" %} </a> </li>
+                            {% else %}
+                                <li> {% block link %} {% endblock %} </li>
+                            {% endif %}
+                                <li> <a id="ga-btn-accrecr" href="{% url 'pro:home' %}" class="pro-link-red"> {% trans "Accès recruteur" %} </a> </li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div><!--/.container-fluid -->
+            </nav>
+
+           <div class="container" style="max-width:100%;width:100%;     padding: 0 5%;">
+               <div class="home-member-container-2" style="float:right;    padding-right: 15px;padding-left: 15px;">
+
+                        <h1 style="font-size:44px"> {% trans "Dechire ta lettre de motivation" %} {{ ecole }} </h1>
+
+                        <h2> {% trans "Postule en répondant aux questions des recruteurs en vidéo et décroche ton prochain job" %} </h2>
+
+
+                        <div class="home-member-inscription">
+
+                            <div class="home-member-inscription-rs col-sm-12" style="padding:0">
+
+
+                                <div class="col-xs-6" style="padding-left:0;padding-right: 5px;">
+                                    <a href="{% url 'members:viadeo-connect' %}?{{ request.GET.urlencode }}"> <img src="{% static 'images/viadeo-connect.png' %}"> </a>
+                                </div>
+
+                                <div class="col-xs-6" style="padding-right:0;padding-left: 5px;">
+                                    <a href="{% url 'members:linkedin-connect' %}?{{ request.GET.urlencode }}"> <img src="{% static 'images/refonte/home-member-01.png' %}" > </a>
+                                </div>
+
+                            </div>
+                            <p class="col-sm-12 home-ou" > Ou </p>
+                            <div  class="home-member-inscription-form col-sm-12" style="padding:0">
+
+                                {% block content %}
+
+                                {% endblock %}
+
+                             </div>
+
+                        </div>
+                </div>
+			</div>
+
+            <div class="home-member-2-footer">
+                {% include "footer-2.html" with class="footer-home-member" %}
+            </div>
+
+        <!-- Google Tag Manager -->
+		<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NC3XK5"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-NC3XK5');</script>
+		<!-- End Google Tag Manager -->
+
+        <!-- Facebook Pixel Code -->
+        <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+        fbq('init', '835536179914009');
+        fbq('track', "PageView");</script>
+        <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=835536179914009&ev=PageView&noscript=1"
+        /></noscript>
+        <!-- End Facebook Pixel Code -->
+
+    </body>
+</html>

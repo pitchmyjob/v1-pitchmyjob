@@ -1,0 +1,132 @@
+{% extends 'user-interne.html' %}
+
+{% block entreprises %} active {% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load tagspro %}
+{% load i18n %}
+
+<div class="container-fluid bloc-filtre">
+	<form action="" method="GET">
+		<div class="container-fluid bloc-filtre-content">
+			<div class="col-sm-12">
+				<div class=" col-sm-3"> 
+					{% if LANGUAGE_CODE == "fr" %}
+						{{ form.search|add_class:"form-control"|attr:"placeholder:Métier, mot clé ou entreprise" }}
+					{% else %}
+						{{ form.search|add_class:"form-control"|attr:"placeholder:Job title, keyword, company" }}
+					{% endif %} 
+
+				</div>
+				<div class=" col-sm-3"> 
+					{% if LANGUAGE_CODE == "fr" %}
+						{{ form.place|add_class:"form-control"|attr:"placeholder:Ville, département, région" }}  
+					{% else %}
+						{{ form.place|add_class:"form-control"|attr:"placeholder:City, state or region" }} 
+					{% endif %} 
+				</div>
+				<div class=" col-sm-3">  
+					{{ form.activity_area|add_class:"form-control" }}
+				</div>
+				<div class=" col-sm-3"> 
+					<input type="submit" value="{% trans 'RECHERCHER' %}" class="form-control btn-general-red"  > 
+				</div>
+
+				{{ form.locality|add_class:"location-input" }}
+				{{ form.administrative_area_level_2|add_class:"location-input" }}
+				{{ form.administrative_area_level_1|add_class:"location-input" }}
+				{{ form.country|add_class:"location-input" }}
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="container-fluid bloc-liste-offre">
+	<div class="col-sm-12 list-entreprise-content"> 
+				
+		{% for pro in object_list %}
+			<div class="col-sm-4 "> 
+				<div class="list-bloc-entreprise"> 
+					<div class="head-bloc-entreprise"> 
+						 <a href="{% url 'members:detail-pro' pro.id %}">  {% if pro.cover %} <img src="{{ pro.cover.cover280.url }}" > {% else %} <img src="{% static 'images/myc2v-58.png' %}" > {% endif %} </a> 
+					</div>
+					<div class="avatar-bloc-entreprise"> 
+						<a href="{% url 'members:detail-pro' pro.id %}"><img src="{{ pro.image.logo100.url }}"></a> 
+					</div>
+					<div class="infos-bloc-entreprise">
+						<h3> <a href="{% url 'members:detail-pro' pro.id %}"> {{ pro.company }}  </a>  </h3>
+						<div class="bloc-info-entreprise"> {{ pro.activity_area.name|default_if_none:"" }} </div>
+						<div class="bloc-info-entreprise"> {{ pro.employes.name|default_if_none:"" }} </div>
+						<div class="bloc-info-entreprise"> {{ pro.headquarters|default_if_none:"" }} </div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 view-offre">
+							<a href="{% url 'members:list-job-pro' pro.id pro.company|slugify %}">
+								{% with pro.count_job as nb %}
+									{% if nb == 0 %}
+										0 {% trans "OFFRE" %}
+									{% else %}
+										{{nb}}  {% trans "OFFRE" %}{{nb|pluralize}}
+									{% endif %}
+								{% endwith %}
+							</a>
+						</div>
+						<div class="col-md-6 view-profil"> <a href="{% url 'members:detail-pro' pro.id %}"> {% trans "VOIR PROFIL" %} </a>  </div>
+					</div>
+				</div>
+			</div>
+		{% empty %}
+
+			<div class="bloc-no-offre"> 
+				<h2> {% trans "Oops !" %} </h2>
+				<p> {% trans "Aucune entreprise trouvée" %} </p>
+			</div>
+
+		{% endfor %}
+	</div>
+
+	<div class="bloc-pagination">
+		<ul class="pagination">
+		    {% if page_obj.has_previous %}
+		        <li>
+			      <a href="?{{ page_obj.previous_page_number.querystring }}" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+		    {% endif %}
+
+		    {% for page in page_obj.pages %}
+		        {% if page %}
+		            {% ifequal page page_obj.number %}
+		                <li class="active"><a >{{ page }}<span class="sr-only">(current)</span></a></li>
+		            {% else %}
+		                 <li><a href="?{{ page.querystring }}">{{ page }}</a></li>
+		            {% endifequal %}
+		        {% else %}
+		        <li>
+			       <a> ...</a>
+			    </li>
+		        {% endif %}
+		    {% endfor %}
+
+		    {% if page_obj.has_next %}
+		        <li>
+			       <a href="?{{ page_obj.next_page_number.querystring }}" aria-label="Next">
+			         <span aria-hidden="true">&raquo;</span>
+			       </a>
+			    </li>
+		    {% endif %}
+		</ul>
+	</div>
+			
+</div>
+ 
+	<script type="text/javascript">
+		$( document ).ready(function() {
+		   	init_autocomplete("id_place");
+		});
+	</script>
+
+{% endblock %}

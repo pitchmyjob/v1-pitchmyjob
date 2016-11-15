@@ -1,0 +1,63 @@
+{% extends 'pages/base-faq.html' %}
+
+	
+{% block general %} profil-menu-active {% endblock %}
+
+{% block subcontent %}
+{% load staticfiles %}
+{% load i18n %}
+
+<div class="col-sm-12 pages-faq">
+	<h3> {% trans "Général" %} </h3>
+</div>
+
+<div class="col-sm-12 pages-faq">
+	<div class="row">
+
+		<div class="col-sm-12 bloc-faq">
+			<h4> Lorem ipsum dolor sit amet, consectetur adipiscing elit ? </h4>
+			<div class="reponse-faq">
+				Etiam iaculis lacus et lectus interdum, sed pellentesque metus vehicula. Suspendisse potenti. Maecenas rutrum ex volutpat sollicitudin tempor. Nunc lobortis gravida sapien, sit amet commodo felis porta id. Duis interdum scelerisque urna sit amet eleifend. Sed pretium nunc a turpis dignissim, nec tincidunt urna tempor. 
+			</div>
+		</div>
+
+		<div class="col-sm-12 bloc-faq">
+			<h4> Lorem ipsum dolor sit amet, consectetur adipiscing elit ? </h4>
+			<div class="reponse-faq">
+				Etiam iaculis lacus et lectus interdum, sed pellentesque metus vehicula. Suspendisse potenti. Maecenas rutrum ex volutpat sollicitudin tempor. Nunc lobortis gravida sapien, sit amet commodo felis porta id. Duis interdum scelerisque urna sit amet eleifend. Sed pretium nunc a turpis dignissim, nec tincidunt urna tempor. 
+			</div>
+		</div>
+
+		<div class="col-sm-12 bloc-faq">
+			<h4> Lorem ipsum dolor sit amet, consectetur adipiscing elit ? </h4>
+			<div class="reponse-faq">
+				Etiam iaculis lacus et lectus interdum, sed pellentesque metus vehicula. Suspendisse potenti. Maecenas rutrum ex volutpat sollicitudin tempor. Nunc lobortis gravida sapien, sit amet commodo felis porta id. Duis interdum scelerisque urna sit amet eleifend. Sed pretium nunc a turpis dignissim, nec tincidunt urna tempor. 
+			</div>
+		</div>
+
+		<div class="col-sm-12 bloc-faq">
+			<h4> Lorem ipsum dolor sit amet, consectetur adipiscing elit ? </h4>
+			<div class="reponse-faq">
+				Etiam iaculis lacus et lectus interdum, sed pellentesque metus vehicula. Suspendisse potenti. Maecenas rutrum ex volutpat sollicitudin tempor. Nunc lobortis gravida sapien, sit amet commodo felis porta id. Duis interdum scelerisque urna sit amet eleifend. Sed pretium nunc a turpis dignissim, nec tincidunt urna tempor. 
+			</div>
+		</div>
+
+		<div class="col-sm-12 bloc-faq">
+			<h4> Lorem ipsum dolor sit amet, consectetur adipiscing elit ? </h4>
+			<div class="reponse-faq">
+				Etiam iaculis lacus et lectus interdum, sed pellentesque metus vehicula. Suspendisse potenti. Maecenas rutrum ex volutpat sollicitudin tempor. Nunc lobortis gravida sapien, sit amet commodo felis porta id. Duis interdum scelerisque urna sit amet eleifend. Sed pretium nunc a turpis dignissim, nec tincidunt urna tempor. 
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<script type="text/javascript">
+$('.bloc-faq h4').click(function() {
+	$('.reponse-faq').slideUp();
+
+	$(this).next().slideDown();
+});
+</script>
+	
+{% endblock %}

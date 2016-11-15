@@ -1,0 +1,16 @@
+{% extends "pro-interne.html" %}
+
+{% block mes-offres %} active {% endblock %}
+{% block msg_nodejs %} {% endblock %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load widget_tweaks %}
+		
+	<div class="container-fluid container-messages">
+			
+			{% include 'notifications/messages.html' %}
+		
+	</div>
+
+{% endblock  %}

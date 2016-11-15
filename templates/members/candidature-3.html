@@ -1,0 +1,68 @@
+{% extends 'user-interne.html' %}
+
+{% block annonces %} active {% endblock %}
+{% block footer %} {% endblock %}
+{% block js_autocomplete %} {% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+
+<div class="container-fluid header-entretien">
+	<h1> {% trans "Choisissez un mode de réponse" %} </h1>
+</div>
+
+<form action="" method="POST">
+{% csrf_token %}
+
+<div class="container-fluid entretien-3">
+	{% if object.is_video %}
+	<div class="col-sm-{{col}} ">
+		<div class="entretien-3-bloc"> 
+			<label class="select-video"> <img id="ga-btn-rep-video" src="{% static 'images/myc2v-19.jpg'%}"> 
+					<div class="entretien-3-text"> {% trans "Réponse vidéo" %} </div>
+			</label>
+		</div> 
+		<input type="radio" name="mode" value="1" id="select-video" style="display:none">
+	</div>
+	{% endif %}
+	{% if object.is_audio %}
+	<div class="col-sm-{{col}}"> 
+		<div class="entretien-3-bloc"> 
+			<label class="select-audio">
+				<img id="ga-btn-rep-audio" src="{% static 'images/myc2v-20.jpg'%}"> 
+				<div class="entretien-3-text"> {% trans "Réponse audio" %} </div>
+			</label>
+		</div>  
+		<input type="radio" name="mode" value="2" id="select-audio" style="display:none">
+	</div>
+	{% endif %}
+	{% if object.is_text %}
+	<div class="col-sm-{{col}}"> 
+		<div class="entretien-3-bloc"> 
+			<label class="select-text">
+				<img id="ga-btn-rep-text" src="{% static 'images/myc2v-21.jpg'%}"> 
+				<div class="entretien-3-text"> {% trans "Réponse texte" %} </div>
+			</label>
+		</div>  
+		<input type="radio" name="mode" value="3" id="select-text" style="display:none">
+	</div>
+	{% endif %}
+</div>
+
+</form>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('label').click(function(){
+			var id = $(this).attr('class');
+			$('#'+id).prop( "checked", true );
+			$('form').submit();
+		});
+	});
+</script>
+
+
+{% endblock %}

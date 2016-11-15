@@ -1,0 +1,148 @@
+{% extends 'user-interne.html' %}
+
+{% block entreprises %} active {% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+{% load tagspro %}
+{% load i18n %}
+
+
+<div class="container-fluid bloc-profil-entreprise">
+
+	<div class="col-sm-12 user-profil-entreprise no-responsive"> 
+		{% if object.cover %} <img src="{{ object.cover.cover840.url }}" class="cover-default-pro" style="max-width:940px; max-height:200px;width:100%"> {% else %} <img src="{% static 'images/myc2v-25.jpg' %}" class="cover-default-pro" style="max-width:940px; max-height:200px; width:100%">  {% endif %}
+		
+	</div>
+
+	<div class="col-sm-12 back-list-offre"> <a href="{% url 'members:list-pro' %}"> <span class="glyphicon glyphicon-arrow-left"></span> {% trans "Retour à la liste" %}</a>  </div>
+
+	<div class="col-sm-8"> 
+
+		<div class="detail-profil-entreprise"> 
+			<div class="container-fluid">
+					<div class="col-md-5"> <h1> {{ object.company }} </h1> </div>
+					<div class="col-md-7 profil-entreprise-candidature" style="display:none"> <a class="btn-general-red" data-toggle="tooltip" data-placement="bottom" title="Bientot disponible"> {% trans "Candidature spontannée" %} </a> </div>
+			</div>
+		</div>
+		
+		{% if object.type_video %}
+			<div class="detail-profil-entreprise profil-entreprise-description profil-entreprise-video"> 
+				<div class="container-fluid">
+					<div class="embed-responsive embed-responsive-16by9">
+					  	<iframe class="embed-responsive-item"  src="{{ object.type_video }} " ></iframe> 
+					</div>
+				</div>
+			</div>
+		{% endif %}
+
+		{% if object.description %}
+			<div class="detail-profil-entreprise profil-entreprise-description"> 
+				<div class="container-fluid">
+					<div class="col-xs-12"> 
+						<h2> {% trans "Description de l'entreprise" %} </h2>
+						<div class="text">
+							{% if object.mp %}
+								{{ object.description|safe }}
+							{% else %}
+								{{ object.description|linebreaks }}
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+
+		{% if  jobs|length > 0 %}
+		<div class="detail-profil-entreprise profil-entreprise-description"> 
+			<div class="container-fluid profil-entreprise-annonces">
+				<div class="col-xs-12"> 
+					<h2> {% trans "Listes des annonces" %} </h2>
+				</div>
+			</div>
+
+			<div class="container-fluid">
+				<div class="row">
+
+					{% for job in jobs.all %}
+						<div class="col-xs-12 profil-entreprise-annonce"> 
+							<div class="col-sm-12">  <h3> {{ job.job_title }} </h3> </div>
+							<div class="col-sm-6">  							
+								<div> {{ job.contracts.all|join:" - " }} - {{ job.job_location }} </div>
+								<div> {{ job.date_created }} </div>
+							</div>
+
+							<div class="col-sm-6 entreprise-annonce-link">
+								<a href="{% url 'members:detail-job' job.id %}" class="btn-general-blue"> {% trans "Voir l'annonce" %}</a>
+							</div>
+						</div>
+					{% endfor %}
+
+				</div>
+			</div>
+
+		</div>
+		{% endif %}
+
+
+	</div>
+
+	<!- sidebar  ->
+
+	<div class="col-sm-4  sidebar-offre-detail"> 
+
+		<div class="bloc-sidebar-list-offre sidebar-logo-marque">
+			<div class="container-fluid">
+				<div class="sidebar-offre-detail-marque">
+					<img src="{{ object.image.logo100.url }}">
+				</div>
+			</div>
+			<div class="container-fluid">
+				{% if object.link_facebook %} <a href="{{object.link_facebook}}" target="blank"><img src="{% static 'images/myc2v-42.png'%}"></a> {% endif %}
+				{% if object.link_twitter %} <a href="{{object.link_twitter}}" target="blank"><img src="{% static 'images/myc2v-43.png'%}"></a> {% endif %}
+				{% if object.link_youtube %} <a href="{{object.link_youtube}}" target="blank"><img src="{% static 'images/myc2v-44.png'%}"></a> {% endif %}
+			</div>
+		</div>
+
+		<div class="bloc-sidebar-list-offre">
+			<div class="container-fluid  detail-entreprise">
+				{% if object.web_site %} <div> {% trans "Site Web" %}  : <span> {{ object.web_site }} </span> </div> {% endif %}
+				{% if object.activity_area %} <div> {% trans "Secteur" %}	: <span> {{ object.activity_area.name }} </span> </div> {% endif %}
+				{% if object.employes %} <div> {% trans "Employés" %} : <span> {{ object.employes.name }} </span> </div> {% endif %}
+				{% if object.ca %} <div> {% trans "Chiffre d'affaire" %} : <span> {{ object.ca }}  </span> </div> {% endif %}
+				{% if object.latitude and object.longitude %}
+					<div id="map" style="width:240px;height:100px"></div>
+				{% endif %}
+			</div>
+		</div>
+
+		<div class="bloc-sidebar-list-offre">
+			<div class="container-fluid  detail-entreprise-stat">
+				<div class="detail-statistique-job"> <span> {% trans "Statistiques" %} </span> </div>
+				<div> <img src="{% static 'images/myc2v-45.png'%}"> <span> {{ object.view }} {% trans "vue" %}{{ object.view|default:'1'|pluralize }} </span> </div>
+				<div> <img src="{% static 'images/myc2v-46.png'%}"> <span> {% with object|pro_nbcandidatures as nb %} {{ nb }} {% trans "candidature" %}{{ nb|default:'1'|pluralize }}  {% endwith %} </span>   </div>
+
+			</div>
+		</div>
+
+
+	</div>
+</div>
+
+<script src="{% static 'js/custom/map.js' %}"></script>
+<script type="text/javascript">
+$( document ).ready(function() {
+
+	{% if object.latitude and object.longitude %}
+		init_map({{ object.latitude|stringformat:"f" }}, {{ object.longitude|stringformat:"f" }}, 12);
+	{% endif %}
+});
+</script>
+
+<script type="text/javascript">
+	$(function () {
+	  $('[data-toggle="tooltip"]').tooltip()
+	})
+</script>
+
+{% endblock %}

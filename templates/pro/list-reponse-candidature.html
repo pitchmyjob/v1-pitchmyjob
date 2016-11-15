@@ -1,0 +1,298 @@
+{% extends "pro-interne.html" %}
+
+{% block mes-offres %} active {% endblock %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load tagspro %}
+	{% load i18n %}
+
+	<link href="https://vjs.zencdn.net/5.10.4/video-js.css" rel="stylesheet">
+	<script src="https://vjs.zencdn.net/5.10.4/video.js"></script>
+
+	<div class="container-fluid list-condidat-listing">
+		<div class="col-sm-12 back-list-offre"> <a href="{% url 'pro:job-candidatures' object.job.id %}"> <span class="glyphicon glyphicon-arrow-left"></span> {% trans "Retour à la liste" %}</a>  </div>
+	</div> 
+
+	<div class="col-xs-12">
+		<div class="container-fluid pro-reponse-questions">
+			<div class="row">
+				<div class="col-sm-6 pro-reponse-videos ">
+					{% if object.mode == 1 %}
+
+						{% if object.new %}
+
+							{% for reponse in object.candidaturereponse_set.all %}
+								<video width="420" height="300" controls id="video-player" class="entretien-rep-{{ reponse.nb }} entretien-rep">
+									<source src="{{ reponse.video.path_aws_v2 }}" type="video/mp4">
+								</video>
+							{% endfor %}
+
+							<script type="text/javascript">
+								$(document).ready(function(){
+									var vid = $('.entretien-rep');
+									$('.entretien-text-1').show();
+									$('.entretien-question').click(function() {
+
+										$(".entretien-rep").each(function() {
+											this.pause();
+										});
+
+										$('.entretien-rep').hide();
+										$('.entretien-question').removeClass('entretien-active');
+
+										var qt = $(this).attr('data-qt');
+										$(this).addClass('entretien-active');
+										$('.entretien-rep-'+qt).show();
+									});
+								});
+							</script>
+
+						{% else %}
+
+							{% for reponse in object.candidaturereponse_set.all %}
+								 <div class="get_time-{{ reponse.nb }}" time={{ reponse.time|default_if_none:0 }}> </div>
+							{% endfor %}
+
+
+							 <video id="my-video" class="video-js" controls preload="auto" width="420" height="300" data-setup="{}">
+									<source src="{{ object.video.path_aws }}" type='video/mp4'>
+									<source src="{{ object.video.path_aws }}" type='video/webm'>
+									<p class="vjs-no-js">
+									  To view this video please enable JavaScript, and consider upgrading to a web browser that
+									  <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+									</p>
+							 </video>
+
+							<script type="text/javascript">
+								var player = videojs('my-video');
+
+								$(document).ready(function(){
+
+									 var path = "{{ object.video.path_video }}";
+									 console.log(path);
+									 var video = document.getElementById("video-player");
+									 //video.load();
+
+
+									$('.entretien-question').click(function() {
+										$('.entretien-question').removeClass('entretien-active');
+										$(this).addClass('entretien-active');
+										var qt = $(this).attr('data-qt');
+										$('.entretien-rep').hide();
+										$('.entretien-rep-'+qt).show();
+
+										skip($('.get_time-'+$(this).attr('data-qt') ).attr("time"));
+									});
+									function skip(value) {
+										//video.play();
+										//video.load();
+										//video.currentTime = parseInt(value);
+										//console.log(parseInt(value));
+
+										//video.src = path+"#t="+parseInt(value);
+
+										player.currentTime(value);
+
+										//console.log(video.src);
+										//video.load();
+									}
+
+								});
+							</script>
+						{% endif %}
+
+					{% endif %}
+
+					{% if object.mode == 2 %}
+						{% for reponse in object.candidaturereponse_set.all %}
+							<div class="get_time-{{ reponse.nb }}" time={{ reponse.time|default_if_none:0 }}> </div>
+						{% endfor %}
+
+						<div style="padding:20px 0;">
+							 <audio controls="" src="{{ object.audio.file_on_server.url }}" id="video-player"></audio> 
+						</div>
+
+						<script type="text/javascript">
+					 		$(document).ready(function(){
+
+					 			 var path = "{{ object.audio.file_on_server.url }}";
+					 			 console.log(path);
+							     var video = document.getElementById("video-player");
+							     video.load();
+
+								$('.entretien-question').click(function() {
+									$('.entretien-question').removeClass('entretien-active');
+									$(this).addClass('entretien-active');
+									var qt = $(this).attr('data-qt');
+									$('.entretien-rep').hide();
+									$('.entretien-rep-'+qt).show();
+
+									skip($('.get_time-'+$(this).attr('data-qt') ).attr("time"));
+								});
+								function skip(value) {
+							        video.src = path+"#t="+parseInt(value);
+							    }   
+
+							});
+					 	</script>
+
+					{% endif %}
+
+					{% if object.mode == 3 %}
+						{% for reponse in object.candidaturereponse_set.all %}
+					 		<div class="entretien-rep-{{ reponse.nb }} entretien-rep style-reponse-text"> {{ reponse.text }}  </div>
+						{% endfor %}
+
+						<script type="text/javascript">
+							$(document).ready(function(){
+								$('.entretien-text-1').show();
+								$('.entretien-question').click(function() {
+									$('.entretien-rep').slideUp();
+									$('.entretien-question').removeClass('entretien-active');
+
+									var qt = $(this).attr('data-qt');
+									$(this).addClass('entretien-active');
+									$('.entretien-rep-'+qt).slideDown();
+								});
+							});
+						</script>
+
+					{% endif %}		
+				</div>
+
+				<div class="col-sm-6 entretien-questions"> 
+					{% for question in object.job.questions.all %}
+						<div class="row">
+							 <div data-qt = "{{ question.nb }}" class="col-sm-12 entretien-question  {% if forloop.first %} entretien-active  {% endif %} {% if forloop.last %}  entretien-question-last {% endif %} "> 
+								{{ question.question }} 
+							</div>   
+						</div>  
+					{% endfor %} 
+				</div>
+
+			</div>
+
+		
+		</div>
+	</div>
+
+	<div class="col-xs-12" style=" margin-top:20px;">
+			<div class="container-fluid " style="max-width: 1000px;"> 
+				<button class="btn-general-blue-2 btn-no-border" style="font-size:16px;"  onclick="Contact({{object.member.id}}, '{{ object.member.first_name|title }}')">{% trans "Contacter" %}</button>
+			</div>
+	</div>
+
+	<div class="col-xs-12"> 
+
+		
+		
+		<div class="container-fluid pro-reponse-cv" style="background:#fff">
+			<div class="row">
+				{% if object.cv %}
+					<iframe src="{{ object.cv.url }}" style="width:100%; height:800px"></iframe>
+				{% else %}
+					<div id="load-theme"></div>
+				{% endif %}
+			</div> 
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		
+		function getCookie(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie != '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = jQuery.trim(cookies[i]);
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getCookie('csrftoken');
+		function csrfSafeMethod(method) {
+		    // these HTTP methods do not require CSRF protection
+		    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+		}
+		$.ajaxSetup({
+		    beforeSend: function(xhr, settings) {
+		        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+		            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+		        }
+		    }
+		});
+
+		$( "#load-theme" ).load( "{% url 'c2v:myc2v-theme' %}", {'id_member': {{ object.member.id }} }, function( response, status, xhr ) { });
+
+		
+
+
+	    var user;
+		var sendheader = function(xhr){
+				xhr.setRequestHeader('Authorization', 'Token {{ apitoken }}');
+		};
+
+		function Contact(id, name)
+		{
+			$('.title-contact').html( $('.title-contact').html().replace('[name]', name) );
+			$('.send-contact').modal('show');
+			user = id;
+		}
+
+		function sendMessage()
+		{
+			var message = $('.text-contact').val();
+			$.ajax({
+		         url: "/api/messages",
+		         type: "POST",
+		         data : {receiver:user, message:message},
+		         beforeSend: sendheader,
+		         success: function(response) { 
+		         	$('.send-contact').modal('hide'); 
+		         	notification("Message envoyé !"); 
+		         	$('.text-contact').val("");
+		         }
+	 	 	});
+		}
+
+	</script>
+
+
+{% endblock  %}
+
+{% block modal %}
+
+<div class="modal fade send-contact" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog ">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title title-contact" > Contacter [name]</h4>
+			</div>
+			<div class="modal-body">
+		
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="exampleInputName2"> Message </label>
+							<textarea class="form-control text-contact" rows=11 object = "message"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default " data-dismiss="modal">Annuler</button>
+				<button type="button" class="btn btn-primary btn-sendCvEmail" onclick="sendMessage()">Envoyer</button>
+				<img src="{% static 'images/bx_loader.gif' %}" class="loadFbConnect" style="display:none">
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock  %}

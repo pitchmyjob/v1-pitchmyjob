@@ -1,0 +1,52 @@
+{% extends 'user-interne.html' %}
+
+
+{% block content %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+<div class="container-fluid container-profil">
+		
+		<div class="col-sm-12">
+			<h1> {% trans "Condition général d'utilisation" %} </h1>
+		</div>
+
+		<div class="col-sm-12">	
+			<div class="col-xs-12 ">
+				<div class="col-sm-12 profil-container cgu" >
+
+					<div class="col-sm-12">
+						<div class="row">
+							<h2> {% trans "Vie privée" %} </h2>
+						</div>
+					</div>
+
+						{% trans "La collecte de données personnelles est indispensable pour le fonctionnement du site Pitchmyjob et le succès de la démarche de l'utilisateur. Ce dernier a cependant un intérêt légitime à être informé des modalités de conservation, de gestion et d'utilisation de ces données." %} <br><br>
+
+						{% trans "Pitchmyjob veille étroitement à la conservation et à la confidentialité de données personnelles enregistrées par chaque utilisateur sur le site et est tenu à cet égard d'une obligation de moyen." %}
+						{% trans "Aucune donnée d'identification n'est recueillie par Pitchmyjob avant votre accès au site, cet accès se faisant après création de votre compte et acceptation des Conditions Générales d’Utilisation (CGU)." %}
+						<br><br>
+
+						{% trans "L'utilisateur candidat autorise expressément et sans réserve Pitchmyjob à communiquer aux recruteurs toutes ses données personnelles d'identification (adresse mail) et l'intégralité de son profil, cette communication étant indispensable à la démarche du candidat. Pitchmyjob est expressément autorisé par l'utilisateur à utiliser les données autres que les données personnelles d'identification à des fins statistiques, d'étude ou à toute autre fin conforme à son objet social." %}
+						<br><br>
+
+						{% trans "Aucune donnée personnelle d'identification enregistrée sur le site par l'utilisateur ne sera utilisée par Pitchmyjob à d'autres fins que celles expressément autorisées ci-dessus par l'utilisateur. Ces mêmes données ne pourront en aucun cas être cédées par Pitchmyjob à qui que ce soit." %}
+						<br><br>
+
+						{% trans "Le recruteur s'engage formellement et comme une condition essentielle de sa relation avec Pitchmyjob à veiller à la confidentialité des données personnelles des candidats qui lui seraient transmises, à en assurer la conservation ou, le cas échéant, la destruction avec le plus grand soin et dans le respect des textes en vigueur." %}
+						{% trans "Le recruteur s'interdit formellement toute transmission ou cession des données précitées quel qu’en soit le motif ou le bénéficiaire, et ce sous peine de fermeture immédiate de son compte et de poursuites judiciaires." %}
+						<br><br>
+
+						{% trans "En application des dispositions de l'article 36 du chapitre V de la  Loi n° 78-17 du 6 Janvier 1978, l'utilisateur, titulaire du droit d'accès aux informations le concernant (cf. article 34 de la même loi)  peut exiger qu'elles soient rectifiées, complétées, clarifiées, mises à jour ou effacées si elles sont inexactes, incomplètes, équivoques, périmées ou dont la collecte ou l'utilisation, la communication ou la conservation est interdite." %}
+						<br><br>
+
+						{% trans "A cette fin, contactez Pitchmyjob en envoyant un mail à contact@pitchmyjob.com ou un courrier à : Pitchmyjob SAS, 29 rue Viala 75015 Paris." %}
+
+				</div>	
+			</div>
+		</div>
+</div>
+
+	
+{% endblock %}

@@ -1,0 +1,12 @@
+<div>
+
+    <form action="#" method="POST">
+        {% csrf_token %}
+        <textarea name="html" id="html" cols="30" rows="10">{{ html }}</textarea> <br>
+        <input type="text" name="id"> <br>
+        <input type="submit" name="send">
+    </form>
+
+    {{ datas.experiences }}
+    
+</div>

@@ -1,0 +1,101 @@
+{% extends 'user-interne.html' %}
+
+
+{% block content %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+<div class="container-fluid container-profil">
+		
+		<div class="col-sm-12">
+			<h1> {% trans "Mon compte" %} </h1>
+		</div>
+
+		<div class="col-sm-12">	
+			<div class="col-md-4 my-account-grid">
+				<div class="row profil-menu">
+					<ul>
+						<li> <a href="{% url 'members:my-account' %}" class="profil-menu-active"> {% trans "Votre compte" %} </a> </li>
+						<li> <a href="{% url 'members:my-account-information' %}"> {% trans "Votre recherche" %} </a> </li>
+						<li> <a href="{% url 'members:my-account-password' %}"> {% trans "Mot de passe" %} </a> </li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="col-md-8 my-account-grid-2">
+				<div class="col-sm-12 profil-container">
+
+					<div class="col-sm-12">
+						<div class="row">
+							<h2> {% trans "Votre compte" %} </h2>
+						</div>
+					</div>
+
+					{% if form.errors %}
+				  		<div class="alert alert-danger col-sm-12"> 
+						    <ul>
+						    {% for field, error in form.errors.items %} 
+						        <li>{{ error }}</li>
+						    {% endfor %}
+						    </ul>
+						</div>
+					{% endif %} 
+
+					<form method="POST" action="">
+						{% csrf_token %}
+
+						<div class="col-sm-3 profil-photo"> 
+							<img src="{{ user.member.image.profil100.url}} ">
+							<div><a href="#" class="delete-account" onclick='confirm_delete()'> {% trans "Supprimer mon compte" %} </a></div>
+						</div>
+
+						<div class="col-sm-9">
+							<div class="row">
+
+								<div class="col-sm-6">
+									<label> {% trans "Prénom" %} </label>
+									{{ form.first_name|add_class:"form-control"}}
+								</div>
+
+								<div class="col-sm-6">
+									<label> {% trans "Nom" %} </label>
+									{{ form.last_name|add_class:"form-control"}}
+								</div>
+
+								<div class="col-sm-12">
+									<label> {% trans "Adresse email" %} </label>
+									<input type="text" value="{{ user.member.email }}" class="form-control" disabled>
+								</div>
+
+								<div class="col-sm-6">
+									<label> {% trans "Date de naissance" %} :  </label>
+									{{ form.birthday|add_class:"form-control"}}
+								</div>
+
+								<div class="col-sm-12 button-submit">
+									<input type="submit" name="Submit" value="Enregistrer" class="btn-general-blue-2">
+								</div>
+
+							</div>
+						</div>
+
+					</form>
+				</div>	
+			</div>
+		</div>
+</div>
+
+<script type="text/javascript">
+	
+	function confirm_delete()
+	{
+		var r = confirm("Etes vous sur de vouloir supprimer votre compte ?");
+		if (r == true) {
+		   window.location.href = "{% url 'members:disable_account' %}";
+		}
+	}
+
+</script>
+	
+{% endblock %}

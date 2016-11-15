@@ -1,0 +1,58 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width" />
+	    
+		<title>Pitch My Job</title>
+	   
+	    
+		<!--[if IE]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+		<style type="text/css">
+			html{
+				font-family:"Arial";
+			}
+			@media (max-width: 480px) {
+				 body{margin:0  !important}
+			 	#et2{font-size: 13px !important;padding: 42px 0 110px !important;}
+			 	.goPitch{font-size: 13px !important;}
+			}
+		</style>
+	</head>
+
+		<div style="background:#2C3E50; height:50px; padding:10px 0;">
+			<table style="width:100%">
+				<tr>
+					<td style="text-align:left;padding-left:50px;"> <img src="http://www.pitchmyjob.com/static/images/PITCH-Helvetica-P-bleu.png" style="max-height:40px; "> </td>
+					<td style="text-align:right;padding-right:100px;font-size:20px;color:#aeb1b4;" class="goPitch">  </td>
+				</tr>
+			</table>
+		</div>
+
+		<div style="padding:15px 30px 10px 30px;">
+			{% block content %}{% endblock %}
+		</div>
+
+		<div style="background:#2C3E50; height:60px; padding:10px 0;">
+			<table style="width:100%">
+				<tr>
+					<td style="text-align:left;padding-left:50px;color:#95a0a7;"> 
+						<img src="http://www.pitchmyjob.com/static/images/PITCH-Helvetica-P-bleu.png" style="max-height:30px; "> 
+						<div style="color:#95a0a7; margin-top:10px;"> Copyright © 2016 PITCH MY JOB </div>
+					</td>
+					<td style="text-align:right;padding-right:100px;font-size:18px;color:#95a0a7">
+						<div> 
+							<a href="https://www.facebook.com/pitchmyjob/"> <img src="http://www.pitchmyjob.com/static/images/pitchmyjob-19.png"> </a> &nbsp; &nbsp;  
+							<a href="https://twitter.com/Pitchmyjob"> <img src="http://www.pitchmyjob.com/static/images/pitchmyjob-20.png"> </a> &nbsp; &nbsp;      
+						</div>
+
+					</td>
+				</tr>
+			</table>
+		</div>
+			
+	</body>
+
+</html>

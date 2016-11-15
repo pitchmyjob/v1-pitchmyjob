@@ -1,0 +1,182 @@
+{% extends 'user-interne.html' %}
+
+{% block annonces %} active {% endblock %}
+{% block footer %} {% endblock %}
+{% block js_autocomplete %} {% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load i18n %}
+	
+	<style type="text/css">
+		.recorder-front-logo { display:none;}
+	</style>
+
+
+	<div class="container-fluid header-entretien">
+		<h1> {{ candidature.job.job_title }} - {{ candidature.job.company }}</h1>
+		<div class="beadcreamps">
+			{% for qt in questions %}
+					<div class="bdc-{{ qt.nb }} beadcreamps-white">{{ qt.nb }}</div>
+			{% endfor %}
+		</div>
+	</div>
+
+	<div class="container-fluid entretien-content entretien-4">
+		<div class="qt-start" > {% trans "Prêts à passer l'entretien ?" %} </div>
+		{% for qt in questions %}
+				<div class="qt-all qt-{{ qt.nb }}" style="display:none;">{{ qt.question }}</div>
+		{% endfor %}
+	</div>
+
+
+	<div class="container-fluid entretien-4-text page-entretien" style="max-width:600px;">
+		<div class="alert alert-danger row" style="display:none"> 
+		    {% trans "Veuillez repondre à la question." %}
+		</div>
+		<div style="width:450px; margin:0 auto;">
+   	 		<div id="replace_me"></div>
+	    </div>
+	    <div class="row">
+			<div class="col-sm-6"> <!-- <a href="{{ back }}" class="backSubmit1">Retour</a> --></div> 
+
+			<div class="col-sm-12"> <a href="#" class="btn-entretien nextQuestion" style="display:none" > {% trans "Question suivante" %} </a>  </div> 
+			<div class="col-sm-12" style="padding: 0 75px;"> 
+				<a href="" class="btn-entretien restartEntretien" style="display:none;float:left"> {% trans "Recommencer" %} </a>  
+				<a href="{{ next }}" class="btn-entretien stopEntretien" style="display:none;float:right"> {% trans "Finir l'entretien" %} </a>  
+			</div> 
+			<div class="col-sm-12"> <a href="#" class="btn-entretien startRecord" style="display:none" > {% trans "Démarrer" %} </a>  </div> 
+			<div class="col-sm-12"> <a href="#" class="btn-entretien stopRecord" style="display:none" > {% trans "Envoyer la candidature" %} </a>  </div> 
+		</div>
+
+    </div> 
+
+    <script type="text/javascript">
+    	
+
+    	//$('.qt-1').show();
+    	//$('.bdc-1').addClass("beadcreamps-red");
+
+
+    	var nb = {{ questions|length }};
+		var next = "{{ next }}";
+		var currQuest = 1;
+		var time = 0;
+
+		console.log( nb );
+
+		$('.nextQuestion').click(function(){
+
+			var now = Math.floor(Date.now() / 1000);
+			var second = now - (time + 1);
+
+			$('.qt-all').hide();
+			currQuest++;
+			$('.qt-'+currQuest).show();
+			$('.bdc-'+currQuest).addClass("beadcreamps-red");
+
+			if(currQuest == nb)
+			{
+				$('.nextQuestion').hide();
+				$('.stopRecord').show();
+			}
+
+			$.ajax({
+				url: "/api/video/entretien/time",
+				type: "POST",
+				data : {'candidature' : {{candidature.id}}, 'nb' : currQuest, 'time' : second},
+				beforeSend: function(xhr){ xhr.setRequestHeader('Authorization', 'Token {{ form }}'); },
+				success: function(response) { console.log('okkk'); },
+				error: function(xhr, status, error) { 
+				 	 console.log( xhr.responseText )
+			    }
+			});
+		});
+
+
+
+    </script>
+
+	<link rel="stylesheet" href="//assets-cdn.ziggeo.com/css/ziggeo-v1.css" />
+	<script src="//assets-cdn.ziggeo.com/js/ziggeo-v1.js"></script>
+	<script>ZiggeoApi.token = "e50140772b22dbd8cbda85384066b8e5";</script>
+	<script>ZiggeoApi.Config.resumable = true;</script>
+
+	<script type="text/javascript">
+		var object;
+		var over = 0;
+		
+
+		ZiggeoApi.Events.on("submitted", function (data) {
+			object = { 'token' : data.video.token, 'embed_url' : data.video.embed_video_url, 'extension' : data.video.streams[0].video_type, 'candidature' : {{candidature.id}} }; 
+			//alert("The video with token " + data.video.token + " has been submitted!");
+			console.log(data.video);
+			$.ajax({
+				url: "/api/video/entretien",
+				type: "POST",
+				data : object,
+				beforeSend: function(xhr){ xhr.setRequestHeader('Authorization', 'Token {{ form }}'); },
+				success: function(response) { console.log('okkk'); },
+				error: function(xhr, status, error) { 
+				 	 console.log( xhr.responseText )
+			    }
+			});
+			$('.stopEntretien').show();
+			$('.stopRecord').hide();
+			$('.restartEntretien').show();
+			$('.qt-all').hide();
+
+		});
+
+
+		ZiggeoApi.Events.on("recording", function (data) {
+			currQuest = 1;
+			time = Math.floor(Date.now() / 1000);
+			
+			$('.restartEntretien').hide();
+			$('.stopEntretien').hide();
+			$('.startRecord').hide();
+
+			if(nb==1)
+			{
+				$('.nextQuestion').hide();
+				$('.stopRecord').show();
+			}else{
+				$('.nextQuestion').show();
+			}
+			
+		});
+
+		ZiggeoApi.Events.on("ready_to_record", function (data) {
+			$('.qt-all').hide();
+			$('.startRecord').show();
+    		$('.beadcreamps-white').removeClass("beadcreamps-red");
+    		//$('.bdc-1').addClass("beadcreamps-red");
+    		$('.restartEntretien').hide();
+    		$('.stopEntretien').hide();
+		});
+
+		var embedding = ZiggeoApi.Embed.embed("#replace_me", {width: "450", height: "300"});
+		//
+		$('.startRecord').click(function() {
+			embedding.record(); 
+			$('.qt-1').show();
+			$('.qt-start').hide();
+			$('.bdc-1').addClass("beadcreamps-red");
+		});
+
+		$('.stopRecord').click(function() {
+			embedding.stopRecord(); 
+			$('.stopRecord').hide();
+		});
+
+		$('.restartEntretien').click(function() {
+			embedding.embedding.reset(); 
+			$('.restartEntretien').hide();
+		});
+	</script>
+
+
+
+{% endblock %}

@@ -1,0 +1,171 @@
+{% extends "pro-interne.html" %}
+
+{% block profil %} active {% endblock %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load widget_tweaks %}
+	{% load i18n %}
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery.Jcrop.css' %}" />
+
+	<div class="container-fluid pro-profil">
+		<form action="" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+
+			<div class="col-sm-12 pro-profil-converture">
+				{% if object.cover %} <img src="{{ object.cover.cover840.url }}" class="cover-default-pro" style="max-width:890px; max-height:200px;width:100%"> {% else %} <img src="{% static 'images/myc2v-28.jpg' %}" class="cover-default-pro" style="max-width:890px; max-height:200px; width:100%"> {% endif %}
+				<div class="pro-profil-modify pro-absolute-modify"> <label for="input-pro-couverture-n"> <img src="{% static 'images/myc2v-49.png'%}"> </label> </div>
+				
+			</div>
+			<input type="text" class="input-pro-couverture"  id="input-pro-couverture" name="cover">
+			{% if form.errors %}
+				<div class="col-sm-12" >
+			  		<div class="alert alert-danger" style="margin-top: 20px; margin-bottom: 0px;">
+					    {% trans "Veuillez remplir les champs obligatoire." %}
+					    {% if form.video_url.errors %}
+							<br> {{ form.video_url.errors }}
+						{% endif %}
+
+					</div>
+				</div>
+			{% endif %} 
+
+		
+			<div class="col-sm-12">
+				<div class="row">
+
+					<div class="col-sm-8">
+							
+						<div class="pro-bloc-profil">
+							{{ form.company|add_class:"form-control input-pro-entreprise"|add_error_class:"custom-error" }}
+						</div>
+
+						<div class="pro-bloc-profil">
+							<label> {% trans "Url de la vidéo de présentation" %} </label>
+							{{ form.video_url|add_class:"form-control"|add_error_class:"custom-error" }}
+						</div>
+
+						<div class="pro-bloc-profil">
+							<label> {% trans "Description de votre entreprise" %} </label>								
+							{{ form.description|add_class:"form-control" }}
+						</div>
+
+						
+
+
+					</div>
+
+					<div class="col-sm-4 "> 
+
+						<div class="pro-bloc-profil">
+
+							<div class="pro-entreprise-logo">
+								<div class="pro-profil-modify-2"> <label for="input-pro-logo"> <img src="{% static 'images/myc2v-49.png' %}"> </label> </div>
+								<img src="{{ object.image.logo100.url }}" class="logo-default-pro" style="max-width:100px; max-height:100px;">
+								<input type="file" class="input-pro-logo" id="input-pro-logo" name="image" >
+							</div>
+
+							<div class="pro-entreprise-rs">
+								<div class="input-group">
+							      	<div class="input-group-addon"> <img src="{% static 'images/myc2v-42.png' %}">  </div>
+							      	{{ form.link_facebook|add_class:"form-control"|attr:"placeholder:https://www.facebook.com" }}
+							    </div>
+
+							    <div class="input-group">
+							      	<div class="input-group-addon"> <img src="{% static 'images/myc2v-43.png' %}">  </div>
+							      	{{ form.link_twitter|add_class:"form-control"|attr:"placeholder:https://twitter.com" }}
+							    </div>
+
+							    <div class="input-group">
+							      	<div class="input-group-addon"> <img src="{% static 'images/myc2v-44.png' %}">  </div>
+							      	{{ form.link_youtube|add_class:"form-control"|attr:"placeholder:https://www.youtube.com" }}
+							    </div>
+
+							</div>
+						</div>
+
+						<div class="pro-bloc-profil ">
+							<div class="detail-entreprise pro-entreprise-infos">
+								<div> {% trans "Site Web" %} : </div>
+								{{ form.web_site|add_class:"form-control" }}
+								<div> {% trans "Secteur" %} :</div>
+								{{ form.activity_area|add_class:"form-control"|add_error_class:"custom-error" }}
+								<div> {% trans "Employés" %} 	:  </div>
+								{{ form.employes|add_class:"form-control"|add_error_class:"custom-error" }}
+								<div> {% trans "Chiffre d'affaire" %} :  </div>
+								{{ form.ca|add_class:"form-control" }}
+
+							</div>
+						</div>
+
+
+					</div>
+
+					<div class="col-sm-12 pro-profil-save ">
+						<input type="submit" class="btn-general-red" value="Enregistrer">
+					</div>
+
+				</div>
+			</div>
+		</form>
+	</div> 
+
+	<div class="dynamic-form " style="display:none"> 
+		<div class="dynamic-form-{nb}">
+			<label class="pro-profil-question"> {% trans "Question" %} N°{nb} <span class="glyphicon glyphicon-remove pro-profil-remove-question" onClick="removeItem({nb})"> </span> </label>
+			<input type="text" class="form-control" name="qt" >
+		</div>
+	</div>
+
+	<script type="text/javascript" src="{% static 'js/plugin/jquery.Jcrop.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/plugin/jquery.SimpleCropper.js' %}"></script>
+
+    <script type="text/javascript">
+    	var test = $('.pro-absolute-modify').simpleCropper(900, 200, 'pro');
+    </script>
+
+	<script type="text/javascript">
+		var nb = 2;
+
+
+		$('.add-form').click(function() {
+			content = $('.dynamic-form').html().replace(/{nb}/g, nb++);
+			$('.bloc-dynamic-form').append( content );
+		});
+
+		function removeItem( i ){
+			$('.dynamic-form-'+i).remove();
+			nb = nb - 1;
+		}
+	
+	</script>
+
+	<script type="text/javascript">
+		$("#input-pro-logo").on('change', function () {
+ 
+	        if (typeof (FileReader) != "undefined") {
+
+	 			if ( $(this)[0].files[0] ) {
+		            
+		            var reader = new FileReader();
+
+		            reader.onload = function (e) {
+		                $('.logo-default-pro').attr('src', e.target.result);
+		 
+		            }
+		            
+		            reader.readAsDataURL($(this)[0].files[0]);
+	        	} else {
+	        		image_holder.html( $('.default-upload').html() );
+	        	}
+	        } else {
+	            alert("This browser does not support FileReader.");
+	        }
+	    });
+
+
+	</script>
+
+{% endblock  %}
+

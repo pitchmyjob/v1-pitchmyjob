@@ -1,0 +1,39 @@
+{% extends 'pages/base-mon-compte.html' %}
+
+	
+{% block presse %} profil-menu-active {% endblock %}
+
+{% block subcontent %}
+{% load staticfiles %}
+
+<div class="col-sm-12 pages-content-a-propos">
+	<div class="row">
+
+		<div class="col-sm-3 pages-presse">
+			<a href="https://www.francebleu.fr/emissions/mode-d-emploi/normandie-rouen/pitch-my-job-revolutionne-la-recherche-d-emploi-sur-internet"> <img src="{% static 'images/presse/francebleu.png' %}" target="blank"> 
+				<h3> France bleu </h3>
+			</a>
+		</div>
+	
+		<div class="col-sm-3 pages-presse">
+			<a href="http://earlyadoptersparis.com/pitch-my-job-le-premier-site-demploi-qui-donne-la-parole-aux-candidats-282" target="blank"> <img src="{% static 'images/presse/early.png' %}"> 
+				<h3> Early adopter </h3>
+			</a>
+		</div>
+
+		<div class="col-sm-3 pages-presse">
+			<a href="http://www.focusrh.com/recrutement/sites-emploi/actualites-rh/2016/03/07/pitchmyjobcom-donne-la-parole-aux-candidats.html"  target="blank">  <img src="{% static 'images/presse/focus.png' %}"> 
+				<h3> Focus RH: </h3>
+			</a>
+		</div>
+
+		<div class="col-sm-3 pages-presse">
+			<a href="http://exclusiverh.com/annuaires/site-emploi-specialise/pitch-my-job.htm"  target="blank">  <img src="{% static 'images/presse/exclusive.png' %}"> 
+				<h3> Exclusive RH </h3>
+			</a>
+		</div>
+
+	</div>
+</div>
+	
+{% endblock %}

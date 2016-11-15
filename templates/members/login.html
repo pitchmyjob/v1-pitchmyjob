@@ -1,0 +1,84 @@
+{% extends "base-login-inscription.html" %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load i18n %}
+	
+	<body class="connexion">
+		<div class="row">
+			<div class="col-md-12 connexion-logo"> <a href="{% url 'members:home' %}"> <img src="{% static 'images/PITCH-Helvetica-P-bleu.png' %}" class="home-user-logo logo-pitch-2"> </a>  </div>
+		</div>
+
+
+		<div class="connexion-bloc">
+			<h1> {% trans "Connexion" %} </h1>
+			<div class="connexion-container">
+				<div class="row rs">
+					<div class="col-xs-12" style="margin-bottom:10px;"> 
+						<!--<img src="{% static 'images/myc2v-25.png' %}" style="cursor:pointer" class="test clickFbConnect" onclick="liAuth()">--> 
+
+						{% if messages %}
+						    {% for message in messages %}
+						    	<div class="col-sm-12">
+							  		<div class="alert alert-danger col-sm-12" role="alert"> 
+									    {{ message }}
+									</div>
+								</div>
+						    {% endfor %}
+						{% endif %}
+
+						<a href="{% url 'members:linkedin-connect' %}?{{ request.GET.urlencode }}" > <img src="{% static 'images/myc2v-25.png' %}" id="ga-btn-login-linkdin"> </a> <br><br>
+
+						<img src="{% static 'images/bx_loader.gif' %}" class="loadFbConnect" style="display:none">
+						<div class="signeUpErrors alert alert-danger" style="display:none;"> </div>
+
+						<a href="{% url 'members:doyoubuzz-connect' %}?{{ request.GET.urlencode }}" > <img id="ga-btn-login-doyoubuzz" src="{% static 'images/doyoubuzz.jpg' %}"> </a> 
+						
+					</div>
+
+					<!-- <div class="col-xs-6"> <a href=""><img src="{% static 'images/myc2v-26.png' %}"></a> </div> -->
+					
+					<!-- <a href="{% url 'members:facebook-connect' %}?{{ request.GET.urlencode }}"><img src="{% static 'images/myc2v-61.png' %}"  id="ga-btn-login-fbk"></a>    -->
+
+					
+
+					
+					
+				</div>
+				
+				<table><tr><td><hr size="70px"></td><td>ou</td> <td><hr size="70px"></td></tr></table>
+
+				<form method="POST" action="" id="ga-btn-cnxion">
+					{% csrf_token %}
+					<div class="connexion-form" > 
+						{% if form.errors %}
+					  		<div class="alert alert-danger alert-inscription lt-connexion"> 
+							    <ul>
+							    {% for field, error in form.errors.items %} 
+							        <li>{{ error }}</li>
+							    {% endfor %}
+							    </ul>
+							</div>
+						{% endif %} 
+						<div class="input-group {% if form.username.errors %} has-error {% endif %}">
+					      	<div class="input-group-addon"> <span class="glyphicon glyphicon-envelope"></span> </div>
+					      	<input type="email" class="form-control" name="username" value="{{ form.username.value|default_if_none:"" }}" placeholder="{% trans 'Email' %}">
+					    </div>
+					    <div class="input-group {% if form.password.errors %} has-error {% endif %}">
+					      	<div class="input-group-addon"> <span class="glyphicon glyphicon-lock"></span> </div>
+					      	<input type="password" class="form-control" name="password" placeholder="{% trans 'Mot de passe' %}">
+					    </div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-6"> <a href="{% url 'pages:reset-password-1' %}" class="forget-password"> {% trans "Mot de passé oublié ?" %} </a> </div>
+						<div class="col-xs-6"> <input type="submit" name="submit" value="{% trans 'Connexion' %}" class="btn-general-red submitConnexion">  </div>
+					</div>
+				</form>
+				<div class="connexion-inscription"> {% trans "Pas encore inscrit ?" %} <a href="{% url 'members:inscription' %}?{{ request.GET.urlencode }}"> {% trans "S'inscrire" %} </a> </div>
+			</div>	
+		</div> 
+	</body>
+
+
+{% endblock  %}

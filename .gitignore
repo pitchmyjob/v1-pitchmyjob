@@ -1,0 +1,11 @@
+myc2V/
+media/records/
+nodejs/
+media/
+static/
+static_ba/
+.git_old/
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

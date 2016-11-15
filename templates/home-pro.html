@@ -1,0 +1,226 @@
+{% load staticfiles %}
+{% load in_group %}
+{% load i18n %}
+
+<!DOCTYPE html>
+
+<!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
+<!--[if IE 8]><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="css/ie7.css" /><![endif]-->
+
+<html lang="fr">
+	<head>
+		<meta property="og:title" content="Rejoins Pitch my job" />
+		<meta property="og:description" content="Passe un entretien et decroche ton prochain job !" /> 
+		<meta property="fb:app_id" content="1521513254812652"/>
+	    <meta property="og:image" content="https://www.pitchmyjob.com/static/images/share2.png"/>
+	   
+		<meta charset="utf-8">
+	    
+		<title>Pitch my job |Recrutement stage, emploi et pré-entretien vidéo</title>
+	    
+	    <!-- behavioral meta data -->
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="format-detection" content="telephone=no">
+	    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0">  
+	    
+	    <!-- core meta data -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<!-- styles -->
+		<link rel="stylesheet" href="{% static 'css/jquery.bxslider.css' %}">
+		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/global.css' %}">
+		<link rel="stylesheet" href="{% static 'css/devices.css' %}">
+
+		<!-- styles -->
+		<script src="{% static 'js/plugin/jquery-1.11.3.min.js' %}"></script> 
+		<script src="{% static 'js/plugin/jquery.bxslider.min.js' %}"></script>  
+		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script> 
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+		
+	    <!-- favicons -->
+		<link rel="icon" href="{% static 'images/favicon.png' %}" type="images/icons/x-icon" />
+		<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="images/icons/x-icon" />
+
+		<meta name="robots" content="noindex">
+		<meta name="googlebot" content="noindex">
+	    
+	    
+		<!--[if IE]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+		
+	</head>
+
+	<body class="pro">
+		<header class="home-pro">
+			<div class="home-pro-filtre">
+				<div class="container"> 
+					<nav class="navbar navbar-default navbar-home">
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"  aria-controls="navbar">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								</button>
+								<a href="#"> <img src="{% static 'images/PITCH-Helvetica-P-bleu.png' %}" class="home-user-logo logo-pitch"> </a>
+							</div>
+							<div id="navbar" class="navbar-collapse collapse">
+								<ul class="nav navbar-nav navbar-right">
+									{% if user.is_authenticated and user|in_group:"pro" %}
+										<li> <a id="ga-btnpro-aepace" href="{% url 'pro:offres' %}" class="navbar-link"> {% trans "Accédez à mon espace Pro" %} </a> </li>
+									{% else %}
+										<li> <a id="ga-btnpro-inscrption" href="{% url 'pro:inscription' %}" class="navbar-link"> {% trans "Inscription" %} </a> </li>
+										<li> <a id="ga-btnpro-conxion" href="{% url 'pro:login' %}"> {% trans "Connexion" %} </a> </li>
+									{% endif %}
+									<li> <a id="ga-btnpro-acandid" href="{% url 'members:home' %}" class="btn-general-red"> {% trans "Accès candidat" %} </a> </li>
+								</ul>
+							</div><!--/.nav-collapse -->
+						</div><!--/.container-fluid -->
+					</nav>
+
+					<div class="home-pro-h1">
+						<h1 style="text-transform: uppercase"> {% trans "recrutez autrement grâce au CV et au pré-entretien" %}</h1>
+						<div> <a id="ga-btnpro-ograt" href="{% url 'pro:job-create' %}" class="btn-general-red"> {% trans "Publier une offre gratuitement" %} </a> </div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<div  class="entretien-differe">
+			<div class="container"> 
+				<h2>{% trans "ENTRETIEN DIFFÉRÉ" %}</h2>
+
+				<div class="row">
+					<div class="col-md-4"> <img src="{% static 'images/myc2v-18.png' %}">  <h3> {% trans "Etape 1" %} </h3>  <p> {% trans "Rédigez votre annonce d'emploi et ajouter des questions d'entretiens" %} </p> </div>
+					<div class="col-md-4"> <img src="{% static 'images/myc2v-19.png' %}">  <h3> {% trans "Etape 2" %} </h3>  <p> {% trans "Les candidats postulent en répondant directement à vos questions en vidéo, audio ou texte" %} </p> </div>
+					<div class="col-md-4"> <img src="{% static 'images/myc2v-20.png' %}">  <h3> {% trans "Etape 3" %} </h3>  <p> {% trans "Vous recevez le CV et l’entretien du candidat par mail." %} </p> </div>		
+				</div>
+				<div class="publier"> <a href="" class="btn-general-blue-2"> {% trans "Publier une offre gratuitement" %} </a> </div>
+			</div>
+		</div>
+
+
+		<div class="lec2v-pro">
+			<div class="container">
+				<h2> {% trans "LE CV" %} </h2>
+				<p> {% trans "Découvrez la personalité des candidats gràce au pitch vidéo contenu dans leur CV. Et gagnez du temps lors de la pré-selection de vos candidats" %} </p>
+			</div>
+		</div>
+
+		<div class="lec2v-theque">
+			<div class="container">
+				<h2> {% trans "LA CV-THEQUE" %} </h2>
+				<div class="text"> 
+					{% trans "Vous cherchez à recruter un candidat ? Accédez à la première base de donnée de CV Vidéo" %}
+					<ul>
+						<li> {% trans "Sourcez de manière optimale les personnalités qui correspondent à votre entreprise" %} </li>
+						<li> {% trans "Gagnez du temps en envoyant des demandes d'entretiens aux meilleurs profils." %} </li>
+					</ul>
+					<div class="link"> <a href="" class="btn-general-blue-2"> {% trans "Accédez à la CV-thèque" %}  </a> </div>
+				</div>
+			</div>
+		</div>
+
+		<div class="profil-entreprise">
+			<div class="container">
+				<h2> {% trans "VOTRE PROFIL ENTREPRISE" %} </h2>
+				<div class="text"> 
+					<ul>
+						<li> {% trans "Gràce à votre profil, développez votre marque employeur, attirez de nouveaux talents et recevez gratuitement des candidatures spontanée." %}</li>
+					</ul>
+					<div class="link"> <a href="" class="btn-general-blue-2"> {% trans "Accédez à la CV-thèque" %}  </a> </div>
+				</div>
+			</div>
+		</div>
+
+		<!--
+		<div class="confiance"> 
+			<div class="container"> 
+				<h2>ILS NOUS FONT CONFIANCE</h2>
+
+				<div class="row list-confiance">
+					<img src="{% static 'images/myc2v-06.png' %}">
+					<img src="{% static 'images/myc2v-09.png' %}">
+					<img src="{% static 'images/myc2v-07.png' %}">
+					<img src="{% static 'images/myc2v-08.png' %}">	
+					<img src="{% static 'images/myc2v-21.png' %}">	
+					<img src="{% static 'images/myc2v-23.png' %}">				
+				</div>
+			</div>
+		</div>
+
+		<div class="presse"> 
+			<div class="container"> 
+				<h2>LA PRESSE PARLE DE NOUS</h2>
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="col-md-12"> 
+							<div class="img">  <img src="{% static 'images/myc2v-13.png' %}"> </div>
+							<div class="title"> 20minutes </div>  <div class="date"> le 20 aount 2015 </div>  <p> " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod. " </p>  
+						</div> 
+					</div>
+
+					<div class="col-sm-3">
+						<div class="col-md-12"> 
+							<div class="img"> <img src="{% static 'images/myc2v-14.png' %}"> </div>
+							<div class="title"> BFTM TV </div>  <div class="date"> le 20 aount 2015 </div>  <p> " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod. " </p>   
+						</div> 
+					</div>
+
+					<div class="col-sm-3">
+						<div class="col-md-12"> 
+							<div class="img"> <img src="{% static 'images/myc2v-24.png' %}"> </div>
+							<div class="title"> Direct matin </div>  <div class="date"> le 20 aount 2015 </div>  <p> " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod. " </p>   
+						</div> 
+					</div>
+
+					<div class="col-sm-3">
+						<div class="col-md-12"> 
+							<div class="img"> <img src="{% static 'images/myc2v-15.png' %}"> </div>
+							<div class="title"> Le Monde </div>  <div class="date"> le 20 aount 2015 </div>  <p> " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod. " </p>  
+						</div> 
+					</div>
+				</div>
+			</div>
+		</div> -->
+
+		{% include 'footer-pro.html' %}
+
+		<!-- Google Tag Manager -->
+		<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NC3XK5"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-NC3XK5');</script>
+		<!-- End Google Tag Manager -->
+
+	</body>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+		  $('.last-offre-slider').bxSlider({
+		    slideWidth: 450,
+		    minSlides: 2,
+		    maxSlides: 3,
+		    slideMargin: 10,
+		    auto : false
+		  });
+		  $('.temoignage-slider').bxSlider({
+		    slideWidth: 400,
+		    minSlides: 2,
+		    maxSlides: 3,
+		    slideMargin: 10,
+		    auto : false
+		  });
+		});
+	</script>
+
+	<script src="{% static 'js/plugin/handlebars-v4.0.5.js' %}"></script>
+	<script src="{% static 'js/custom/share.js' %}"></script>
+
+</html>

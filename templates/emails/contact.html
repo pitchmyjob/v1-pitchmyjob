@@ -1,0 +1,11 @@
+{% extends 'emails/basic.html' %}
+
+
+{% block content %}
+<p>
+	Objet = {{ objet }}
+</p>
+<p>
+	Message = {{ message|safe|linebreaksbr  }}
+</p>
+{% endblock %}

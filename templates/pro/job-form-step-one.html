@@ -1,0 +1,106 @@
+{% extends "pro-interne.html" %}
+
+{% block mes-offres %} active {% endblock %}
+
+{% block content %}	
+	{% load staticfiles %}
+	{% load widget_tweaks %}
+	{% load i18n %}
+		
+	<div class="create-offre-1">
+		<div class="col-md-12">
+			<img src="{% static 'images/myc2v-29.png' %}">
+		</div>
+	</div> 
+
+	<div class="create-offre-bloc-1">
+		<div class="container-fluid">
+			<div class="col-md-12 title"> {% trans "Détail du poste" %} </div>
+
+			<div class="col-sm-3 logo"> 
+
+				<div class="col-md-12"> 
+				<label> {% trans "Votre logo" %} </label>
+			
+				<div class="bloc-logo"> 
+					<div class="pro-offre-logo-modify"> <label for="id_image"> <img src="{% static 'images/myc2v-49.png'%}"> </label> </div>
+					<div id="image-holder"> 
+						{% if form.image.value %} <img src="{{ form.image.value.logo100.url }}"> {% else %} <img src="{{ user.pro.image.logo100.url }}"> {% endif %} 
+					</div>
+				</div>
+				</div>
+			 </div> 
+			<form action="" method="POST" enctype="multipart/form-data">
+				<input type="file" id="id_image" name="image" style="display:none">
+				{% csrf_token %}
+				<div class="col-sm-9"> 
+					<div class="col-md-6"> 
+						<label> {% trans "Nom de l'entreprise" %} *</label> 
+						{{ form.company|add_class:"form-control"|add_error_class:"custom-error" }}
+						<label> {% trans "Contact" %} *</label> 
+						{{ form.contact|add_class:"form-control"|add_error_class:"custom-error" }}
+						<label> {% trans "Lien vers le site" %} *</label> 
+						{{ form.web_site|add_class:"form-control"|add_error_class:"custom-error" }}
+					</div>
+					<div class="col-md-6"> 
+						<label> {% trans "Intitulé du poste" %} *</label> 
+						{{ form.job_title|add_class:"form-control"|add_error_class:"custom-error" }}
+						<label> {% trans "Lieux du poste" %} *</label> 
+						{{ form.job_location|add_class:"form-control"|add_error_class:"custom-error" }}
+						<label> {% trans "Secteur du poste" %} *</label> 
+						{{ form.activity_area|add_class:"form-control"|add_error_class:"custom-error" }}	
+						<input type="submit" value="Suivant" class="createSubmit1">		
+					</div>
+				</div>
+				{{ form.latitude|add_class:"location-input" }}
+				{{ form.longitude|add_class:"location-input" }}
+				{{ form.street_number|add_class:"location-input" }}
+				{{ form.route|add_class:"location-input" }}
+				{{ form.locality|add_class:"location-input" }}
+				{{ form.administrative_area_level_2|add_class:"location-input" }}
+				{{ form.administrative_area_level_1|add_class:"location-input" }}
+				{{ form.country|add_class:"location-input" }}  
+			</form>
+
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		var defaut = "{% if form.image.value %} {{ form.image.value.logo100.url }} {% else %} {{ user.pro.image.logo100.url }} {% endif %} ";
+
+		$("#id_image").on('change', function () {
+ 
+	        if (typeof (FileReader) != "undefined") {
+	        	var image_holder = $("#image-holder");
+	 			
+	 			if ( $(this)[0].files[0] ) {
+	 				image_holder.empty();
+		            
+		            var reader = new FileReader();
+		            reader.onload = function (e) {
+		                $("<img />", {
+		                    "src": e.target.result,
+		                    "class": "thumb-image"
+		                }).appendTo(image_holder);
+		 
+		            }
+		            image_holder.show();
+		            
+		            reader.readAsDataURL($(this)[0].files[0]);
+	        	} else {
+	        		$("#image-holder img").attr('src', defaut);
+	        	}
+	        } else {
+	            alert("This browser does not support FileReader.");
+	        }
+	    });
+
+		$( document ).ready(function() {
+		   	init_autocomplete("id_job_location", false, 'address');
+		});
+
+	</script>
+
+
+
+{% endblock  %}

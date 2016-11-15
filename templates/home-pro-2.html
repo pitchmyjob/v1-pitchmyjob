@@ -1,0 +1,505 @@
+{% load staticfiles %}
+{% load in_group %}
+{% load i18n %}
+
+<!DOCTYPE html>
+
+<!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
+<!--[if IE 8]><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="css/ie7.css" /><![endif]-->
+
+<html lang="fr">
+	<head>
+		<meta property="og:title" content="Rejoins Pitch my job" />
+		<meta property="og:description" content="Passe un entretien et decroche ton prochain job !" />
+		<meta property="fb:app_id" content="1521513254812652"/>
+	    <meta property="og:image" content="https://www.pitchmyjob.com/static/images/share2.png"/>
+
+		<meta charset="utf-8">
+
+		<title>Pitch my job | Recrutement stage, emploi et pré-entretien vidéo</title>
+
+	    <!-- behavioral meta data -->
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="format-detection" content="telephone=no">
+	    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0">
+
+	    <!-- core meta data -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<!-- styles -->
+		<link rel="stylesheet" href="{% static 'css/jquery.bxslider.css' %}">
+		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/global.css' %}">
+		<link rel="stylesheet" href="{% static 'css/devices.css' %}">
+
+		<!-- styles -->
+		<script src="{% static 'js/plugin/jquery-1.11.3.min.js' %}"></script>
+		<script src="{% static 'js/plugin/jquery.bxslider.min.js' %}"></script>
+		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+
+	    <!-- favicons -->
+		<link rel="icon" href="{% static 'images/favicon.png' %}" type="images/icons/x-icon" />
+		<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="images/icons/x-icon" />
+
+		<meta name="robots" content="noindex">
+		<meta name="googlebot" content="noindex">
+
+
+
+		<!--[if IE]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+	</head>
+
+	<body>
+
+       <header class="home-pro-2">
+
+           <div class="home-pro-filtre-2">
+				<div class="container-pro-2">
+					<nav class="navbar navbar-default navbar-home-pro-2">
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"  aria-controls="navbar">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								</button>
+								<a href="#"> <img src="{% static 'images/refonte/home-pro-logo.png' %}" class="home-user-logo logo-pitch"> </a>
+							</div>
+							<div id="navbar" class="navbar-collapse collapse">
+								<ul class="nav navbar-nav navbar-right">
+									{% if user.is_authenticated and user|in_group:"pro" %}
+										<li> <a id="ga-btnpro-aepace" href="{% url 'pro:offres' %}" class="navbar-link"> {% trans "Accédez à mon espace Pro" %} </a> </li>
+									{% else %}
+										<li> <a id="ga-btnpro-inscrption" href="{% url 'pro:inscription' %}" class="navbar-link"> {% trans "Inscription" %} </a> </li>
+										<li> <a id="ga-btnpro-conxion" href="{% url 'pro:login' %}"> {% trans "Connexion" %} </a> </li>
+									{% endif %}
+									<li> <a id="ga-btnpro-acandid" href="{% url 'members:home' %}" class="pro-link-red"> {% trans "Accès candidat" %} </a> </li>
+								</ul>
+							</div><!--/.nav-collapse -->
+						</div><!--/.container-fluid -->
+					</nav>
+
+					<div class="home-pro-h1-2">
+						<h1> {% trans "Recrutez autrement" %} <br> {% trans "grâce à Pitch my job !" %} </h1>
+						<div> <a id="ga-btnpro-ograt" href="{% url 'pro:inscription' %}" class="btn-general-blue-3"> {% trans "Publiez une offre" %} </a> </div>
+					</div>
+
+                    <div class="home-pro-2-more">
+                        <div class="pro-2-more"> En savoir plus </div>
+                        <div><img src="{% static 'images/refonte/home-pro-07.png' %}" alt=""> </div>
+                    </div>
+				</div>
+			</div>
+
+       </header>
+
+
+        <div id="pro-home-metric" class="container-fluid">
+
+            <div class="col-sm-4">
+
+                 <div class="pro-metrics">
+                    <span class="timer t1"></span>
+                    <div class="text"> Candidats </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-4">
+
+                 <div class="pro-metrics">
+                    <span class="timer t2"></span>
+                    <div class="text"> Entretiens </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-4">
+
+                 <div class="pro-metrics">
+                    <span class="timer t3"></span>
+                    <div class="text"> Entreprises </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+       <div class="pourquoi-pitch container-fluid">
+
+           <h2>Pourquoi choisir Pitch my job ?</h2>
+
+           <div class="col-sm-2"></div>
+
+           <div class="col-sm-5">
+                <div class="embed-responsive" style="max-width:500px; height:300px; margin:0 auto;">
+                  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/S-2pmpi-Tps"></iframe>
+                </div>
+           </div>
+
+           <div class="col-sm-5 pourquoi-pitch-text">
+               <p> Le CV et la lettre de motivation ne vous permettent pas de prendre compte la motivation et la personnalité des candidats en amont de l'entretien physique. </p>
+               <p> Pitch my job réinvente le recrutement sur internet en remplaçant la lettre de motivation par des pré-entretiens. </p>
+               <p> Rédigez vos annonces d'emploi, ajoutez vos questions d'entretien et accédez aux réponses des candidats en video.</p>
+           </div>
+
+       </div>
+
+
+       <div class="comment-ca-marche container-fluid">
+           <h2 class="col-sm-12"> Comment ça marche ? </h2>
+
+           <div class="col-sm-4 comment-ca-marche-text">
+
+               <p class="etape etape-1 etape-select" etape=1>
+                   <b>Etape 1</b> <br>
+                   Rédigez votre annonce d'emploi et ajoutez des questions d'entretiens
+               </p>
+
+               <p class="etape etape-2" etape=2>
+                   <b>Etape 2</b> <br>
+                   Les candidats postulent en répondant directement à vos questions en vidéo.
+               </p>
+
+               <p class="etape etape-3" etape=3>
+                   <b>Etape 3</b> <br>
+                   Le CV du candidat et son pré-entretien vous sont directement envoyés, vous n'avez plus qu'à consulter ses réponses.
+               </p>
+
+           </div>
+
+           <div class="col-sm-8 etape-img-3">
+
+               <div class="img-etape">
+                    <img src="{% static 'images/refonte/home-pro-01.png' %}" alt="" etape=1 class="click-etape click-etape-1">
+                    <img src="{% static 'images/refonte/home-pro-02.png' %}" alt="" etape=2 class="click-etape down click-etape-2">
+                    <img src="{% static 'images/refonte/home-pro-03.png' %}" alt="" etape=3 class="click-etape down click-etape-3">
+               </div>
+
+                <div class="img-etape-1 img-zindex">
+                    <img src="{% static 'images/refonte/home-pro-04.png' %}" alt="" class="img-1">
+                    <img src="{% static 'images/refonte/home-pro-05.png' %}" alt="" class="img-2" style="display:none">
+                    <img src="{% static 'images/refonte/home-pro-06.png' %}" alt="" class="img-3" style="display:none">
+                </div>
+
+           </div>
+
+       </div>
+
+
+       <div class="container-fluid container-cv-theque">
+
+           <div class="col-sm-6 container-cv-theque-left" style="text-align:center; position:relative">
+               <img src="{% static 'images/refonte/home-pro-08.png' %}">
+           </div>
+
+           <div class="col-sm-6 container-cv-theque-text">
+               <h2> La CV-Thèque </h2>
+               <p>  Vous cherchez à recruter un  candidat ? Accédez à notre base de donnée de CV  </p>
+               <ul>
+                  <li> Sourcez de manière optimale les personnalités qui correspondent à votre entreprise</li>
+                  <li> Gagnez du temps en envoyant  des demandes d'entretien aux meilleurs profils</li>
+               </ul>
+
+               <div class="container-cv-theque-btn" style="margin-bottom:20px;">
+                   <a id="ga-btnpro-ograt" href="{% url 'pro:c2v-theque' %}" class="btn-general-blue-3"> {% trans "Accédez à la CV-Thèque" %} </a>
+               </div>
+
+           </div>
+
+       </div>
+
+
+       <div class="container-fluid container-home-profil">
+
+
+
+           <div class="col-sm-6 container-home-profil-text" style="padding-left: 10%;padding-bottom: 40px;">
+               <h2> Le profil entreprise </h2>
+               <p>  Sur Pitch my job, vous pouvez créer  gratuitement une page carrière aux couleurs de votre entreprise afin de :  </p>
+               <ul>
+                  <li> Développer votre marque  employeur </li>
+                  <li> Mettre en avant votre entreprise, vos métiers et vos  équipes en vidéo </li>
+                  <li> Attirer de nouveaux talents </li>
+                  <li> Recevoir des candidatures  spontanées intégrant des  pré-entretiens </li>
+               </ul>
+
+               <div class="container-profil-text-btn" style="margin-top:20px;">
+                   <a id="ga-btnpro-ograt" href="{% url 'pro:inscription' %}" class="btn-general-blue-3"> {% trans "Créez votre profil" %} </a>
+               </div>
+
+           </div>
+
+           <div class="col-sm-6 container-home-profil-img" style="text-align:center">
+               <img src="{% static 'images/refonte/home-pro-11.png' %}" style="max-height:600px;">
+           </div>
+
+
+
+       </div>
+
+
+       <div class="container-fluid container-cv-theque container-confiance">
+           <div class="col-sm-12 title" >
+                Ils nous font confiance
+           </div>
+
+           <div class="logo">
+
+               <div class="container-fluid" style="max-width:1000px">
+
+                   <div class="col-sm-3" style="text-align:center; padding:10px 0;">
+                       <img src="{% static 'images/logo/themoneytizer.png' %}">
+                   </div>
+
+                    <div class="col-sm-3" style="text-align:center; padding:10px 0;">
+                        <img src="{% static 'images/logo/save.png' %}">
+                    </div>
+
+                    <div class="col-sm-3" style="text-align:center;padding:10px 0;">
+                        <img src="{% static 'images/logo/whosnext.png' %}">
+                    </div>
+
+                    <div class="col-sm-3" style="text-align:center;padding:10px 0;">
+                        <img src="{% static 'images/logo/lelynx.svg' %}">
+                    </div>
+
+               </div>
+
+           </div>
+
+       </div>
+
+
+       <div class="container-fluid container-offre-pro">
+
+           <h2> Nos offres </h2>
+
+             <div class="col-sm-12 container-">
+
+                    <div class="col-sm-4 offre1" >
+                        <h3>Offre d'emploi</h3>
+                        <ul>
+                            <li>Valable 30 jours</li>
+                            <li>Création de votre annonce d'emploi</li>
+                            <li>Ajout de vos questions d'entretien</li>
+                            <li>Invitez par mail autant de candidats que vous le souhaitez</li>
+                            <li>Réponses aux entretiens illimitées</li>
+                        </ul>
+                        <div class="price"> 99€ <span>HT</span> </div>
+
+                        <div class="general-red-3">
+                            <a href="{% url 'pro:job-create' %}" class="btn-general-red-3">Choisir cette offre</a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4" style="padding-right:10px; padding-left:10px;">
+                        <div class="offre2">
+                            <h3>Offre Ninja</h3>
+                            <ul>
+                                <li>Valable 30 jours</li>
+                                <li>Création de votre annonce d'emploi</li>
+                                <li>Ajout de vos questions d'entretien</li>
+                                <li>Invitez par mail autant de candidats que vous le souhaitez</li>
+                                <li>Réponses aux entretiens illimitées</li>
+                                <li>Accès à 50 profils dans la CV-thèque</li>
+                                <li>50 envois de demandes d'entretien</li>
+                            </ul>
+                            <div class="price"> 249€ <span>HT</span> </div>
+
+                            <div class="general-red-3">
+                                <a href="{% url 'pro:job-create' %}" class="btn-general-red-3">Choisir cette offre</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 offre1" >
+                        <h3>Offre CV-Thèque</h3>
+                        <ul>
+                            <li>Valable 30 jours</li>
+                            <li>Accès à 50 profils dans la CV-Thèque</li>
+                            <li>50 envois de demandes d'entretien</li>
+                        </ul>
+                        <div class="price">  {% trans "Gratuit" %} <span> <strike> 199 € HT</strike> </span> </div>
+
+                        <div class="general-red-3">
+                            <a href="{% url 'pro:offres' %}" class="btn-general-red-3">Choisir cette offre</a>
+                        </div>
+                    </div>
+
+             </div>
+
+       </div>
+
+       <div class="container-fluid container-contact">
+           <h3>Contactez-nous !</h3>
+           <p class="contact1"> Vous avez une question ?  </p>
+           <p class="contact2"> contact@pitchmyjob.com </p>
+           <p class="contact1"> Ou par téléphone au </p>
+           <p class="contact2"> 06 50 02 47 03</p>
+
+       </div>
+
+       <div class="container-fluid container-interest">
+            <h3> Vous êtes intéréssés par Pitch my job ? </h3>
+           <div class="general-green-3">
+                <a href="{% url 'pro:inscription' %}" class="btn-general-green-3">Commencez vos recrutements ! </a>
+            </div>
+       </div>
+
+
+
+       {% include "footer-2.html" %}
+
+
+       <script>
+
+           $('.etape').click(function(){
+                var id = $(this).attr('etape');
+
+               $('.click-etape').addClass('down');
+
+               $('.click-etape-'+id).removeClass('down');
+               $('.click-etape-'+id).addClass('up');
+
+               $('.img-etape-1 img').hide();
+               $('.img-'+id).show();
+
+               $('.etape').removeClass('etape-select');
+               $('.etape-'+id).addClass('etape-select');
+
+           });
+
+
+           $('.click-etape').click(function() {
+               var id = $(this).attr('etape');
+
+               $('.click-etape').addClass('down');
+
+               $('.click-etape-'+id).removeClass('down');
+               $('.click-etape-'+id).addClass('up');
+
+               $('.img-etape-1 img').hide();
+               $('.img-'+id).show();
+
+               $('.etape').removeClass('etape-select');
+               $('.etape-'+id).addClass('etape-select');
+
+           });
+
+           function scrollToAnchor(aid){
+                var tag = $("#"+aid+"");
+                $('html,body').animate({scrollTop: tag.offset().top},'slow');
+            }
+
+            var unique = true;
+
+           $('.home-pro-2-more').click(function() {
+               scrollToAnchor('pro-home-metric');
+           });
+
+
+            $(window).scroll(function() {
+                if ($(document).scrollTop() > 100) {
+                    if(unique)
+                        countNumber();
+                    unique=false;
+                }
+            });
+
+
+           (function($) {
+                $.fn.countTo = function(options) {
+                    // merge the default plugin settings with the custom options
+                    options = $.extend({}, $.fn.countTo.defaults, options || {});
+
+                    // how many times to update the value, and how much to increment the value on each update
+                    var loops = Math.ceil(options.speed / options.refreshInterval),
+                        increment = (options.to - options.from) / loops;
+
+                    return $(this).each(function() {
+                        var _this = this,
+                            loopCount = 0,
+                            value = options.from,
+                            interval = setInterval(updateTimer, options.refreshInterval);
+
+                        function updateTimer() {
+                            value += increment;
+                            loopCount++;
+                            $(_this).html(value.toFixed(options.decimals));
+
+                            if (typeof(options.onUpdate) == 'function') {
+                                options.onUpdate.call(_this, value);
+                            }
+
+                            if (loopCount >= loops) {
+                                clearInterval(interval);
+                                value = options.to;
+
+                                if (typeof(options.onComplete) == 'function') {
+                                    options.onComplete.call(_this, value);
+                                }
+                            }
+                        }
+                    });
+                };
+
+                $.fn.countTo.defaults = {
+                    from: 0,  // the number the element should start at
+                    to: 100,  // the number the element should end at
+                    speed: 1000,  // how long it should take to count between the target numbers
+                    refreshInterval: 100,  // how often the element should be updated
+                    decimals: 0,  // the number of decimal places to show
+                    onUpdate: null,  // callback method for every time the element is updated,
+                    onComplete: null,  // callback method for when the element finishes updating
+                };
+            })(jQuery);
+
+            function countNumber() {
+                jQuery(function ($) {
+                    $('.t1').countTo({
+                        from: 0,
+                        to: 8436,
+                        speed: 2000,
+                        refreshInterval: 50,
+                        onComplete: function (value) {
+                            console.debug(this);
+                        }
+                    });
+                });
+
+                jQuery(function ($) {
+                    $('.t2').countTo({
+                        from: 0,
+                        to: 1354,
+                        speed: 2000,
+                        refreshInterval: 50,
+                        onComplete: function (value) {
+                            console.debug(this);
+                        }
+                    });
+                });
+
+                jQuery(function ($) {
+                    $('.t3').countTo({
+                        from: 0,
+                        to: 96,
+                        speed: 2000,
+                        refreshInterval: 50,
+                        onComplete: function (value) {
+                            console.debug(this);
+                        }
+                    });
+                });
+            }
+
+       </script>
+
+    </body>
+</html>

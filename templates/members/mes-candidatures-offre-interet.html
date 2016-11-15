@@ -1,0 +1,70 @@
+{% extends 'user-interne.html' %}
+
+
+{% block content %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+<div class="container-fluid container-profil">
+
+		<div class="col-sm-12">
+			<h1> {% trans "Les offres qui m'intéressent" %} </h1>
+		</div>
+
+		<div class="col-sm-12">
+			<div class="col-sm-4">
+				<div class="row profil-menu">
+					<ul>
+						<li> <a href="{% url 'members:mes-candidatures-offre' %}"> {% trans "Offre d'emplois" %} </a> </li>
+						<li> <a href="{% url 'members:mes-candidatures-offre-interest' %}" class="profil-menu-active"> {% trans "Les offres qui m'intéressent" %} </a> </li>
+						<!--<li> <a href=""> Demandes d'entretiens </a> </li>
+						<li> <a href=""> Candidatures spontannées </a> </li>-->
+					</ul>
+				</div>
+			</div>
+
+			<div class="col-sm-8 ">
+				<div class="list-offre-content profil-container-list-offre">
+
+
+					{% for candidature in object_list %}
+						<div class="container-fluid bloc-one-offre">
+							<div class="col-xs-3 bloc-logo-offre"> <img src="{{ candidature.job.image.logo100.url }}"> </div>
+							<div class="col-xs-9">
+								<div class="offre-one-description">
+									<h3> {{ candidature.job.job_title }} </h3>
+									<p> {{ candidature.job.company }} - {{ candidature.job.job_location }} </p>
+									<p> {{ candidature.job.contracts.all|join:" - " }} </p>
+								</div>
+								<div class="row">
+									<div class="col-sm-6 offre-one-date"> {{ candidature.job.date_created }}  </div>
+									<div class="col-sm-6 offre-link-detail" > <a href="{% url 'members:detail-candidature' candidature.job.id %}"> {% trans "Voir ma candidature" %}</a> </div>
+								</div>
+							</div>
+						</div>
+					{% empty %}
+						<div class="bloc-no-offre">
+							<p> {% trans "Aucune offre" %} </p>
+						</div>
+
+						<!-- <div class="bloc-search-entreprise">
+							<p> Quelles entreprises aimeriez vous retrouver sur MyC2V ? </p>
+							<div class="container-fluid">
+								<div class=" col-sm-8">
+									<input type="text" class="form-control" placeholder="Noms des entreprises">
+								</div>
+								<div class=" col-sm-3">
+									<input type="submit" class="form-control btn-general-red" value="Ajouter">
+								</div>
+							</div>
+						</div> -->
+
+					{% endfor %}
+
+				</div>
+			</div>
+		</div>
+</div>
+
+{% endblock %}

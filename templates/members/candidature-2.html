@@ -1,0 +1,118 @@
+{% extends 'user-interne.html' %}
+
+{% block annonces %} active {% endblock %}
+{% block footer %} {% endblock %}
+{% block js_autocomplete %} {% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+	<div class="container-fluid header-entretien">
+		<h1> {% trans "Valider votre CV" %} </h1>
+	</div>
+
+	{% if form.errors %}
+  		<div class="alert alert-danger container-fluid entretien-2-error"> 
+		    <ul>
+		    {% for field, error in form.errors.items %} 
+		    	{% if field == '__all__' %}
+		    		{% trans "Veuillir remplir au minimum une expérience et une formation dans votre C2V en" %} <a href="{% url 'c2v:myc2v' %}"> {% trans "cliquant ici" %}  </a> 
+		    		{% trans "ou bien importer un CV en format PDF." %}
+		    	{% else %}
+		       		<li>{{ error }}</li>
+		        {% endif %}
+		    {% endfor %}
+		    </ul>
+		</div>
+	{% endif %} 
+
+	<div class="container-fluid entretien-content entretien-2">
+		
+		<form action="" method="POST"  enctype="multipart/form-data">
+			{%csrf_token%}
+			<div class="row">
+				<!--<div class="col-xs-6 col-left">
+					<a href="{% url 'c2v:myc2v' %}" class="btn-general-blue-2"> Modifier le C2V</a>
+				</div> -->
+				<div class="col-sm-6 col-center">
+					<!--<label for="id_cv" class="btn-general-blue-2 btn-import-cv"> Importer un CV format PDF </label>-->
+					<a href="{% url 'c2v:myc2v' %}" class="btn-general-blue-2 btn-import-cv"  > {% trans "Modifier mon CV" %} </a>
+					<div class="success-import-cv" > <span class="glyphicon glyphicon-ok"></span> {% trans "Votre CV a bien été importé." %} </div>
+					<input type="file" name="cv" id="id_cv" style="display:none">
+				</div>
+				<div class="col-sm-6 col-center">
+					 <input id="ga-btn-postuleraveccv" type="submit" class="btn-general-red btn-general-go" value="{% trans 'Postuler avec mon CV' %}">
+				</div>
+			</div>
+		</form>
+
+	</div>
+
+	<div class="container-fluid entretien-content" style="margin-bottom:50px;">	
+		<div class="row">
+			<div id="load-theme"></div>
+			 <iframe id="viewer" frameborder="0" scrolling="no" style="width:100%; height:700px;display:none" ></iframe>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+
+		//$(function() {
+			//$("input:file").change(function (){
+				//$('.success-import-cv').show();
+				//$('.btn-import-cv').hide();
+				//$('.btn-general-go').val("Accédez à l'entretien");
+				//PreviewImage();
+			//});
+		//});
+
+			// using jQuery
+		function getCookie(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie != '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = jQuery.trim(cookies[i]);
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getCookie('csrftoken');
+		function csrfSafeMethod(method) {
+		    // these HTTP methods do not require CSRF protection
+		    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+		}
+		$.ajaxSetup({
+		    beforeSend: function(xhr, settings) {
+		        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+		            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+		        }
+		    }
+		});
+		$( "#load-theme" ).load( "{% url 'c2v:myc2v-theme' %}", {'modif' : false}, function( response, status, xhr ) { });
+
+		function PreviewImage() {
+                pdffile=document.getElementById("id_cv").files[0];
+                if(pdffile.type == "application/pdf")
+                {
+					pdffile_url=URL.createObjectURL(pdffile);
+	                $('#viewer').attr('src',pdffile_url);
+					$('#load-theme').hide();
+					$('#viewer').show();
+                }
+        }
+
+	</script>
+
+	<link rel="stylesheet" href="//assets-cdn.ziggeo.com/css/ziggeo-v1.css" />
+	<script src="//assets-cdn.ziggeo.com/js/ziggeo-v1.js"></script>
+	<script>ZiggeoApi.token = "e50140772b22dbd8cbda85384066b8e5";</script>
+{% endblock %}

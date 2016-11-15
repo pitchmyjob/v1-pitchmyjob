@@ -1,0 +1,72 @@
+{% extends 'user-interne.html' %}
+
+{% block footer %} {% endblock %}
+{% block js_autocomplete %} {% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+<script src="https://api.clipchamp.com/t7bngV6xDz1cpBe_0u7U5maM50U/button.js"></script>
+
+<script type="text/javascript">
+clipchamp.preload();
+</script>
+
+
+<div id="my_clichamp_button_wrapper"
+     data-preset="web"
+     data-format="mp4"
+     data-resolution="keep"
+     data-inputs="camera"
+     data-output="dummy"
+     data-enable="mobile-webcam-format-fallback,no-branding,no-error-bypass,no-hidden-run,no-popout,no-probe-reject,no-thank-you">
+     <!-- Clipchamp button gets injected in here -->
+</div>
+
+
+
+<!-- add a wrapper element into the document... -->
+<script type="text/javascript">
+// ...or dynamically inject at least one wrapper element into the document
+$('#my_clichamp_button_wrapper').clipchamp({
+	"preset": "web",
+	"format": "mp4",
+	"resolution": "keep",
+	"inputs": [
+		"camera"
+	],
+	"output": "dummy",
+	"enable": [
+		"mobile-webcam-format-fallback",
+		"no-branding",
+		"no-error-bypass",
+		"no-hidden-run",
+		"no-popout",
+		"no-probe-reject",
+		"no-thank-you"
+	]
+});
+</script>
+
+
+<link rel="stylesheet" href="//assets-cdn.ziggeo.com/v1-r10/ziggeo.css" />
+<script src="//assets-cdn.ziggeo.com/v1-r10/ziggeo.js"></script>
+<script>ZiggeoApi.token = "e50140772b22dbd8cbda85384066b8e5";</script>
+<script>ZiggeoApi.language = "fr";</script>
+<script>ZiggeoApi.Config.webrtc = true;</script>
+
+<ziggeo ziggeo-width=320
+          ziggeo-height=240>
+</ziggeo>
+
+
+
+<video width="420" height="250" controls="" id="video-player" src="https://s3.eu-central-1.amazonaws.com/pitchmyjob/7544cef8156275b64e23c1dda5ed45ff.mp4">
+						<source src="https://s3.eu-central-1.amazonaws.com/pitchmyjob/7544cef8156275b64e23c1dda5ed45ff.mp4" type="video/mp4">
+					 </video>
+
+
+
+{% endblock %}

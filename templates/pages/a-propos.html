@@ -1,0 +1,18 @@
+{% extends 'pages/base-mon-compte.html' %}
+
+	
+{% block a-propos %} profil-menu-active {% endblock %}
+
+{% block subcontent %}
+{% load i18n %}
+
+
+<div class="col-sm-12 pages-content-a-propos">
+	<p> {% trans "Pitch my job est un site d'emploi Français permettant aux candidats et aux entreprises de se découvrir grâce à des innovations uniques, le CV et l'entretien différé." %} </p>
+
+	<p> {% trans "L'aventure Pitch my job a démarré en Juin 2013 avec le soutien de l’incubateur AMBITION dans les locaux des MBA ESG à Paris à partir de janvier 2014." %} </p>
+
+	<p> {% trans "Notre objectif est de permettre à tous les chercheurs d'emploi de mettre en avant leur personnalité et leur motivation et d’offrir aux entreprises des outils leur permettant de trouver le bon candidat." %} </p>
+</div>
+	
+{% endblock %}

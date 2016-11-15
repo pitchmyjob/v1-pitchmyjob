@@ -1,0 +1,13 @@
+Questions : <br>
+{% for qt in questions %}
+ Question {{ qt.nb }} : {{ qt.question }} <br>
+{% endfor %}
+
+<br>
+
+Link :
+{% for link in links %}
+
+Reponse {{ link.nb}} : {{ link.video.path_aws_v2 }}
+
+{% endfor %}
