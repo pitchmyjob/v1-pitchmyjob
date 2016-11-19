@@ -42,7 +42,7 @@ class Viadeo():
             url=url,
             headers={
                 "Accept": "application/json",
-                "Authorization": " Bearer %s" % self.access_token
+                "Authorization": " Bearer %s" % ( self.access_token )
             }
         )
         return json.loads(r.text)
