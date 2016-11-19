@@ -14,7 +14,8 @@ class SetLastVisitMiddleware(object):
 
         if 'pitchmyjob.fr' in request.META['HTTP_HOST']:
             return HttpResponsePermanentRedirect( "https://www.pitchmyjob.com/" )
-
+        
+        return response
         if 'pitchmyjob.com' == request.META['HTTP_HOST']:
             return HttpResponsePermanentRedirect( "https://www.pitchmyjob.com"+url )
 
