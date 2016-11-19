@@ -1,6 +1,6 @@
 {% extends 'layout-home-member.html' %}
 {% load i18n %}
-
+{% get_current_language as LANGUAGE_CODE %}
 {% block link %} <a id="ga-btn-cnxion" href="{% url 'members:login' %}"> {% trans "Connexion" %} </a> {% endblock %}
 {% block header %}  <link rel="canonical" href="http://www.pitchmyjob.com"> {% endblock %}
 
@@ -48,7 +48,11 @@
         </div>
     </div>
 
-    <p><a href="{% url 'members:login' %}" class="inscrit-home" style="color:#fff"> {% trans "Déjà inscrit ?" %}</a>  </p>
+    {% if LANGUAGE_CODE == "fr" %}
+        <p><a href="{% url 'members:login' %}" class="inscrit-home" style="color:#fff"> {% trans "Déjà inscrit ?" %}</a>  </p>
+    {% else %}
+        <p><a href="{% url 'members:login' %}" class="inscrit-home" style="color:#fff"> {% trans "Sign in" %}</a>  </p>
+    {% endif %}
 
 </form>
 

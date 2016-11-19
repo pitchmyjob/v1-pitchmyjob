@@ -263,7 +263,7 @@ class JobList(BaseSearchFormMixin, PaginationMixin, ListView):
 			if self.search:
 				return job.filter(active=True, paid=True, date_posted__gte=timezone.now() - datetime.timedelta(days=settings.DAYS_JOB) ).order_by('scraper', '-date_posted')
 			else:
-				return job.filter(active=True, paid=True, date_posted__gte=timezone.now() - datetime.timedelta(days=settings.DAYS_JOB) ).order_by('scraper', '-date_posted')
+				return job.filter(active=True, paid=True, date_posted__gte=timezone.now() - datetime.timedelta(days=settings.DAYS_JOB) ).order_by('-date_posted')
 		else:
 			return Job.objects.filter(active=True, paid=True, date_posted__gte=timezone.now() - datetime.timedelta(days=settings.DAYS_JOB) ).order_by('-date_posted')
 

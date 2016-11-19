@@ -99,7 +99,7 @@ class Pro(models.Model):
 	link_youtube	= models.CharField(max_length=250, null=True, blank=True)
 	token_password 	= models.CharField(max_length=250, null=True, blank=True)
 	view 			= models.IntegerField(default=0)
-	credit_job 		= models.IntegerField(default=0)
+	credit_job		= models.IntegerField(default=1)
 	scraper 		= models.BooleanField(default=False)
 	mp 				= models.BooleanField(default=False)
 	mp_type 		= models.CharField(max_length=200, null=True, blank=True)
@@ -225,11 +225,14 @@ class Job(models.Model):
 						"description": job.description.replace('\r', '').replace('\n', ' ') if job.description else '',
 						"mission": job.mission.replace('\r', '').replace('\n', ' ') if job.mission else '',
 						"profile": job.profile.replace('\r', '').replace('\n', ' ') if job.profile else '',
-						"tags": list(job.tags.values_list('name', flat=True)),
+						"tags": {
+							"count": job.tags.count(),
+							"datas": list(job.tags.values_list('name', flat=True)) if job.tags else []
+						},
 						"industry": job.activity_area.name if job.activity_area else '',
-						"experience": list(job.experiences.values_list('name', flat=True)),
-						"studies": list(job.studies.values_list('name', flat=True)),
-						"contracts": list(job.contracts.values_list('name', flat=True)),
+						"experience": list(job.experiences.values_list('name', flat=True)) if job.experiences else [],
+						"studies": list(job.studies.values_list('name', flat=True)) if job.studies else [],
+						"contracts": list(job.contracts.values_list('name', flat=True)) if job.contracts else [],
 						"location": {
 							"lat": job.latitude,
 							"lon": job.longitude,
@@ -239,7 +242,9 @@ class Job(models.Model):
 							"administrative_area_level_2": job.administrative_area_level_2
 						},
 						"date_posted": str(job.date_posted),
-						"date_created": str(datetime.datetime.now())
+						"timestamp_posted": int(time.mktime(job.date_posted.timetuple())) if job.date_posted else "",
+						"date_created": str(datetime.datetime.now()),
+						"scraper": job.scraper
 					}
 					es.index(index="pitch", doc_type="job", id=job.id, body=json.dumps(js))
 				except Exception:

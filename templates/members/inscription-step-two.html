@@ -5,6 +5,11 @@
 	{% load widget_tweaks %}
 	{% load i18n %}
 
+	<script>
+		var dataLayer = window.dataLayer || [];
+		dataLayer.push({'event': 'inscription_user'});
+	</script>
+
 	<body class="connexion etape-2">
 		<div class="row">
 			<div class="col-md-12 connexion-logo"> <img src="{% static 'images/PITCH-Helvetica-P-bleu.png' %}" class="home-user-logo logo-pitch">  </div>
