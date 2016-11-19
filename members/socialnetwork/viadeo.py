@@ -42,14 +42,24 @@ class Viadeo():
         print ("-----------------------------------------")
         print ("-----------------------------------------")
         print( self.access_token )
-        r = requests.get(
-            url=url,
-            headers={
-                "Accept": "application/json",
-                "Authorization": " Bearer %s" % ( self.access_token )
-            }
-        )
-        return json.loads(r.text)
+        hder = " Bearer %s" % ( self.access_token )
+
+        req = urllib2.Request(url)
+        req.add_header('Authorization', hder)
+        resp = urllib2.urlopen(req)
+        content = resp.read()
+
+        print ( content )
+        return json.loads(content)
+        #r = requests.get(
+        #    url=url,
+        #    headers={
+        #        "Accept": "application/json",
+        #        "Authorization": " Bearer %s" % ( self.access_token )
+        #    }
+        #)
+
+        #return json.loads(r.text)
 
     def get_city(self):
         if 'geoLocalisation' in self.user['data']:
