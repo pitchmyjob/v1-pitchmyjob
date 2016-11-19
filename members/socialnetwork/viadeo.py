@@ -38,6 +38,10 @@ class Viadeo():
         return self.http_requests("https://partners.viadeo.com/api/member/profile/full")
 
     def http_requests(self, url):
+        print ("-----------------------------------------")
+        print ("-----------------------------------------")
+        print ("-----------------------------------------")
+        print( self.access_token )
         r = requests.get(
             url=url,
             headers={
