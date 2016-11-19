@@ -38,10 +38,7 @@ class Viadeo():
         return self.http_requests("https://partners.viadeo.com/api/member/profile/full")
 
     def http_requests(self, url):
-        print ("-----------------------------------------")
-        print ("-----------------------------------------")
-        print ("-----------------------------------------")
-        print( self.access_token )
+
         hder = " Bearer %s" % ( self.access_token )
 
         req = urllib2.Request(url)
@@ -49,7 +46,6 @@ class Viadeo():
         resp = urllib2.urlopen(req)
         content = resp.read()
 
-        print ( content )
         return json.loads(content)
         #r = requests.get(
         #    url=url,

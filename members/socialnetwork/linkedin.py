@@ -1,6 +1,6 @@
 from rauth.service import OAuth2Service
 import json, requests
-import time, random, hashlib
+import time, random, hashlib, urllib2
 
 class Linkedin(object):
 
@@ -30,8 +30,17 @@ class Linkedin(object):
 		if 'access_token' not in token:
 			return False
 
-		request = requests.get("https://api.linkedin.com/v1/people/~:(public-profile-url,emailAddress,first-name,last-name,date-of-birth)?format=json", headers={"Authorization" : " Bearer %s" % token['access_token']})
-		res = json.loads(request.text)
+		#request = requests.get("https://api.linkedin.com/v1/people/~:(public-profile-url,emailAddress,first-name,last-name,date-of-birth)?format=json", headers={"Authorization" : " Bearer %s" % token['access_token']})
+		#res = json.loads(request.text)
 
-		return res
+		hder = " Bearer %s" % token['access_token']
+
+		req = urllib2.Request("https://api.linkedin.com/v1/people/~:(public-profile-url,emailAddress,first-name,last-name,date-of-birth)?format=json")
+		req.add_header('Authorization', hder)
+		resp = urllib2.urlopen(req)
+		content = resp.read()
+
+		return json.loads(content)
+
+		#return res
 
