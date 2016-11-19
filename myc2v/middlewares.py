@@ -9,10 +9,10 @@ class SetLastVisitMiddleware(object):
 
     def process_response(self, request, response):
         url = request.get_full_path()
-        
+        return response
         if not request.is_secure():
             return HttpResponsePermanentRedirect( "https://www.pitchmyjob.com"+url )
-        return response
+        
         if 'pitchmyjob.fr' in request.META['HTTP_HOST']:
             return HttpResponsePermanentRedirect( "https://www.pitchmyjob.com/" )
         
