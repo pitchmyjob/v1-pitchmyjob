@@ -122,22 +122,28 @@ def script_import_linkedin(mr, pk):
 
 	if 'experiences' in mr.data:
 		for exp in mr.data['experiences']:
-			if 'month' in exp['date_range']['start']:
-				dd = str(exp['date_range']['start']['year'])+"-"+str(exp['date_range']['start']['month'])
-				dd = datetime.datetime.strptime(dd, '%Y-%m')
-			else:
-				dd = datetime.datetime.strptime(exp['date_range']['start']['year'], '%Y')
-			cvExp = CvExperience(cv=cv, company=exp['company'], title=exp['title'], date_start=dd)
-			if exp['date_range']['end']:
-				if 'month' in exp['date_range']['end']:
-					df = str(exp['date_range']['end']['year'])+"-"+str(exp['date_range']['end']['month'])
-					df = datetime.datetime.strptime(df, '%Y-%m')
+			try:
+				if 'month' in exp['date_range']['start']:
+					dd = str(exp['date_range']['start']['year'])+"-"+str(exp['date_range']['start']['month'])
+					dd = datetime.datetime.strptime(dd, '%Y-%m')
 				else:
-					df = datetime.datetime.strptime(exp['date_range']['end']['year'], '%Y')
-				cvExp.date_end = df
+					dd = datetime.datetime.strptime(exp['date_range']['start']['year'], '%Y')
+				cvExp = CvExperience(cv=cv, company=exp['company'], title=exp['title'], date_start=dd)
+			except Exception:
+				pass
+			if exp['date_range']['end']:
+				try:
+					if 'month' in exp['date_range']['end']:
+						df = str(exp['date_range']['end']['year'])+"-"+str(exp['date_range']['end']['month'])
+						df = datetime.datetime.strptime(df, '%Y-%m')
+					else:
+						df = datetime.datetime.strptime(exp['date_range']['end']['year'], '%Y')
+					cvExp.date_end = df
+				except Exception:
+					pass
 			if exp['description']:
 				cvExp.description = exp['description']
-			if exp['location']: 
+			if exp['location']:
 				cvExp.location = exp['location']
 			cvExp.save()
 			if exp['company_logo']:
@@ -146,20 +152,26 @@ def script_import_linkedin(mr, pk):
 				img_temp.flush()
 				cvExp.image.save(str(cvExp.id)+".jpg", File(img_temp))
 
-	if 'education' in mr.data:		
+	if 'education' in mr.data:
 		for educ in mr.data['education']:
 			cvEduc = CvFormation(cv=cv, school=educ['school'], degree=educ['diploma'])
 			if educ['date_range']:
 				if 'start' in educ['date_range']:
 					if educ['date_range']['start']:
-						dd = str(educ['date_range']['start']['year'])
-						dd = datetime.datetime.strptime(dd, '%Y')
-						cvEduc.date_start = dd
+						try:
+							dd = str(educ['date_range']['start']['year'])
+							dd = datetime.datetime.strptime(dd, '%Y')
+							cvEduc.date_start = dd
+						except Exception:
+							pass
 				if 'end' in educ['date_range']:
 					if educ['date_range']['end']:
-						df = str(educ['date_range']['end']['year'])
-						df = datetime.datetime.strptime(df, '%Y')
-						cvEduc.date_end = df
+						try:
+							df = str(educ['date_range']['end']['year'])
+							df = datetime.datetime.strptime(df, '%Y')
+							cvEduc.date_end = df
+						except Exception:
+							pass
 			cvEduc.save()
 			if educ['logo']:
 				img_temp = NamedTemporaryFile(delete=True)

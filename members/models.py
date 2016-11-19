@@ -103,11 +103,15 @@ class Member(models.Model):
 				"first_name": member.first_name,
 				"last_name": member.last_name,
 				"email": member.email,
+				"image": member.image.url,
 				"study": member.study.name if member.study else '',
 				"industry": list(member.activity_area.values_list('name', flat=True)),
 				"experience": member.experience.name if member.experience else  '',
 				"contracts": list(member.contracts.values_list('name', flat=True)),
-				"tags": list(member.tags.values_list('name', flat=True)),
+				"tags": {
+					"count": member.tags.count(),
+					"datas": list(member.tags.values_list('name', flat=True)) if member.tags else []
+				},
 				"location": {
 					"locality": member.locality,
 					"country": member.country,
@@ -115,13 +119,25 @@ class Member(models.Model):
 					"administrative_area_level_2": member.administrative_area_level_2
 				},
 				"poste": member.cv.poste,
-				"experiences": [{"title": exp.title, "company": exp.company,
-								 "description": exp.description.replace('\r', '').replace('\n',
-																						  ' ') if exp.description else ''}
-								for exp in member.cv.cvexperience_set.all()],
-				"formations": [{"school": fm.school, "degree": fm.degree} for fm in member.cv.cvformation_set.all()],
+				"experiences": {
+					"count": member.cv.cvexperience_set.count(),
+					"datas": [{"title": exp.title, "company": exp.company,
+							   "description": exp.description.replace('\r', '').replace('\n',
+																						' ') if exp.description else ''}
+							  for exp in member.cv.cvexperience_set.all()]
+				},
+				"formations": {
+					"count": member.cv.cvformation_set.count(),
+					"datas": [{"school": fm.school, "degree": fm.degree} for fm in member.cv.cvformation_set.all()]
+				},
+				"skills": {
+					"count": member.cv.cvskill_set.count(),
+					"datas": list(member.cv.cvskill_set.values_list('name', flat=True))
+				},
 				"languages": [lg.name for lg in member.cv.cvlanguage_set.all()],
-				"interets": [int.name for int in member.cv.cvinterest_set.all()],
+				"interets": [inter.name for inter in member.cv.cvinterest_set.all()],
+				"timestamp_joined": int(time.mktime(member.user.date_joined.timetuple())),
+				"date_joined": str(member.user.date_joined)
 			}
 
 			es = Elasticsearch(['https://search-pitch-2k2jxfngnsvechhmkt5xiyyc4m.eu-west-1.es.amazonaws.com/'])

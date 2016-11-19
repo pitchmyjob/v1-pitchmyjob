@@ -129,6 +129,7 @@ def linkedin_return(request):
 		user = user.first()
 		user.backend = 'django.contrib.auth.backends.ModelBackend'
 		login(request, user)
+		async_linkedin_cv.delay(user.member.id, res['publicProfileUrl'])
 		return tools.redirect(request, 2)
 
 	user = User.objects.create_user(email, email, "00000000")
@@ -224,6 +225,7 @@ def viadeo_return(request):
 		user = u.first()
 		user.backend = 'django.contrib.auth.backends.ModelBackend'
 		login(request, user)
+		v.import_datas(user.member, user.member.cv)
 		return tools.redirect(request, 2)
 
 	password = "00000"

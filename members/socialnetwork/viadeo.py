@@ -77,6 +77,13 @@ class Viadeo():
 
     def import_datas(self, member, cv):
         a = self.get_account()
+
+        CvExperience.objects.filter(cv=cv).delete()
+        CvFormation.objects.filter(cv=cv).delete()
+        CvInterest.objects.filter(cv=cv).delete()
+        CvLanguage.objects.filter(cv=cv).delete()
+        CvSkill.objects.filter(cv=cv).delete()
+        
         data = a['data']
 
         userinfo = self.user if self.user else self.get_full_user()

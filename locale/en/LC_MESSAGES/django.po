@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-10 15:24+0100\n"
-"PO-Revision-Date: 2016-04-12 18:12+0200\n"
+"POT-Creation-Date: 2016-11-15 15:50+0100\n"
+"PO-Revision-Date: 2016-11-14 15:04+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.11\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: api/youtube_api.py:127
 #: myc2V/lib/python2.7/site-packages/django_youtube/api.py:127
@@ -58,7 +59,7 @@ msgstr "Please enter a valid date (DD/MM/YYYY)"
 
 #: members/forms.py:36
 msgid "Le numero de téléphone permet au recruteur de vous contacter."
-msgstr ""
+msgstr "Your phone number allows recruiters to contact you"
 
 #: members/forms.py:53 members/forms.py:80
 msgid "Niveau d'étude actuel"
@@ -132,12 +133,16 @@ msgid ""
 "Aucun email ne semble être rattaché à votre compte Linkedin. Vous ne pouvez "
 "pas vous inscrire avec votre compte Linkedin sur Pitch my job."
 msgstr ""
+"No email seems to be attached to your LinkedIn account. You cannot register "
+"to Pitch my job with your LinkedIn account."
 
 #: members/socialnetwork/sn_views.py:177
 msgid ""
 "Aucun email n'est rattaché à votre compte Facebook. De ce fait, vous ne "
 "pouvez pas vous inscrire avec votre compte Facebook sur Pitch my job."
 msgstr ""
+"Aucun email n'est rattaché à votre compte Facebook. De ce fait, vous ne "
+"pouvez pas vous inscrire avec votre compte Facebook sur Pitch my job."
 
 #: members/views.py:62 members/views.py:83 pro/views.py:55
 msgid "L'email et le mot de passe ne correspondent pas."
@@ -154,6 +159,15 @@ msgstr "Sign in"
 #| msgid "Votre CV a bien été importé."
 msgid "Votre mot de passe a bien été modifié."
 msgstr "Your password was successfully edited"
+
+#: myc2V/lib/python2.7/site-packages/botocore/docs/bcdoc/textwriter.py:469
+#, python-format
+msgid "[image: %s]"
+msgstr ""
+
+#: myc2V/lib/python2.7/site-packages/botocore/docs/bcdoc/textwriter.py:470
+msgid "[image]"
+msgstr ""
 
 #: myc2V/lib/python2.7/site-packages/dal_select2/views.py:38
 #, python-format
@@ -1408,19 +1422,19 @@ msgstr ""
 
 #: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:103
 msgid "Complément d'information 1"
-msgstr ""
+msgstr "Additional information 1"
 
 #: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:105
 msgid "Complément d'information 2"
-msgstr ""
+msgstr "Additional information 2"
 
 #: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:107
 msgid "Complément d'information 3"
-msgstr ""
+msgstr "Additional information 3"
 
 #: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:111
 msgid "Liste des cartes de paiement acceptées"
-msgstr ""
+msgstr "Credit cards accepted"
 
 #: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:112
 msgid ""
@@ -1431,7 +1445,7 @@ msgstr ""
 
 #: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:124
 msgid "Identifiant de la boutique"
-msgstr ""
+msgstr "Shop's ID"
 
 #: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:226
 msgid ""
@@ -1440,12 +1454,12 @@ msgstr ""
 
 #: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:231
 msgid "URL du service de paiment"
-msgstr ""
+msgstr "Payment URL"
 
 #: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:232
 #: myc2V/lib/python2.7/site-packages/eopayment/tipi.py:40
 msgid "ne pas modifier si vous ne savez pas"
-msgstr ""
+msgstr "Do not edit if you don't know"
 
 #: myc2V/lib/python2.7/site-packages/eopayment/systempayv2.py:236
 msgid "Secret pour la configuration de TEST"
@@ -1457,7 +1471,7 @@ msgstr ""
 
 #: myc2V/lib/python2.7/site-packages/eopayment/tipi.py:31
 msgid "Numéro client"
-msgstr ""
+msgstr "Client number"
 
 #: myc2V/lib/python2.7/site-packages/eopayment/tipi.py:32
 msgid "un numéro à 6 chiffres communiqué par l’administrateur TIPI"
@@ -1688,11 +1702,11 @@ msgstr ""
 msgid "next"
 msgstr ""
 
-#: myc2v/settings.py:217
+#: myc2v/settings.py:265
 msgid "French"
 msgstr ""
 
-#: myc2v/settings.py:218
+#: myc2v/settings.py:266
 msgid "English"
 msgstr ""
 
@@ -1807,13 +1821,15 @@ msgstr "Create your resume in one click"
 msgid "Connectez-vous"
 msgstr "Sign in"
 
-#: templates/c2v/myc2v-login.html:64 templates/pages/reset-password-1.html:14
+#: templates/c2v/myc2v-login.html:64 templates/members/login-refonte.html:44
+#: templates/pages/reset-password-1.html:14
 #: templates/pages/reset-password-2.html:14
 #: templates/pages/reset-password-3.html:14
 msgid "Mot de passe oublié ?"
 msgstr "Forgot your password ?"
 
-#: templates/c2v/myc2v-login.html:72 templates/members/login.html.py:78
+#: templates/c2v/myc2v-login.html:72 templates/members/login-refonte.html:52
+#: templates/members/login.html:78
 msgid "Pas encore inscrit ?"
 msgstr "Not registered ?"
 
@@ -1834,7 +1850,7 @@ msgid "Télécharger"
 msgstr "Download"
 
 #: templates/c2v/myc2v.html:70 templates/c2v/myc2v.html.py:603
-#: templates/notifications/messages.html:73 templates/pro/list-offre.html:215
+#: templates/notifications/messages.html:73 templates/pro/list-offre.html:212
 msgid "Envoyer"
 msgstr "Send"
 
@@ -1862,7 +1878,7 @@ msgstr "Email content"
 #: templates/c2v/myc2v.html:661 templates/c2v/myc2v.html.py:701
 #: templates/c2v/myc2v.html:781 templates/c2v/myc2v.html.py:865
 #: templates/c2v/myc2v.html:943 templates/c2v/myc2v.html.py:1034
-#: templates/pro/list-offre.html:38 templates/pro/list-offre.html.py:214
+#: templates/pro/list-offre.html:38 templates/pro/list-offre.html.py:211
 msgid "Annuler"
 msgstr "Cancel"
 
@@ -1930,7 +1946,7 @@ msgstr "Fluent"
 msgid "Bilingue"
 msgstr "Bilingual"
 
-#: templates/c2v/myc2v.html:702 templates/members/list-job.html.py:189
+#: templates/c2v/myc2v.html:702
 msgid "Ajouter"
 msgstr "Add"
 
@@ -2192,6 +2208,8 @@ msgid ""
 "découvrir son cv et à l’inviter à répondre à votre pré-entretien si son "
 "profil vous intéresse."
 msgstr ""
+"However he didn't answer to the pre-interview. Discover the resume and "
+"invite the candidate to answer the pre-interview"
 
 #: templates/emails/email_interet.html:15
 #, fuzzy
@@ -2285,17 +2303,19 @@ msgstr "You can also see candidates in our resume library"
 
 #: templates/emails/send_invitation_entretien.html:6
 msgid "Tu t’es récemment montré intéressé par l’offre"
-msgstr ""
+msgstr "You were interested by the offer "
 
 #: templates/emails/send_invitation_entretien.html:6
 msgid "de"
-msgstr ""
+msgstr "of"
 
 #: templates/emails/send_invitation_entretien.html:8
 msgid ""
 "Ta candidature a retenu leur attention et ils t’invitent à répondre à leur "
 "pré-entretien."
 msgstr ""
+"Your resume caught the attention of the recruiter they want you to answer "
+"the pre-interview"
 
 #: templates/emails/send_invitation_entretien.html:12
 #, fuzzy
@@ -2391,7 +2411,7 @@ msgstr "Password"
 
 #: templates/home-member-2.html:51
 msgid "Déjà inscrit ?"
-msgstr ""
+msgstr "Already registered ?"
 
 #: templates/home-member.html:128 templates/user-interne.html.py:91
 msgid "Mon CV"
@@ -2557,7 +2577,7 @@ msgstr "They hire"
 msgid "Découvre toutes les offres proches de chez toi."
 msgstr "Discover all the companies near you"
 
-#: templates/home-member.html:462 templates/members/list-job.html.py:247
+#: templates/home-member.html:462 templates/members/list-job.html.py:237
 msgid "Afficher l'annonce"
 msgstr "See the offer"
 
@@ -2571,7 +2591,7 @@ msgstr "Candidates"
 
 #: templates/home-pro-2.html:88
 msgid "Recrutez autrement"
-msgstr ""
+msgstr "Discover a new way to recruit talents"
 
 #: templates/home-pro-2.html:88
 #, fuzzy
@@ -2691,18 +2711,14 @@ msgid "Offres d'emploi"
 msgstr "Job offers"
 
 #: templates/layout-home-member.html:139
-msgid "Dechire ta lettre de motivation"
-msgstr ""
+msgid "Déchire ta lettre de motivation et prends la parole !"
+msgstr "The first job-board that gives back a voice to candidate"
 
 #: templates/layout-home-member.html:141
-#, fuzzy
-#| msgid ""
-#| "Postule en répondant aux questions d’entretien des recruteurs en vidéo, "
-#| "audio ou texte"
 msgid ""
 "Postule en répondant aux questions des recruteurs en vidéo et décroche ton "
 "prochain job"
-msgstr "Apply by answering interview questions in video, audio or text"
+msgstr "Apply by answering interview questions in video"
 
 #: templates/members/candidature-1.html:21
 msgid "Vous avez choisi de postuler à l’annonce de"
@@ -3009,7 +3025,7 @@ msgstr "Password"
 
 #: templates/members/detail-job.html:472 templates/pages/react.html.py:309
 msgid "Vous êtes déjà inscrits ?"
-msgstr ""
+msgstr "Already registered ?"
 
 #: templates/members/detail-pro.html:25
 msgid "Candidature spontannée"
@@ -3068,22 +3084,22 @@ msgstr "Need help ? Access"
 msgid "FAQ"
 msgstr "FAQ"
 
-#: templates/members/inscription-step-two.html:14
+#: templates/members/inscription-step-two.html:20
 msgid "Information & Recherche"
 msgstr "Information & Research"
 
-#: templates/members/inscription-step-two.html:43
+#: templates/members/inscription-step-two.html:49
 msgid ""
 "Ajouter ici un maximum de mot clés correspondant à votre recherche. Il peut "
 "s'agir de compétences, métiers ou fonctions"
-msgstr ""
+msgstr "Add keywords matching your search, skills, jobs etc.."
 
-#: templates/members/inscription-step-two.html:75
+#: templates/members/inscription-step-two.html:81
 #: templates/members/my-account-information.html:91
 msgid "Lieu de recherche"
 msgstr "Location "
 
-#: templates/members/inscription-step-two.html:105
+#: templates/members/inscription-step-two.html:111
 msgid "Terminer"
 msgstr "Finish"
 
@@ -3135,41 +3151,31 @@ msgstr "Filters"
 msgid "Oops !"
 msgstr "Oops !"
 
-#: templates/members/list-job.html:183
-msgid "Quelles entreprises aimeriez vous retrouver sur Pitch my job ?"
-msgstr ""
-
-#: templates/members/list-job.html:186
-#, fuzzy
-#| msgid "Nom de l'entreprise"
-msgid "Noms des entreprises"
-msgstr "Company name"
-
-#: templates/members/list-job.html:325
+#: templates/members/list-job.html:315
 #, fuzzy
 #| msgid "Entretiens différés"
 msgid "L'entretien différé"
 msgstr "Pre-interviews"
 
-#: templates/members/list-job.html:326
+#: templates/members/list-job.html:316
 msgid "Répond aux questions des recruteurs de 3 manières :"
 msgstr "3 innovative ways of answering the recruiter's questions"
 
-#: templates/members/list-job.html:330
+#: templates/members/list-job.html:320
 #, fuzzy
 #| msgid "Ma video"
 msgid "Video"
 msgstr "My video"
 
-#: templates/members/list-job.html:334
+#: templates/members/list-job.html:324
 msgid "Audio"
 msgstr "Audio"
 
-#: templates/members/list-job.html:338
+#: templates/members/list-job.html:328
 msgid "Texte"
 msgstr "Text"
 
-#: templates/members/list-job.html:357
+#: templates/members/list-job.html:347
 #, fuzzy
 #| msgid "S'inscrire sur Pitch my job"
 msgid "Ils recrutent sur Pitch My Job"
@@ -3203,7 +3209,7 @@ msgstr "Back to offers"
 #: templates/members/mes-candidatures-offre-interet.html:20
 #: templates/members/mes-candidatures-offre.html:20
 msgid "Les offres qui m'intéressent"
-msgstr ""
+msgstr "My job offers"
 
 #: templates/members/mes-candidatures-offre-interet.html:19
 #: templates/members/mes-candidatures-offre.html:19
@@ -3603,11 +3609,11 @@ msgstr "PUBLISH A JOB OFFER"
 
 #: templates/pro/factures.html:12
 msgid "Vos factures"
-msgstr ""
+msgstr "Invoices"
 
 #: templates/pro/factures.html:17
 msgid "Facture N°"
-msgstr ""
+msgstr "Invoice n°"
 
 #: templates/pro/factures.html:22
 #, fuzzy
@@ -3821,7 +3827,7 @@ msgstr "Job offers"
 
 #: templates/pro/list-offre.html:18
 msgid "Offre en attente de publication"
-msgstr ""
+msgstr "Offers waiting to be published"
 
 #: templates/pro/list-offre.html:37
 msgid "Etes vous sur de vouloir supprimer l'offre"
@@ -3845,7 +3851,7 @@ msgstr "GCU"
 
 #: templates/pro/list-offre.html:65
 msgid "Publier"
-msgstr ""
+msgstr "Publish"
 
 #: templates/pro/list-offre.html:83
 msgid "Inviter une personne par email"
@@ -3853,7 +3859,7 @@ msgstr "Invite someone by email"
 
 #: templates/pro/list-offre.html:88
 msgid "Pour republier"
-msgstr ""
+msgstr "Re-publish"
 
 #: templates/pro/list-offre.html:88
 #, fuzzy
@@ -3863,7 +3869,7 @@ msgstr "click here"
 
 #: templates/pro/list-offre.html:93
 msgid "En attente de publication"
-msgstr ""
+msgstr "Waiting to be published"
 
 #: templates/pro/list-offre.html:100
 msgid "Modifier"
@@ -3892,11 +3898,8 @@ msgid ""
 "Ajoutez les adresses emails des candidats que vous souhaitez inviter à "
 "repondre à votre pré-entretien video."
 msgstr ""
-
-#: templates/pro/list-offre.html:206
-msgid ""
-"Separé par une virgule si plusieurs (ex : john@mail.com, lea@mail.com, ...)"
-msgstr ""
+"Add the email adresses of the candidates you want to invite to answer the "
+"pre-interview"
 
 #: templates/pro/my-account-password.html:15 templates/pro/my-account.html:15
 msgid "Modifier mon mot de passe"
@@ -3909,6 +3912,11 @@ msgstr "Please fill the fields marked *"
 #: templates/pro/profil.html:45
 msgid "Url de la vidéo de présentation"
 msgstr "Video "
+
+#, fuzzy
+#~| msgid "Nom de l'entreprise"
+#~ msgid "Noms des entreprises"
+#~ msgstr "Company name"
 
 #~ msgid "Créer votre CV"
 #~ msgstr "Create your resume"

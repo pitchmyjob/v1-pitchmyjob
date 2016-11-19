@@ -136,9 +136,17 @@
            <div class="container" style="max-width:100%;width:100%;     padding: 0 5%;">
                <div class="home-member-container-2" style="float:right;    padding-right: 15px;padding-left: 15px;">
 
-                        <h1 style="font-size:44px"> {% trans "Dechire ta lettre de motivation" %} {{ ecole }} </h1>
+                        {% if LANGUAGE_CODE == "fr" %}
+                            <h1 style="font-size:44px"> {% trans "Déchire ta lettre de motivation et prends la parole !" %} {{ ecole }} </h1>
 
-                        <h2> {% trans "Postule en répondant aux questions des recruteurs en vidéo et décroche ton prochain job" %} </h2>
+                            <h2> {% trans "Postule en répondant aux questions des recruteurs en vidéo et décroche ton prochain job" %} </h2>
+
+                        {% else %}
+
+                            <h1 style="font-size:44px"> {% trans "The first job-board that gives back a voice to candidate" %} {{ ecole }} </h1>
+
+                            <h2> {% trans "Apply by answering interview questions in video" %} </h2>
+                        {% endif %}
 
 
                         <div class="home-member-inscription">
