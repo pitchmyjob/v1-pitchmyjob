@@ -113,8 +113,14 @@ def linkedin_return(request):
 	if not request.GET.get('code'):
 		return HttpResponseRedirect( "/" )
 
+	print ( "*******************yan**********************" )
+	print ( "*****************************************" )
+	print ( "*****************************************" )
+
 	linkedin = Linkedin()
-	res = linkedin.get_user_data(request.GET.get('code')) 
+	res = linkedin.get_user_data(request.GET.get('code'))
+
+	print('1111111111111111111')
 
 	if not res:
 		return HttpResponseRedirect( "/" )
@@ -132,6 +138,8 @@ def linkedin_return(request):
 		async_linkedin_cv(user.member.id, res['publicProfileUrl'])
 		return tools.redirect(request, 2)
 
+	print('2222222222222222222')
+
 	user = User.objects.create_user(email, email, "00000000")
 	user.backend = 'django.contrib.auth.backends.ModelBackend'
 
@@ -146,6 +154,8 @@ def linkedin_return(request):
 	if 'publicProfileUrl' in res:
 		async_linkedin_cv(member.id, res['publicProfileUrl'])
 
+	print('3333333333333333333333333333333')
+
 	g = Group.objects.get(name='member') 
 	g.user_set.add(user)
 	g.save()
@@ -153,6 +163,7 @@ def linkedin_return(request):
 	member.save_on_elasticsearch()
 
 	login(request, user)
+	print('44444444444444444444444444444')
 	return HttpResponseRedirect( reverse('members:sn-password') )
 
 
