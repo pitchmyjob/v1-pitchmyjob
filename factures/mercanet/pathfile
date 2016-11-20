@@ -27,15 +27,15 @@ D_LOGO!https://v1-pitchmyjob.s3.amazonaws.com/static/images/logo/!
 #
 # fichier des  param�tres mercanet
 #
-F_DEFAULT!parmcom.mercanet!
+F_DEFAULT!/opt/python/current/app/factures/mercanet/parmcom.mercanet!
 #
 # fichier param�tre commercant
 #
-F_PARAM!parmcom!
+F_PARAM!/opt/python/current/app/factures/mercanet/parmcom!
 #
 # certificat du commercant
 #
-F_CERTIFICATE!certif!
+F_CERTIFICATE!/opt/python/current/app/factures/mercanet/certif!
 # 
 # type du certificat 	
 # 
