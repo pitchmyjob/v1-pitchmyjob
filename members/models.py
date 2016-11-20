@@ -13,6 +13,7 @@ from elasticsearch import Elasticsearch
 from django.db.models.signals import pre_delete
 from django.dispatch import receiver
 import uuid
+import time, datetime
 
 def generate_filename(self, filename):
 	filename, file_extension = os.path.splitext(filename)
@@ -59,7 +60,7 @@ class Member(models.Model):
 	first_name 		= models.CharField(max_length=150, null=True)
 	last_name 		= models.CharField(max_length=150, null=True)
 	email 			= models.CharField(max_length=200, null=True)
-	birthday		= models.DateField(null = True)
+	birthday		= models.DateField(null = True, blank=True)
 	job_wanted		= models.CharField(max_length=150, null=True, blank=True)
 	study 			= models.ForeignKey(Study, null=True)
 	activity_area	= models.ManyToManyField("pro.ActivityArea", blank=True)
@@ -80,8 +81,14 @@ class Member(models.Model):
 	rs_type 		= models.IntegerField(null=True, default=0) #inscription normal, 1 - inscription linkedin, 2 - inscription doyoubuzz, 3 - facebook, 4 - Viadeo
 	rs_doyoubuzz_cv = models.FileField(null=True, blank=True, upload_to='doyoubuzz/')
 	tags 			= models.ManyToManyField("pro.Tag", blank=True)
-	cv_pdf 			= models.FileField(upload_to=generate_filename, null=True)
+	cv_pdf 			= models.FileField(upload_to=generate_filename, null=True, blank=True)
 	school			 = models.CharField(max_length=150, null=True, blank=True)
+
+
+	def save(self, *args, **kwargs):
+		if self.cv :
+			self.save_on_elasticsearch()
+		super(Member, self).save(*args, **kwargs)
 
 	def experiences_count(self):
 		return self.cv.cvexperience_set.count()
@@ -121,10 +128,7 @@ class Member(models.Model):
 				"poste": member.cv.poste,
 				"experiences": {
 					"count": member.cv.cvexperience_set.count(),
-					"datas": [{"title": exp.title, "company": exp.company,
-							   "description": exp.description.replace('\r', '').replace('\n',
-																						' ') if exp.description else ''}
-							  for exp in member.cv.cvexperience_set.all()]
+					"datas": [{"title": exp.title, "company": exp.company,"description": exp.description.replace('\r', '').replace('\n',' ') if exp.description else ''}for exp in member.cv.cvexperience_set.all()]
 				},
 				"formations": {
 					"count": member.cv.cvformation_set.count(),
