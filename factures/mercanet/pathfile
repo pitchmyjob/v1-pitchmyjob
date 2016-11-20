@@ -8,34 +8,34 @@
 #
 #
 #-------------------------------------------------------------------------
-# Activation (YES) / Désactivation (NO) du mode DEBUG
+# Activation (YES) / Dï¿½sactivation (NO) du mode DEBUG
 #-------------------------------------------------------------------------
 #
 DEBUG!YES!
 #
 # ------------------------------------------------------------------------
-# Chemin vers le répertoire des logos depuis le web alias  
-# Exemple pour le répertoire www.merchant.com/mercanet/payment/logo/
+# Chemin vers le rï¿½pertoire des logos depuis le web alias  
+# Exemple pour le rï¿½pertoire www.merchant.com/mercanet/payment/logo/
 # indiquer:
 # ------------------------------------------------------------------------
 #
-D_LOGO!http://www.pitchmyjob.com/static/images/logo/!
+D_LOGO!https://v1-pitchmyjob.s3.amazonaws.com/static/images/logo/!
 #
 # --------------------------------------------------------------------------
-#  Fichiers paramètres liés a l'api mercanet paiement	
+#  Fichiers paramï¿½tres liï¿½s a l'api mercanet paiement	
 # --------------------------------------------------------------------------
 #
-# fichier des  paramètres mercanet
+# fichier des  paramï¿½tres mercanet
 #
-F_DEFAULT!/var/www/vhosts/myc2v/factures/mercanet/parmcom.mercanet!
+F_DEFAULT!parmcom.mercanet!
 #
-# fichier paramètre commercant
+# fichier paramï¿½tre commercant
 #
-F_PARAM!/var/www/vhosts/myc2v/factures/mercanet/parmcom!
+F_PARAM!parmcom!
 #
 # certificat du commercant
 #
-F_CERTIFICATE!/var/www/vhosts/myc2v/factures/mercanet/certif!
+F_CERTIFICATE!certif!
 # 
 # type du certificat 	
 # 
