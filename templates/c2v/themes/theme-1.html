@@ -43,25 +43,25 @@
 					<table style="width: 80%;">
 
 						<tr>
-							{% if cv.city %} <td valign=top> <img src="http://www.pitchmyjob.com/static/images/c2v-v2-4.png" class="theme-1-picto" > {{  cv.city|default_if_none:"" }} {{  cv.country|default_if_none:""  }}</td> {% endif %}
-							<td valign=top> {% if cv.birthday %} <img src="http://www.pitchmyjob.com/static/images/c2v-v2-1.png" class="theme-1-picto-1" style="width:20px;"> {{  cv.birthday|age }} ans {% endif %}  </td>
-							{% if cv.phone %} <td valign=top> <img src="http://www.pitchmyjob.com/static/images/c2v-v2-3.png" class="theme-1-picto" style="width:10px"> {{  cv.phone|default_if_none:""  }}  </td> {% endif %}
+							{% if cv.city %} <td valign=top> <img src="{% static 'images/c2v-v2-4.png' %}" class="theme-1-picto" > {{  cv.city|default_if_none:"" }} {{  cv.country|default_if_none:""  }}</td> {% endif %}
+							<td valign=top> {% if cv.birthday %} <img src="{% static 'images/c2v-v2-1.png' %}" class="theme-1-picto-1" style="width:20px;"> {{  cv.birthday|age }} ans {% endif %}  </td>
+							{% if cv.phone %} <td valign=top> <img src="{% static 'images/c2v-v2-3.png' %}" class="theme-1-picto" style="width:10px"> {{  cv.phone|default_if_none:""  }}  </td> {% endif %}
 						</tr>
 					</table>
 					<div style="padding-top:12px;">
-						<img src="http://www.pitchmyjob.com/static/images/c2v-v2-5.png" class="theme-1-picto-1" > {{  cv.email }} 
+						<img src="{% static 'images/c2v-v2-5.png' %}" class="theme-1-picto-1" > {{  cv.email }}
 					</div>
 					{% if cv.site %}
 					<div style="padding-top:12px;">
-						<img src="http://www.pitchmyjob.com/static/images/c2v-v2-6.png" class="theme-1-picto-1" > {{  cv.site|default_if_none:""  }} 
+						<img src="{% static 'images/c2v-v2-6.png' %}" class="theme-1-picto-1" > {{  cv.site|default_if_none:""  }}
 					</div>
 					{% endif %}
 					{% if cv.description %}
 						<table style="margin-top:8px;">
 							<tr>
-								<td style="width:20px"> <img src="http://www.pitchmyjob.com/static/images/c2v-v2-7.png" style="width: 18px;"> </td>
+								<td style="width:20px"> <img src="{% static 'images/c2v-v2-7.png' %}" style="width: 18px;"> </td>
 								<td style=" text-align:center;width:92%"> {{cv.description|default_if_none:"" }} </td>
-								<td style="width:20px; float:right;"> <img src="http://www.pitchmyjob.com/static/images/c2v-v2-8.png" style="width: 18px;"></td>
+								<td style="width:20px; float:right;"> <img src="{% static 'images/c2v-v2-8.png' %}" style="width: 18px;"></td>
 							</tr>
 						</table>
 					{% endif %}
@@ -94,7 +94,7 @@
 					<img src="{{ cv.member.image.url }}" class="changePhoto" style="width:200px;">
 					{% if cv.member.video %}
 					 <!--<div style="position:absolute;top:67px; right:67px;cursor:pointer" data-toggle="modal" data-target=".show-video"> <img src="http://62.210.131.54/static/images/c2v-v2-10.png"> </div> -->
-					 <div style="position:absolute;top:67px; right:67px;cursor:pointer" onclick="showVideo()"> <img src="http://62.210.131.54/static/images/c2v-v2-10.png" class="play-img"> </div> 
+					 <div style="position:absolute;top:67px; right:67px;cursor:pointer" onclick="showVideo()"> <img src="{% static 'images/c2v-v2-10.png' %}" class="play-img"> </div>
 					 <div style="width:250px;height:200px;position:absolute;top:0; right:0;display:none" class="playerVideoC2"> 
 					 		{% if cv.member.video.type_video == 1 %}
 							  <video width="250" height="200" controls>
@@ -116,9 +116,9 @@
 
 						$( ".play-img" ).hover(
 						  function() {
-						    $(this).attr('src', 'http://62.210.131.54/static/images/c2v-v2-10-full.png');
+						    $(this).attr('src', 'https://v1-pitchmyjob.s3.amazonaws.com/static/images/c2v-v2-10-full.png');
 						  }, function() {
-						    $(this).attr('src', 'http://62.210.131.54/static/images/c2v-v2-10.png');
+						    $(this).attr('src', "https://v1-pitchmyjob.s3.amazonaws.com/static/images/c2v-v2-10.png");
 						  }
 						);
 					 </script>
@@ -152,7 +152,7 @@
 						<div class="theme-1-xp-date"> 
 							de {{ exp.date_start|date:"M. Y" }}  à {{ exp.date_end|date:"M. Y"|default:"Aujourd'hui"  }}   
 							{% if exp.location %}
-								<img src="http://62.210.131.54/static/images/c2v-v2-9.png" style="margin-left:15px; margin-top: -8px;"> {{ exp.location }} 
+								<img src="{% static 'images/c2v-v2-9.png' %}" style="margin-left:15px; margin-top: -8px;"> {{ exp.location }}
 							{% endif %}
 						</div>
 						<div class="theme-1-xp-desc">

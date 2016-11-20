@@ -5,6 +5,7 @@ media/
 static/
 static_ba/
 .git_old/
+*.pyc
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
