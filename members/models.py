@@ -86,8 +86,11 @@ class Member(models.Model):
 
 
 	def save(self, *args, **kwargs):
-		if self.cv :
-			self.save_on_elasticsearch()
+		try:
+			if self.cv :
+				self.save_on_elasticsearch()
+		except Exception:
+			pass
 		super(Member, self).save(*args, **kwargs)
 
 	def experiences_count(self):
