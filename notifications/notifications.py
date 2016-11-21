@@ -124,6 +124,7 @@ def script_import_linkedin(mr, pk):
 
 	if 'experiences' in mr.data:
 		for exp in mr.data['experiences']:
+			cvExp = CvExperience(cv=cv, company=exp['company'], title=exp['title'])
 			try:
 				if 'month' in exp['date_range']['start']:
 					dd = str(exp['date_range']['start']['year'])+"-"+str(exp['date_range']['start']['month'])
@@ -132,7 +133,7 @@ def script_import_linkedin(mr, pk):
 					dd = datetime.datetime.strptime(exp['date_range']['start']['year'], '%Y')
 				cvExp = CvExperience(cv=cv, company=exp['company'], title=exp['title'], date_start=dd)
 			except Exception:
-				pass
+				cvExp = CvExperience(cv=cv, company=exp['company'], title=exp['title'])
 			if exp['date_range']['end']:
 				try:
 					if 'month' in exp['date_range']['end']:

@@ -274,10 +274,10 @@ class LinkedInScraper(object):
                     text += self.break_line_replace
                 else:
                     text += tag
+
+            return text
         except Exception:
-            pass
-        
-        return text
+            return bs_tag
 
     def _parse_proficiency(self, proficiency):
         """ Return the language level """
