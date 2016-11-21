@@ -197,7 +197,7 @@ class JobListEntreprise(BaseSearchFormMixin, ListView):
 		return context
 
 	def get_queryset(self):
-			return Job.objects.filter(active=True, paid=True, date_posted__gte=timezone.now() - datetime.timedelta(days=settings.DAYS_JOB) ).filter(pro =  self.kwargs.get('pk'))
+			return Job.objects.filter(active=True, paid=True, date_posted__gte=timezone.now().date() - datetime.timedelta(days=settings.DAYS_JOB) ).filter(pro =  self.kwargs.get('pk'))
 
 class JobList(BaseSearchFormMixin, PaginationMixin, ListView):
 	model = Job
