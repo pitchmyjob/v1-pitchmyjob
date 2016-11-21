@@ -268,11 +268,15 @@ class LinkedInScraper(object):
 
     def _get_text_with_break_lines(self, bs_tag):
         text = ''
-        for tag in bs_tag.recursiveChildGenerator():
-            if isinstance(tag, Tag) and tag.name in ('br'):
-                text += self.break_line_replace
-            else:
-                text += tag
+        try :
+            for tag in bs_tag.recursiveChildGenerator():
+                if isinstance(tag, Tag) and tag.name in ('br'):
+                    text += self.break_line_replace
+                else:
+                    text += tag
+        except Exception:
+            pass
+        
         return text
 
     def _parse_proficiency(self, proficiency):
