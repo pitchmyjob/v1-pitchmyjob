@@ -37,13 +37,14 @@ class LinkedInScraper(object):
             url_scrip = "http://163.172.28.221:1010/"
 
             try:
-                #r = requests.post(
-                #    url=url_scrip,
-                #    data={'url': url}
-                #)
-                #result = json.loads(r.text)
-                #status = int(result['status'])
-                #text = result['text']
+                r = requests.post(
+                    url="http://62.210.131.54/fr/linkedin",
+                    data={'url': url}
+                )
+                result = json.loads(r.text)
+
+                status = int(result['status'])
+                text = result['text']
 
                 headers = {
                     'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
@@ -56,13 +57,13 @@ class LinkedInScraper(object):
                     'Connection': 'keep-alive'
                 }
 
-                r = requests.request("GET", url, headers=headers)
+                #r = requests.request("GET", url, headers=headers)
 
-                status = int(r.status_code)
-                text = r.text
+                #status = int(r.status_code)
+                #text = r.text
 
-                print(status)
-                print(text)
+                #print(status)
+                #print(text)
 
             except Exception:
                 status=500
