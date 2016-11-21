@@ -133,7 +133,7 @@ def linkedin_return(request):
 		return tools.redirect(request, 2)
 
 
-	user = User.objects.create_user(email, email, "00000000")
+	user = User.objects.create_user(email, email, "cvG456hz")
 	user.backend = 'django.contrib.auth.backends.ModelBackend'
 
 	member = Member(email = email, first_name = res['firstName'], last_name = res['lastName'], user = user, rs_pwd = True,  rs_type=1)
@@ -154,8 +154,7 @@ def linkedin_return(request):
 	member.save_on_elasticsearch()
 
 	login(request, user)
-	print('44444444444444444444444444444')
-	return HttpResponseRedirect( reverse('members:sn-password') )
+	return HttpResponseRedirect( reverse('members:inscription-step-2') )
 
 
 def facebook_connect(request):
@@ -230,7 +229,7 @@ def viadeo_return(request):
 		v.import_datas(user.member, user.member.cv)
 		return tools.redirect(request, 2)
 
-	password = "00000"
+	password = "cvG456hz"
 	user = User.objects.create_user(email, email, password)
 	user.backend = 'django.contrib.auth.backends.ModelBackend'
 
@@ -252,4 +251,4 @@ def viadeo_return(request):
 
 	login(request, user)
 
-	return HttpResponseRedirect(reverse('members:sn-password'))
+	return HttpResponseRedirect(reverse('members:inscription-step-2'))
