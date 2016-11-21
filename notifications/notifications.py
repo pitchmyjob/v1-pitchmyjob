@@ -50,6 +50,7 @@ def remixjob_check():
 		if job.scraper_id not in list_id:
 			job.active=False
 			job.save()
+			job.delete_on_elasticsearch()
 			rm=rm+1
 
 	#send_mail('Remixjob - Cron check effectue', 'Nombre remove : '+str(rm), 'contact@pitchmyjob.com', ['tannier.yannis@gmail.com'], fail_silently=False)
@@ -67,6 +68,7 @@ def jobteaser_check():
 		if job.scraper_id not in list_id:
 			job.active=False
 			job.save()
+			job.delete_on_elasticsearch()
 			rm=rm+1
 
 	#send_mail('JobTeaser - Cron check effectue', 'Nombre remove : '+str(rm), 'contact@pitchmyjob.com', ['tannier.yannis@gmail.com'], fail_silently=False)

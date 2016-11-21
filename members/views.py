@@ -228,6 +228,7 @@ class JobList(BaseSearchFormMixin, PaginationMixin, ListView):
 
 	def get_queryset(self):
 		self.search=False
+
 		if self.request.method == 'GET':
 			job = Job.objects.all()
 			if self.request.GET.get('activity_area') :
@@ -261,11 +262,11 @@ class JobList(BaseSearchFormMixin, PaginationMixin, ListView):
 				job = job.filter( Q(mission__icontains = self.request.GET.get('search')) | Q(job_title__icontains = self.request.GET.get('search')) | Q(company__icontains = self.request.GET.get('search')) | Q(tags__name__icontains = self.request.GET.get('search')) | Q(description__icontains = self.request.GET.get('search'))  ).distinct()
 
 			if self.search:
-				return job.filter(active=True, paid=True, date_posted__gte=timezone.now() - datetime.timedelta(days=settings.DAYS_JOB) ).order_by('scraper', '-date_posted')
+				return job.filter(active=True, paid=True, date_posted__gte=timezone.now().date() - datetime.timedelta(days=settings.DAYS_JOB) ).order_by('scraper', '-date_posted')
 			else:
-				return job.filter(active=True, paid=True, date_posted__gte=timezone.now() - datetime.timedelta(days=settings.DAYS_JOB) ).order_by('-date_posted')
+				return job.filter(active=True, paid=True, date_posted__gte=timezone.now().date() - datetime.timedelta(days=settings.DAYS_JOB) ).order_by('-date_posted')
 		else:
-			return Job.objects.filter(active=True, paid=True, date_posted__gte=timezone.now() - datetime.timedelta(days=settings.DAYS_JOB) ).order_by('-date_posted')
+			return Job.objects.filter(active=True, paid=True, date_posted__gte=timezone.now().date() - datetime.timedelta(days=settings.DAYS_JOB) ).order_by('-date_posted')
 
 class JobDetail(DetailView):
 	model = Job
@@ -301,7 +302,7 @@ class JobDetail(DetailView):
 		return context
 
 	def get_object(self, queryset=None):
-		job = Job.objects.filter(pk=self.kwargs.get(self.pk_url_kwarg, None), active=True, paid=True, date_posted__gte=timezone.now() - datetime.timedelta(days=settings.DAYS_JOB) )
+		job = Job.objects.filter(pk=self.kwargs.get(self.pk_url_kwarg, None), active=True, paid=True, date_posted__gte=timezone.now().date() - datetime.timedelta(days=settings.DAYS_JOB) )
 		if not job.exists():
 			return None
 		return job.first()
@@ -414,7 +415,7 @@ class ProDetail(DetailView):
 		pro = Pro.objects.get(id=self.kwargs.get(self.pk_url_kwarg, None))
 		pro.view = pro.view + 1
 		pro.save()
-		context['jobs'] = pro.job_set.filter(active=True, paid=True, date_posted__gte=timezone.now() - datetime.timedelta(days=settings.DAYS_JOB) )
+		context['jobs'] = pro.job_set.filter(active=True, paid=True, date_posted__gte=timezone.now().date() - datetime.timedelta(days=settings.DAYS_JOB) )
 		return context
 
 @login_required()
