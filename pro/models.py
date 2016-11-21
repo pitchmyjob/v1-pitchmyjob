@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from myc2v.mixins import UnicodeNameMixin
 from easy_thumbnails.fields import ThumbnailerImageField
-import urlparse, re, datetime, json
+import urlparse, re, datetime, json, time
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.conf import settings
