@@ -222,6 +222,7 @@ class Job(models.Model):
 						"id_pro": job.pro.id,
 						"company": job.company,
 						"title": job.job_title,
+						"image": job.image.url,
 						"description": job.description.replace('\r', '').replace('\n', ' ') if job.description else '',
 						"mission": job.mission.replace('\r', '').replace('\n', ' ') if job.mission else '',
 						"profile": job.profile.replace('\r', '').replace('\n', ' ') if job.profile else '',
