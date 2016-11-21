@@ -61,6 +61,9 @@ class LinkedInScraper(object):
                 status = int(r.status_code)
                 text = r.text
 
+                print(status)
+                print(text)
+
             except Exception:
                 status=500
                 body = 'Erreur sur script N°%s %s ' % (str(rand), url_scrip)
