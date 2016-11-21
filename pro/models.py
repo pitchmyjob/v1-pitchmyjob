@@ -248,8 +248,8 @@ class Job(models.Model):
 						"scraper": job.scraper
 					}
 					es.index(index="pitch", doc_type="job", id=job.id, body=json.dumps(js))
-				except Exception:
-					print( Exception)
+				except Exception as e:
+					print( str(e) )
 
 		super(Job, self).save(*args, **kwargs)
 
