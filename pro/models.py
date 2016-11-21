@@ -249,7 +249,7 @@ class Job(models.Model):
 					}
 					es.index(index="pitch", doc_type="job", id=job.id, body=json.dumps(js))
 				except Exception:
-					pass
+					print( Exception)
 
 		super(Job, self).save(*args, **kwargs)
 
