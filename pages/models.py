@@ -11,14 +11,15 @@ class Contact(models.Model):
 
 
 class LandingPage(models.Model):
-	first_name 	= models.CharField(max_length=250, null=True, blank=True)
-	last_name 	= models.CharField(max_length=250, null=True, blank=True)
-	email 		= models.CharField(max_length=250, null=True, blank=True)
-	company 	= models.CharField(max_length=250, null=True, blank=True)
-	phone	 	= models.CharField(max_length=250, null=True, blank=True)
-	fonction 	= models.CharField(max_length=250, null=True, blank=True)
-	employes	= models.CharField(max_length=250, null=True, blank=True)
-	landing		= models.CharField(max_length=250, null=True, blank=True)
+	first_name 	 = models.CharField(max_length=250, null=True, blank=True)
+	last_name 	 = models.CharField(max_length=250, null=True, blank=True)
+	email 		 = models.CharField(max_length=250, null=True, blank=True)
+	company 	 = models.CharField(max_length=250, null=True, blank=True)
+	phone	 	 = models.CharField(max_length=250, null=True, blank=True)
+	fonction 	 = models.CharField(max_length=250, null=True, blank=True)
+	employes	 = models.CharField(max_length=250, null=True, blank=True)
+	landing		 = models.CharField(max_length=250, null=True, blank=True)
+	date_created = models.DateField(auto_now_add=True, null=True)
 
 
 class Apec(models.Model): 
