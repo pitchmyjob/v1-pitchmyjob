@@ -10,6 +10,16 @@ class Contact(models.Model):
 	message 	= models.TextField(null=True)
 
 
+class LandingPage(models.Model):
+	first_name 	= models.CharField(max_length=250, null=True, blank=True)
+	last_name 	= models.CharField(max_length=250, null=True, blank=True)
+	email 		= models.CharField(max_length=250, null=True, blank=True)
+	company 	= models.CharField(max_length=250, null=True, blank=True)
+	phone	 	= models.CharField(max_length=250, null=True, blank=True)
+	fonction 	= models.CharField(max_length=250, null=True, blank=True)
+	employes	= models.CharField(max_length=250, null=True, blank=True)
+
+
 class Apec(models.Model): 
 	identifiant = models.CharField(max_length=150, null=True)
 	titre 		= models.CharField(max_length=150, null=True) 

@@ -43,5 +43,7 @@ urlpatterns = [
     url(r'^flatchr', views.import_flatchr, name='import_flatchr'),
     url(r'^scraper-apec', views.apec, name='apec'),
 
+    url(r'^pro/offre-speciale$', TemplateView.as_view(template_name="pages/landing.html"),name='landing-page'),
+
     url(r'^email/candidature-avorte', views.candidature_avorte, name='candidature_avorte'),
 ]

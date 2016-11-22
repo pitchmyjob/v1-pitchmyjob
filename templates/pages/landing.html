@@ -1,0 +1,181 @@
+{% load staticfiles %}
+{% load in_group %}
+{% load i18n %}
+
+<!DOCTYPE html>
+
+<!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
+<!--[if IE 8]><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="css/ie7.css" /><![endif]-->
+
+<html lang="fr">
+	<head>
+		<meta property="og:title" content="Rejoins Pitch my job" />
+		<meta property="og:description" content="Passe un entretien et decroche ton prochain job !" />
+		<meta property="fb:app_id" content="1521513254812652"/>
+	    <meta property="og:image" content="https://www.pitchmyjob.com/static/images/share2.png"/>
+
+		<meta charset="utf-8">
+
+		<title>Pitch my job | Recrutement stage, emploi et pré-entretien vidéo</title>
+
+	    <!-- behavioral meta data -->
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="format-detection" content="telephone=no">
+	    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0">
+
+	    <!-- core meta data -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<!-- styles -->
+		<link rel="stylesheet" href="{% static 'css/jquery.bxslider.css' %}">
+		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/global.css' %}">
+		<link rel="stylesheet" href="{% static 'css/devices.css' %}">
+
+		<!-- styles -->
+		<script src="{% static 'js/plugin/jquery-1.11.3.min.js' %}"></script>
+		<script src="{% static 'js/plugin/jquery.bxslider.min.js' %}"></script>
+		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+
+	    <!-- favicons -->
+		<link rel="icon" href="{% static 'images/favicon.png' %}" type="images/icons/x-icon" />
+		<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="images/icons/x-icon" />
+
+		<meta name="robots" content="noindex">
+		<meta name="googlebot" content="noindex">
+
+        <style>
+
+            .home-member-inscription-form .form-control{height:35px;}
+
+            .form-control{    border: 1px solid rgba(0, 0, 0, 0.25); font-size:10px !important; height:30px;}
+
+            .form-horizontal{    background: #fff; font-size:10px !important;border-radius:10px;padding: 15px;}
+
+            input{max-width:180px;}
+
+        </style>
+
+		<!--[if IE]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+	</head>
+
+	<body>
+
+       <header class="home-pro-2">
+
+           <div class="home-pro-filtre-2" style="background: rgba(0, 0, 0, 0.62);">
+				<div class="container-pro-2">
+					<nav class="navbar navbar-default navbar-home-pro-2">
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"  aria-controls="navbar">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								</button>
+								<a href="#"> <img src="{% static 'images/refonte/home-pro-logo.png' %}" class="home-user-logo logo-pitch"> </a>
+							</div>
+						</div><!--/.container-fluid -->
+					</nav>
+
+                <div style="max-width:960px; margin: 0 auto;  padding:10px 0 50px 0; " class="row">
+
+                    <h1 style="color:#fff; font-size:40px;text-align:center ;">Trouvez le candidat idéal grâce au pré-entretien vidéo</h1>
+
+                </div>
+
+
+                <div style="max-width:960px; margin: 0 auto;" class="row">
+
+                    <div class="col-sm-7">
+
+                    </div>
+
+
+                    <div class="col-sm-5" >
+
+                        <form class="form-horizontal">
+                              <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Prénom&nbsp;* </label>
+                                <div class="col-sm-10">
+                                  <input type="email" class="form-control" id="inputEmail3" placeholder="">
+                                </div>
+                              </div>
+
+                                <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Nom&nbsp;*</label>
+                                <div class="col-sm-10">
+                                  <input type="email" class="form-control" id="inputEmail3" placeholder="">
+                                </div>
+                              </div>
+
+                                <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Email&nbsp;*</label>
+                                <div class="col-sm-10">
+                                  <input type="email" class="form-control" id="inputEmail3" placeholder="">
+                                </div>
+                              </div>
+
+                                <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Fonction&nbsp;*</label>
+                                <div class="col-sm-10">
+                                  <input type="email" class="form-control" id="inputEmail3" placeholder="">
+                                </div>
+                              </div>
+
+                                <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Entreprise&nbsp;*</label>
+                                <div class="col-sm-10">
+                                  <input type="email" class="form-control" id="inputEmail3" placeholder="">
+                                </div>
+                              </div>
+
+                                <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Téléphone&nbsp;*</label>
+                                <div class="col-sm-10">
+                                  <input type="email" class="form-control" id="inputEmail3" placeholder="">
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-2 control-label">Nombre d'employés&nbsp;*</label>
+                                <div class="col-sm-10">
+                                  <input type="password" class="form-control" id="inputPassword3" placeholder="">
+                                </div>
+                              </div>
+
+                            <div class="input-group">
+                                <input type="submit" name="birthday" id="ga-btn-inscript" class="form-control form-submit" value="Inscription">
+                            </div>
+
+                        </form>
+
+
+
+
+
+
+                    </div>
+
+               </div>
+
+
+
+
+
+
+                </div>
+
+           </div>
+
+       </header>
+
+
+
+    </body>
+</html>
