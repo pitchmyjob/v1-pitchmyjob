@@ -18,6 +18,7 @@ class LandingPage(models.Model):
 	phone	 	= models.CharField(max_length=250, null=True, blank=True)
 	fonction 	= models.CharField(max_length=250, null=True, blank=True)
 	employes	= models.CharField(max_length=250, null=True, blank=True)
+	landing		= models.CharField(max_length=250, null=True, blank=True)
 
 
 class Apec(models.Model): 
