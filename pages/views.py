@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, FormView, UpdateView
 from django.views.generic.edit import CreateView
-from .models import Contact, Apec
+from .models import Contact, Apec, LandingPage
 from c2v.models import Cv
 from members.models import Member
 from pro.models import Pro, JobList, Job
@@ -93,6 +93,20 @@ def ResetPasswordStep3(request, token):
 	context = {"form": form}
 
 	return render(request, 'pages/reset-password-3.html', context)
+
+
+class LandingPageCreate(CreateView):
+	model = LandingPage
+	fields = ['first_name', 'last_name', 'email', 'company', 'phone', 'fonction', 'employes']
+	template_name = 'pages/landing.html'
+
+	def form_valid(self, form):
+		obj = form.save()
+		obj.landing = "offre-speciale-viadeo"
+		obj.save()
+
+		return HttpResponseRedirect( reverse('pages:landing-page-merci') )
+
 
 def connect_all_user(request, id):
 	member = Member.objects.get(id=id)

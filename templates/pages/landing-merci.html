@@ -118,7 +118,6 @@
 
             .navbar-default{     padding: 0.5em 0; }
 
-            .has-error input{border:1px solid red !important;}
          </style>
 
       </head>
@@ -147,7 +146,7 @@
 
             <div class="fw-page-builder-content" style="height:100vh">
                <section  id="section-58348b24d0336" class="fw-main-row parallax-section  auto "  style=" background:url(https://s3-eu-west-1.amazonaws.com/v1-pitchmyjob/static/landing.jpg) no-repeat center center scroll;-moz-background-size: cover;background-size: cover;-webkit-background-size: cover;-o-background-size: cover;width: 100%;overflow: hidden; "  >
-                  <div style='min-height:100vh; background-color:rgba(17, 17, 17, 0.53);'>
+                  <div style='min-height:100vh; background-color:rgba(17, 17, 17, 0.63);'>
                      <div class="fw-container no-spacing">
                         <div class="fw-row">
                            <div id="column-58348b24d0a71" class="none  fw-col-sm-12      wow " data-wow-offset="120" data-wow-duration="1.5s" style="  ">
@@ -156,117 +155,16 @@
                                     <section class="welcome-message home-6">
                                        <div class="row">
                                           <div class="col-md-11 center-block">
-                                             <div class="row">
+                                             <div class="row" style="text-align:center">
 
-                                                   <h1 style="font-size: 38px;margin-top:0px;padding-bottom:22px;text-align:center">Trouvez le candidat idéal grâce au pré-entretien vidéo</h1>
-                                                <div class="col-md-7">
-                                                   <h2>Vous souhaitez dénicher les meilleurs talents pour votre entreprise ?</h2>
-                                                   <div style="color:#fff">
-                                                     - Publiez votre annonce d’emploi et ajoutez vos questions d’entretien
-                                                       <br><br>
-                                                    - Les candidats postulent en répondant à vos questions d’entretien en vidéo <br><br>
-                                                    - Visionnez les réponses des candidats avec vos collaborateurs. <br><br>
+                                                   <h1 style="font-size: 52px;">Merci pour votre intérêt pour Pitch my job</h1>
+                                                <br>
+                                                   <h2 style="color:#fff; font-size: 26px;"> Nous vous recontacterons dans les plus brefs délais
+                                                      <br> pour vous présenter l'ensemble de nos services</h2>
 
-                                                    Avec Pitch my Job, prenez enfin en compte le savoir être et la personnalité des candidats et ne passez plus à côté d’un talent.
+                                                   <h3 style="color:#fff;font-size: 20px;"> N'attendez pas d'être recontacté et inscrivez vous directement sur
+                                                      <a href="https://www.pitchmyjob.com/fr/pro/">www.pitchmyjob.com/pro</a> </h3>
 
-                                                   </div>
-                                                </div>
-                                                <div class="col-md-1"></div>
-                                                <div class="col-md-4">
-                                                   <section class="cta-light" style="    padding: 0 15px;">
-                                                      <div class="caldera-grid" id="caldera_form_1" data-cf-ver="1.4.1" data-cf-form-id="CF57a642b8f06bb">
-                                                         <div id="caldera_notices_1" data-spinner="http://demo.xpeedstudio.com/wp/archer/variant6/wp-admin/images/spinner.gif"></div>
-                                                         <form method="POST" style="border-radius: 10px;">
-
-                                                             {% csrf_token %}
-                                                             <div  class="row ">
-                                                               <div  class="col-sm-12  single">
-                                                                  <div role="field" data-field-wrapper="fld_1812913" class="form-group {% if form.first_name.errors %} has-error {% endif %}">
-                                                                     <div class="">
-                                                                        <input placeholder="Prénom*" name="first_name" class="form-control" value="{{ form.first_name.value|default_if_none:''}}">
-                                                                     </div>
-                                                                  </div>
-                                                               </div>
-                                                            </div>
-                                                            <div  class="row ">
-                                                               <div  class="col-sm-12  single">
-                                                                  <div role="field" data-field-wrapper="fld_4810590" class="form-group {% if form.last_name.errors %} has-error {% endif %}">
-                                                                     <div class="">
-                                                                        <input placeholder="Nom*" name="last_name" class="form-control" value="{{ form.last_name.value|default_if_none:''}}">
-                                                                     </div>
-                                                                  </div>
-                                                               </div>
-                                                            </div>
-
-                                                            <div  class="row ">
-                                                               <div  class="col-sm-12  single">
-                                                                  <div role="field" data-field-wrapper="fld_4810590" class="form-group {% if form.email.errors %} has-error {% endif %}">
-                                                                     <div class="">
-                                                                        <input placeholder="Email*" name="email" class="form-control" value="{{ form.email.value|default_if_none:''}}">
-                                                                     </div>
-                                                                  </div>
-                                                               </div>
-                                                            </div>
-
-                                                            <div  class="row ">
-                                                               <div  class="col-sm-12  single">
-                                                                  <div role="field" data-field-wrapper="fld_4810590" class="form-group {% if form.fonction.errors %} has-error {% endif %}">
-                                                                     <div class="">
-                                                                        <input placeholder="Fonction*" name="fonction" class="form-control" value="{{ form.fonction.value|default_if_none:''}}">
-                                                                     </div>
-                                                                  </div>
-                                                               </div>
-                                                            </div>
-
-                                                            <div  class="row ">
-                                                               <div  class="col-sm-12  single">
-                                                                  <div role="field" class="form-group {% if form.company.errors %} has-error {% endif %}">
-                                                                     <div class="">
-                                                                        <input placeholder="Entreprise*" name="company" class="form-control" value="{{ form.company.value|default_if_none:''}}">
-                                                                     </div>
-                                                                  </div>
-                                                               </div>
-                                                            </div>
-
-                                                            <div  class="row ">
-                                                               <div  class="col-sm-12  single">
-                                                                  <div role="field"class="form-group {% if form.phone.errors %} has-error {% endif %}">
-                                                                     <div class="">
-                                                                        <input placeholder="Téléphone*" name="phone" class="form-control" value="{{ form.phone.value|default_if_none:''}}">
-                                                                     </div>
-                                                                  </div>
-                                                               </div>
-                                                            </div>
-
-                                                            <div  class="row ">
-                                                               <div  class="col-sm-12  single">
-                                                                  <div role="field" data-field-wrapper="fld_1561974" class="form-group {% if form.employes.errors %} has-error {% endif %}">
-                                                                     <div class="">
-                                                                        <select class="form-control" name="employes">
-                                                                           <option value="" selected="selected">Nombre d'employés*</option>
-                                                                           <option value="1-9" >1-9</option>
-                                                                           <option value="10-49" >10-49</option>
-                                                                           <option value="50-499" >50-499</option>
-                                                                           <option value="500-999" >500-999</option>
-                                                                           <option value="1000-4999" >1000-4999</option>
-                                                                           <option value="5000+" >5000+</option>
-                                                                        </select>
-                                                                     </div>
-                                                                  </div>
-                                                               </div>
-                                                            </div>
-                                                            <div  class="row ">
-                                                               <div  class="col-sm-12  single">
-                                                                  <div role="field" data-field-wrapper="fld_2668148" class="form-group">
-                                                                     <div class="">
-                                                                        <input class="btn-primmary" type="submit" value="Etre rappelé">
-                                                                     </div>
-                                                                  </div>
-                                                               </div>
-                                                            </div>
-                                                         </form>
-                                                      </div>
-                                                   </section>
                                                 </div>
                                              </div>
                                           </div>
