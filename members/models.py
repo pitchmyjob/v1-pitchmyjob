@@ -18,7 +18,7 @@ import time, datetime
 def generate_filename(self, filename):
 	filename, file_extension = os.path.splitext(filename)
 	filename = slugify(filename)
-	name = str(filename) + "-" + str(uuid.uuid4()) + str(file_extension)
+	name = str(uuid.uuid4()) + str(file_extension)
 	url = "c2v/%s/%s" % (self.id, name )
 	return url
 
