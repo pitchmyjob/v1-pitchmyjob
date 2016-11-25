@@ -236,7 +236,7 @@ def notification(ntype, member=None, pro=None, job=None, params=None):
 		async_send_email("Votre candidature a été envoyé !", [member.email], "emails/candidature_envoyee.html", {"job":job.job_title, "first_name":member.first_name, "company":job.company})
 	if ntype == 2:
 		#async_send_email("Votre offre a été modifié.", [pro.email], "emails/candidature_envoyee.html", {"job":job.job_title, "first_name":pro.first_name, "id":job.id})
-		async_send_email("Votre offre a été modifié.", [pro.email], "emails/modification_offre.html", {"job":job.job_title, "first_name":pro.first_name, "id":job.id})
+		async_send_email("Votre offre a été modifiée.", [pro.email], "emails/modification_offre.html", {"job":job.job_title, "first_name":pro.first_name, "id":job.id})
 	if ntype == 3:
 		async_send_email("Votre offre a été publiée avec succès.", [pro.email], "emails/offre_publiee.html", {"job":job.job_title, "first_name":pro.first_name, "id":job.id})
 	if ntype == 4:
