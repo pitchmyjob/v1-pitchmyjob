@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from . import views
 
+from pages.views import xml_indeed, xml_optioncarriere, xml_jobrapido, xml_jobijoba
+
 urlpatterns = [
     url(r'^api/token-auth/', 'rest_framework.authtoken.views.obtain_auth_token'),
     url(r'^api/media$', views.MediaDetail.as_view() ),
@@ -36,4 +38,10 @@ urlpatterns = [
     url(r'^api/video/question$', views.VideoQuestionEntretien.as_view()),
     url(r'^api/video/question/params', views.VideoQuestionEntretienParams.as_view()),
     url(r'^api/entretien/close', views.ValideEntretien.as_view()),
+
+    url(r'^xml/flatchr-4gdp54F', xml_indeed, name='xml_indeed'),
+    url(r'^xml/indeed-gR94mDf5c6', xml_indeed, name='xml_indeed'),
+    url(r'^xml/optioncarriere-gR94mDf5c6', xml_optioncarriere, name='xml_optioncarriere'),
+    url(r'^xml/jobrapido', xml_jobrapido, name='xml_jobrapido'),
+    url(r'^xml/jobijoba-8fmePfS19d5', xml_jobijoba, name='xml_jobijoba'),
 ]
