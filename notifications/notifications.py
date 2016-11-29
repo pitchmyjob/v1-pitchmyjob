@@ -184,19 +184,28 @@ def script_import_linkedin(mr, pk):
 
 	if 'skills' in mr.data:
 		for skill in mr.data['skills']:
-			CvSkill(cv=cv, name=skill).save()
+			try:
+				CvSkill(cv=cv, name=skill).save()
+			except Exception:
+				pass
 
 	if 'languages' in mr.data:
 		for lang in mr.data['languages']:
-			cvLang = CvLanguage(cv=cv, name=lang['name'])
-			if 'proficiency' in lang:
-				if lang['proficiency']:
-					cvLang.level = lang['proficiency']
-			cvLang.save()
+			try:
+				cvLang = CvLanguage(cv=cv, name=lang['name'])
+				if 'proficiency' in lang:
+					if lang['proficiency']:
+						cvLang.level = lang['proficiency']
+				cvLang.save()
+			except Exception:
+				pass
 
 	if 'interests' in mr.data:
 		for inter in mr.data['interests']:
-			CvInterest(cv=cv, name=inter).save()
+			try:
+				CvInterest(cv=cv, name=inter).save()
+			except Exception:
+				pass
 
 	member.save_on_elasticsearch()
 

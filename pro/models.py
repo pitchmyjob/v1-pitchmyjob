@@ -16,7 +16,7 @@ import uuid
 def generate_unique_filename(self, filename):
 	filename, file_extension = os.path.splitext(filename)
 	filename = slugify(filename)
-	name = str(filename) + "-" +str(uuid.uuid4()) + str(file_extension)
+	name = str(uuid.uuid4()) + str(file_extension)
 	url = "job/%s" % ( name )
 	return url
 
