@@ -156,7 +156,7 @@ def linkedin_return(request):
 			"url" : res['publicProfileUrl'],
 			"id" : member.id
 		}
-		requests.post("http://163.172.28.221:1234/", data=payload, headers={"Content-Type" : "application/json"})
+		requests.post("http://163.172.28.221:1234/", data=payload)
 		#async_linkedin_cv(member.id, res['publicProfileUrl'])
 
 	g = Group.objects.get(name='member') 
