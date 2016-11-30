@@ -141,15 +141,23 @@ def linkedin_return(request):
 	cv = Cv( member = member, email = member.email, first_name = member.first_name, last_name = member.last_name  ).save()
 	
 	if 'publicProfileUrl' in res:
-		cv.site = res['publicProfileUrl']
-		cv.save()
+		try:
+			cv.site = res['publicProfileUrl']
+			cv.save()
+		except Exception:
+			pass
 
 	if 'ecole' in request.session:
 		member.school = request.session['ecole']
 		member.save()
 
 	if 'publicProfileUrl' in res:
-		async_linkedin_cv(member.id, res['publicProfileUrl'])
+		payload = {
+			"url" : res['publicProfileUrl'],
+			"id" : member.id
+		}
+		requests.post("http://163.172.28.221:1234/", data=payload)
+		#async_linkedin_cv(member.id, res['publicProfileUrl'])
 
 	g = Group.objects.get(name='member') 
 	g.user_set.add(user)
