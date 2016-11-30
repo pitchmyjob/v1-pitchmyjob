@@ -138,7 +138,7 @@ def linkedin_return(request):
 
 	member = Member(email = email, first_name = res['firstName'], last_name = res['lastName'], user = user, rs_pwd = True,  rs_type=1)
 	member.save()
-	cv = Cv( member = member, email = member.email, first_name = member.first_name, last_name = member.last_name  ).save()
+	cv = Cv.objects.create( member = member, email = member.email, first_name = member.first_name, last_name = member.last_name  )
 	
 	if 'publicProfileUrl' in res:
 		try:
