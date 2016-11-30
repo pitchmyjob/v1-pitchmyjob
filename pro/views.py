@@ -283,6 +283,10 @@ class JobStepFiveUpdate(OnlyProLoginRequiredMixin, UpdateJobProMixin, UpdateView
 		else:
 			price = 11880
 
+		if job.contracts.filter(id=9).exists() and job.contracts.count() == 1:
+			context['stage'] = True
+			price = 5880
+
 		p = Paiement(price, 1, self.request.user.id, self.get_object().id, normal_return="http://www.pitchmyjob.com/pro/paiement-offre", cancel_return="http://www.pitchmyjob.com/pro/paiement-offre")
 		code = p.call_request()
 		context['pay'] = code[3]
