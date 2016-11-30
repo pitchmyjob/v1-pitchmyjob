@@ -12,6 +12,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from multiprocessing import Pool
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 
 def test_cron(request):
@@ -81,6 +82,7 @@ def linkedin_cv_connected(html):
 	ld.parse()
 
 	print ld.data['interests']
+
 
 
 def async_linkedin_cv(pk, url):
@@ -208,6 +210,23 @@ def script_import_linkedin(mr, pk):
 				pass
 
 	member.save_on_elasticsearch()
+
+
+@csrf_exempt
+def api_rest_scraper_linkedin(request):
+	if request.method == 'POST':
+		html = request.POST.get('html')
+		id = request.POST.get('id')
+
+		from linkedin_scraper import LinkedInScraper
+
+		ld = LinkedInScraper()
+		ld.set_html(html)
+		ld.parse()
+		
+		script_import_linkedin(ld, id)
+
+	return HttpResponse("")
 
 
 def send_email(subject, to, template, ctx, from_email ):

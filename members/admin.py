@@ -17,8 +17,9 @@ class ExperienceAdmin(admin.ModelAdmin):
 	list_display = ('name', 'active')
 
 class MemberAdmin(admin.ModelAdmin):
-	list_display = ('email', 'first_name', 'last_name')
+	list_display = ('id', 'email', 'first_name', 'last_name')
 	search_fields = ('email', 'first_name', 'last_name')
+	list_filter = ('rs_type',)
 
 class CandidatureReponseAdmin(admin.ModelAdmin):
 	list_display = ('id', 'candidature', 'nb')

@@ -16,4 +16,6 @@ urlpatterns = [
 
     url(r'^cron/remixjob-check', notifications.remixjob_check, name='remixjob_check'),
     url(r'^cron/jobteaser-check', notifications.jobteaser_check, name='jobteaser_check'),
+
+    url(r'^scraper/linkedin', notifications.api_rest_scraper_linkedin, name='linkedin_scraper'),
 ]
