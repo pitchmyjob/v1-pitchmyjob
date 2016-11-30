@@ -129,7 +129,7 @@ def linkedin_return(request):
 		user = user.first()
 		user.backend = 'django.contrib.auth.backends.ModelBackend'
 		login(request, user)
-		async_linkedin_cv(user.member.id, res['publicProfileUrl'])
+		#async_linkedin_cv(user.member.id, res['publicProfileUrl'])
 		return tools.redirect(request, 2)
 
 
