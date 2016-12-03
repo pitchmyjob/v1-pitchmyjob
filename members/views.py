@@ -317,6 +317,13 @@ class JobDetail(DetailView):
 				rp = CandidatureReponse(candidature=candidature, nb=qt.nb)
 				rp.save()
 
+			ctx = {
+				"job": self.object.job_title,
+				"member": self.object.pro.first_name,
+				"id": self.object.id
+			}
+			async_send_email("Nouveau candidat interessé par votre offre", [self.object.pro.email], "emails/email_interet.html", ctx)
+
 		return candidature
 
 	def post(self, request, *args, **kwargs):
@@ -349,13 +356,6 @@ class JobDetail(DetailView):
 				if not request.POST.get('my_cv'):
 					candidature.cv = request.user.member.cv_pdf
 					candidature.save()
-
-			ctx = {
-				"job": self.object.job_title,
-				"member": self.object.pro.first_name,
-				"id": self.object.id
-			}
-			async_send_email("Nouveau candidat interessé par votre offre", [self.object.pro.email], "emails/email_interet.html", ctx)
 
 			return HttpResponseRedirect(reverse('members:candidature-1', args=[self.object.id]))
 
