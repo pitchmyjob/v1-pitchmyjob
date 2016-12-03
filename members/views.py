@@ -350,6 +350,13 @@ class JobDetail(DetailView):
 					candidature.cv = request.user.member.cv_pdf
 					candidature.save()
 
+			ctx = {
+				"job": self.object.job_title,
+				"member": self.object.pro.first_name,
+				"id": self.object.id
+			}
+			async_send_email("Nouveau candidat interessé par votre offre", [self.object.pro.email], "emails/email_interet.html", ctx)
+
 			return HttpResponseRedirect(reverse('members:candidature-1', args=[self.object.id]))
 
 		if request.POST.get('apply'):
