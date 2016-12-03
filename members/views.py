@@ -316,7 +316,7 @@ class JobDetail(DetailView):
 			for qt in self.get_object().questions.all():
 				rp = CandidatureReponse(candidature=candidature, nb=qt.nb)
 				rp.save()
-
+			self.object = self.get_object()
 			ctx = {
 				"job": self.object.job_title,
 				"member": self.object.pro.first_name,
