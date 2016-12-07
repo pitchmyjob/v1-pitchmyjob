@@ -40,7 +40,7 @@ urlpatterns = [
     url(r'^react', TemplateView.as_view(template_name="pages/react.html"), name='react'),
     url(r'^whosnext', views.whosnext, name='whosnext'),
     url(r'^broadben', views.import_broadben, name='import_broadben'),
-    url(r'^flatchr', views.import_flatchr, name='import_flatchr'),
+    url(r'^flatchr$', views.import_flatchr, name='import_flatchr'),
     url(r'^scraper-apec', views.apec, name='apec'),
 
     url(r'^pro/offre-speciale$', views.LandingPageCreate.as_view(),name='landing-page'),

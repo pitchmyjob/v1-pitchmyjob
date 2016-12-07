@@ -11,30 +11,37 @@ from django.core.files import File
 from django.conf import settings
 from django.core.mail import send_mail
 from multiprocessing import Pool
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import get_list_or_404, get_object_or_404
+from django.core.urlresolvers import reverse, reverse_lazy
 
 
 def test_cron(request):
 	send_mail('Hello cron!', 'No bug', 'contact@pitchmyjob.com', ['tannier.yannis@gmail.com'], fail_silently=False)
 	return HttpResponse("")
 
-def async_multiposting():
+def async_multiposting(requests):
 	from pro.multiposteur.multiposting import Multiposting
 	Multiposting()
 
-def cron_import_flatchr():
+def flatchr_job_redirect(requests, ref):
+	job = get_object_or_404(Job, mp_flatchr_ref=ref)
+	return HttpResponseRedirect( reverse('members:detail-job', args=[job.id]) )
+
+def cron_import_flatchr(requests):
 	from pro.multiposteur.flatchr import Flatchr
 	Flatchr()
+	return HttpResponse("")
 	#send_mail('Flatchr cron!', 'No bug', 'contact@pitchmyjob.com', ['tannier.yannis@gmail.com'],fail_silently=False)
 
-def async_remixjob_import():
+def async_remixjob_import(requests):
 	from remixjob_scraper import RemixJobScraper
 	rj = RemixJobScraper()
 	rj.parse()
 	#send_mail('Remixjob - Cron import effectue !', 'No bug', 'contact@pitchmyjob.com', ['tannier.yannis@gmail.com'], fail_silently=False)
 
-def async_jobteaser_import():
+def async_jobteaser_import(requests):
 	from jobteaser_scraper import JobTeaserScraper
 	jb = JobTeaserScraper()
 	jb.parse()

@@ -20,11 +20,11 @@ class SetLastVisitMiddleware(object):
         if 'pitchmyjob.com' == request.META['HTTP_HOST']:
             return HttpResponsePermanentRedirect( "https://www.pitchmyjob.com"+url )
 
-        #if hasattr(request, 'user') :
-        #if request.user.is_authenticated():
+        if hasattr(request, 'user') :
+            if request.user.is_authenticated():
         # Update last visit time after request finished processing.
-        #if request.user.groups.filter(name='member').exists():
-        #Member.objects.filter(user=request.user).update(last_visit=now())
+                if request.user.groups.filter(name='member').exists():
+                    Member.objects.filter(user=request.user).update(last_visit=now())
 
         return response
 

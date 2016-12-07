@@ -4,6 +4,7 @@ nodejs/
 media/
 static/
 static_ba/
+myc2v/settings.py
 .git_old/
 *.pyc
 # Elastic Beanstalk Files

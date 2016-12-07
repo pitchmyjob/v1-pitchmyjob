@@ -8,14 +8,16 @@ from django.template.defaultfilters import slugify
 from pro.multiposteur.multiposteur import Multiposteur
 from django.core.files.temp import NamedTemporaryFile
 from django.core.files import File
+from notifications.scraper import Scraper
 
-class Flatchr(Multiposteur):
+class Flatchr(Multiposteur, Scraper):
     url="http://xml.flatchr.io/8vq1xlpR24p6zEM0"
 
     def __init__(self):
         self.parse()
 
     def parse(self):
+
         f = urllib2.urlopen(self.url)
         xml = BeautifulSoup(f, 'html.parser')
 
@@ -119,8 +121,9 @@ class Flatchr(Multiposteur):
 
             job.save()
 
-            job_qt = JobQuestion(question="question test 1", nb=1, job=job).save()
-            job_qt = JobQuestion(question="question test 2", nb=2, job=job).save()
+            qts = self.get_questions(1)
+            job_qt = JobQuestion(question=qts[0], nb=1, job=job)
+            job_qt.save()
 
             if current['company_logo'] :
                 img_temp = NamedTemporaryFile(delete=True)

@@ -10,7 +10,10 @@ urlpatterns = [
     url(r'^cron/test$', notifications.test_cron, name='cron-test'),
 
     url(r'^cron/multiposting', notifications.async_multiposting, name='async_multiposting'),
+
     url(r'^cron/flatchr', notifications.cron_import_flatchr, name='cron_import_flatchr'),
+    url(r'^flatchr/job/(?P<ref>[-\w\d]+)', notifications.flatchr_job_redirect, name='cron_import_flatchr'),
+
     url(r'^cron/remixjob', notifications.async_remixjob_import, name='async_remixjob_import'),
     url(r'^cron/jobteaser', notifications.async_jobteaser_import, name='async_jobteaser_import'),
 

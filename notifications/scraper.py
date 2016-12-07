@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 import re, datetime, json, random, os
-import mechanize
 import urllib2
 from bs4 import BeautifulSoup
 from bs4.element import Tag
@@ -58,10 +57,11 @@ class Scraper(object):
     only_id=False
 
     def __init__(self):
+        pass
         # Initializing fake browser to bypass LinkedIn security
-        self.browser = mechanize.Browser()
-        self.browser.set_handle_robots(False)
-        self.browser.addheaders = self.headers
+        #self.browser = mechanize.Browser()
+        #self.browser.set_handle_robots(False)
+        #self.browser.addheaders = self.headers
        
         #user = User.objects.exclude(id__in=(1,4,3))
         #user.delete()
@@ -336,7 +336,7 @@ class Scraper(object):
         self.parse()
         return self.list_id
 
-    def get_questions(self):
+    def get_questions(self, nb=3):
         qt = [
             [
                 "Certains recruteurs pensent qu'il faut changer de poste tout les 5 ans, qu'en pensez vous ?",
@@ -414,7 +414,7 @@ class Scraper(object):
 
         select_qt = []
 
-        rand = random.sample(range(0, 5), 3)
+        rand = random.sample(range(0, 5), nb)
         for x in rand:
             arr = qt[x]
             rand_array = random.randint(0, len(arr)-1)
