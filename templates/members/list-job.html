@@ -155,11 +155,8 @@
 								</a>
 								<div class="row">
 									<div class="col-md-6 offre-one-date" itemprop="datePosted">
-										{% if job.scraper  %}
-											{{ job.date_posted|date:"d F Y" }}
-										{% else %}
-											{% now "d F Y" %}
-										{% endif %}
+										{{ job.date_posted|date:"d F Y" }}
+										
 									</div>
 									<div class="col-md-6 offre-link-detail"> <a id="ga-btn-{{job.id}}" class="url-annonce" href="{% url 'members:detail-job' job.id %}">{% trans "Voir l'annonce" %}</a> </div>
 								</div>
