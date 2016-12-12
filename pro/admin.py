@@ -29,12 +29,12 @@ def make_deactive(modeladmin, request, queryset):
 class JobAdmin(admin.ModelAdmin):
 	inlines = (JobQuestionModeleInCommande,)
 	list_display = ('job_title', 'active', 'pro')
-	list_filter = ('active', 'scraper_site' )
+	list_filter = ('active', 'scraper_site', 'complet' )
 	search_fields = ('job_title', 'id', 'pro__company', 'company')
 	actions=[make_deactive, make_active]
 
 	def get_queryset(self, request):
-		return super(JobAdmin,self).get_queryset(request).filter(complet=True)
+		return super(JobAdmin,self).get_queryset(request)
  
 class ProAdmin(admin.ModelAdmin):
 	list_display = ('company', 'email', 'first_name', 'last_name')
