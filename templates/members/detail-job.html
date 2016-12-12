@@ -132,20 +132,30 @@
 
 						<h2> {% trans "Description du poste" %} </h2>
 						<div class="text" itemprop="description">
-							
-
-							{{ object.description|safe }}
+							{% if object.scraper or object.mp %}
+								{{ object.description|safe }}
+							{% else %}
+								{{ object.description|linebreaks }}
+							{% endif %}
 						</div>
 						{% if object.mission %}
 							<h2> {% trans "Missions" %} </h2>
 							<div class="text">
-								{{ object.mission|linebreaks }}
+								{% if object.scraper or object.mp %}
+									{{ object.mission|safe }}
+								{% else %}
+									{{ object.mission|linebreaks }}
+								{% endif %}
 							</div>
 						{% endif %}
 						{% if object.profile %}
 							<h2> {% trans "Profil" %} </h2>
 							<div class="text" itemprop="skills">
-								{{ object.profile|linebreaks }}
+								{% if object.scraper or object.mp %}
+									{{ object.profile|safe }}
+								{% else %}
+									{{ object.profile|linebreaks }}
+								{% endif %}
 							</div>
 						{% endif %}
 
