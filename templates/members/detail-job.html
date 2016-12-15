@@ -265,8 +265,8 @@
 					<p> En un clic, il n'y a pas plus facile </p>
 
 					<div class="col-sm-12" style="padding:40px 0 20px 0;">
-						<div class="col-sm-6"> <a id="signup-job-viadeo" href="{% url 'members:viadeo-connect' %}"> <img src="{% static 'images/viadeo-connect.png' %}" alt=""> </a>  </div>
-						<div class="col-sm-6"> <a id="signup-job-linkedin" href="{% url 'members:linkedin-connect' %}"> <img src="{% static 'images/refonte/home-member-23.png' %}" alt=""> </a>  </div>
+						<div class="col-sm-6"> <a id="signup-job-viadeo" href="{% url 'members:viadeo-connect' %}?next=/annonce/{{object.id}}"> <img src="{% static 'images/viadeo-connect.png' %}" alt=""> </a>  </div>
+						<div class="col-sm-6"> <a id="signup-job-linkedin" href="{% url 'members:linkedin-connect' %}?next=/annonce/{{object.id}}"> <img src="{% static 'images/refonte/home-member-23.png' %}" alt=""> </a>  </div>
 					</div>
 
 				</div>
