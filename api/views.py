@@ -25,6 +25,21 @@ from c2v.views import generate_pdf, render_to_pdf
 from notifications.notifications import notification, async_send_email, async_send_email_attach, alert_message, async_linkedin_cv
 from django.template.defaultfilters import slugify
 from rest_framework.parsers import JSONParser
+from rest_framework.pagination import PageNumberPagination
+from django.db.models import Q, Count
+
+
+class LargeResultsSetPagination(PageNumberPagination):
+    page_size = 20
+    page_size_query_param = 'page_size'
+    max_page_size = 10000
+
+
+class FullDataBaseMember(generics.ListAPIView):
+	queryset = Member.objects.annotate(num_exp=Count('tags', distinct=True)).filter(num_exp__lte=1)
+	serializer_class = FullDataBaseMemberSerializer
+	pagination_class = LargeResultsSetPagination
+
 
 class JobApiList(APIView):
 	def get(self, request, format=None):

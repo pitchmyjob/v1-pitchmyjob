@@ -44,4 +44,6 @@ urlpatterns = [
     url(r'^xml/optioncarriere-gR94mDf5c6', xml_optioncarriere, name='xml_optioncarriere'),
     url(r'^xml/jobrapido', xml_jobrapido, name='xml_jobrapido'),
     url(r'^xml/jobijoba-8fmePfS19d5', xml_jobijoba, name='xml_jobijoba'),
+
+    url(r'^api/export/member/gde561fmlsdf5646sdfkjsdf5213dfg', views.FullDataBaseMember.as_view(), name='exporte'),
 ]

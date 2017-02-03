@@ -9,6 +9,52 @@ import base64, urlparse, re
 from django.core.files.base import ContentFile
 from django.utils.dateformat import format
 
+
+class CvInterestSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = CvInterest
+		fields = '__all__'
+
+class CvLanguageSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = CvLanguage
+		fields = '__all__'
+
+class CvSkillSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = CvSkill
+		fields = '__all__'
+
+class CvExperienceSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = CvExperience
+		fields = '__all__'
+
+class CvFormationSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = CvFormation
+		fields = '__all__'
+
+class CvSerialize(serializers.ModelSerializer):
+	cvskill_set = CvSkillSerializer(many=True)
+	cvlanguage_set = CvLanguageSerializer(many=True)
+	cvinterest_set = CvInterestSerializer(many=True)
+	cvexperience_set = CvExperienceSerializer(many=True)
+	cvformation_set = CvFormationSerializer(many=True)
+
+	class Meta:
+		model = Cv
+		fields = '__all__'
+
+class FullDataBaseMemberSerializer(serializers.ModelSerializer):
+	cv = CvSerialize()
+
+	class Meta:
+		model = Member
+		exclude = ('user', )
+		depth=1
+
+
 class JobSerializer(serializers.ModelSerializer):
 
 	class Meta:
