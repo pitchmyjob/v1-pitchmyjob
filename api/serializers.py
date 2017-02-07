@@ -9,6 +9,12 @@ import base64, urlparse, re
 from django.core.files.base import ContentFile
 from django.utils.dateformat import format
 
+class FullJobSerialier(serializers.ModelSerializer):
+	class Meta:
+		model = Job
+		fields = '__all__'
+		depth = 1
+
 
 class CvInterestSerializer(serializers.ModelSerializer):
 	class Meta:

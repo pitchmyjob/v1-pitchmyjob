@@ -9,7 +9,7 @@ from django.db.models import Q, Max
 from api.serializers import *
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -34,8 +34,14 @@ class LargeResultsSetPagination(PageNumberPagination):
     page_size_query_param = 'page_size'
     max_page_size = 10000
 
+class FullDataJob(generics.ListAPIView):
+	queryset = Job.objects.filter(mp=False, scraper=False, complet=True, active=True)
+	serializer_class = FullJobSerialier
+	pagination_class = LargeResultsSetPagination
+
 
 class FullDataBaseMember(generics.ListAPIView):
+	permission_classes = (IsAdminUser,)
 	queryset = Member.objects.annotate(num_exp=Count('tags', distinct=True)).filter(num_exp__lte=1)
 	serializer_class = FullDataBaseMemberSerializer
 	pagination_class = LargeResultsSetPagination

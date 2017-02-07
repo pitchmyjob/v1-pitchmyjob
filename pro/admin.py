@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import ActivityArea, Contract, Employes, Pro, Job, JobList, ContractTime, JobQuestion, Tag, SearchJob, SeenJob
 
+
 class ActivityAreaAdmin(admin.ModelAdmin):
 	list_display = ('name', 'active')
 
@@ -29,7 +30,7 @@ def make_deactive(modeladmin, request, queryset):
 class JobAdmin(admin.ModelAdmin):
 	inlines = (JobQuestionModeleInCommande,)
 	list_display = ('job_title', 'active', 'pro')
-	list_filter = ('active', 'scraper_site', 'complet' )
+	list_filter = ('active', 'scraper_site', 'complet', 'scraper', 'mp' )
 	search_fields = ('job_title', 'id', 'pro__company', 'company')
 	actions=[make_deactive, make_active]
 
