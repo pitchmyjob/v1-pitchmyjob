@@ -9,6 +9,7 @@ class SetLastVisitMiddleware(object):
 
     def process_response(self, request, response):
         url = request.get_full_path()
+        return HttpResponsePermanentRedirect( "https://spitchapp.co/" )
         return response
         if not request.is_secure():
             return HttpResponsePermanentRedirect( "https://spitchapp.co/" )
