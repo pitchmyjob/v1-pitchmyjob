@@ -11,14 +11,16 @@ class SetLastVisitMiddleware(object):
         url = request.get_full_path()
         return response
         if not request.is_secure():
-            return HttpResponsePermanentRedirect( "https://www.pitchmyjob.com"+url )
+            return HttpResponsePermanentRedirect( "https://spitchapp.co/" )
+            #return HttpResponsePermanentRedirect( "https://www.pitchmyjob.com"+url )
         
         if 'pitchmyjob.fr' in request.META['HTTP_HOST']:
-            return HttpResponsePermanentRedirect( "https://www.pitchmyjob.com/" )
+            return HttpResponsePermanentRedirect( "https://spitchapp.co/" )
         
         
         if 'pitchmyjob.com' == request.META['HTTP_HOST']:
-            return HttpResponsePermanentRedirect( "https://www.pitchmyjob.com"+url )
+            return HttpResponsePermanentRedirect( "https://spitchapp.co/" )
+            #return HttpResponsePermanentRedirect( "https://www.pitchmyjob.com"+url )
 
         if hasattr(request, 'user') :
             if request.user.is_authenticated():
