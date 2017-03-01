@@ -9,8 +9,10 @@ class SetLastVisitMiddleware(object):
 
     def process_response(self, request, response):
         url = request.get_full_path()
-        return HttpResponsePermanentRedirect( "https://spitchapp.co/" )
-        return response
+        if "api" not in url and "pro" not in url :
+            return HttpResponsePermanentRedirect( "https://spitchapp.co/" )
+        else:
+            return response
         if not request.is_secure():
             return HttpResponsePermanentRedirect( "https://spitchapp.co/" )
             #return HttpResponsePermanentRedirect( "https://www.pitchmyjob.com"+url )
