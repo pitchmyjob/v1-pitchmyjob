@@ -12,7 +12,6 @@ class CandidatureFormAutocomplete(forms.ModelForm):
             'member': autocomplete.ModelSelect2(url='/autocomplete/member-autocomplete'),
         }
 
-
 class CvFormAutocomplete(forms.ModelForm):
     class Meta:
         model = Cv

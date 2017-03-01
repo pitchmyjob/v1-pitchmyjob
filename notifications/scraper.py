@@ -228,20 +228,20 @@ class Scraper(object):
             #pro.image.save(str(pro.id)+".jpg", File(browser_2))
         return pro
 
-    def create_job(self, pro, job_location=None, job_web_site=None, job_tags=None, job_company=None, job_title=None, job_activityarea=None, job_contrats=None, job_study=None, job_experience=None, job_description=None, job_image=None, job_scraper_site=None, job_scraper_url=None, job_id=None):
+    def create_job(self, pro, job_location=None, job_contrats_list=None, job_web_site=None, job_contact = None, job_tags=None, job_email = None, job_company=None, job_title=None, job_activityarea=None, job_contrats=None, job_study=None, job_experience=None, job_description=None, job_image=None, job_url_image =None, job_scraper_site=None, job_scraper_url=None, job_id=None):
         if job_id:
             job_verif=Job.objects.filter(scraper_id=job_id, scraper_site=job_scraper_site)
         else:
             job_verif=Job.objects.filter(scraper_url=job_scraper_url, scraper_site=job_scraper_site)
 
         if job_verif.exists():
-            #print "already exist"
+            print "already exist"
             self.stop=self.stop+1
             return True
 
         job_verif=Job.objects.filter(job_title=job_title, pro=pro, description=job_description)
         if job_verif.exists():
-            #print "duplicate"
+            print "duplicate"
             return True
 
         self.stop=0
@@ -251,8 +251,12 @@ class Scraper(object):
             job.company=job_company.strip()
         if job_title:
             job.job_title=job_title
+
         if job_activityarea:
             job.activity_area=job_activityarea
+        else:
+            job.activity_area = ActivityArea.objects.get(id=40)
+
         if job_description:
             job.description=job_description
         if job_web_site:
@@ -282,6 +286,8 @@ class Scraper(object):
                 if 'address' in job_location:
                     job.job_location=job_location['address']
 
+        if job.country != "France" :
+            return False
         job.save()
 
         if job_tags:
@@ -301,6 +307,10 @@ class Scraper(object):
         if job_experience:
             job.experiences.add(job_experience)
 
+        if job_contrats_list:
+            for ct in job_contrats_list:
+                job.contracts.add(ct)
+
         job.contract_time.add(ContractTime.objects.get(id=1))
         if job_image:
             job.image = job_image
@@ -314,6 +324,19 @@ class Scraper(object):
         if job_id:
             job.scraper_id = job_id
 
+        if job_email:
+            job.mp_email = job_email
+
+        if job_contact:
+            job.contact = job_contact
+
+        if job_url_image:
+            img_temp = NamedTemporaryFile(delete=True)
+            img_temp.write(urllib2.urlopen(job_url_image).read())
+            img_temp.flush()
+            job.image.save(str(job.id) + ".jpg", File(img_temp))
+
+
         job.date_posted=timezone.now()
         job.scraper=True
         job.is_video=True
@@ -323,13 +346,17 @@ class Scraper(object):
         job.active=True
         job.save()
 
-        questions = self.get_questions()
+        n = random.randint(1,3)
+
+        questions = self.get_questions(nb=n)
 
         i = 1
         for q in questions:
             job_qt = JobQuestion(question=q, nb=i, job=job)
             job_qt.save()
             i=i+1
+
+        return True
 
     def get_list_id(self):
         self.only_id=True
@@ -338,79 +365,46 @@ class Scraper(object):
 
     def get_questions(self, nb=3):
         qt = [
-            [
-                "Certains recruteurs pensent qu'il faut changer de poste tout les 5 ans, qu'en pensez vous ?",
-                "Comment travaillez vous en équipe ?",
-                "Un client vous insulte au téléphone, comment réagissez vous ?",
-                "Qu'avez-vous fait depuis votre dernier emploi ?",
-                "De quoi êtes vous le plus fier dans votre carrière ?",
-                "Que vous ont apporté vos précedents emplois ?",
-                "Pouvez vous me décrire une journée type dans votre dernier emploi ?",
-                "Qu'est ce qui vous pousse a faire plus que le minimum necessaire quand vous réalisez un projet ?",
-                "Qu'est-ce qui vous amuse le plus et le moins dans votre travail ?",
-                "Quel situation professionnelle ne voudriez vous pas revivre ?",
-                "Par quel moyen avez-vous trouvé chacun de vos stages ?"
-            ],
-            [
-                "Parlez moi de votre formation en quelques mots",
-                "Quel type d'étudiant êtes/étiez vous ?",
-                "Qu'est ce qui a motivé votre choix d'orientation ?",
-                "Pensez vous avoir réussi vos études ?",
-                "Citez moi un élément marquant de votre scolarité ?",
-                "De quoi êtes vous le plus fier dans vos études ?",
-                "Si vous deviez refaire vos études quelle formation choisiriez vous ?",
-                "Avez-vous voyagé durant vos études ? Pourquoi ?",
-                "Etes vous toujours en contact avec vos anciens camarades ?",
-                "Quelle matière vous a le plus passionné durant vos études ?",
-                "Quelles compétences avez-vous développé au travers de vos études ? Citez en trois.",
-                "Quelles qualités humaines ont-elles été utiles pour réussir dans vos études ? "
-            ],
-            [
-                "Parlez moi de vous",
-                "Qu'est ce qui est le plus important dans votre vie",
-                "Quels sont vos principaux défauts ?",
-                "Quelles sont vos principales qualités ?",
-                "Expliquez moi votre plus grosse erreur ?",
-                "Résumez brièvement votre CV",
-                "Pourquoi devrions nous vous engager ?",
-                "Qui admirez vous ?",
-                "Qu'est ce qui vous motive dans la vie ?",
-                "Qu'est ce qui vous rend heureux ?",
-                "Qu'est ce qui vous met mal à l'aise ?",
-                "Quelle est votre journée type ?",
-                "Comment réagissez vous face aux critiques ?",
-                "Aimez vous le changement ?",
-                "Quels sont vos objectifs dans la vie ?",
-                "Quelles sont vos valeurs dans la vie ?",
-                "Comment équilibrez vous votre vie professionnelle et personnelle ?",
-                "Donnez moi 3 avantages ou 3 inconvenients au changement ?",
-                "Quel poste aimeriez vous occuper dans 5 ans ?",
-                "Comment vous voyez vous dans 10 ans ?",
-                "Comment occuperiez vous vos 30 premiers jours de prise de fonction ?"
-            ],
-            [
-                "Comment gérez vous le stress ?",
-                "Que pensez vous apporter à une entreprise ?",
-                "Quelles sont selon vous les valeurs les plus importantes en entreprise ?",
-                "Quel est votre projet professionnel ?",
-                "Etes vous optimiste, réfléchi ou pessimiste ?",
-                "Pensez vous que votre épanouissement personnel comprend l'épanouissement dans votre travail ?",
-                "Qu’attendez-vous de votre hiérarchie ?",
-                "Votre n+1 refuse de prendre en compte vos idées, que faites-vous ?"
-            ],
-            [
-                "Pourquoi avez-vous répondu à notre annonce ?",
-                "Que connaissez vous de notre entreprise ?",
-                "Pouvez vous me préciser ce que vous avez compris du poste ?",
-                "Qu'attendez vous de ce poste ?",
-                "Pourquoi pensez vous être le candidat idéal ?",
-                "Que pensez vous apporter à une société ?",
-                "N'avez-vous pas peur de vous ennuyer à ce poste ?",
-                "Qu'est-ce qui vous motive à venir travailler chez nous ?",
-                "Qu'est ce qui vous interesse dans ce poste ?",
-                "Qu’est-ce qu’un bon manager pour vous ?"
+               [
+                    "Comment travaillez vous en équipe ?",
+                    "De quoi êtes vous le plus fier dans votre carrière ?",
+                    "Que vous ont apporté vos précédents emplois ?",
+                    "Qu'est-ce qui vous amuse le plus et le moins dans votre travail ?",
+                ],
+                [
+                    "Parlez moi de votre formation en quelques mots"
+                    "Qu'est ce qui a motivé votre choix d'orientation ?",
+                    "De quoi êtes vous le plus fier dans vos études ?",
+                    "Quelle matière vous a le plus passionné durant vos études ?",
+                    "Quelles compétences avez-vous développé au travers de vos études ? Citez en trois.",
+                ],
+                [
+                    "Parlez moi de vous",
+                    "Quelles sont vos principales qualités ?",
+                    "Résumez brièvement votre CV",
+                    "Pourquoi devrions nous vous engager ?",
+                    "Qui admirez vous ?",
+                    "Qu'est ce qui vous motive dans la vie ?",
+                    "Quels sont vos objectifs dans la vie ?",
+                    "Comment équilibrez vous votre vie professionnelle et personnelle ?",
+                    "Quel poste aimeriez vous occuper dans 5 ans ?",
+                ],
+                [
+
+                    "Que pensez vous apporter à une entreprise ?",
+                    "Quelles sont selon vous les valeurs les plus importantes en entreprise ?",
+                    "Quel est votre projet professionnel ?"
+                    "Qu’attendez-vous de votre hiérarchie ?"
+                ],
+                [
+                    "Pourquoi avez-vous répondu à notre annonce ?",
+                    "Que connaissez vous de notre entreprise ?",
+                    "Qu'attendez vous de ce poste ?",
+                    "Pourquoi pensez vous être le candidat idéal ?",
+                    "Que pensez vous apporter à une société ?",
+                    "Qu'est-ce qui vous motive à venir travailler chez nous ?",
+                ]
             ]
-        ]
 
         select_qt = []
 

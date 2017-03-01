@@ -47,4 +47,5 @@ urlpatterns = [
 
     url(r'^api/export/member/gde561fmlsdf5646sdfkjsdf5213dfg', views.FullDataBaseMember.as_view(), name='exporte'),
     url(r'^api/export/job/s56f4s6d54g3s51fdsf8', views.FullDataJob.as_view(), name='exporte_job'),
+    url(r'^api/export/pro/a8r7pokf56g4sd54', views.FullDataPro.as_view(), name='exporte_pro'),
 ]

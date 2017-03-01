@@ -142,9 +142,113 @@ def import_flatchr(request):
 	Flatchr()
 	return HttpResponse('ok')
 
+def letudiant_scraper(request):
+	from notifications.letudiant_scraper import LetudiantScraper
+	LetudiantScraper().parse()
+	return HttpResponse('ok')
+
+
 #----------------------------------------------------------
 #----------------------------------------------------------
 #----------------------------------------------------------
+
+def elasticsearch_import_cv():
+	from elasticsearch import Elasticsearch
+	import datetime, json, time
+
+	members = Member.objects.order_by("-id")
+
+	es = Elasticsearch(['https://search-pitch-2k2jxfngnsvechhmkt5xiyyc4m.eu-west-1.es.amazonaws.com/'])
+
+	for member in members:
+		print member.id
+		js = {
+			"first_name": member.first_name,
+			"last_name": member.last_name,
+			"email": member.email,
+			"image" : "https://v1-pitchmyjob.s3.amazonaws.com"+member.image.url,
+			"study": member.study.name if member.study else '',
+			"industry": list(member.activity_area.values_list('name', flat=True)),
+			"experience": member.experience.name if member.experience else  '',
+			"contracts": list(member.contracts.values_list('name', flat=True)),
+			"tags": {
+				"count" : member.tags.count(),
+				"datas" : list(member.tags.values_list('name', flat=True)) if member.tags else []
+			},
+			"location": {
+				"locality": member.locality,
+				"country": member.country,
+				"administrative_area_level_1": member.administrative_area_level_1,
+				"administrative_area_level_2": member.administrative_area_level_2
+			},
+			"poste": member.cv.poste,
+			"experiences": {
+				"count" : member.cv.cvexperience_set.count(),
+				"datas" : [{"title": exp.title, "company": exp.company,"description": exp.description.replace('\r', '').replace('\n',' ') if exp.description else ''}for exp in member.cv.cvexperience_set.all()]
+			},
+			"formations": {
+				"count" : member.cv.cvformation_set.count(),
+				"datas" : [{"school": fm.school, "degree": fm.degree} for fm in member.cv.cvformation_set.all()]
+			},
+			"skills" : {
+				"count" : member.cv.cvskill_set.count(),
+				"datas" : list(member.cv.cvskill_set.values_list('name', flat=True))
+			},
+			"languages": [lg.name for lg in member.cv.cvlanguage_set.all()],
+			"interets": [inter.name for inter in member.cv.cvinterest_set.all()],
+			"timestamp_joined": int(time.mktime(member.user.date_joined.timetuple())),
+			"date_joined" : str(member.user.date_joined)
+		}
+
+		es.index(index="pitch", doc_type="cv", id=member.id, body=json.dumps(js))
+
+def elasticsearch_import_job():
+
+	from elasticsearch import Elasticsearch
+	import datetime, json
+	import time
+	from django.utils import timezone
+
+	es = Elasticsearch(['https://search-pitch-2k2jxfngnsvechhmkt5xiyyc4m.eu-west-1.es.amazonaws.com/'])
+
+	jobs = Job.objects.filter(active=True, paid=True, date_posted__gte=timezone.now().date() - datetime.timedelta(days=30)).order_by('scraper')
+	print jobs.count()
+
+	for job in jobs:
+
+		print job.id
+		js = {
+			"id_pro": job.pro.id,
+			"company": job.company,
+			"title": job.job_title,
+			"image" : "https://v1-pitchmyjob.s3.amazonaws.com"+job.image.url,
+			"description": job.description.replace('\r', '').replace('\n', ' ') if job.description else '',
+			"mission": job.mission.replace('\r', '').replace('\n', ' ') if job.mission else '',
+			"profile": job.profile.replace('\r', '').replace('\n', ' ') if job.profile else '',
+			"tags": {
+				"count": job.tags.count(),
+				"datas": list(job.tags.values_list('name', flat=True)) if job.tags else []
+			},
+			"industry": job.activity_area.name if job.activity_area else '',
+			"experience": list(job.experiences.values_list('name', flat=True)) if job.experiences else [],
+			"studies": list(job.studies.values_list('name', flat=True)) if job.studies else [],
+			"contracts": list(job.contracts.values_list('name', flat=True)) if job.contracts else [],
+			"location": {
+				"lat": job.latitude,
+				"lon": job.longitude,
+				"locality": job.locality,
+				"country": job.country,
+				"administrative_area_level_1": job.administrative_area_level_1,
+				"administrative_area_level_2": job.administrative_area_level_2
+			},
+			"date_posted": str(job.date_posted),
+			"timestamp_posted" : int(time.mktime(job.date_posted.timetuple())) if job.date_posted else "",
+			"date_created": str(datetime.datetime.now()),
+			"scraper" : job.scraper
+		}
+		es.index(index="pitch", doc_type="job", id=job.id, body=json.dumps(js))
+
+
 
 def import_metier(request):
 	import csv
@@ -201,6 +305,36 @@ def test_email(request):
 	#job = Job.objects.filter(active=False, scraper=True,date_posted__gte=timezone.now() - datetime.timedelta(days=settings.DAYS_JOB)).order_by('-date_posted')
 
 	#job.update(active=True)
+	elasticsearch_import_job()
+	elasticsearch_import_cv()
+
+	return HttpResponse("Ok")
+
+	from bs4 import BeautifulSoup
+
+	jobs = Job.objects.filter(scraper_site="letudiant")
+	print jobs.count()
+	for job in jobs:
+		print job.id
+		new = ""
+		desc = BeautifulSoup(job.description, 'html.parser')
+		nxt = 0
+		for elem in desc.find_all(['h5', 'p']):
+
+			if nxt == 1:
+				nxt = 0
+				continue
+
+			if elem.get_text().strip() in ("Experience", "Type de contrat", u"Durée", "Infos localisation", u"Niveau(x) d'études"):
+				nxt = 1
+				continue
+
+			new = new + elem.prettify()
+
+		job.description = new
+		job.save()
+
+	return HttpResponse("Ok")
 
 	import requests
 

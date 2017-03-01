@@ -253,8 +253,8 @@ class Job(models.Model):
 
 		super(Job, self).save(*args, **kwargs)
 
-	def __unicode__ (self):
-		return self.job_title
+	#def __unicode__ (self):
+		#return self.job_title
 
 	class Meta:
 		ordering = ['-date_created']

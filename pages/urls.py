@@ -42,9 +42,13 @@ urlpatterns = [
     url(r'^broadben', views.import_broadben, name='import_broadben'),
     url(r'^flatchr$', views.import_flatchr, name='import_flatchr'),
     url(r'^scraper-apec', views.apec, name='apec'),
+    url(r'^scraper-letudiant', views.letudiant_scraper, name='letudiant_scraper'),
 
     url(r'^pro/offre-speciale$', views.LandingPageCreate.as_view(),name='landing-page'),
     url(r'^pro/offre-speciale/merci$', TemplateView.as_view(template_name="pages/landing-merci.html"), name='landing-page-merci'),
 
     url(r'^email/candidature-avorte', views.candidature_avorte, name='candidature_avorte'),
+
+    #url(r'^elasticsarch/cv', views.elasticsearch_import_cv() , name='elastic-cv'),
+    #url(r'^elasticsarch/job', views.elasticsearch_import_job(), name='elastic-job'),
 ]

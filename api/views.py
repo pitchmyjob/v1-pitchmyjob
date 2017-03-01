@@ -47,6 +47,13 @@ class FullDataBaseMember(generics.ListAPIView):
 	pagination_class = LargeResultsSetPagination
 
 
+class FullDataPro(generics.ListAPIView):
+	#permission_classes = (IsAdminUser,)
+	queryset = Pro.objects.filter(active=True, scraper=False, mp=False)
+	serializer_class = FullDataProSerializer
+	pagination_class = LargeResultsSetPagination
+
+
 class JobApiList(APIView):
 	def get(self, request, format=None):
 

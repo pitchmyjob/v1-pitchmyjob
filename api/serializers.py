@@ -2,12 +2,19 @@
 from rest_framework import serializers
 from c2v.models import Cv, CvExperience, CvFormation, CvSkill, CvLanguage, CvInterest
 from members.models import Member, Video, Audio
-from pro.models import JobList, Job
+from pro.models import JobList, Job, Pro
 from django.db.models import Q
 from notifications.models import Message, Notification
 import base64, urlparse, re
 from django.core.files.base import ContentFile
 from django.utils.dateformat import format
+
+
+class FullDataProSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Pro
+		fields = '__all__'
+
 
 class FullJobSerialier(serializers.ModelSerializer):
 	class Meta:

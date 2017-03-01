@@ -47,6 +47,13 @@ def async_jobteaser_import(requests):
 	jb.parse()
 	#send_mail('JobTeaser - Cron import effectue !', 'No bug', 'contact@pitchmyjob.com', ['tannier.yannis@gmail.com'], fail_silently=False)
 
+
+def async_letudiant_import(requests):
+	from letudiant_scraper import LetudiantScraper
+	lt = LetudiantScraper()
+	lt.parse()
+
+
 def remixjob_check():
 	from remixjob_scraper import RemixJobScraper
 	rj = RemixJobScraper()
