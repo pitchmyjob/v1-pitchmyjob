@@ -9,7 +9,7 @@ class SetLastVisitMiddleware(object):
 
     def process_response(self, request, response):
         url = request.get_full_path()
-        if "api" not in url and "pro" not in url :
+        if "api" not in url and "pro" not in url and "admin" not in url:
             return HttpResponsePermanentRedirect( "https://spitchapp.co/" )
         else:
             return response
