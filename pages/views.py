@@ -305,6 +305,126 @@ def test_email(request):
 	#job = Job.objects.filter(active=False, scraper=True,date_posted__gte=timezone.now() - datetime.timedelta(days=settings.DAYS_JOB)).order_by('-date_posted')
 
 	#job.update(active=True)
+
+	from pro.models import Pro
+	import boto3
+	import json
+	import uuid
+
+	pros = Pro.objects.all()
+
+	sqs = boto3.resource('sqs')
+	queue = sqs.get_queue_by_name(QueueName="v2-sqsEmail-dev")
+
+	message = json.dumps({
+		'uuid': str(uuid.uuid4()),
+		'subject': "Pitchmyjob devient Spitch !",
+		'to': ['tannier.yannis@gmail.com'],
+		'from': "antoine@pitchmyjob.com",
+		'replyto': ["antoine@pitchmyjob.com"],
+		'template': "emailing/emailing-spitch-pro.html",
+		'context': {"name": "Antoine"},
+		'secure': 1,
+	})
+
+	#queue.send_message(MessageBody=message)
+
+
+	for pro in pros:
+		if "viadeo" not in pro.email and "pitchmyjob" not in pro.email:
+			message = json.dumps({
+				'uuid': str(uuid.uuid4()),
+				'subject': "Pitchmyjob devient Spitch !",
+				'to': [pro.email],
+				'from': "antoine@pitchmyjob.com",
+				'replyto': ["antoine@pitchmyjob.com"],
+				'template': "emailing/emailing-spitch-pro.html",
+				'context': {"name": pro.first_name},
+				'secure': 1,
+			})
+			queue.send_message(MessageBody=message)
+
+
+
+	return HttpResponse("Ok")
+
+
+	from members.models import Member
+	import boto3
+	import json
+	import uuid
+
+	members = Member.objects.all()
+
+	sqs = boto3.resource('sqs')
+	queue = sqs.get_queue_by_name(QueueName="v2-sqsEmail-dev")
+
+
+
+	#queue.send_message(MessageBody=message)
+
+	tp = 0
+	a = 0
+
+	message = json.dumps({
+		'uuid': str(uuid.uuid4()),
+		'subject': "Pitchmyjob devient Spitch 3!",
+		'to': ['tannier.yannis@gmail.com'],
+		'from': "antoine@pitchmyjob.com",
+		'replyto': ["antoine@pitchmyjob.com"],
+		'template': "emailing/emailing-spitch-antoine.html",
+		'context': {"name": "Antoine"},
+		'secure': 1,
+	})
+
+	#queue.send_message(MessageBody=message)
+
+	message = json.dumps({
+		'uuid': str(uuid.uuid4()),
+		'subject': "Pitchmyjob devient Spitch 2!",
+		'to': ['tannier.yannis@gmail.com'],
+		'from': "contact@pitchmyjob.com",
+		'replyto': ["contact@pitchmyjob.com"],
+		'template': "emailing/emailing-spitch.html",
+		'context': {"name": "Antoine"},
+		'secure': 1,
+	})
+
+	#queue.send_message(MessageBody=message)
+
+
+	for member in members:
+
+		if tp < 4000:
+			template = "emailing/emailing-spitch.html"
+			fr = "contact@pitchmyjob.com"
+		else:
+			template = "emailing/emailing-spitch-antoine.html"
+			fr = "antoine@pitchmyjob.com"
+
+		a = a + 1
+		tp = tp + 1
+
+		print template
+		print fr
+
+		message = json.dumps({
+			'uuid': str(uuid.uuid4()),
+			'subject': "Pitchmyjob devient Spitch !",
+			'to': [member.user.email],
+			'from': fr,
+			'replyto': [fr],
+			'template': template,
+			'context': {"name": member.first_name},
+			'secure': 1,
+		})
+
+		queue.send_message(MessageBody=message)
+
+
+
+	return HttpResponse("Ok")
+
 	elasticsearch_import_job()
 	elasticsearch_import_cv()
 

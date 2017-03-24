@@ -35,7 +35,7 @@ class LargeResultsSetPagination(PageNumberPagination):
     max_page_size = 10000
 
 class FullDataJob(generics.ListAPIView):
-	queryset = Job.objects.filter(mp=False, scraper=False, complet=True, active=True)
+	queryset = Job.objects.filter(complet=True)
 	serializer_class = FullJobSerialier
 	pagination_class = LargeResultsSetPagination
 

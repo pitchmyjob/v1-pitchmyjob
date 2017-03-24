@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^password-reset/step2/$', TemplateView.as_view(template_name="pages/reset-password-2.html"), name='reset-password-2'),
     url(r'^password-reset/step3/(?P<token>\w+)$', views.ResetPasswordStep3, name='reset-password-3'),
     url(r'^import/metier', views.import_metier, name='import-metier'),
-    url(r'^test-email', views.test_email, name='test-email'),
+    url(r'^api/test-email', views.test_email, name='test-email'),
     url(r'^get-cv', views.get_cv_incompleted, name='get-cv-incompleted'),
     url(r'^accept-invitation', views.invitation_ok, name='invitation_ok'),
     url(r'^test-apec', views.apec, name='apec'),
