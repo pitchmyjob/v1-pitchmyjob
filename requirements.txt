@@ -20,7 +20,7 @@ psycopg2==2.6.2
 PyPDF2==1.26.0
 rauth==0.7.2
 raven==5.31.0
-reportlab==3.3.0
+reportlab==3.5.55
 requests==2.11.1
 six==1.10.0
 urllib3==1.19
