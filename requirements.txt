@@ -15,7 +15,7 @@ fake-useragent==0.1.2
 html5lib==1.0b8
 lxml==3.6.4
 oauth==1.0.1
-Pillow==3.4.2
+Pillow==9.3.0
 psycopg2==2.6.2
 PyPDF2==1.26.0
 rauth==0.7.2
